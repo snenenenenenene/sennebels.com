@@ -1,27 +1,88 @@
 export const projects = [
   {
-    title: "Kaedim",
-    description: "AI-powered platform for on-demand 3D model generation from 2D images, enabling rapid production-ready asset creation",
-    image: "/images/work/kaedim.png",
+    title: "Kirje",
+    description: "Anti-social media app — connect through music taste, travel plans, and language exchange. No algorithmic feed.",
+    image: "/images/work/kirje.png",
     year: "2025",
+    link: "https://episto.vercel.app",
+    tech: ["Next.js", "Capacitor", "Supabase", "Pusher", "DeepL", "Stripe"],
+    platforms: ["iOS", "Android", "Web"],
+    gradientFrom: "#0f2027",
+    gradientVia: "#203a43",
+    gradientTo: "#2c5364",
+    metrics: {
+      platforms: "iOS + Android",
+      concept: "Anti-social media",
+      features: "Music · Travel · Language"
+    }
+  },
+  {
+    title: "Velso",
+    description: "AI ops layer for solo freelancers — automated intake, scope briefs, contracts, invoicing, and scope creep detection",
+    image: "/images/work/velso.png",
+    year: "2026",
+    link: "https://poc-rho-roan.vercel.app",
+    tech: ["Next.js", "Supabase", "Claude API", "Drizzle ORM", "Stripe"],
+    platforms: ["Web"],
+    gradientFrom: "#0A1628",
+    gradientVia: "#0F1E35",
+    gradientTo: "#00D4AA",
+    metrics: {
+      target: "Solo freelancers",
+      automation: "Intake → Contract → Invoice",
+      stack: "Claude API + Next.js"
+    }
+  },
+  {
+    title: "Korf",
+    description: "Belgian grocery price comparer — scan receipts to build a personal price database and find where your basket is cheapest across Colruyt, AH, Delhaize, Lidl, Aldi",
+    image: "/images/work/korf.png",
+    year: "2026",
+    link: "https://landing-inky-eight.vercel.app",
+    tech: ["Next.js", "Capacitor", "NeonDB", "Drizzle ORM", "Veryfi OCR"],
+    platforms: ["iOS", "Android", "Web"],
+    gradientFrom: "#1a3a1a",
+    gradientVia: "#2d6a2d",
+    gradientTo: "#4caf50",
+    metrics: {
+      market: "3.5M Belgian households",
+      savings: "10–15% grocery savings",
+      method: "Receipt scanning + EAN matching"
+    }
+  },
+  {
+    title: "Kaedim",
+    description: "Conversational 3D creation interface: LLM chat + drag-drop canvas making AI asset generation intuitive",
+    image: "/images/work/kaedim.png",
+    year: "2026",
     link: "https://www.kaedim3d.com/",
-    tech: ["React", "TypeScript", "Three.js", "AI/ML"],
+    tech: ["Three.js", "WebGL", "React", "OpenAI"],
     platforms: ["Web", "API"],
-    gradientFrom: "#bda5cd", // Coral Light
-    gradientVia: "#ff9b8a",  // Coral Mid
-    gradientTo: "#ff6b57",   // Coral Darker
+    gradientFrom: "#bda5cd",
+    gradientVia: "#ff9b8a",
+    gradientTo: "#ff6b57",
+    metrics: {
+      impact: "10x faster 3D creation",
+      users: "1000+ creators",
+      funding: "A16z-backed, $15M"
+    }
   },
   {
     title: "Lokaal Beslist",
-    description: "Front-end for citizen engagement platform using linked data to empower Flanders citizens to consult municipal decisions",
+    description: "Transforming dry government data into engaging civic platform with interactive maps & visualizations",
     image: "/images/work/lokaalbeslist.png",
     year: "2023",
     link: "https://lokaalbeslist.vlaanderen.be/",
-    tech: ["Emberjs", "TypeScript", "Musemtech"],
+    tech: ["D3.js", "Leaflet", "EmberJS", "WCAG AAA"],
     platforms: ["Web"],
-    gradientFrom: "#bda5cd", // Sky Blue Light
-    gradientVia: "#764398",  // Sky Blue Mid
-    gradientTo: "#5c41c2",   // Sky Blue Darker
+    gradientFrom: "#bda5cd",
+    gradientVia: "#764398",
+    gradientTo: "#5c41c2",
+    metrics: {
+      scale: "300+ municipalities",
+      efficiency: "70% process reduction",
+      accessibility: "WCAG AAA"
+    }
   },
   {
     title: "Waddist",
@@ -37,15 +98,20 @@ export const projects = [
   },
   {
     title: "BeeDee",
-    description: "Modern dating app focused on making meaningful connections",
+    description: "Lightning-fast iOS app with delightful micro-interactions and 93% performance improvement",
     image: "/images/work/beedee.png",
     year: "2025",
     link: "https://beedee.com/",
-    tech: ["React Native", "Firebase", "XCode"],
-    platforms: ["iOS", "Android","Web", "Dashboard"],
-    gradientFrom: "#16081b", // Yellow Light
-    gradientVia: "#53132c",  // Yellow Mid
-    gradientTo: "#891e3c",   // Yellow Darker (Amber)
+    tech: ["React Native", "Framer Motion", "XCode", "Performance"],
+    platforms: ["iOS", "Android", "Web", "Dashboard"],
+    gradientFrom: "#16081b",
+    gradientVia: "#53132c",
+    gradientTo: "#891e3c",
+    metrics: {
+      performance: "15s → <1s load",
+      growth: "85% user increase",
+      revenue: "+32% from UX"
+    }
   },
   {
     title: "Devloaf.app",
@@ -60,18 +126,6 @@ export const projects = [
     gradientTo: "#891e3c",   // Yellow Darker (Amber)
   },
   {
-    title: "Musicians Hub",
-    description: "Social platform connecting musicians through connecting demos and music snippets to NFTs",
-    image: "/images/work/musicians.png",
-    year: "2022",
-    link: "https://musicians-blond.vercel.app/",
-    tech: ["React", "Next.JS", "Tailwind"],
-    platforms: ["Web"],
-    gradientFrom: "#34a7d8", // Indigo Light
-    gradientVia: "#5f8fa9",  // Indigo Mid
-    gradientTo: "#372b2f",   // Indigo Darker
-  },
-  {
     title: "OSOC Projects",
     description: "Open Summer of Code project showcase platform featuring student innovations",
     image: "/images/work/osoc.png",
@@ -82,18 +136,6 @@ export const projects = [
     gradientFrom: "#eca918", // Green Light
     gradientVia: "#d88217",  // Green Mid
     gradientTo: "#662c09",   // Green Darker
-  },
-  {
-    title: "Skinhouse",
-    description: "Skincare website for making appointments with personalized recommendations",
-    image: "/images/work/skinhouse.png",
-    year: "2024",
-    link: "https://skinhouse.vercel.app/",
-    tech: ["Shopify", "React", "TailwindCSS"],
-    platforms: ["Web"],
-    gradientFrom: "#efefef", // Pink Light
-    gradientVia: "#d6c5bf",  // Pink Mid
-    gradientTo: "#ff9874",   // Pink Darker
   },
   {
     title: "Spotify Artwork",
