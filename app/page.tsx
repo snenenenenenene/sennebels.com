@@ -1010,6 +1010,49 @@ const ThemeSwitcher = ({ currentTheme, setTheme }: { currentTheme: Theme; setThe
   );
 };
 
+// SEO-crawlable header. Always rendered in the DOM (regardless of loading
+// state) so Google indexes the real content even when the client-side 3D
+// viewer hasn't hydrated. Visually hidden via Tailwind's sr-only so it
+// doesn't disturb the designed experience.
+function SeoSrHeader() {
+  return (
+    <header className="sr-only">
+      <h1>Senne Bels — Creative Developer</h1>
+      <p>
+        Creative developer based in Antwerp, Belgium. I build interactive,
+        game-like websites and performant full-stack applications with
+        React, Next.js, TypeScript, Three.js, and Node.js. Currently
+        freelancing via Okapi Works and shipping my own products — Kirje,
+        Velso, Korf, Thren, and Stadiq.
+      </p>
+      <nav aria-label="Selected work">
+        <h2>Selected work</h2>
+        <ul>
+          {projects.map((p) => (
+            <li key={p.title}>
+              <strong>{p.title}</strong> — {p.description}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <nav aria-label="Contact">
+        <h2>Contact</h2>
+        <ul>
+          <li>
+            <a href="mailto:sennebels@gmail.com">sennebels@gmail.com</a>
+          </li>
+          <li>
+            <a href="https://github.com/snenenenenenene">GitHub</a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/senne-bels/">LinkedIn</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
 // Main Page Component - Staggered Animations
 export default function HomePage() {
   const [isProjectScrolling, setIsProjectScrolling] = React.useState(false);
@@ -1077,30 +1120,38 @@ export default function HomePage() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
   };
 
-  // Show loading screen until all images are loaded
+  // Show loading screen until all images are loaded.
+  // The SeoSrHeader is rendered in BOTH branches so Google / crawlers see
+  // real content (h1, bio, project list) even when the page is in its
+  // pre-hydration loading state.
   if (!imagesLoaded) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-black">
-        <div className="text-center">
-          <div className="mb-4">
-            <div className="w-48 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
-                style={{ width: `${loadingProgress}%` }}
-              />
+      <>
+        <SeoSrHeader />
+        <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-black">
+          <div className="text-center">
+            <div className="mb-4">
+              <div className="w-48 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
+                  style={{ width: `${loadingProgress}%` }}
+                />
+              </div>
             </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Loading assets...</p>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Loading assets...</p>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <main 
-      className={`min-h-screen w-full p-4 md:p-6 lg:p-8 overflow-hidden transition-background duration-1000 ease-in-out`} // Increased duration
-      style={backgroundStyle} 
-    >
+    <>
+      <SeoSrHeader />
+      <main
+        className={`min-h-screen w-full p-4 md:p-6 lg:p-8 overflow-hidden transition-background duration-1000 ease-in-out`} // Increased duration
+        style={backgroundStyle}
+      >
       {/* Hidden preloader to force all images to load */}
       <HiddenImagePreloader />
       
@@ -1183,6 +1234,7 @@ export default function HomePage() {
                 </div>
       {/* Theme Switcher UI */}
       <ThemeSwitcher currentTheme={theme} setTheme={setTheme} />
-    </main>
+      </main>
+    </>
   );
 }
