@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { projects } from "./constants"; // Import projects data
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sennebels.xyz'),
+  metadataBase: new URL('https://sennebels.com'),
   title: {
     default: "Senne Bels - Creative Developer",
     template: "%s | Senne Bels"
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "Belgium Developer",
     "Antwerp Developer"
   ],
-  authors: [{ name: "Senne Bels", url: "https://sennebels.xyz" }],
+  authors: [{ name: "Senne Bels", url: "https://sennebels.com" }],
   creator: "Senne Bels",
   publisher: "Senne Bels",
   formatDetection: {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_UK",
-    url: "https://sennebels.xyz",
+    url: "https://sennebels.com",
     siteName: "Senne Bels",
     title: "Senne Bels - Creative Developer",
     description: "Creative developer focused on building interactive, game-like websites and innovative digital experiences.",
@@ -91,9 +91,9 @@ export const metadata: Metadata = {
     me: ["mailto:sennebels@gmail.com"],
   },
   alternates: {
-    canonical: "https://sennebels.xyz",
+    canonical: "https://sennebels.com",
     languages: {
-      'en-US': 'https://sennebels.xyz',
+      'en-US': 'https://sennebels.com',
     },
   },
   category: "technology",
@@ -103,7 +103,7 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Senne Bels",
-  "url": "https://sennebels.xyz",
+  "url": "https://sennebels.com",
   "sameAs": [
     // Add links to your social profiles here if available, e.g.:
     // "https://www.linkedin.com/in/yourprofile",
