@@ -1,22 +1,5 @@
 export const projects = [
   {
-    title: "Kirje",
-    description: "Anti-social media app — connect through music taste, travel plans, and language exchange. No algorithmic feed.",
-    image: "/images/work/kirje.png",
-    year: "2025",
-    link: "https://episto.vercel.app",
-    tech: ["Next.js", "Capacitor", "Supabase", "Pusher", "DeepL", "Stripe"],
-    platforms: ["iOS", "Android", "Web"],
-    gradientFrom: "#0f2027",
-    gradientVia: "#203a43",
-    gradientTo: "#2c5364",
-    metrics: {
-      platforms: "iOS + Android",
-      concept: "Anti-social media",
-      features: "Music · Travel · Language"
-    }
-  },
-  {
     title: "Velso",
     description: "AI ops layer for solo freelancers — automated intake, scope briefs, contracts, invoicing, and scope creep detection",
     image: "/images/work/velso.png",

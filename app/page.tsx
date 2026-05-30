@@ -1022,8 +1022,8 @@ function SeoSrHeader() {
         Creative developer based in Antwerp, Belgium. I build interactive,
         game-like websites and performant full-stack applications with
         React, Next.js, TypeScript, Three.js, and Node.js. Currently
-        freelancing independently and shipping my own products — Kirje,
-        Velso, Korf, Thren, and Stadiq.
+        freelancing independently and shipping my own products — Velso,
+        Korf, Thren, and Stadiq.
       </p>
       <nav aria-label="Selected work">
         <h2>Selected work</h2>
