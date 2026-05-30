@@ -196,7 +196,7 @@ const ProfileCard = () => {
 
         {/* Bio */}
         <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-3">
-          Full-stack developer & creative tech enthusiast from Antwerp, Belgium. Founder of <strong className="font-medium text-black dark:text-white">Okapi Works, my freelance company</strong>, and enjoy collaborating with startups. Focused on building interactive, scalable web experiences.
+          Full-stack developer & creative tech enthusiast from Antwerp, Belgium. I freelance for startups and agencies, building interactive, scalable web experiences with a love for game-like UIs and creative tech.
         </p>
         <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6">
           Currently developing <strong className="font-medium text-black dark:text-white">ORNITHO</strong>, a dinosaur horror game set in Antwerp, in my free time. Actively seeking international contract opportunities in <strong className="font-medium text-black dark:text-white">North America, Japan, or the UK</strong>. Also, a big fan of cats.
@@ -1022,7 +1022,7 @@ function SeoSrHeader() {
         Creative developer based in Antwerp, Belgium. I build interactive,
         game-like websites and performant full-stack applications with
         React, Next.js, TypeScript, Three.js, and Node.js. Currently
-        freelancing via Okapi Works and shipping my own products — Kirje,
+        freelancing independently and shipping my own products — Kirje,
         Velso, Korf, Thren, and Stadiq.
       </p>
       <nav aria-label="Selected work">
