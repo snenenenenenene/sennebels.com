@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { Featured } from "../data/portfolio";
 import { TINT_BG, TINT_LINK, TINT_TEXT } from "./ui";
 
@@ -48,13 +49,19 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
           ))}
         </ul>
 
-        <p className={`pt-2 text-base font-bold ${TINT_LINK[tint]}`}>{project.cta} &rarr;</p>
+        <Link
+          href={`/work/${project.slug}`}
+          className={`inline-flex w-fit items-center gap-1.5 pt-2 text-base font-bold ${TINT_LINK[tint]}`}
+        >
+          {project.cta}
+          <ArrowRight size={17} strokeWidth={2.5} aria-hidden />
+        </Link>
       </div>
 
       {project.image ? (
         <Image
           src={project.image}
-          alt={`${project.name} — ${project.title}`}
+          alt={`${project.name}: ${project.title}`}
           width={1400}
           height={900}
           className="h-[240px] w-full rounded-3xl object-cover object-top lg:h-[330px] lg:w-auto lg:min-w-0 lg:flex-1"
@@ -118,7 +125,7 @@ export function SmallCard({
   );
 
   const className =
-    "flex w-full flex-col gap-2 rounded-[22px] bg-white px-7 py-[26px] md:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]";
+    "flex h-full w-full flex-col gap-2 rounded-[22px] bg-white px-7 py-[26px]";
 
   return href ? (
     <Link href={href} className={className}>

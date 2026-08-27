@@ -20,9 +20,9 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const TITLE = `${PERSON.name} — ${PERSON.jobTitle}`;
+const TITLE = `${PERSON.name}, ${PERSON.jobTitle}`;
 const DESCRIPTION =
-  "Senior software engineer in Antwerp, Belgium. Six years remote-first building full-stack web, mobile and production AI systems in TypeScript — for Tomorrowland, Kaedim (Y Combinator) and the Belgian government.";
+  "Senior software engineer in Antwerp, Belgium. Six years remote-first building full-stack web, mobile and production AI systems in TypeScript, for Tomorrowland, Kaedim (Y Combinator) and the Belgian government.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sennebels.com"),
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         url: "/assets/screenshot.png",
         width: 1200,
         height: 630,
-        alt: `${PERSON.name} — ${PERSON.jobTitle}`,
+        alt: `${PERSON.name}, ${PERSON.jobTitle}`,
       },
     ],
   },

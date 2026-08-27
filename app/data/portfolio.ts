@@ -33,6 +33,12 @@ export type Featured = {
   image?: string;
   spec?: { points: string[]; credit: string };
   cta: string;
+  /** Everything below powers /work/[slug] only. */
+  facts: { label: string; value: string }[];
+  /** Two or three paragraphs. No headings inside; the page supplies structure. */
+  story: string[];
+  outcomes: { value: string; label: string }[];
+  live?: { label: string; href: string };
 };
 
 export const FEATURED: Featured[] = [
@@ -55,6 +61,21 @@ export const FEATURED: Featured[] = [
       credit: "Delivered through In The Pocket",
     },
     cta: "read the write-up",
+    facts: [
+      { label: "Role", value: "Senior Mobile Engineer" },
+      { label: "Through", value: "In The Pocket" },
+      { label: "Timeline", value: "Jul 2026 to now" },
+      { label: "Team", value: "Product owner, tech lead, mobile engineers" },
+    ],
+    story: [
+      "Tomorrowland ran several apps at once: Tomorrowland Radio, an app per festival, and Tomorrowland Account. Each had its own release cycle, its own content pipeline, and its own idea of what a user was. The brief was to fold all of it into one cross-platform product without losing what made each one useful.",
+      "The interesting constraint was editorial. A festival lineup changes on the day. If every content change needs an App Store review, the app is already wrong. So the UI is server-driven: an OpenAPI-specified NestJS backend-for-frontend describes what to render, and the app renders it. Prismic content objects are mirrored into Zod schemas, so a shape change in the CMS becomes a type error at build time rather than a crash in someone's pocket at a festival.",
+      "Delivery ran inside an agency team with CODEOWNERS-based review and EAS pipelines for preview, production and tagged releases.",
+    ],
+    outcomes: [
+      { value: "3 apps", label: "folded into one product" },
+      { value: "0 releases", label: "needed to ship a content change" },
+    ],
   },
   {
     slug: "euroconsumers",
@@ -75,6 +96,21 @@ export const FEATURED: Featured[] = [
       credit: "Delivered through Nimble, in a team of eight",
     },
     cta: "read the write-up",
+    facts: [
+      { label: "Role", value: "AI Engineer" },
+      { label: "Through", value: "Nimble" },
+      { label: "Timeline", value: "Aug 2025 to Apr 2026" },
+      { label: "Team", value: "Eight engineers, two organisations" },
+    ],
+    story: [
+      "A European consumer-rights organisation wanted an assistant that could answer legal questions on its public sites. The hard part is not the chat interface. It is that a wrong answer about someone's rights is worse than no answer at all.",
+      "The first version used single-shot retrieval, which is fine for lookup and useless for reasoning across documents. I replaced it with a tool-calling agent in Mastra, given dedicated retrieval tools over legal documents, articles and product data, so it can take several steps toward an answer instead of guessing in one.",
+      "Around that sits the part that makes it shippable: an ingestion pipeline that parses and chunks PDFs into hybrid sparse and dense embeddings, automated scorers that measure whether an answer is actually grounded in the corpus, guardrails that refuse questions outside it, human review on high-risk answers, and LangSmith tracing across the whole retrieval and generation path so a regression can be debugged rather than argued about.",
+    ],
+    outcomes: [
+      { value: "100+", label: "daily active users on public sites" },
+      { value: "Multi-tenant", label: "one system, several consumer organisations" },
+    ],
   },
   {
     slug: "kaedim",
@@ -88,6 +124,22 @@ export const FEATURED: Featured[] = [
     markColor: "#FF6B57",
     image: "/images/work/kaedim.png",
     cta: "read the write-up",
+    facts: [
+      { label: "Role", value: "Creative Engineer" },
+      { label: "Company", value: "Kaedim, Y Combinator-backed" },
+      { label: "Timeline", value: "2025" },
+      { label: "Scope", value: "Five or more repositories" },
+    ],
+    story: [
+      "Kaedim turns concept art into production 3D assets. The generation was strong; the way people worked with it was not. Getting from an idea to a usable model meant leaving the product, and there was no reliable way to know whether a generated asset was actually good before a customer saw it.",
+      "I built an AI 3D copilot that puts an LLM chat next to a drag-and-drop canvas, so describing what you want and manipulating it happen in the same place, over interactive WebGL.",
+      "Then the unglamorous half: an end-to-end pipeline covering idea capture, generation in Blender over the Model Context Protocol, an internal review queue for designers, and customer-facing progress tracking. Large assets move through AWS S3. I also automated the design-to-development handoff with Figma Dev MCP and recorded the walkthrough that onboarded the rest of the team onto it.",
+    ],
+    outcomes: [
+      { value: "Thousands", label: "of users on the platform" },
+      { value: "5+ repos", label: "coordinated across frontend, backend and test infra" },
+    ],
+    live: { label: "kaedim3d.com", href: "https://www.kaedim3d.com/" },
   },
   {
     slug: "beedee",
@@ -101,6 +153,22 @@ export const FEATURED: Featured[] = [
     markColor: "#891E3C",
     image: "/images/work/beedee.png",
     cta: "read the write-up",
+    facts: [
+      { label: "Role", value: "Frontend Lead" },
+      { label: "Timeline", value: "Jan 2025 to now" },
+      { label: "Team", value: "One engineer plus rotating interns" },
+      { label: "Contribution", value: "1,100+ commits, top contributor" },
+    ],
+    story: [
+      "BeeDee is a consumer social platform with 140,000 users. When I picked up frontend, the most-used interaction in the product took more than fifteen seconds. People were not complaining about it. They were leaving.",
+      "Getting it under one second was React rendering work and a caching strategy, not a rewrite. Real-time sockets were the next failure: connections dropped under load, so reconnect logic and connection pooling had to hold at 10,000 daily actives. Discovery had degraded separately, and came back through query caching and database index work.",
+      "The other constraint was that the platform is barred from paid advertising on Meta, Google and Reddit. Growth had to be organic, which made technical SEO a revenue channel rather than a checkbox: an 18% click-through rate against a 2 to 5% industry benchmark, and first-position ranking on target terms. I also shipped the iOS app in React Native and integrated multi-currency payments through Mollie.",
+    ],
+    outcomes: [
+      { value: "93%", label: "faster on the critical interaction, 15s to under 1s" },
+      { value: "18%", label: "organic click-through, against a 2 to 5% benchmark" },
+      { value: "32%", label: "revenue growth from initiatives I contributed to" },
+    ],
   },
   {
     slug: "lokaal-beslist",
@@ -114,6 +182,23 @@ export const FEATURED: Featured[] = [
     markColor: "#5C41C2",
     image: "/images/work/lokaalbeslist.png",
     cta: "read the write-up",
+    facts: [
+      { label: "Role", value: "Full-Stack Developer" },
+      { label: "Client", value: "Flanders Agency of Home Affairs" },
+      { label: "Timeline", value: "Jul 2022 to Jul 2024" },
+      { label: "Reach", value: "300+ Belgian municipalities" },
+    ],
+    story: [
+      "Every Belgian municipality publishes its decisions and its finances. Legally, that is transparency. Practically, it was hundreds of separate publication streams in formats nobody outside a civil service reads, which means the information was public and unavailable at the same time.",
+      "The platform pulls that together for citizens: local decisions and financial data across hundreds of municipalities, with interactive geospatial visualisation on Leaflet and OpenStreetMap so you can start from where you live rather than from a document ID. A microservice architecture and semantic web standards keep the data interoperable instead of trapped in one portal.",
+      "Alongside it, automated compliance monitoring cut the manual audit work by 70% while keeping regulatory adherence intact. Accessibility was a requirement rather than a pass at the end: WCAG AAA.",
+    ],
+    outcomes: [
+      { value: "89%", label: "reduction in page load times" },
+      { value: "70%", label: "less manual government audit work" },
+      { value: "WCAG AAA", label: "accessibility conformance" },
+    ],
+    live: { label: "lokaalbeslist.vlaanderen.be", href: "https://lokaalbeslist.vlaanderen.be/" },
   },
 ];
 
@@ -129,7 +214,7 @@ export const ALSO = [
     name: "Outpost",
     kind: "Client",
     description:
-      "A whole e-commerce platform rebuilt alone — 944 of 946 commits across storefront, REST API, database schema, Docker and deployment.",
+      "A whole e-commerce platform rebuilt alone: 944 of 946 commits across storefront, REST API, database schema, Docker and deployment.",
   },
   {
     name: "Ornitho",
@@ -182,23 +267,23 @@ export const NUMBERS = [
 ];
 
 export const EXPERIENCE = [
-  { role: "Founder & Principal Engineer", org: "Okapi Works", dates: "Apr 2020 – now" },
-  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", dates: "Jul 2026 – now" },
-  { role: "Full-Stack Engineer", org: "Outpost", dates: "Jan 2026 – now" },
-  { role: "Frontend Lead", org: "BeeDee", dates: "Jan 2025 – now" },
-  { role: "AI Engineer", org: "Euroconsumers, via Nimble", dates: "Aug 2025 – Apr 2026" },
+  { role: "Founder & Principal Engineer", org: "Okapi Works", dates: "Apr 2020 to now" },
+  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", dates: "Jul 2026 to now" },
+  { role: "Full-Stack Engineer", org: "Outpost", dates: "Jan 2026 to now" },
+  { role: "Frontend Lead", org: "BeeDee", dates: "Jan 2025 to now" },
+  { role: "AI Engineer", org: "Euroconsumers, via Nimble", dates: "Aug 2025 to Apr 2026" },
   { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", dates: "2025" },
-  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", dates: "Jul 2022 – Jul 2024" },
-  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", dates: "2021 – 2026" },
+  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", dates: "Jul 2022 to Jul 2024" },
+  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", dates: "2021 to 2026" },
 ];
 
 export const EDUCATION = {
   degree: "BSc Computer Science, Cum Laude",
   detail:
-    "AP University of Applied Sciences, Antwerp · 2019–2022. Big data, distributed systems, cloud.",
+    "AP University of Applied Sciences, Antwerp · 2019 to 2022. Big data, distributed systems, cloud.",
 };
 
-export const LANGUAGES = ["Dutch — native", "English — C2", "French — professional"];
+export const LANGUAGES = ["Dutch, native", "English, C2", "French, professional"];
 
 /** `ai: true` chips are tinted so the in-demand half reads first. */
 export const SKILLS = [

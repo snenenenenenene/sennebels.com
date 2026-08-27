@@ -13,6 +13,7 @@ import {
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
 import { Chip, SectionHeader, TintPanel } from "./components/ui";
+import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
 // engines and answer engines can read it without executing any JavaScript.
@@ -27,7 +28,11 @@ export default function Home() {
       </Section>
       <div className="flex flex-col gap-[26px] px-6 md:px-[72px]">
         {FEATURED.map((project, i) => (
-          <ProjectCard key={project.slug} project={project} flipped={i % 2 === 1} />
+          <Reveal key={project.slug}>
+            <LiftOnHover>
+              <ProjectCard project={project} flipped={i % 2 === 1} />
+            </LiftOnHover>
+          </Reveal>
         ))}
       </div>
 
@@ -35,22 +40,25 @@ export default function Home() {
         <SectionHeader label="Also built" aside="smaller, still real, still running" />
       </Section>
       <ul className="flex flex-wrap gap-5 px-6 md:px-[72px]">
-        {ALSO.map((item) => (
+        {ALSO.map((item, i) => (
           <li key={item.name} className="contents">
-            <SmallCard {...item} />
+            <Reveal delay={(i % 3) * 0.07} className="w-full md:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]">
+              <SmallCard {...item} />
+            </Reveal>
           </li>
         ))}
       </ul>
 
       <div className="flex flex-col gap-[26px] px-6 pt-14 lg:flex-row md:px-[72px]">
-        {NUMBERS.map((n) => (
+        {NUMBERS.map((n, i) => (
+          <Reveal key={n.value} delay={i * 0.08} className="flex flex-1">
           <TintPanel
-            key={n.value}
             tint={n.tint}
             title={n.value}
             body={n.label}
             titleClass="font-display text-[46px] font-semibold leading-[50px] -tracking-[0.03em] text-ink"
           />
+          </Reveal>
         ))}
       </div>
 
@@ -106,21 +114,27 @@ function Hero() {
       id="work"
       className="flex flex-col items-start justify-between gap-10 px-6 pb-16 pt-[78px] xl:flex-row xl:items-center xl:gap-16 md:px-[72px]"
     >
-      <div className="flex w-full flex-col gap-[26px] xl:w-[720px] xl:shrink-0">
+      <Stagger className="flex w-full flex-col gap-[26px] xl:w-[720px] xl:shrink-0">
+        <Rise>
         <h1 className="flex flex-wrap items-baseline gap-x-3.5 text-[40px] font-medium leading-tight -tracking-[0.02em] md:text-[52px] md:leading-[64px]">
           <span>Hi there! I&rsquo;m</span>
           <span className="font-display font-semibold italic -tracking-[0.025em] text-moss md:text-[56px]">
             {PERSON.name}.
           </span>
         </h1>
+        </Rise>
 
+        <Rise>
         <p className="max-w-[620px] text-lg leading-8 text-ink-2 md:text-[21px] md:leading-[34px]">
           {PERSON.tagline}
         </p>
+        </Rise>
 
         {/* Self-contained passage, deliberately quotable by answer engines. */}
         <p className="sr-only">{PERSON.answerBlock}</p>
 
+
+        <Rise>
         <ul className="flex items-center gap-3">
           <IconLink href={PERSON.resume} label="Resume">
             <path d="M5 2.5h8l4 4v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z" />
@@ -138,11 +152,14 @@ function Hero() {
             <path d="M3 6l8 5.5L19 6" />
           </IconLink>
         </ul>
-      </div>
+        </Rise>
+      </Stagger>
 
-      <div className="flex size-[290px] shrink-0 items-center justify-center rounded-[36px] bg-tint-mint">
-        <Avatar />
-      </div>
+      <Reveal delay={0.15} y={16}>
+        <div className="flex size-[290px] shrink-0 items-center justify-center rounded-[36px] bg-tint-mint">
+          <Avatar />
+        </div>
+      </Reveal>
     </header>
   );
 }
@@ -247,8 +264,10 @@ function Fun() {
         {FUN_INTRO}
       </p>
       <div className="flex flex-col gap-5 lg:flex-row">
-        {FUN.map((f) => (
-          <TintPanel key={f.title} tint={f.tint} title={f.title} body={f.body} />
+        {FUN.map((f, i) => (
+          <Reveal key={f.title} delay={i * 0.07} className="flex flex-1">
+            <TintPanel tint={f.tint} title={f.title} body={f.body} />
+          </Reveal>
         ))}
       </div>
     </div>
