@@ -1,32 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
-import { Rule } from "./ui";
+import { Tilt, Plane } from "./tilt";
 
 /**
- * Wabi-sabi entry: no card, no tint block. A hairline opens the row, the
- * image sits unframed, and space carries the grouping. Rows alternate so the
- * page never settles into a single zigzag rhythm.
- *
- * Confidential client work has no shippable screenshot, so it gets a written
- * list instead of a faked mock.
+ * Apple groups related content on a raised surface rather than separating it
+ * with rules. There is not a single hairline in here: the fill does the
+ * grouping and the shadow does the separating.
  */
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
   return (
-    <article className="group/card flex flex-col gap-8 py-14">
-      <Rule />
-      <div
-        className={`flex flex-col gap-10 lg:gap-16 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}
-      >
-        <div className="flex flex-col gap-5 lg:w-[46%] lg:shrink-0">
-          <p className="text-caption font-medium uppercase tracking-[0.2em] text-ink-3">
-            {project.name}
-          </p>
+    <article className="group/card rounded-[26px] bg-raised p-6 shadow-[0_1px_2px_rgba(20,16,12,0.05),0_12px_36px_-28px_rgba(20,16,12,0.5)] transition-shadow duration-300 hover:shadow-[0_2px_4px_rgba(20,16,12,0.06),0_26px_60px_-30px_rgba(20,16,12,0.55)] md:p-8">
+      <div className={`flex flex-col gap-9 lg:gap-14 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+        <div className="flex flex-col gap-4 lg:w-[44%] lg:shrink-0">
+          <p className="text-caption font-medium uppercase tracking-[0.2em] text-ink-3">{project.name}</p>
 
-          <h3 className="max-w-[18ch] text-title1 font-medium text-ink">
-            {project.title}
-          </h3>
+          <h3 className="max-w-[18ch] text-title1 font-medium text-ink">{project.title}</h3>
 
           <p className="max-w-[54ch] text-body text-ink-2">{project.description}</p>
 
@@ -34,42 +24,43 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
 
           <Link
             href={`/work/${project.slug}`}
-            className="mt-2 inline-flex min-h-[44px] w-fit items-center gap-2 border-b border-moss/40 pb-1 text-body font-medium text-moss transition-colors hover:border-moss"
+            className="mt-1 inline-flex min-h-[44px] w-fit items-center gap-2 text-body font-medium text-moss"
           >
             {project.cta}
             <ArrowRight
               size={17}
               weight="bold"
               aria-hidden
-              className="transition-transform duration-300 group-hover/card:translate-x-1"
+              className="transition-transform duration-300 ease-out group-hover/card:translate-x-1"
             />
           </Link>
         </div>
 
         {project.image ? (
-          <div className="overflow-hidden rounded-[3px] lg:min-w-0 lg:flex-1">
-            {/* HIG dark mode: soften bright content images so they do not glow. */}
-            <Image
-              src={project.image}
-              alt={`${project.name}: ${project.title}`}
-              width={1400}
-              height={900}
-              loading="eager"
-              className="h-[240px] w-full object-cover object-top transition-transform duration-300 ease-out group-hover/card:scale-[1.03] lg:h-[380px]"
-            />
-          </div>
+          <Tilt className="lg:min-w-0 lg:flex-1">
+            <div className="overflow-hidden rounded-[18px] shadow-[0_20px_50px_-26px_rgba(20,16,12,0.6)]">
+              <Image
+                src={project.image}
+                alt={`${project.name}: ${project.title}`}
+                width={1400}
+                height={900}
+                loading="eager"
+                className="h-[230px] w-full object-cover object-top lg:h-[370px]"
+              />
+            </div>
+          </Tilt>
         ) : (
           project.spec && (
-            <ul className="flex flex-col justify-center gap-5 lg:min-w-0 lg:flex-1">
+            // Confidential client work has no shippable screenshot, so it gets a
+            // written list rather than a faked mock.
+            <ul className="flex flex-col justify-center gap-4 lg:min-w-0 lg:flex-1">
               {project.spec.points.map((point) => (
-                <li key={point} className="flex flex-col gap-4">
+                <li key={point} className="flex items-start gap-3 rounded-[16px] bg-paper/60 px-4 py-3.5">
+                  <CheckCircle size={19} weight="duotone" className="mt-0.5 shrink-0 text-moss" aria-hidden />
                   <span className="text-body text-ink-2">{point}</span>
-                  <Rule />
                 </li>
               ))}
-              <li className="font-display text-callout italic text-ink-3">
-                {project.spec.credit}
-              </li>
+              <li className="pl-1 font-display text-callout italic text-ink-3">{project.spec.credit}</li>
             </ul>
           )
         )}
@@ -94,16 +85,18 @@ export function SmallCard({
   const body = (
     <>
       {image && (
-        <div className="mb-5 overflow-hidden rounded-[3px]">
-          <Image
-            src={image}
-            alt={`${name}: ${description.slice(0, 60)}`}
-            width={1200}
-            height={760}
-            loading="eager"
-            className="h-[150px] w-full object-cover object-top transition-transform duration-300 ease-out group-hover/small:scale-[1.04]"
-          />
-        </div>
+        <Tilt max={6} className="mb-4">
+          <div className="overflow-hidden rounded-[14px] shadow-[0_14px_32px_-22px_rgba(20,16,12,0.6)]">
+            <Image
+              src={image}
+              alt={`${name}: ${description.slice(0, 60)}`}
+              width={1200}
+              height={760}
+              loading="eager"
+              className="h-[148px] w-full object-cover object-top"
+            />
+          </div>
+        </Tilt>
       )}
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="text-title3 font-medium text-ink">{name}</h3>
@@ -113,14 +106,14 @@ export function SmallCard({
     </>
   );
 
-  // min-h keeps the interactive target comfortably over the HIG 44pt minimum.
-  const className = "group/small flex min-h-[44px] flex-col gap-2";
+  const cls =
+    "group/small flex min-h-[44px] flex-col gap-1.5 rounded-[20px] bg-raised p-5 shadow-[0_1px_2px_rgba(20,16,12,0.04),0_10px_28px_-24px_rgba(20,16,12,0.45)] transition-shadow duration-300 hover:shadow-[0_2px_4px_rgba(20,16,12,0.06),0_20px_44px_-26px_rgba(20,16,12,0.5)]";
 
   return href ? (
-    <Link href={href} className={className}>
+    <Link href={href} className={cls}>
       {body}
     </Link>
   ) : (
-    <div className={className}>{body}</div>
+    <div className={cls}>{body}</div>
   );
 }

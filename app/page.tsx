@@ -10,6 +10,14 @@ import {
   LinkedinLogo,
   Mountains,
   Terminal,
+  UsersThree,
+  Lightning,
+  GitCommit,
+  Clock,
+  Briefcase,
+  GraduationCap,
+  Translate,
+  Wrench,
 } from "@phosphor-icons/react/dist/ssr";
 import {
   ALSO,
@@ -23,15 +31,15 @@ import {
   SKILLS,
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
-import { Chip, Glyph, Rule, SectionHeader } from "./components/ui";
+import { Dock } from "./components/dock";
+import { Chip, Glyph, SectionHeader } from "./components/ui";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
 // engines and answer engines can read it without executing any JavaScript.
 export default function Home() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 md:px-12 lg:px-16">
-      <Nav />
+    <main id="top" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-28 md:px-12 lg:px-16">
       <Hero />
 
       {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
@@ -42,7 +50,6 @@ export default function Home() {
             <ProjectCard project={project} flipped={i % 2 === 1} />
           </Reveal>
         ))}
-        <Rule />
       </section>
 
       <Also />
@@ -51,31 +58,15 @@ export default function Home() {
       <Skills />
       <Fun />
       <Footer />
+      <Dock
+        links={{
+          resume: PERSON.resume,
+          github: PERSON.github,
+          linkedin: PERSON.linkedin,
+          email: `mailto:${PERSON.email}`,
+        }}
+      />
     </main>
-  );
-}
-
-function Nav() {
-  return (
-    <nav className="flex h-[68px] items-center justify-between gap-8">
-      <Link href="/" aria-label="Senne Bels, home" className="flex min-h-[44px] min-w-[44px] items-center">
-        <Cat size={26} weight="duotone" className="text-moss" aria-hidden />
-      </Link>
-      <div className="flex items-center gap-6 text-callout md:gap-8">
-        <a href="#work" className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-ink">
-          Work
-        </a>
-        <a href="#about" className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-ink">
-          About
-        </a>
-        <a
-          href={`mailto:${PERSON.email}`}
-          className="flex min-h-[44px] items-center border-b border-moss/40 font-medium text-moss transition-colors hover:border-moss"
-        >
-          Get in touch
-        </a>
-      </div>
-    </nav>
   );
 }
 
@@ -156,16 +147,20 @@ function Also() {
   );
 }
 
+const STAT_ICONS = [UsersThree, Lightning, GitCommit, Clock];
+
 function Numbers() {
   return (
     <section className="flex flex-col pt-28">
-      <Rule />
       <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {NUMBERS.map((n, i) => (
+        {NUMBERS.map((n, i) => {
+          const Ico = STAT_ICONS[i % STAT_ICONS.length];
+          return (
           <Reveal key={n.value} delay={i * 0.08}>
-            <div className="flex flex-col gap-3 border-b border-hairline py-10 pr-8 lg:border-b-0">
+            <div className="flex h-full flex-col gap-2.5 rounded-[20px] bg-raised p-6">
+              <Ico size={22} weight="duotone" className="text-moss" aria-hidden />
               <dt className="sr-only">{n.label}</dt>
-              <dd className="flex flex-col gap-3">
+              <dd className="flex flex-col gap-2">
                 <span className="font-display text-title1 font-medium text-ink">
                   {n.value}
                 </span>
@@ -173,9 +168,9 @@ function Numbers() {
               </dd>
             </div>
           </Reveal>
-        ))}
+          );
+        })}
       </dl>
-      <Rule className="hidden lg:block" />
     </section>
   );
 }
@@ -187,12 +182,11 @@ function About() {
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
         <div className="flex flex-col">
-          <h3 className="pb-6 text-title3 font-medium">Experience</h3>
-          <Rule />
-          {EXPERIENCE.map((e) => (
+          <h3 className="flex items-center gap-2 pb-4 text-title3 font-medium"><Briefcase size={21} weight="duotone" className="text-moss" aria-hidden />Experience</h3>
+              {EXPERIENCE.map((e) => (
             <div
               key={e.role + e.org}
-              className="flex flex-col gap-1 border-b border-hairline py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              className="flex flex-col gap-1 rounded-[16px] px-4 py-3.5 odd:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
               <div className="flex flex-col gap-0.5">
                 <p className="text-body font-medium">{e.role}</p>
@@ -205,12 +199,12 @@ function About() {
 
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-3">
-            <h3 className="text-title3 font-medium">Education</h3>
+            <h3 className="flex items-center gap-2 text-title3 font-medium"><GraduationCap size={21} weight="duotone" className="text-moss" aria-hidden />Education</h3>
             <p className="text-body">{EDUCATION.degree}</p>
             <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="text-title3 font-medium">Languages</h3>
+            <h3 className="flex items-center gap-2 text-title3 font-medium"><Translate size={21} weight="duotone" className="text-moss" aria-hidden />Languages</h3>
             <ul className="flex flex-col gap-2 text-body text-ink-2">
               {LANGUAGES.map((l) => (
                 <li key={l}>{l}</li>
@@ -226,7 +220,7 @@ function About() {
 function Skills() {
   return (
     <section className="flex flex-col gap-6 pt-24">
-      <h3 className="text-title3 font-medium">Skills</h3>
+      <h3 className="flex items-center gap-2 text-title3 font-medium"><Wrench size={21} weight="duotone" className="text-moss" aria-hidden />Skills</h3>
       <ul className="flex flex-wrap gap-2.5">
         {SKILLS.map((s) => (
           <Chip key={s.label} tone={s.ai ? "accent" : "plain"}>
@@ -266,7 +260,6 @@ function Fun() {
 function Footer() {
   return (
     <footer className="flex flex-col gap-12 pb-16 pt-28">
-      <Rule />
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div className="flex flex-col gap-5">
           <h2 className="max-w-[16ch] font-display text-title1 font-medium italic text-moss">
@@ -279,7 +272,7 @@ function Footer() {
           </p>
           <a
             href={`mailto:${PERSON.email}`}
-            className="inline-flex min-h-[44px] w-fit items-center gap-2 border-b border-moss/40 pb-1 text-lede font-medium text-moss transition-colors hover:border-moss"
+            className="inline-flex min-h-[44px] w-fit items-center gap-2.5 rounded-full bg-moss px-6 py-3 text-body font-semibold text-paper shadow-[0_10px_26px_-14px_rgba(20,16,12,0.6)] transition-transform duration-200 ease-out active:scale-[0.98]"
           >
             {PERSON.email}
             <ArrowUpRight size={19} weight="bold" aria-hidden />

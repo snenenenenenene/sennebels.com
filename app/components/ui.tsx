@@ -8,11 +8,6 @@ import type { Icon } from "@phosphor-icons/react";
  * "embrace colors that adapt to the current appearance".
  */
 
-/** A hairline. The only divider on the page. */
-export function Rule({ className = "" }: { className?: string }) {
-  return <hr className={`h-px w-full border-0 bg-hairline ${className}`} aria-hidden />;
-}
-
 /**
  * Rebus: the glyph sits inside the sentence rather than beside it, so the
  * words and the marks read as one line. Icons come from Phosphor, never
