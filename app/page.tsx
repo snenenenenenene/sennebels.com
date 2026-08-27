@@ -1,1240 +1,352 @@
-"use client"
-
-import React, { useEffect, useRef, useState, useCallback, Suspense } from 'react';
-import type { ReactNode, MouseEvent as ReactMouseEvent } from 'react';
-import { AnimatePresence, motion, PanInfo, useAnimation, useMotionValue, useSpring, animate } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Mail, Download, Activity, MapPin, LanguagesIcon, Sun, Moon, Sparkles, Cat, LayoutGrid, X, ChevronLeft, Apple, Smartphone, Globe, LayoutDashboard } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { projects } from "./constants";
-import { useImagePreloader } from "./hooks/useImagePreloader";
-import HiddenImagePreloader from "./components/HiddenImagePreloader";
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Environment, Html } from '@react-three/drei';
-import * as THREE from 'three';
-import ReactDOM from 'react-dom';
-import { Model as CalicoModel } from './components/models/calico'; // Import Calico Model
-import type { Metadata } from 'next';
+import {
+  ALSO,
+  EDUCATION,
+  EXPERIENCE,
+  FEATURED,
+  FUN,
+  FUN_INTRO,
+  LANGUAGES,
+  NUMBERS,
+  PERSON,
+  SKILLS,
+} from "./data/portfolio";
+import { ProjectCard, SmallCard } from "./components/ProjectCard";
+import { Chip, SectionHeader, TintPanel } from "./components/ui";
 
-// Define Theme Type
-type Theme = 'light' | 'dark' | 'calico' | 'immersive';
+// Server component on purpose: every claim below ships in the HTML, so search
+// engines and answer engines can read it without executing any JavaScript.
+export default function Home() {
+  return (
+    <main className="mx-auto flex w-full max-w-[1440px] flex-col bg-paper font-sans text-ink">
+      <Nav />
+      <Hero />
 
-// Define Calico Palette Hexcodes
-const CALICO_WHITE = '#FAF8F5';
-const CALICO_ORANGE = '#D87A4A';
-const CALICO_BROWN = '#8C6D5E';
-const CALICO_BLACK = '#261F1C';
+      <Section>
+        <SectionHeader label="Selected work" aside="five that matter most" />
+      </Section>
+      <div className="flex flex-col gap-[26px] px-6 md:px-[72px]">
+        {FEATURED.map((project, i) => (
+          <ProjectCard key={project.slug} project={project} flipped={i % 2 === 1} />
+        ))}
+      </div>
 
-// Define Theme Colors (Updated Calico)
-const THEME_COLORS = {
-  light: { 
-    bg: '#FFFFFF', 
-    card: 'bg-neutral-100/90 dark:bg-neutral-800/90', 
-    border: 'border-black/5 dark:border-white/10', 
-    text: 'text-neutral-900 dark:text-neutral-100' // Base text color for theme
-  }, 
-  dark: { 
-    bg: '#191919', 
-    card: 'bg-[#2F2F2F]/90 dark:bg-[#2F2F2F]/90', 
-    border: 'border-white/10 dark:border-white/10', 
-    text: 'text-neutral-100 dark:text-neutral-100' // Dark theme uses light text
-  }, 
-  calico: { 
-    bg: CALICO_WHITE, // Use Calico off-white for background
-    card: `bg-white`, // Default card is white
-    border: `border-[${CALICO_BLACK}]/20`, // Dark brown border, slightly more visible
-    text: `text-[${CALICO_BLACK}]` // Dark brown text for Calico
-  }, 
-  immersive: { 
-    bg: 'dynamic', 
-    card: 'bg-neutral-100/80 dark:bg-[#1D1D1F]/80', 
-    border: 'border-black/5 dark:border-white/10', 
-    text: 'text-neutral-900 dark:text-neutral-100' // Default like light theme text
-  } 
-};
+      <Section className="pt-[66px]">
+        <SectionHeader label="Also built" aside="smaller, still real, still running" />
+      </Section>
+      <ul className="flex flex-wrap gap-5 px-6 md:px-[72px]">
+        {ALSO.map((item) => (
+          <li key={item.name} className="contents">
+            <SmallCard {...item} />
+          </li>
+        ))}
+      </ul>
 
-// Base Bento Card Styling
-const BENTO_BASE_CLASSES = "bg-neutral-100/80 dark:bg-[#1D1D1F]/80 backdrop-blur-lg border border-black/5 dark:border-white/10 rounded-3xl shadow-sm transition-colors duration-300";
+      <div className="flex flex-col gap-[26px] px-6 pt-14 lg:flex-row md:px-[72px]">
+        {NUMBERS.map((n) => (
+          <TintPanel
+            key={n.value}
+            tint={n.tint}
+            title={n.value}
+            body={n.label}
+            titleClass="font-display text-[46px] font-semibold leading-[50px] -tracking-[0.03em] text-ink"
+          />
+        ))}
+      </div>
 
-// Updated Bento Card Wrapper (Uses theme text color)
-const BentoCard = ({ 
-  children, 
-  className = '', 
-  href,
-  theme = 'immersive',
-  overrideBg, // Optional override for color blocking
-  ...props 
-}: { 
-  children: React.ReactNode; 
-  className?: string; 
-  href?: string; 
-  theme?: Theme;
-  overrideBg?: string; // e.g., 'bg-[#D87A4A]' 
-  [key: string]: any; 
-}) => {
-  const themeConfig = THEME_COLORS[theme];
-  // Use override or default card background
-  const cardBg = overrideBg && theme === 'calico' ? overrideBg : themeConfig.card;
-  const baseClassName = `${cardBg} ${themeConfig.border} backdrop-blur-lg rounded-3xl shadow-sm transition-colors duration-300 ${className}`;
-  // Use theme's base text color
-  const textClassName = overrideBg && theme === 'calico' ? `text-[${CALICO_WHITE}]` : themeConfig.text;
-  const hoverClasses = theme !== 'immersive' 
-      ? `hover:border-[${theme === 'calico' ? CALICO_BLACK : 'black'}]/25 dark:hover:border-white/25` 
-      : 'hover:border-black/10 dark:hover:border-white/20';
+      <About />
+      <Skills />
+      <Fun />
+      <Footer />
+    </main>
+  );
+}
 
-  const combinedClassName = `${baseClassName} ${textClassName}`;
-
-  const content = (
-    <div className={combinedClassName} {...props}>
+function Section({
+  children,
+  className = "",
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}) {
+  return (
+    <div id={id} className={`px-6 py-7 md:px-[72px] ${className}`}>
       {children}
     </div>
   );
+}
 
-  if (href) {
-    return (
-      <Link 
-        href={href} 
-        className={`block h-full w-full ${combinedClassName} ${hoverClasses}`} 
-        {...props}
-      >
-        {content}
-      </Link>
-    );
-  }
-
-  return content;
-};
-
-// --- Reusable Popover Component ---
-const Popover = ({ 
-  content, 
-  x, 
-  y, 
-  visible 
-}: { 
-  content: React.ReactNode; 
-  x: number; 
-  y: number; 
-  visible: boolean; 
-}) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true); // Ensure component is mounted client-side before using portal
-  }, []);
-
-  if (!visible || !isMounted) return null;
-
-  return ReactDOM.createPortal(
-    <div 
-      className="fixed z-[999] px-2 py-1 bg-black/80 dark:bg-white/90 text-white dark:text-black text-[11px] font-medium rounded-md shadow-lg pointer-events-none whitespace-nowrap transition-opacity duration-150"
-      style={{
-        top: `${y + 15}px`, // Position below cursor
-        left: `${x}px`,    // Position at cursor X
-        transform: 'translateX(-50%)', // Center horizontally
-        opacity: visible ? 1 : 0, // Fade effect
-      }}
-    >
-      {content}
-    </div>,
-    document.body // Render directly into the body element
-  );
-};
-
-// Profile Card (Using Popover Component)
-const ProfileCard = () => {
-  const links = [
-    { icon: Github, href: "https://github.com/snenenenenenene", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/sennebels", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:sennebels@gmail.com", label: "Email" },
-    { icon: Download, href: "/assets/CV Senne Bels.pdf", label: "Resume", download: "CV Senne Bels.pdf" }
-  ];
-
-  // State for icon popovers
-  const [iconPopover, setIconPopover] = React.useState<{
-    visible: boolean; 
-    content: string; 
-    x: number; 
-    y: number; 
-  } | null>(null);
-
-  const handleIconMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>, label: string) => {
-    setIconPopover({ visible: true, content: label, x: e.clientX, y: e.clientY });
-  };
-
-  const handleIconMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (iconPopover?.visible) {
-      setIconPopover(prev => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
-    }
-  };
-
-  const handleIconMouseLeave = () => {
-    setIconPopover(prev => prev ? { ...prev, visible: false } : null);
-  };
-
+function Nav() {
   return (
-    <BentoCard className="h-full flex flex-col p-6 md:p-8 overflow-hidden">
-      <div className="flex-grow"> {/* Wrapper to allow bio to push footer down */} 
-        {/* Header */}
-        <div className="flex items-start gap-4 mb-6">
-          <motion.div 
-            className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 shrink-0"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <Image src="/images/avatar.png" alt="Senne Bels profile picture" fill className="object-cover" sizes="64px" priority loading="eager" />
-          </motion.div>
-          <div>
-            <h1 className="text-xl font-semibold tracking-tight text-black dark:text-white mb-0.5">
-              Senne Bels
-            </h1>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Full-stack Developer & Game Dev
-            </p>
-          </div>
-        </div>
-
-        {/* Bio */}
-        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-3">
-          Full-stack developer & creative tech enthusiast from Antwerp, Belgium. I freelance for startups and agencies, building interactive, scalable web experiences with a love for game-like UIs and creative tech.
-        </p>
-        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6">
-          Currently developing <strong className="font-medium text-black dark:text-white">ORNITHO</strong>, a dinosaur horror game set in Antwerp, in my free time. Actively seeking international contract opportunities in <strong className="font-medium text-black dark:text-white">North America, Japan, or the UK</strong>. Also, a big fan of cats.
-        </p>
-      </div>
-
-      {/* Footer Info (Location, Languages, Links) */}
-      <div className="mt-auto border-t border-black/5 dark:border-white/10 pt-4">
-        <div className="grid grid-cols-2 gap-4 text-xs mb-4">
-          <div>
-            <h3 className="flex items-center gap-1.5 font-medium text-neutral-500 dark:text-neutral-400 mb-1.5">
-              <MapPin className="w-3 h-3" /> LOCATION
-            </h3>
-            <p className="text-neutral-600 dark:text-neutral-300">
-              🇧🇪 Antwerp, Belgium
-            </p>
-            <p className="text-neutral-500 dark:text-neutral-400 text-[11px]">(Open to relocate)</p>
-          </div>
-          <div>
-            <h3 className="flex items-center gap-1.5 font-medium text-neutral-500 dark:text-neutral-400 mb-1.5">
-              <LanguagesIcon className="w-3 h-3" /> LANGUAGES
-            </h3>
-            <p className="text-neutral-600 dark:text-neutral-300">🇬🇧 English (Fluent)</p>
-            <p className="text-neutral-600 dark:text-neutral-300">🇳🇱 Dutch (Native)</p>
-          </div>
-        </div>
-        {/* Links Section */}
-        <div className="flex items-center justify-between border-t border-black/5 dark:border-white/10 pt-4 mb-4"> {/* Added mb-4 */} 
-           <span className="text-xs text-neutral-500 dark:text-neutral-400">Get in touch:</span>
-           <div className="flex gap-3">
-            {links.map(({ icon: Icon, href, label, download }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                download={download}
-                className="p-1.5 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 dark:focus-visible:ring-offset-black rounded-lg"
-                whileTap={{ scale: 0.90 }}
-                whileHover={{ 
-                  rotate: [0, -8, 8, -8, 8, 0],
-                  transition: { duration: 0.4, ease: "easeInOut" } 
-                }}
-                aria-label={label}
-                onMouseEnter={(e) => handleIconMouseEnter(e, label)}
-                onMouseMove={handleIconMouseMove}
-                onMouseLeave={handleIconMouseLeave}
-              >
-                <Icon className="w-4 h-4" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-        
-        {/* --- Cats Section --- */} 
-        {/* {(() => {
-          // Define cat data inside an IIFE to keep it scoped
-          const catImages = [
-            { src: '/assets/Brie.png', alt: 'Brie' },
-            { src: '/assets/placeholder-cat-2.png', alt: 'Cat 2' },
-            { src: '/assets/placeholder-cat-3.png', alt: 'Cat 3' },
-            { src: '/assets/placeholder-cat-4.png', alt: 'Cat 4' },
-          ];
-          return (
-            <div className="border-t border-black/5 dark:border-white/10 pt-4">
-              <h3 className="text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-2 text-center">Supervisors</h3>
-              <div className="flex justify-center gap-2">
-                {catImages.map((cat) => (
-                  <div key={cat.alt} className="relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-black/10 dark:ring-white/10">
-                    <Image
-                      src={cat.src}
-                      alt={cat.alt}
-                      fill
-                      className="object-cover"
-                      sizes="40px"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })()} */}
-      </div>
-
-      {/* Use Popover Component - Renders via Portal */}
-      <Popover 
-        visible={!!iconPopover?.visible} 
-        content={iconPopover?.content || ''} 
-        x={iconPopover?.x || 0} 
-        y={iconPopover?.y || 0} 
-      />
-    </BentoCard>
-  );
-};
-
-// Map platform names to icons (Ensure type safety)
-const platformIcons: { [key: string]: React.ElementType | undefined } = {
-  iOS: Apple,
-  Android: Smartphone,
-  Web: Globe,
-  Mobile: Smartphone,
-  Desktop: Activity, // Placeholder, maybe Laptop icon?
-  Dashboard: LayoutDashboard,
-};
-
-// Featured Projects Card (Matching Border Radius)
-const FeaturedProjects = ({ 
-  currentProject, 
-  setCurrentProject, 
-  onScrollingChange 
-}: { 
-  currentProject: number;
-  setCurrentProject: React.Dispatch<React.SetStateAction<number>>;
-  onScrollingChange: (isScrolling: boolean) => void 
-}) => {
-  const [direction, setDirection] = React.useState(0);
-  const [isScrollLocked, setIsScrollLocked] = React.useState(false);
-  const [showOverview, setShowOverview] = React.useState(false); // State for overview modal
-  const [showNudgeHint, setShowNudgeHint] = React.useState(true); // State for hint visibility
-  const projectContainerRef = React.useRef<HTMLDivElement>(null);
-  const dragThreshold = 50; // Min drag distance in pixels to trigger change
-  const dragVelocityThreshold = 300; // Min velocity to trigger change
-
-  // State for platform icon popovers
-  const [platformPopover, setPlatformPopover] = React.useState<{
-    visible: boolean; 
-    content: string; 
-    x: number; 
-    y: number; 
-  } | null>(null);
-
-  const handleProjectChange = React.useCallback((index: number) => {
-    if (isScrollLocked || index === currentProject) return; 
-    setIsScrollLocked(true);
-    onScrollingChange(true);
-    setDirection(index > currentProject ? 1 : -1);
-    setCurrentProject(index); 
-
-    setTimeout(() => {
-      setIsScrollLocked(false);
-      onScrollingChange(false);
-    }, 500); 
-  }, [isScrollLocked, onScrollingChange, currentProject, setCurrentProject]);
-
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const offset = info.offset.x;
-    const velocity = info.velocity.x;
-    let nextProjectIndex = currentProject;
-
-    if (Math.abs(offset) > dragThreshold || Math.abs(velocity) > dragVelocityThreshold) {
-      if (offset < -dragThreshold || velocity < -dragVelocityThreshold) {
-        nextProjectIndex = (currentProject + 1 + projects.length) % projects.length;
-      } else if (offset > dragThreshold || velocity > dragVelocityThreshold) {
-        nextProjectIndex = (currentProject - 1 + projects.length) % projects.length;
-      }
-    }
-    
-    if (nextProjectIndex !== currentProject) {
-       handleProjectChange(nextProjectIndex);
-    }
-  };
-
-  const handleOverviewClick = (index: number) => {
-    if (index !== currentProject) {
-      handleProjectChange(index);
-    }
-    setShowOverview(false); 
-  };
-
-  React.useEffect(() => {
-    const hintTimeout = setTimeout(() => {
-      setShowNudgeHint(false);
-    }, 3500); 
-    return () => clearTimeout(hintTimeout);
-  }, []);
-
-  const handlePlatformMouseEnter = (e: React.MouseEvent<HTMLDivElement>, label: string) => {
-    setPlatformPopover({ visible: true, content: label, x: e.clientX, y: e.clientY });
-  };
-
-  const handlePlatformMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (platformPopover?.visible) {
-      setPlatformPopover(prev => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
-    }
-  };
-
-  const handlePlatformMouseLeave = () => {
-    setPlatformPopover(prev => prev ? { ...prev, visible: false } : null);
-  };
-
-  const variants = {
-    enter: (direction: number) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction: number) => ({ x: direction < 0 ? '100%' : '-100%', opacity: 0 })
-  };
-
-  return (
-      <div 
-        ref={projectContainerRef}
-        className="relative w-full h-full cursor-grab active:cursor-grabbing group/nav" // Keep group/nav for hover detection
-      >
-        {/* Remove Navigation Arrow Buttons */}
-
-        {/* Add Hover Text Hints (Positioned at Bottom) */} 
-        <div className="absolute left-2 md:left-4 bottom-2 md:bottom-4 z-20 pointer-events-none transition-opacity duration-300 opacity-0 group-hover/nav:opacity-100">
-          <div className="px-3 py-1 rounded-full bg-black/40 dark:bg-white/10 backdrop-blur-sm text-white dark:text-neutral-200 text-[10px] md:text-xs font-medium whitespace-nowrap">
-            Slide Right
-          </div>
-        </div>
-        <div className="absolute right-2 md:right-4 bottom-2 md:bottom-4 z-20 pointer-events-none transition-opacity duration-300 opacity-0 group-hover/nav:opacity-100">
-           <div className="px-3 py-1 rounded-full bg-black/40 dark:bg-white/10 backdrop-blur-sm text-white dark:text-neutral-200 text-[10px] md:text-xs font-medium whitespace-nowrap">
-            Slide Left
-          </div>
-        </div>
-
-      <div className="absolute inset-0 overflow-hidden"> {/* Project content container */}
-        {/* Animated Nudge Hint */} 
-        <AnimatePresence>
-          {showNudgeHint && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: [0, 1, 1, 0], // Fade in, stay, fade out
-                x: [0, 0, -10, -10], // Stay, nudge left, stay nudged
-                transition: {
-                  duration: 2.5, // Total duration
-                  times: [0, 0.2, 0.8, 1], // Timing points for keyframes
-                  delay: 0.8, // Start after initial load
-                  ease: "easeInOut"
-                }
-              }}
-              exit={{ opacity: 0 }} // Optional exit animation
-              className="absolute top-1/2 right-4 -translate-y-1/2 z-10 pointer-events-none"
-            >
-              <ChevronLeft className="w-6 h-6 text-white/60" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Preload adjacent project images in hidden divs */}
-        <div className="absolute inset-0 pointer-events-none">
-          {projects.map((project, index) => {
-            // Only render adjacent images (previous, current, next)
-            const diff = Math.abs(index - currentProject);
-            const isAdjacent = diff <= 1 || diff === projects.length - 1;
-            if (!isAdjacent) return null;
-            
-            return (
-              <div
-                key={`preload-${project.title}`}
-                className="absolute inset-0 opacity-0"
-                aria-hidden="true"
-              >
-                <Image
-                  src={project.image}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={true}
-                  loading="eager"
-                  quality={90}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-                <motion.div
-            key={currentProject}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
-            }}
-            className="absolute inset-0 origin-center"
-            // Drag properties
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.1}
-            onDragEnd={handleDragEnd}
-            // Add styles during drag
-            whileDrag={{ scale: 0.97, opacity: 0.85 }} 
-          >
-            <div className="relative w-full h-full flex flex-col"> {/* Changed to flex column */} 
-              {/* Image Container (Takes up most space) */} 
-              <div className="relative flex-grow overflow-hidden rounded-t-3xl"> {/* Added rounding */} 
-                <Image
-                  src={projects[currentProject].image}
-                  alt={projects[currentProject].title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={true}
-                  loading="eager"
-                  quality={90}
-                  // Prevent native image dragging
-                  draggable={false}
-                  onDragStart={(e) => e.preventDefault()}
-                />
-              </div>
-
-              {/* Info Panel Container (Bottom section) */} 
-              <div className="flex-shrink-0 p-6 md:p-8 text-black dark:text-white bg-neutral-50/80 dark:bg-black/30 rounded-b-3xl"> {/* Added padding, background, rounding */} 
-                <div className="flex items-start justify-between mb-3 gap-4"> {/* Use start align, add gap */} 
-                  <div> {/* Wrap title/year */} 
-                    <h3 className="text-xl md:text-2xl font-medium tracking-tight mb-1"> {/* Adjusted size */} 
-                      {projects[currentProject].title}
-                    </h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm font-medium text-neutral-600 dark:text-neutral-400"> {/* Adjusted styling */} 
-                      {projects[currentProject].year}
-                    </span>
-                  </div>
-                  {/* Moved View Project Link here */} 
-                  <Link
-                    href={projects[currentProject].link}
-                    target="_blank"
-                    className="flex-shrink-0 text-xs text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group bg-black/10 dark:bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full font-medium whitespace-nowrap" // Adjusted styling
-                  >
-                    View Project <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                </div>
-
-                <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed max-w-2xl"> {/* Adjusted text color */} 
-                  {projects[currentProject].description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {projects[currentProject].tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-black/10 dark:bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-400" // Adjusted styling
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Conditionally render Platform Icons */} 
-                {((projects[currentProject] as any).platforms && (projects[currentProject] as any).platforms.length > 0) && (
-                  <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-black/5 dark:border-white/10"> 
-                    <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 mr-1">Platforms:</span>
-                    {(projects[currentProject] as any).platforms?.map((platform: string) => { 
-                      const IconComponent = platformIcons[platform]; 
-                      // Check if it's a valid component type (function or object)
-                      if (typeof IconComponent !== 'function' && typeof IconComponent !== 'object') {
-                        return null; 
-                      }
-                      return (
-                        <motion.div
-                          key={platform}
-                          className="flex items-center justify-center p-1.5 bg-black/5 dark:bg-white/5 rounded-md cursor-default"
-                          onMouseEnter={(e) => handlePlatformMouseEnter(e, platform)}
-                          onMouseMove={handlePlatformMouseMove}
-                          onMouseLeave={handlePlatformMouseLeave}
-                        >
-                          {/* Render the component */}
-                          <IconComponent className="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-400" />
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {/* Page Number Indicator & Overview Trigger */} 
-                <div className="flex justify-center items-center gap-4 mt-4">
-                  <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                    {currentProject + 1} / {projects.length}
-                  </span>
-                  <button 
-                    onClick={() => setShowOverview(true)}
-                    className="p-1 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" 
-                    aria-label="Show all projects"
-                  >
-                    <LayoutGrid className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      
-      {/* Project Overview Modal */} 
-      <AnimatePresence>
-        {showOverview && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowOverview(false)} // Click backdrop to close
-            className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4"
-          >
-            {/* Modal Content */} 
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking content
-              className="relative bg-white dark:bg-neutral-800 rounded-2xl shadow-xl w-full max-w-3xl max-h-[80vh] overflow-y-auto p-4 md:p-6" // Reduced padding (Re-applying)
-            >
-              <h3 className="text-lg font-medium text-black dark:text-white mb-6 text-center">All Projects</h3>
-              {/* Close Button */} 
-              <button 
-                onClick={() => setShowOverview(false)} 
-                className="absolute top-4 right-4 p-1.5 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
-                aria-label="Close project overview"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Grid of Projects */} 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                {projects.map((project, index) => (
-                  <button 
-                    key={project.title}
-                    onClick={() => handleOverviewClick(index)}
-                    className={`relative group block w-full aspect-square rounded-lg overflow-hidden transition-all duration-200 ${currentProject === index ? 'ring-2 ring-sky-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-800' : 'hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-800'}`}
-                  >
-                    <Image 
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                      priority={true}
-                      loading="eager"
-                      quality={85}
-                      unoptimized={false}
-                    />
-                    {/* Subtle overlay for title */}
-                    <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 via-black/30 to-transparent">
-                      <h4 className="text-xs font-medium text-white truncate">{project.title}</h4>
-                    </div>
-                     {/* Selection indicator */}
-                    {currentProject === index && (
-                      <div className="absolute inset-0 bg-sky-500/20"></div>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Platform Icon Popover */} 
-      <Popover 
-        visible={!!platformPopover?.visible} 
-        content={platformPopover?.content || ''} 
-        x={platformPopover?.x || 0} 
-        y={platformPopover?.y || 0} 
-      />
-    </div>
-  );
-};
-
-// Refined GitHub Stats (Language bars removed)
-const GitHubStats = ({ theme, overrideBg }: { theme?: Theme; overrideBg?: string }) => {
-  const [stats, setStats] = React.useState<any>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
-  
-  // Animation for contribution count
-  const count = useMotionValue(0);
-  const rounded = useSpring(count, { stiffness: 100, damping: 30, mass: 1 });
-
-  React.useEffect(() => {
-    let animationControls: ReturnType<typeof animate> | null = null;
-
-    fetch('/api/github')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then(data => {
-        if (data.error) {
-          throw new Error(data.error || 'Failed to fetch GitHub stats');
-        }
-        setStats(data);
-        setLoading(false);
-        // Animate the count when data arrives
-        if (data.totalContributions) {
-          animationControls = animate(count, data.totalContributions, {
-             type: "spring",
-             duration: 1.5 // Duration for the count-up
-          });
-        }
-      })
-      .catch(err => {
-        console.error('Error fetching GitHub stats:', err);
-        setError(err.message || 'Could not load stats.');
-        setLoading(false);
-      });
-
-    // Cleanup function to stop animation if component unmounts
-    return () => {
-       animationControls?.stop();
-    };
-  }, [count]); // Dependency array includes count
-
-  // Use state for the display count to ensure re-renders
-  const [displayCount, setDisplayCount] = React.useState("0");
-  React.useEffect(() => {
-    return rounded.on("change", (latest) => {
-      // Update state with the formatted number
-      setDisplayCount(latest.toLocaleString("en-US", { maximumFractionDigits: 0 }));
-    });
-  }, [rounded]);
-
-  return (
-    <BentoCard theme={theme} overrideBg={overrideBg} className="h-full p-6 md:p-8 flex flex-col">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="flex items-center gap-2 text-sm font-medium text-black dark:text-white">
-          <Activity className="w-4 h-4" /> GitHub Activity
-        </h3>
-        {/* Display loading/error or the animated count */} 
-        <span className="text-xs text-neutral-500 dark:text-neutral-400 flex items-center gap-1">
-          <Github className="w-3 h-3" /> 
-          {loading ? (
-            'Loading...'
-          ) : error ? (
-            'Error'
-          ) : (
-            // Use motion.span to display animated value from state
-            <motion.span>{displayCount}</motion.span>
-          )}
-          { !loading && !error && ' contributions'} 
+    <nav className="flex items-center justify-between gap-8 px-6 pt-6 md:px-[72px]">
+      <Link href="/" aria-label="Senne Bels, home">
+        <span className="flex size-11 items-center justify-center rounded-[14px] bg-tint-mint">
+          <CatMark />
         </span>
+      </Link>
+      <div className="flex items-center gap-5 text-base font-medium md:gap-7">
+        <a href="#work">work</a>
+        <a href="#about">about</a>
+        <a
+          href={`mailto:${PERSON.email}`}
+          className="rounded-full bg-moss px-5 py-[11px] text-[15px] font-semibold text-[#F4FAF3]"
+        >
+          let&rsquo;s talk
+        </a>
       </div>
-
-      {/* Main Content Area (Graph or Status) */}
-      <div className="flex-grow flex items-center justify-center">
-        {loading && <p className="text-xs text-neutral-500 dark:text-neutral-400">Loading stats...</p>}
-        {error && <p className="text-xs text-red-600 dark:text-red-400">Error: {error}</p>}
-        {stats && !loading && !error && (
-          <div className="w-full">
-            <ContributionGraph contributions={stats.contributionCalendar} />
-        </div>
-        )}
-      </div>
-    </BentoCard>
+    </nav>
   );
-};
+}
 
-// Contribution Graph Component (Using Popover Component)
-const ContributionGraph = ({ contributions }: { contributions: any }) => {
-  const [popover, setPopover] = React.useState<{ visible: boolean; content: string; x: number; y: number; } | null>(null);
-
-  if (!contributions || !contributions.weeks) {
-    return <div className="text-xs text-gray-400">Contribution data not available.</div>;
-  }
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>, day: any) => {
-    const content = `${day.contributionCount} contributions on ${new Date(day.date).toLocaleDateString()}`;
-    setPopover({ visible: true, content, x: e.clientX, y: e.clientY });
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (popover?.visible) {
-      setPopover(prev => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setPopover(prev => prev ? { ...prev, visible: false } : null);
-  };
-
-  const getContributionColor = (count: number) => {
-    if (count === 0) return 'bg-neutral-100 dark:bg-neutral-800';
-    if (count <= 3) return 'bg-green-200 dark:bg-green-900';
-    if (count <= 6) return 'bg-green-300 dark:bg-green-800';
-    if (count <= 9) return 'bg-green-400 dark:bg-green-700';
-    return 'bg-green-500 dark:bg-green-600';
-  };
-
+function Hero() {
   return (
-    <div className="relative"> {/* Added relative positioning context */}
-      {/* Contribution Grid */}
-      <div className="overflow-x-auto scrollbar-hide pb-1">
-        <div className="inline-grid grid-flow-col auto-cols-max gap-[2px]">
-          {contributions.weeks.map((week: any, weekIndex: number) => (
-            <div key={weekIndex} className="grid grid-rows-7 gap-[2px]">
-              {week.contributionDays.map((day: any, dayIndex: number) => (
-                <motion.div
-                  key={day.date || dayIndex}
-                  className={`w-2 h-2 rounded-sm ${getContributionColor(day.contributionCount)} transition-colors cursor-default`}
-                  onMouseEnter={(e) => handleMouseEnter(e, day)}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                  whileHover={{ scale: 1.3 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
+    <header
+      id="work"
+      className="flex flex-col items-start justify-between gap-10 px-6 pb-16 pt-[78px] xl:flex-row xl:items-center xl:gap-16 md:px-[72px]"
+    >
+      <div className="flex w-full flex-col gap-[26px] xl:w-[720px] xl:shrink-0">
+        <h1 className="flex flex-wrap items-baseline gap-x-3.5 text-[40px] font-medium leading-tight -tracking-[0.02em] md:text-[52px] md:leading-[64px]">
+          <span>Hi there! I&rsquo;m</span>
+          <span className="font-display font-semibold italic -tracking-[0.025em] text-moss md:text-[56px]">
+            {PERSON.name}.
+          </span>
+        </h1>
 
-      {/* Use Popover Component - Renders via Portal */}
-      <Popover 
-        visible={!!popover?.visible} 
-        content={popover?.content || ''} 
-        x={popover?.x || 0} 
-        y={popover?.y || 0} 
-      />
-    </div>
-  );
-};
+        <p className="max-w-[620px] text-lg leading-8 text-ink-2 md:text-[21px] md:leading-[34px]">
+          {PERSON.tagline}
+        </p>
 
-// --- Renamed to Generic Model Viewer ---
-const ModelViewer = ({ theme }: { theme?: Theme }) => {
-  const controlsRef = useRef<any>(); // Ref for OrbitControls
-  const [isRotating, setIsRotating] = React.useState(true); // State to control rotation
-  const [isHovered, setIsHovered] = React.useState(false); // Keep hover state
+        {/* Self-contained passage, deliberately quotable by answer engines. */}
+        <p className="sr-only">{PERSON.answerBlock}</p>
 
-  // --- Manual Cursor Change Effect ---
-  useEffect(() => {
-    if (typeof document !== 'undefined') { // Ensure document exists (client-side)
-      document.body.style.cursor = isHovered ? 'pointer' : 'auto';
-    }
-    // Cleanup function to reset cursor on unmount
-    return () => {
-       if (typeof document !== 'undefined') {
-          document.body.style.cursor = 'auto';
-       }
-    };
-  }, [isHovered]); // Run effect when isHovered changes
-  // --- End Manual Cursor Change ---
-
-  // --- Audio Setup (Keep this) ---
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const audioBufferRef = useRef<AudioBuffer | null>(null);
-  
-  useEffect(() => {
-    // Initialize AudioContext on mount (client-side only)
-    if (typeof window !== 'undefined') {
-      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const audioCtx = audioContextRef.current;
-
-      // Fetch and decode the audio file
-      fetch('/assets/audio/meow.mp3') // Ensure this path is correct!
-        .then(response => response.arrayBuffer())
-        .then(arrayBuffer => audioCtx.decodeAudioData(arrayBuffer))
-        .then(decodedBuffer => {
-          audioBufferRef.current = decodedBuffer;
-        })
-        .catch(error => console.error('Error loading audio file:', error));
-    }
-
-    // Cleanup function
-    return () => {
-      audioContextRef.current?.close();
-    };
-  }, []);
-
-  // Function to play the sound
-  const playMeowSound = () => {
-    const audioCtx = audioContextRef.current;
-    const audioBuffer = audioBufferRef.current;
-    if (audioCtx && audioBuffer && audioCtx.state !== 'closed') {
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      const source = audioCtx.createBufferSource();
-      source.buffer = audioBuffer;
-      source.connect(audioCtx.destination);
-      source.start(0);
-    }
-  };
-  // --- End Audio Setup ---
-
-  const handleInteractionStart = () => {
-    setIsRotating(false);
-  };
-
-  const handleInteractionEnd = () => {
-    setIsRotating(true);
-  };
-
-  return (
-    <BentoCard theme={theme} className="h-full !p-0 overflow-hidden relative">
-      <Canvas 
-        camera={{ position: [0, 1, 5], fov: 50 }} 
-        shadows 
-      >
-        <ambientLight intensity={0.6} /> 
-        <directionalLight 
-          position={[5, 8, 5]} 
-          intensity={1.5} 
-          castShadow 
-          shadow-mapSize-width={1024} 
-          shadow-mapSize-height={1024}
-        />
-        <Suspense fallback={
-          <Html center className="text-xs text-neutral-500">
-            Loading Model...
-          </Html>
-        }>
-          <group
-            position={[0, 0, 0]}
-            onPointerEnter={() => setIsHovered(true)}
-            onPointerLeave={() => setIsHovered(false)}
-          >
-            <CalicoModel
-              position-y={-1}
-              onModelClick={playMeowSound}
-              isHovered={isHovered}
-            />
-          </group>
-          <mesh
-            rotation={[-Math.PI / 2, 0, 0]}
-            position={[0, -1, 0]}
-            receiveShadow
-          >
-            <planeGeometry args={[10, 10]} />
-            <shadowMaterial opacity={0.4} />
-          </mesh>
-          <Environment preset="city" />
-        </Suspense>
-        <OrbitControls
-          ref={controlsRef}
-          enableZoom={false}
-          enablePan={false}
-          autoRotate={isRotating}
-          autoRotateSpeed={0.5}
-          minPolarAngle={Math.PI / 2.8}
-          maxPolarAngle={Math.PI / 1.8}
-          target={[0, 0.2, 0]}
-          onStart={handleInteractionStart}
-          onEnd={handleInteractionEnd}
-        />
-      </Canvas>
-    </BentoCard>
-  );
-};
-
-// --- Theme Switcher Component (with Cat Icon and Popover) ---
-const ThemeSwitcher = ({ currentTheme, setTheme }: { currentTheme: Theme; setTheme: (theme: Theme) => void }) => {
-  const themes: Theme[] = ['light', 'dark', 'calico', 'immersive'];
-  const icons = { light: Sun, dark: Moon, calico: Cat, immersive: Sparkles };
-
-  const [popover, setPopover] = useState<{ visible: boolean; content: string; x: number; y: number } | null>(null);
-
-  const cycleTheme = () => {
-    const currentIndex = themes.indexOf(currentTheme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
-    // Hide popover on click
-    setPopover(prev => prev ? { ...prev, visible: false } : null);
-  };
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const currentIndex = themes.indexOf(currentTheme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    const nextThemeName = themes[nextIndex];
-    const content = `Switch to ${nextThemeName.charAt(0).toUpperCase() + nextThemeName.slice(1)}`;
-    setPopover({ visible: true, content, x: e.clientX, y: e.clientY });
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (popover?.visible) {
-      setPopover(prev => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setPopover(prev => prev ? { ...prev, visible: false } : null);
-  };
-
-  const Icon = icons[currentTheme];
-
-  return (
-    <>
-      <button
-        onClick={cycleTheme}
-        onMouseEnter={handleMouseEnter}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="fixed bottom-6 left-6 z-50 p-2 w-9 h-9 flex items-center justify-center rounded-full bg-neutral-200/70 dark:bg-neutral-800/70 backdrop-blur-sm border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white hover:scale-110 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
-        aria-label={`Current theme: ${currentTheme}. Switch theme.`}
-      >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.span
-            key={currentTheme} // Key change triggers animation
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Icon className="w-5 h-5" />
-          </motion.span>
-        </AnimatePresence>
-      </button>
-      {/* Popover for Theme Switcher */}
-      <Popover 
-        visible={!!popover?.visible} 
-        content={popover?.content || ''} 
-        x={popover?.x || 0} 
-        y={popover?.y || 0} 
-      />
-    </>
-  );
-};
-
-// SEO-crawlable header. Always rendered in the DOM (regardless of loading
-// state) so Google indexes the real content even when the client-side 3D
-// viewer hasn't hydrated. Visually hidden via Tailwind's sr-only so it
-// doesn't disturb the designed experience.
-function SeoSrHeader() {
-  return (
-    <header className="sr-only">
-      <h1>Senne Bels — Creative Developer</h1>
-      <p>
-        Creative developer based in Antwerp, Belgium. I build interactive,
-        game-like websites and performant full-stack applications with
-        React, Next.js, TypeScript, Three.js, and Node.js. Currently
-        freelancing independently and shipping my own products — Velso,
-        Korf, Thren, and Stadiq.
-      </p>
-      <nav aria-label="Selected work">
-        <h2>Selected work</h2>
-        <ul>
-          {projects.map((p) => (
-            <li key={p.title}>
-              <strong>{p.title}</strong> — {p.description}
-            </li>
-          ))}
+        <ul className="flex items-center gap-3">
+          <IconLink href={PERSON.resume} label="Resume">
+            <path d="M5 2.5h8l4 4v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z" />
+            <path d="M13 2.5v4h4M7.5 12h7M7.5 15.5h7" />
+          </IconLink>
+          <IconLink href={PERSON.linkedin} label="LinkedIn">
+            <path d="M2.5 2.5h17v17h-17z" />
+            <path d="M6.5 9.5v6M6.5 6.4v.1M10.5 15.5v-6M14.5 15.5v-3.2a2.3 2.3 0 0 0-4-1.4" />
+          </IconLink>
+          <IconLink href={PERSON.github} label="GitHub">
+            <path d="M7.5 18c-3.5.9-3.5-1.9-4.8-2.4M16.5 19v-3.1a2.7 2.7 0 0 0-.7-2c2.4-.3 4.9-1.2 4.9-5.4a4.2 4.2 0 0 0-1.1-2.9 3.9 3.9 0 0 0-.1-2.9s-.9-.3-3 1.1a10.5 10.5 0 0 0-5.6 0C8.8 2.4 7.9 2.7 7.9 2.7a3.9 3.9 0 0 0-.1 2.9 4.2 4.2 0 0 0-1.1 3c0 4.1 2.5 5 4.9 5.3a2.7 2.7 0 0 0-.7 2V19" />
+          </IconLink>
+          <IconLink href={`mailto:${PERSON.email}`} label="Email">
+            <path d="M2 4.5h18v13H2z" />
+            <path d="M3 6l8 5.5L19 6" />
+          </IconLink>
         </ul>
-      </nav>
-      <nav aria-label="Contact">
-        <h2>Contact</h2>
-        <ul>
-          <li>
-            <a href="mailto:sennebels@gmail.com">sennebels@gmail.com</a>
-          </li>
-          <li>
-            <a href="https://github.com/snenenenenenene">GitHub</a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/senne-bels/">LinkedIn</a>
-          </li>
-        </ul>
-      </nav>
+      </div>
+
+      <div className="flex size-[290px] shrink-0 items-center justify-center rounded-[36px] bg-tint-mint">
+        <Avatar />
+      </div>
     </header>
   );
 }
 
-// Main Page Component - Staggered Animations
-export default function HomePage() {
-  const [isProjectScrolling, setIsProjectScrolling] = React.useState(false);
-  const [currentProject, setCurrentProject] = React.useState(0);
-  const [backgroundStyle, setBackgroundStyle] = React.useState({});
-  
-  const themes: Theme[] = ['light', 'dark', 'calico', 'immersive']; 
+function IconLink({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li>
+      <a
+        href={href}
+        aria-label={label}
+        className="flex size-12 items-center justify-center rounded-[15px] bg-[#E9EFE6]"
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          fill="none"
+          stroke="#2E6B48"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          {children}
+        </svg>
+      </a>
+    </li>
+  );
+}
 
-  // Theme State - Initialize with default, load from localStorage in effect
-  const [theme, setTheme] = useState<Theme>('immersive'); // Default theme
-  
-  // Preload all project images and avatar
-  const allImages = [
-    ...projects.map(p => p.image),
-    '/images/avatar.png',
-    '/assets/Brie.png'
-  ];
-  const { imagesLoaded, loadingProgress } = useImagePreloader(allImages);
-
-  // Effect to load theme from localStorage on client-side mount
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('portfolio-theme') as Theme;
-      if (savedTheme && themes.includes(savedTheme)) {
-        setTheme(savedTheme);
-      }
-    }
-  }, []); // Empty dependency array ensures this runs only once on mount
-
-  // Effect to update background and save theme choice
-  React.useEffect(() => {
-    const themeConfig = THEME_COLORS[theme];
-    if (theme === 'immersive') {
-      const project = projects[currentProject];
-      if (project && project.gradientFrom && project.gradientVia && project.gradientTo) {
-        setBackgroundStyle({ background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientVia}, ${project.gradientTo})` });
-      } else {
-        setBackgroundStyle({ background: THEME_COLORS.dark.bg }); // Fallback for immersive
-      }
-    } else {
-      setBackgroundStyle({ background: themeConfig.bg });
-    }
-
-    // Apply dark class for Tailwind dark: variants
-    if (theme === 'dark' || theme === 'immersive') { // Apply dark styles for dark and immersive themes
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
-    // Persist theme choice
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio-theme', theme);
-    }
-
-  }, [theme, currentProject]); // Keep dependencies for this effect
-
-  // Animation Variants for Staggering
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
-  };
-  const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
-  };
-
-  // Show loading screen until all images are loaded.
-  // The SeoSrHeader is rendered in BOTH branches so Google / crawlers see
-  // real content (h1, bio, project list) even when the page is in its
-  // pre-hydration loading state.
-  if (!imagesLoaded) {
-    return (
-      <>
-        <SeoSrHeader />
-        <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-black">
-          <div className="text-center">
-            <div className="mb-4">
-              <div className="w-48 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
-                  style={{ width: `${loadingProgress}%` }}
-                />
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Loading assets...</p>
-          </div>
-        </div>
-      </>
-    );
-  }
-
+function About() {
   return (
     <>
-      <SeoSrHeader />
-      <main
-        className={`min-h-screen w-full p-4 md:p-6 lg:p-8 overflow-hidden transition-background duration-1000 ease-in-out`} // Increased duration
-        style={backgroundStyle}
-      >
-      {/* Hidden preloader to force all images to load */}
-      <HiddenImagePreloader />
-      
-      {/* Grain Overlay - Moved outside main for fixed positioning */} 
-      <div className="grain-overlay"></div> 
-      
-      {/* Removed fixed height, allowing content to grow. Added min-height for viewport height */}
-      {/* Reverted: Set fixed height on md+ screens, min-height only for mobile */}
-      <div className="relative z-10 max-w-7xl mx-auto min-h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)]"> 
-                  <motion.div 
-           // Changed to 1 column by default, 6 columns on large screens
-           className="grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-6 h-full"
-           variants={containerVariants}
-           initial="hidden"
-           animate="visible"
-        >
-          {/* --- Left Column (Profile) --- */}
-          {/* Changed to span 1 column by default, 2 on large screens */}
-          {/* Removed row-span, should fill height automatically */}
-          {/* Added overflow-hidden to enforce grid cell boundary */}
-          {/* Added lift on hover */} 
-          <motion.div 
-            className="col-span-1 lg:col-span-2 flex flex-col gap-4 md:gap-6 overflow-hidden"
-            variants={itemVariants}
-            whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300 } }} 
-          >
-             {/* Profile Card Wrapper (Takes full column height) */}
-             <div className="flex-1 min-h-0"> 
-               <ProfileCard /> 
-                    </div>
-                  </motion.div>
-                  
-          {/* --- Right Column (Projects, Stats, Model) --- */}
-          {/* Changed to span 1 column by default, 4 on large screens */}
-          {/* Removed row-span, should fill height automatically */}
-          {/* Added overflow-hidden to enforce grid cell boundary */}
-          <motion.div 
-            className="col-span-1 lg:col-span-4 grid grid-rows-[auto_auto] lg:grid-rows-[minmax(0,3fr)_minmax(0,1fr)] gap-4 md:gap-6 overflow-hidden"
-            variants={itemVariants}
-          >
-            {/* Projects Carousel Wrapper */}
-                  <motion.div
-              initial={false}
-              animate={{ scale: isProjectScrolling ? 0.985 : 1 }} // Even subtler scale
-              transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-              className="row-span-1 w-full h-[50vh] lg:h-full overflow-hidden" // Added default height for mobile project view
-            >
-              <BentoCard className="h-full overflow-hidden !p-0" theme={theme}>
-                <FeaturedProjects 
-                  currentProject={currentProject} 
-                  setCurrentProject={setCurrentProject} 
-                  onScrollingChange={setIsProjectScrolling} 
-                />
-            </BentoCard>
-                    </motion.div>
-
-            {/* Bottom Row (GitHub & 3D Model) - Reverted */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
-              {/* GitHub Stats - Reverted */} 
-              {/* Added lift on hover */} 
-              <motion.div 
-                className="col-span-1 md:col-span-7 min-h-0 overflow-hidden"
-                whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300 } }} 
-              >
-                <GitHubStats theme={theme} /> 
-              </motion.div>
-              {/* REMOVED Cat Gallery Container */} 
-              {/* Model Viewer - Updated Usage */} 
-              {/* Added lift on hover */} 
-              <motion.div 
-                className="col-span-1 md:col-span-5 min-h-0 overflow-hidden"
-                whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300 } }} 
-              >
-                <ModelViewer theme={theme} /> 
-              </motion.div>
-            </div>
-          </motion.div>
-
-                    </motion.div>
+      <Section id="about" className="pt-[78px]">
+        <SectionHeader label="About me" aside="the short version" />
+      </Section>
+      <div className="flex flex-col gap-[26px] px-6 lg:flex-row lg:items-start md:px-[72px]">
+        <div className="flex w-full flex-col gap-[22px] rounded-[30px] bg-white p-8 lg:w-[58%] lg:shrink-0 md:p-10">
+          <h3 className="text-[22px] font-bold -tracking-[0.01em]">Experience</h3>
+          <ul className="flex flex-col gap-[22px]">
+            {EXPERIENCE.map((e) => (
+              <li key={e.role + e.org} className="flex items-baseline justify-between gap-5">
+                <div className="flex flex-col gap-0.5 md:w-[400px] md:shrink-0">
+                  <p className="text-[17px] font-semibold">{e.role}</p>
+                  <p className="text-[15px] text-[#7C716B]">{e.org}</p>
                 </div>
-      {/* Theme Switcher UI */}
-      <ThemeSwitcher currentTheme={theme} setTheme={setTheme} />
-      </main>
+                <p className="shrink-0 text-sm font-medium text-ink-3">{e.dates}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex flex-1 flex-col gap-[26px]">
+          <div className="flex flex-col gap-3.5 rounded-[30px] bg-tint-mint p-8">
+            <h3 className="text-[22px] font-bold -tracking-[0.01em]">Education</h3>
+            <p className="text-[17px] font-semibold">{EDUCATION.degree}</p>
+            <p className="text-[15px] leading-6 text-[#4C5B49]">{EDUCATION.detail}</p>
+          </div>
+          <div className="flex flex-col gap-3.5 rounded-[30px] bg-tint-butter p-8">
+            <h3 className="text-[22px] font-bold -tracking-[0.01em]">Languages</h3>
+            <ul className="flex flex-col gap-[7px] text-base text-[#6B6047]">
+              {LANGUAGES.map((l) => (
+                <li key={l}>{l}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </>
+  );
+}
+
+function Skills() {
+  return (
+    <div className="flex flex-col gap-5 px-6 pt-14 md:px-[72px]">
+      <h3 className="text-[22px] font-bold -tracking-[0.01em]">Skills</h3>
+      <ul className="flex flex-wrap gap-2.5">
+        {SKILLS.map((s) => (
+          <Chip key={s.label} tone={s.ai ? "ai" : "plain"}>
+            {s.label}
+          </Chip>
+        ))}
+        <Chip tone="muted">+ more</Chip>
+      </ul>
+    </div>
+  );
+}
+
+function Fun() {
+  return (
+    <div className="flex flex-col gap-[26px] px-6 pt-[70px] md:px-[72px]">
+      <SectionHeader label="When I'm not working" aside="which is rarer than it should be" />
+      <p className="max-w-[900px] text-lg leading-8 text-ink-2 md:text-xl md:leading-[33px]">
+        {FUN_INTRO}
+      </p>
+      <div className="flex flex-col gap-5 lg:flex-row">
+        {FUN.map((f) => (
+          <TintPanel key={f.title} tint={f.tint} title={f.title} body={f.body} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  const columns = [
+    { title: "Around here", links: [["Work", "#work"], ["About", "#about"]] },
+    {
+      title: "Elsewhere",
+      links: [
+        ["GitHub", PERSON.github],
+        ["LinkedIn", PERSON.linkedin],
+        ["Resume", PERSON.resume],
+      ],
+    },
+  ];
+
+  return (
+    <footer className="flex flex-col gap-11 px-6 pb-14 pt-[76px] md:px-[72px]">
+      <div className="flex flex-col items-start justify-between gap-10 flex-wrap lg:flex-row lg:gap-14">
+        <div className="flex w-full flex-col gap-4 lg:w-[430px] lg:shrink-0">
+          <p className="font-display text-[40px] font-semibold italic leading-[46px] -tracking-[0.025em] text-moss">
+            Come say hi.
+          </p>
+          <p className="text-[17px] leading-7 text-ink-2">
+            Open to contract work, and to full-time roles that can sponsor a move. Currently pointed
+            at Vancouver, Edinburgh and San Francisco.
+          </p>
+          <a href={`mailto:${PERSON.email}`} className="text-[19px] font-bold">
+            {PERSON.email}
+          </a>
+        </div>
+
+        {columns.map((col) => (
+          <div key={col.title} className="flex w-[170px] shrink-0 flex-col gap-3">
+            <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#A09189]">
+              {col.title}
+            </p>
+            {col.links.map(([label, href]) => (
+              <a key={label} href={href} className="text-base text-ink-2">
+                {label}
+              </a>
+            ))}
+          </div>
+        ))}
+
+        <div className="flex w-[190px] shrink-0 flex-col gap-3">
+          <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#A09189]">
+            Things I made
+          </p>
+          {["Transita", "Korf", "Velso", "Ornitho"].map((name) => (
+            <span key={name} className="text-base text-ink-2">
+              {name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-start justify-between gap-3 border-t border-hairline pt-[26px] md:flex-row md:items-center">
+        <p className="text-[15px] text-ink-3">
+          &copy; 2026 {PERSON.name} &middot; {PERSON.locality}, Belgium
+        </p>
+        <p className="font-display text-base italic text-ink-3">
+          Made on too much coffee, with four cats actively in the way.
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+function CatMark() {
+  return (
+    <svg width="26" height="22" viewBox="0 0 26 22" fill="none" aria-hidden>
+      <path d="M5 9 L5 3 L9.5 6.5 L15.5 6.5 L20 3 L20 9" fill="#2E6B48" />
+      <rect x="4" y="8" width="17" height="12" rx="4" fill="#2E6B48" />
+      <circle cx="9.5" cy="13.5" r="1.7" fill="#EAF3E6" />
+      <circle cx="15.5" cy="13.5" r="1.7" fill="#EAF3E6" />
+    </svg>
+  );
+}
+
+/** The 404 face from the previous site, redrawn as flat art so it ships in the HTML. */
+function Avatar() {
+  return (
+    <svg width="176" height="176" viewBox="0 0 176 176" fill="none" role="img" aria-label="Senne Bels">
+      <circle cx="88" cy="92" r="62" fill="#F9F8F5" stroke="#1E1515" strokeWidth="4" />
+      <path d="M30 74 q10 -46 58 -46 q48 0 58 46" fill="#3B302A" />
+      <path d="M30 74 q22 -14 58 -14 q36 0 58 14" fill="#3B302A" />
+      <text x="88" y="82" fontFamily="monospace" fontSize="22" fontWeight="700" fill="#1E1515" textAnchor="middle">
+        404
+      </text>
+      <circle cx="52" cy="118" r="8" fill="#E8A08A" opacity="0.55" />
+      <circle cx="124" cy="118" r="8" fill="#E8A08A" opacity="0.55" />
+      <circle cx="66" cy="104" r="5.5" fill="#1E1515" />
+      <circle cx="110" cy="104" r="5.5" fill="#1E1515" />
+      <path d="M74 126 q14 12 28 0" stroke="#1E1515" strokeWidth="4.5" strokeLinecap="round" />
+    </svg>
   );
 }
