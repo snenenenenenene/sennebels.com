@@ -13,6 +13,29 @@ const config: Config = {
       // One editorial scale. Size, leading and tracking are bundled per step,
       // because Apple's typography rule is that the three move together:
       // tight negative tracking as type grows, looser leading as it shrinks.
+      // SSOT for surface treatment. Every radius, shadow and glass recipe on the
+      // site resolves here, so nothing is hand-tuned at the call site.
+      borderRadius: {
+        card: "26px",
+        panel: "20px",
+        media: "18px",
+        tile: "14px",
+      },
+      boxShadow: {
+        card: "0 1px 2px rgba(20,16,12,0.05), 0 12px 36px -28px rgba(20,16,12,0.5)",
+        "card-hover": "0 2px 4px rgba(20,16,12,0.07), 0 26px 60px -30px rgba(20,16,12,0.55)",
+        media: "0 20px 50px -26px rgba(20,16,12,0.6)",
+        // Liquid Glass: outer drop plus an inner top highlight so the panel
+        // edge refracts rather than reading as a flat translucent rectangle.
+        glass:
+          "0 18px 50px -24px rgba(20,16,12,0.5), inset 0 1px 0 rgba(255,255,255,0.6)",
+        "glass-dark":
+          "0 18px 50px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.09)",
+      },
+      spacing: {
+        tap: "44px", // HIG minimum interactive target
+        stack: "28px", // the one vertical rhythm step between grouped cards
+      },
       fontSize: {
         display: ["clamp(2.6rem,5.4vw,4rem)", { lineHeight: "1.03", letterSpacing: "-0.032em" }],
         title1: ["clamp(1.75rem,3vw,2.5rem)", { lineHeight: "1.08", letterSpacing: "-0.026em" }],

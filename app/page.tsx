@@ -32,7 +32,8 @@ import {
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
 import { Dock } from "./components/dock";
-import { Chip, Glyph, SectionHeader } from "./components/ui";
+import { Chip, Glyph, Heading, Surface, TAP } from "./components/ui";
+import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -43,7 +44,7 @@ export default function Home() {
       <Hero />
 
       {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
-      <section id="work" className="pt-24">
+      <section id="work" className="flex flex-col gap-stack pt-24">
         <SectionHeader label="Selected work" aside="five that matter most" />
         {FEATURED.map((project, i) => (
           <Reveal key={project.slug} y={40}>
@@ -119,7 +120,7 @@ function IconLink({
     <li>
       <a
         href={href}
-        className="flex min-h-[44px] items-center gap-2 text-ink-2 transition-colors hover:text-moss"
+        className="flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-moss"
       >
         <I size={19} weight="duotone" aria-hidden />
         {label}
@@ -157,7 +158,7 @@ function Numbers() {
           const Ico = STAT_ICONS[i % STAT_ICONS.length];
           return (
           <Reveal key={n.value} delay={i * 0.08}>
-            <div className="flex h-full flex-col gap-2.5 rounded-[20px] bg-raised p-6">
+            <Surface className="flex h-full flex-col gap-2.5 p-6">
               <Ico size={22} weight="duotone" className="text-moss" aria-hidden />
               <dt className="sr-only">{n.label}</dt>
               <dd className="flex flex-col gap-2">
@@ -166,7 +167,7 @@ function Numbers() {
                 </span>
                 <span className="max-w-[26ch] text-callout text-ink-3">{n.label}</span>
               </dd>
-            </div>
+            </Surface>
           </Reveal>
           );
         })}
@@ -182,11 +183,11 @@ function About() {
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
         <div className="flex flex-col">
-          <h3 className="flex items-center gap-2 pb-4 text-title3 font-medium"><Briefcase size={21} weight="duotone" className="text-moss" aria-hidden />Experience</h3>
+          <div className="pb-4"><Heading icon={Briefcase}>Experience</Heading></div>
               {EXPERIENCE.map((e) => (
             <div
               key={e.role + e.org}
-              className="flex flex-col gap-1 rounded-[16px] px-4 py-3.5 odd:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              className="flex flex-col gap-1 rounded-tile px-4 py-3.5 transition-colors duration-200 odd:bg-raised hover:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
               <div className="flex flex-col gap-0.5">
                 <p className="text-body font-medium">{e.role}</p>
@@ -199,12 +200,12 @@ function About() {
 
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-3">
-            <h3 className="flex items-center gap-2 text-title3 font-medium"><GraduationCap size={21} weight="duotone" className="text-moss" aria-hidden />Education</h3>
+            <Heading icon={GraduationCap}>Education</Heading>
             <p className="text-body">{EDUCATION.degree}</p>
             <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="flex items-center gap-2 text-title3 font-medium"><Translate size={21} weight="duotone" className="text-moss" aria-hidden />Languages</h3>
+            <Heading icon={Translate}>Languages</Heading>
             <ul className="flex flex-col gap-2 text-body text-ink-2">
               {LANGUAGES.map((l) => (
                 <li key={l}>{l}</li>
@@ -220,7 +221,7 @@ function About() {
 function Skills() {
   return (
     <section className="flex flex-col gap-6 pt-24">
-      <h3 className="flex items-center gap-2 text-title3 font-medium"><Wrench size={21} weight="duotone" className="text-moss" aria-hidden />Skills</h3>
+      <Heading icon={Wrench}>Skills</Heading>
       <ul className="flex flex-wrap gap-2.5">
         {SKILLS.map((s) => (
           <Chip key={s.label} tone={s.ai ? "accent" : "plain"}>
@@ -257,6 +258,11 @@ function Fun() {
   );
 }
 
+const MINE = ["Transita", "Korf", "Velso", "Ornitho"];
+
+const FOOTER_LINK =
+  "flex min-h-tap items-center text-ink-2 transition-colors duration-200 hover:text-moss";
+
 function Footer() {
   return (
     <footer className="flex flex-col gap-12 pb-16 pt-28">
@@ -272,7 +278,7 @@ function Footer() {
           </p>
           <a
             href={`mailto:${PERSON.email}`}
-            className="inline-flex min-h-[44px] w-fit items-center gap-2.5 rounded-full bg-moss px-6 py-3 text-body font-semibold text-paper shadow-[0_10px_26px_-14px_rgba(20,16,12,0.6)] transition-transform duration-200 ease-out active:scale-[0.98]"
+            className={`inline-flex w-fit items-center gap-2.5 rounded-full bg-moss px-6 py-3 text-body font-semibold text-paper shadow-card-hover ${TAP}`}
           >
             {PERSON.email}
             <ArrowUpRight size={19} weight="bold" aria-hidden />
@@ -282,19 +288,19 @@ function Footer() {
         <div className="grid grid-cols-2 gap-8 text-callout">
           <div className="flex flex-col gap-3">
             <p className="text-caption uppercase tracking-[0.14em] text-ink-3">Elsewhere</p>
-            <a href={PERSON.github} className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-moss">
-              GitHub
-            </a>
-            <a href={PERSON.linkedin} className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-moss">
-              LinkedIn
-            </a>
-            <a href={PERSON.resume} className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-moss">
-              Resume
-            </a>
+            {[
+              { label: "GitHub", href: PERSON.github },
+              { label: "LinkedIn", href: PERSON.linkedin },
+              { label: "Resume", href: PERSON.resume },
+            ].map((l) => (
+              <a key={l.label} href={l.href} className={FOOTER_LINK}>
+                {l.label}
+              </a>
+            ))}
           </div>
           <div className="flex flex-col gap-3">
             <p className="text-caption uppercase tracking-[0.14em] text-ink-3">Mine</p>
-            {["Transita", "Korf", "Velso", "Ornitho"].map((n) => (
+            {MINE.map((n) => (
               <span key={n} className="text-ink-2">
                 {n}
               </span>

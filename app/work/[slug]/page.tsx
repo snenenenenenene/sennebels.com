@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
+import { Surface, TAP } from "../../components/ui";
 import { Reveal, Rise, Stagger } from "../../components/motion";
 
 export function generateStaticParams() {
@@ -64,7 +65,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       <nav className="flex h-[68px] items-center">
         <Link
           href="/#work"
-          className="inline-flex min-h-[44px] items-center gap-2 text-callout text-ink-2 transition-colors hover:text-ink"
+          className="inline-flex min-h-tap items-center gap-2 text-callout text-ink-2 transition-colors duration-200 hover:text-ink"
         >
           <ArrowLeft size={16} weight="bold" aria-hidden />
           All work
@@ -86,7 +87,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           {project.live && (
             <Rise><a
               href={project.live.href}
-              className="inline-flex min-h-[44px] w-fit items-center gap-2 rounded-full bg-accent-soft px-5 py-2.5 text-body font-semibold text-moss transition-transform duration-200 ease-out active:scale-[0.98]"
+              className={`inline-flex w-fit items-center gap-2 rounded-full bg-accent-soft px-5 py-2.5 text-body font-semibold text-moss ${TAP}`}
             >
               {project.live.label}
               <ArrowUpRight size={17} weight="bold" aria-hidden />
@@ -120,7 +121,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                   {project.tech.map((t) => (
                     <li
                       key={t}
-                      className="rounded-full bg-accent-soft px-3.5 py-[7px] text-caption font-medium text-moss"
+                      className="rounded-full bg-accent-soft px-3.5 py-[7px] text-caption font-medium text-moss transition-transform duration-200 hover:-translate-y-0.5"
                     >
                       {t}
                     </li>
@@ -139,7 +140,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             alt={`${project.name}: ${project.title}`}
             width={1400}
             height={900}
-            className="w-full rounded-[20px] object-cover shadow-[0_26px_60px_-30px_rgba(20,16,12,0.6)]"
+            className="w-full rounded-panel object-cover shadow-media"
           />
         </Tilt></figure></Reveal>
       )}
@@ -149,12 +150,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {project.outcomes.map((o, i) => (
             <Reveal key={o.label} delay={i * 0.08} className="flex flex-1">
-            <div className="flex h-full flex-col gap-2.5 rounded-[20px] bg-raised p-6">
+            <Surface className="flex h-full flex-col gap-2.5 p-6">
               <p className="font-display text-title1 font-medium">
                 {o.value}
               </p>
               <p className="max-w-[28ch] text-callout text-ink-3">{o.label}</p>
-            </div>
+            </Surface>
             </Reveal>
           ))}
         </div>
@@ -162,7 +163,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
       <Link
         href={`/work/${next.slug}`}
-        className="group mb-24 mt-24 flex flex-col gap-3 rounded-[26px] bg-raised p-8 shadow-[0_1px_2px_rgba(20,16,12,0.05),0_14px_40px_-28px_rgba(20,16,12,0.5)] md:p-12"
+        className="group mb-24 mt-24 flex flex-col gap-3 rounded-card bg-raised p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-12"
       >
         <span className="text-caption uppercase tracking-[0.14em] text-ink-3">Next</span>
         <span className="flex flex-wrap items-center gap-x-4 gap-y-2 text-title1 font-medium text-ink">

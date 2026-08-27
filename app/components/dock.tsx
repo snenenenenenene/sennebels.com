@@ -10,6 +10,7 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "framer-motion";
+import { GLASS } from "./ui";
 import {
   Cat,
   EnvelopeSimple,
@@ -45,14 +46,20 @@ export function Dock({ links }: { links: Record<string, string> }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-5 z-40 flex justify-center px-4">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-5 pt-10">
+      {/* iOS 26 scroll edge effect: content passing beneath the functional
+          layer fades out, so the Dock never sits on top of live text. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-paper via-paper/80 to-transparent"
+      />
       <motion.nav
         aria-label="Primary"
         // clientX, not pageX: it must share a coordinate space with
         // getBoundingClientRect below, which is viewport-relative.
         onMouseMove={(e) => !reduce && mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
-        className="pointer-events-auto flex items-end gap-1.5 rounded-[22px] border border-white/50 bg-[color-mix(in_srgb,var(--raised)_72%,transparent)] px-3 pb-2.5 pt-2 shadow-[0_18px_50px_-24px_rgba(20,16,12,0.5),inset_0_1px_0_rgba(255,255,255,0.6)] backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:shadow-[0_18px_50px_-20px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.09)]"
+        className={`pointer-events-auto flex items-end gap-1.5 rounded-card px-3 pb-2.5 pt-2 ${GLASS}`}
       >
         {ITEMS.map((item) => (
           <DockItem
@@ -102,14 +109,14 @@ function DockItem({
       <motion.span style={{ width: glyph, height: glyph }} className="flex items-center justify-center">
         <I size="100%" weight="duotone" aria-hidden />
       </motion.span>
-      <span className="pointer-events-none absolute -top-9 whitespace-nowrap rounded-lg bg-ink px-2.5 py-1 text-caption font-medium text-paper opacity-0 transition-opacity duration-150 group-hover/dock:opacity-100">
+      <span className="pointer-events-none absolute -top-9 whitespace-nowrap rounded-lg bg-ink px-2.5 py-1 text-caption font-medium text-paper opacity-0 transition-all duration-200 ease-out group-hover/dock:-top-10 group-hover/dock:opacity-100">
         {label}
       </span>
     </>
   );
 
   const cls =
-    "group/dock relative flex aspect-square items-center justify-center rounded-[14px] text-ink-2 transition-colors hover:text-moss";
+    "group/dock relative flex aspect-square items-center justify-center rounded-tile text-ink-2 transition-colors hover:text-moss";
 
   return internal ? (
     <motion.a ref={ref} href={href} aria-label={label} style={{ width: reduce ? 44 : width }} className={cls}>

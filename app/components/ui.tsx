@@ -2,11 +2,49 @@ import type { ReactNode } from "react";
 import type { Icon } from "@phosphor-icons/react";
 
 /**
- * Wabi-sabi: space does the grouping, not boxes. There is one accent
- * (celadon-moss) and it is the only accent on the page. Every colour comes
- * from a CSS variable that swaps under prefers-color-scheme, per HIG's
- * "embrace colors that adapt to the current appearance".
+ * Shared primitives. Every surface on the site is built from these, so a
+ * radius or shadow is defined once here (and in the Tailwind tokens they
+ * reference) rather than re-tuned at each call site.
  */
+
+/** Pressable affordance. iOS scales a control down on touch rather than dimming it. */
+export const TAP =
+  "min-h-tap transition-transform duration-200 ease-out active:scale-[0.98]";
+
+/**
+ * Liquid Glass, Regular variant. iOS 26 splits the interface into a content
+ * layer and a functional layer that floats above it; this is that floating
+ * material. Regular blurs and re-luminates whatever is behind it, which is
+ * the correct choice wherever the panel carries text or controls.
+ *
+ * Glass has no colour of its own. The fill is a colour-mix against the live
+ * surface token so it picks up whatever sits behind it, in either appearance.
+ */
+export const GLASS =
+  "border border-white/50 bg-[color-mix(in_srgb,var(--raised)_72%,transparent)] shadow-glass backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:shadow-glass-dark";
+
+/** A grouped content surface. Replaces rules: fill groups, elevation separates. */
+export function Surface({
+  children,
+  className = "",
+  interactive = false,
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  interactive?: boolean;
+  as?: "div" | "article" | "li" | "section";
+}) {
+  return (
+    <Tag
+      className={`rounded-panel bg-raised shadow-card ${
+        interactive ? "transition-shadow duration-300 hover:shadow-card-hover" : ""
+      } ${className}`}
+    >
+      {children}
+    </Tag>
+  );
+}
 
 /**
  * Rebus: the glyph sits inside the sentence rather than beside it, so the
@@ -16,7 +54,7 @@ import type { Icon } from "@phosphor-icons/react";
 export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
   return (
     <I
-      size={"0.92em"}
+      size="0.92em"
       weight="duotone"
       className="mx-[0.18em] inline-block shrink-0 -translate-y-[0.06em] align-baseline text-moss"
       aria-hidden={label ? undefined : true}
@@ -25,20 +63,20 @@ export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
   );
 }
 
-/** Section opener. Used sparingly: the page allows three across all sections. */
-export function SectionHeader({ label, aside }: { label: string; aside?: string }) {
+/** Section sub-heading with its glyph. One definition, used by every section. */
+export function Heading({ icon: I, children }: { icon: Icon; children: ReactNode }) {
   return (
-    <div className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
-      <h2 className="text-callout font-semibold uppercase tracking-[0.22em] text-ink-3">{label}</h2>
-      {aside && <p className="font-display text-title3 font-medium italic text-moss">{aside}</p>}
-    </div>
+    <h3 className="flex items-center gap-2 text-title3 font-medium">
+      <I size={21} weight="duotone" className="text-moss" aria-hidden />
+      {children}
+    </h3>
   );
 }
 
 export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "accent" }) {
   return (
     <li
-      className={`rounded-full px-[17px] py-[9px] text-callout font-medium ${
+      className={`rounded-full px-[17px] py-[9px] text-callout font-medium transition-colors duration-200 ${
         tone === "accent" ? "bg-accent-soft text-moss" : "bg-raised text-ink-2"
       }`}
     >

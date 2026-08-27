@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
-import { Tilt, Plane } from "./tilt";
+import { Tilt } from "./tilt";
+import { TAP } from "./ui";
 
 /**
  * Apple groups related content on a raised surface rather than separating it
@@ -11,7 +12,7 @@ import { Tilt, Plane } from "./tilt";
  */
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
   return (
-    <article className="group/card rounded-[26px] bg-raised p-6 shadow-[0_1px_2px_rgba(20,16,12,0.05),0_12px_36px_-28px_rgba(20,16,12,0.5)] transition-shadow duration-300 hover:shadow-[0_2px_4px_rgba(20,16,12,0.06),0_26px_60px_-30px_rgba(20,16,12,0.55)] md:p-8">
+    <article className="group/card rounded-card bg-raised p-6 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-8">
       <div className={`flex flex-col gap-9 lg:gap-14 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
         <div className="flex flex-col gap-4 lg:w-[44%] lg:shrink-0">
           <p className="text-caption font-medium uppercase tracking-[0.2em] text-ink-3">{project.name}</p>
@@ -24,7 +25,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
 
           <Link
             href={`/work/${project.slug}`}
-            className="mt-1 inline-flex min-h-[44px] w-fit items-center gap-2 text-body font-medium text-moss"
+            className={`mt-1 inline-flex w-fit items-center gap-2 text-body font-medium text-moss ${TAP}`}
           >
             {project.cta}
             <ArrowRight
@@ -38,7 +39,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
 
         {project.image ? (
           <Tilt className="lg:min-w-0 lg:flex-1">
-            <div className="overflow-hidden rounded-[18px] shadow-[0_20px_50px_-26px_rgba(20,16,12,0.6)]">
+            <div className="overflow-hidden rounded-media shadow-media">
               <Image
                 src={project.image}
                 alt={`${project.name}: ${project.title}`}
@@ -55,7 +56,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             // written list rather than a faked mock.
             <ul className="flex flex-col justify-center gap-4 lg:min-w-0 lg:flex-1">
               {project.spec.points.map((point) => (
-                <li key={point} className="flex items-start gap-3 rounded-[16px] bg-paper/60 px-4 py-3.5">
+                <li key={point} className="flex items-start gap-3 rounded-tile bg-paper/60 px-4 py-3.5 transition-colors duration-200 hover:bg-paper">
                   <CheckCircle size={19} weight="duotone" className="mt-0.5 shrink-0 text-moss" aria-hidden />
                   <span className="text-body text-ink-2">{point}</span>
                 </li>
@@ -86,7 +87,7 @@ export function SmallCard({
     <>
       {image && (
         <Tilt max={6} className="mb-4">
-          <div className="overflow-hidden rounded-[14px] shadow-[0_14px_32px_-22px_rgba(20,16,12,0.6)]">
+          <div className="overflow-hidden rounded-tile shadow-media">
             <Image
               src={image}
               alt={`${name}: ${description.slice(0, 60)}`}
@@ -107,7 +108,7 @@ export function SmallCard({
   );
 
   const cls =
-    "group/small flex min-h-[44px] flex-col gap-1.5 rounded-[20px] bg-raised p-5 shadow-[0_1px_2px_rgba(20,16,12,0.04),0_10px_28px_-24px_rgba(20,16,12,0.45)] transition-shadow duration-300 hover:shadow-[0_2px_4px_rgba(20,16,12,0.06),0_20px_44px_-26px_rgba(20,16,12,0.5)]";
+    "group/small flex min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card transition-shadow duration-300 hover:shadow-card-hover";
 
   return href ? (
     <Link href={href} className={cls}>
