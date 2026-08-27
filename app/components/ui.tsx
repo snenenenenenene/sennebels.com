@@ -26,6 +26,29 @@ export const TINT_LINK: Record<Tint, string> = {
   butter: "text-[#7A5A12]",
 };
 
+/**
+ * Soft out-of-focus colour behind a section. This is the Apple-ish depth device:
+ * a large shape at blur(80px) reading as light rather than as a gradient overlay.
+ * Static and pointer-events-none, so it never costs a repaint on scroll.
+ */
+export function Glow({
+  className = "",
+  from,
+  size = 520,
+}: {
+  className?: string;
+  from: string;
+  size?: number;
+}) {
+  return (
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute -z-10 rounded-full blur-[80px] ${className}`}
+      style={{ width: size, height: size, backgroundColor: from, opacity: 0.5 }}
+    />
+  );
+}
+
 export function SectionHeader({ label, aside }: { label: string; aside: string }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">

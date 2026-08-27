@@ -12,7 +12,7 @@ import {
   SKILLS,
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
-import { Chip, SectionHeader, TintPanel } from "./components/ui";
+import { Chip, Glow, SectionHeader, TintPanel } from "./components/ui";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -42,7 +42,7 @@ export default function Home() {
       <ul className="flex flex-wrap gap-5 px-6 md:px-[72px]">
         {ALSO.map((item, i) => (
           <li key={item.name} className="contents">
-            <Reveal delay={(i % 3) * 0.07} className="w-full md:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]">
+            <Reveal delay={(i % 3) * 0.07} y={40} className="flex w-full md:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]">
               <SmallCard {...item} />
             </Reveal>
           </li>
@@ -112,13 +112,15 @@ function Hero() {
   return (
     <header
       id="work"
-      className="flex flex-col items-start justify-between gap-10 px-6 pb-16 pt-[78px] xl:flex-row xl:items-center xl:gap-16 md:px-[72px]"
+      className="relative isolate flex flex-col items-start justify-between gap-10 overflow-hidden px-6 pb-16 pt-[78px] xl:flex-row xl:items-center xl:gap-16 md:px-[72px]"
     >
+      <Glow from="#CFE7D5" className="-right-24 -top-32" size={560} />
+      <Glow from="#EAE2F6" className="-left-40 top-40" size={420} />
       <Stagger className="flex w-full flex-col gap-[26px] xl:w-[720px] xl:shrink-0">
         <Rise>
         <h1 className="flex flex-wrap items-baseline gap-x-3.5 text-[40px] font-medium leading-tight -tracking-[0.02em] md:text-[52px] md:leading-[64px]">
           <span>Hi there! I&rsquo;m</span>
-          <span className="font-display font-semibold italic -tracking-[0.025em] text-moss md:text-[56px]">
+          <span className="bg-[linear-gradient(99deg,#2E6B48_0%,#4A8C63_58%,#1E1515_100%)] bg-clip-text font-display font-semibold italic -tracking-[0.025em] text-transparent md:text-[56px]">
             {PERSON.name}.
           </span>
         </h1>
@@ -258,7 +260,8 @@ function Skills() {
 
 function Fun() {
   return (
-    <div className="flex flex-col gap-[26px] px-6 pt-[70px] md:px-[72px]">
+    <div className="relative isolate flex flex-col gap-[26px] overflow-hidden px-6 pt-[70px] md:px-[72px]">
+      <Glow from="#F7E6C8" className="-right-32 top-10" size={440} />
       <SectionHeader label="When I'm not working" aside="which is rarer than it should be" />
       <p className="max-w-[900px] text-lg leading-8 text-ink-2 md:text-xl md:leading-[33px]">
         {FUN_INTRO}

@@ -205,6 +205,7 @@ export const FEATURED: Featured[] = [
 export const ALSO = [
   {
     name: "Transita",
+    image: "/images/work/transita.png",
     kind: "My product",
     description:
       "Solo-built and operated, 759 of 760 commits, with paying customers. Claude ranks a person's best global immigration pathways from a three-minute questionnaire.",
@@ -218,24 +219,28 @@ export const ALSO = [
   },
   {
     name: "Ornitho",
+    image: "/images/work/ornitho.jpg",
     kind: "My game",
     description:
       "A dinosaur horror game set in Antwerp. Actual Antwerp, actual dinosaurs. The reason everything above behaves the way it does.",
   },
   {
     name: "Faultline",
+    image: "/images/work/faultline.webp",
     kind: "My game",
     description:
       "Browser multiplayer on Three.js and Colyseus. Compound disasters, and dead players still get a vote on what happens next.",
   },
   {
     name: "Velso",
+    image: "/images/work/velso.png",
     kind: "My product",
     description:
       "An AI ops layer for solo freelancers: intake, scope briefs, contracts, invoicing and scope-creep detection, automated end to end.",
   },
   {
     name: "Korf",
+    image: "/images/work/korf-live.png",
     kind: "My product",
     description:
       "Belgian grocery price comparison, live on the App Store and Google Play, shipping to TestFlight on every push to main.",

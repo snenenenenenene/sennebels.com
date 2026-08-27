@@ -14,7 +14,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
 
   return (
     <article
-      className={`flex flex-col items-center gap-8 rounded-[34px] p-8 lg:gap-12 md:p-11 ${TINT_BG[tint]} ${
+      className={`group/card flex flex-col items-center gap-8 rounded-[34px] p-8 transition-shadow duration-500 hover:shadow-[0_24px_60px_-30px_rgba(30,21,21,0.28)] lg:gap-12 md:p-11 ${TINT_BG[tint]} ${
         flipped ? "lg:flex-row-reverse" : "lg:flex-row"
       }`}
     >
@@ -59,13 +59,15 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
       </div>
 
       {project.image ? (
-        <Image
-          src={project.image}
-          alt={`${project.name}: ${project.title}`}
-          width={1400}
-          height={900}
-          className="h-[240px] w-full rounded-3xl object-cover object-top lg:h-[330px] lg:w-auto lg:min-w-0 lg:flex-1"
-        />
+        <div className="h-[240px] w-full overflow-hidden rounded-3xl lg:h-[330px] lg:w-auto lg:min-w-0 lg:flex-1">
+          <Image
+            src={project.image}
+            alt={`${project.name}: ${project.title}`}
+            width={1400}
+            height={900}
+            className="size-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-[1.04]"
+          />
+        </div>
       ) : (
         project.spec && <SpecPanel project={project} />
       )}
@@ -102,14 +104,35 @@ export function SmallCard({
   kind,
   description,
   href,
+  image,
 }: {
   name: string;
   kind: string;
   description: string;
   href?: string;
+  image?: string;
 }) {
   const body = (
     <>
+      {!image && (
+        // Confidential client work has no shippable asset. A quiet band keeps the
+        // grid even rather than leaving a ragged text-only card.
+        <div
+          aria-hidden
+          className="mb-1 h-[132px] w-full rounded-[14px] bg-[linear-gradient(120deg,#EFEDE7_0%,#E6E9E4_52%,#EDE7EF_100%)]"
+        />
+      )}
+      {image && (
+        <div className="mb-1 h-[132px] w-full overflow-hidden rounded-[14px] bg-[#F1EFEA]">
+          <Image
+            src={image}
+            alt={`${name}: ${description.slice(0, 60)}`}
+            width={1200}
+            height={760}
+            className="size-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/small:scale-[1.05]"
+          />
+        </div>
+      )}
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="text-xl font-bold text-ink">{name}</h3>
         <p
@@ -125,7 +148,7 @@ export function SmallCard({
   );
 
   const className =
-    "flex h-full w-full flex-col gap-2 rounded-[22px] bg-white px-7 py-[26px]";
+    "group/small flex h-full w-full flex-col gap-2 rounded-[22px] bg-white p-5 transition-shadow duration-500 hover:shadow-[0_18px_44px_-24px_rgba(30,21,21,0.3)]";
 
   return href ? (
     <Link href={href} className={className}>
