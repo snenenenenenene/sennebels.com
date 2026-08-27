@@ -17,21 +17,16 @@ const config: Config = {
         display: ["var(--font-fraunces)", "Georgia", "serif"],
       },
       colors: {
-        // Soft Stack palette
-        paper: "#F9F8F5",
-        ink: "#1E1515",
-        "ink-2": "#4A3F3F",
-        "ink-3": "#8C8079",
-        hairline: "#E4E1DA",
-        moss: "#2E6B48",
-        // Per-project card tints
-        tint: {
-          violet: "#F0EAF7",
-          mint: "#EAF7E4",
-          blush: "#FDEDE7",
-          rose: "#FBEAEF",
-          butter: "#FFF8DF",
-        },
+        // Wabi-sabi tokens. Every value swaps under prefers-color-scheme: dark
+        // in globals.css, so both themes come from one set of class names.
+        paper: "var(--paper)",
+        raised: "var(--raised)",
+        ink: "var(--ink)",
+        "ink-2": "var(--ink-2)",
+        "ink-3": "var(--ink-3)",
+        hairline: "var(--hairline)",
+        moss: "var(--accent)",
+        "accent-soft": "var(--accent-soft)",
         'dark-accent': '#bc6c25',
         gray: {
           1: "var(--gray-1)",

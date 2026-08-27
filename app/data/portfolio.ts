@@ -18,8 +18,6 @@ export const PERSON = {
     "Senne Bels is a senior software engineer based in Antwerp, Belgium, with six years of remote-first experience building web, mobile and AI systems in TypeScript. He leads frontend for a consumer platform serving 140,000 users, has delivered production LLM systems with retrieval, evaluation and guardrails, and has shipped work for Tomorrowland, the Y Combinator-backed startup Kaedim, and the Flanders Agency of Home Affairs.",
 } as const;
 
-export type Tint = "violet" | "mint" | "blush" | "rose" | "butter";
-
 export type Featured = {
   slug: string;
   name: string;
@@ -27,8 +25,6 @@ export type Featured = {
   title: string;
   description: string;
   tech: string[];
-  tint: Tint;
-  markColor: string;
   /** Real screenshot, or a spec panel when the work is confidential / has no shippable asset. */
   image?: string;
   spec?: { points: string[]; credit: string };
@@ -50,8 +46,6 @@ export const FEATURED: Featured[] = [
     description:
       "Senior mobile engineer on the consolidated super app, merging Tomorrowland Radio, the per-festival apps and Tomorrowland Account into a single product. Server-driven UI over an OpenAPI NestJS backend-for-frontend, so content teams ship without waiting on an app release.",
     tech: ["React Native", "Expo", "Server-driven UI"],
-    tint: "violet",
-    markColor: "#5B2A8C",
     spec: {
       points: [
         "Three separate apps merged into one cross-platform product",
@@ -85,8 +79,6 @@ export const FEATURED: Featured[] = [
     description:
       "A multi-tenant assistant for a European consumer-rights organisation, live on public sites. A tool-calling agent over hybrid retrieval, with automated groundedness scoring, out-of-corpus guardrails, and human review on the answers that carry real risk.",
     tech: ["Mastra", "RAG", "LangSmith"],
-    tint: "mint",
-    markColor: "#2E6B48",
     spec: {
       points: [
         "A tool-calling agent replacing single-shot retrieval with multi-step reasoning",
@@ -120,9 +112,7 @@ export const FEATURED: Featured[] = [
     description:
       "An AI 3D copilot joining chat and canvas, plus a pipeline that pushes every generated asset through Blender over the Model Context Protocol and tests it automatically.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
-    tint: "blush",
-    markColor: "#FF6B57",
-    image: "/images/work/kaedim.png",
+    image: "/images/work/kaedim.webp",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Creative Engineer" },
@@ -149,9 +139,7 @@ export const FEATURED: Featured[] = [
     description:
       "Led frontend on a consumer social platform: cut the slowest interactions from 15 seconds to under one, held real-time sockets steady at 10,000 daily actives, and shipped the iOS app.",
     tech: ["React Native", "Sockets", "Mollie"],
-    tint: "rose",
-    markColor: "#891E3C",
-    image: "/images/work/beedee.png",
+    image: "/images/work/beedee.webp",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Frontend Lead" },
@@ -178,9 +166,7 @@ export const FEATURED: Featured[] = [
     description:
       "A citizen-facing transparency platform for the Flanders Agency of Home Affairs, opening up local municipal decisions and financial data. Pages loaded 89% faster, and automated compliance tooling cut manual government audit work by 70%.",
     tech: ["Leaflet", "D3.js", "Semantic web"],
-    tint: "butter",
-    markColor: "#5C41C2",
-    image: "/images/work/lokaalbeslist.png",
+    image: "/images/work/lokaalbeslist.webp",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Full-Stack Developer" },
@@ -205,7 +191,7 @@ export const FEATURED: Featured[] = [
 export const ALSO = [
   {
     name: "Transita",
-    image: "/images/work/transita.png",
+    image: "/images/work/transita.webp",
     kind: "My product",
     description:
       "Solo-built and operated, 759 of 760 commits, with paying customers. Claude ranks a person's best global immigration pathways from a three-minute questionnaire.",
@@ -219,7 +205,7 @@ export const ALSO = [
   },
   {
     name: "Ornitho",
-    image: "/images/work/ornitho.jpg",
+    image: "/images/work/ornitho.webp",
     kind: "My game",
     description:
       "A dinosaur horror game set in Antwerp. Actual Antwerp, actual dinosaurs. The reason everything above behaves the way it does.",
@@ -233,14 +219,14 @@ export const ALSO = [
   },
   {
     name: "Velso",
-    image: "/images/work/velso.png",
+    image: "/images/work/velso.webp",
     kind: "My product",
     description:
       "An AI ops layer for solo freelancers: intake, scope briefs, contracts, invoicing and scope-creep detection, automated end to end.",
   },
   {
     name: "Korf",
-    image: "/images/work/korf-live.png",
+    image: "/images/work/korf-live.webp",
     kind: "My product",
     description:
       "Belgian grocery price comparison, live on the App Store and Google Play, shipping to TestFlight on every push to main.",
@@ -252,22 +238,18 @@ export const NUMBERS = [
   {
     value: "140,000",
     label: "people using the platform I lead frontend for",
-    tint: "butter" as Tint,
   },
   {
     value: "15s → 1s",
     label: "what I did to their slowest screen, a 93% cut",
-    tint: "mint" as Tint,
   },
   {
     value: "944 of 946",
     label: "commits on a whole e-commerce rebuild, alone",
-    tint: "violet" as Tint,
   },
   {
     value: "6 years",
     label: "remote-first: agency, government, YC-backed",
-    tint: "blush" as Tint,
   },
 ];
 
@@ -311,21 +293,17 @@ export const FUN = [
   {
     title: "Four cats, one dog",
     body: "The long-term plan involves opening a cat cafe. This is not a joke, it is a roadmap item.",
-    tint: "blush" as Tint,
   },
   {
     title: "Mountains, eventually",
     body: "I hike. Belgium is six metres above sea level and entirely flat. You can see the problem.",
-    tint: "mint" as Tint,
   },
   {
     title: "Overwatch & HOI4",
     body: "Plus Rocket League and Rivals of Aether. Half research, half genuinely just playing games.",
-    tint: "violet" as Tint,
   },
   {
     title: "Coffee, obviously",
     body: "Usually paired with a walk, and occasionally with a suspiciously ambitious dinner plan.",
-    tint: "butter" as Tint,
   },
 ];

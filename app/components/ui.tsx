@@ -1,92 +1,53 @@
 import type { ReactNode } from "react";
-import type { Tint } from "../data/portfolio";
-
-export const TINT_BG: Record<Tint, string> = {
-  violet: "bg-tint-violet",
-  mint: "bg-tint-mint",
-  blush: "bg-tint-blush",
-  rose: "bg-tint-rose",
-  butter: "bg-tint-butter",
-};
-
-/** Body copy inside a tinted surface — dark enough on every tint we use. */
-export const TINT_TEXT: Record<Tint, string> = {
-  violet: "text-[#514459]",
-  mint: "text-[#465244]",
-  blush: "text-[#5C443E]",
-  rose: "text-[#5C3A44]",
-  butter: "text-[#6B6047]",
-};
-
-export const TINT_LINK: Record<Tint, string> = {
-  violet: "text-[#6B3F8C]",
-  mint: "text-[#2E6B48]",
-  blush: "text-[#B0453A]",
-  rose: "text-[#9B2244]",
-  butter: "text-[#7A5A12]",
-};
+import type { Icon } from "@phosphor-icons/react";
 
 /**
- * Soft out-of-focus colour behind a section. This is the Apple-ish depth device:
- * a large shape at blur(80px) reading as light rather than as a gradient overlay.
- * Static and pointer-events-none, so it never costs a repaint on scroll.
+ * Wabi-sabi: space does the grouping, not boxes. There is one accent
+ * (celadon-moss) and it is the only accent on the page. Every colour comes
+ * from a CSS variable that swaps under prefers-color-scheme, per HIG's
+ * "embrace colors that adapt to the current appearance".
  */
-export function Glow({
-  className = "",
-  from,
-  size = 520,
-}: {
-  className?: string;
-  from: string;
-  size?: number;
-}) {
+
+/** A hairline. The only divider on the page. */
+export function Rule({ className = "" }: { className?: string }) {
+  return <hr className={`h-px w-full border-0 bg-hairline ${className}`} aria-hidden />;
+}
+
+/**
+ * Rebus: the glyph sits inside the sentence rather than beside it, so the
+ * words and the marks read as one line. Icons come from Phosphor, never
+ * hand-drawn paths.
+ */
+export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
   return (
-    <div
-      aria-hidden
-      className={`pointer-events-none absolute -z-10 rounded-full blur-[80px] ${className}`}
-      style={{ width: size, height: size, backgroundColor: from, opacity: 0.5 }}
+    <I
+      size={"0.92em"}
+      weight="duotone"
+      className="mx-[0.18em] inline-block shrink-0 -translate-y-[0.06em] align-baseline text-moss"
+      aria-hidden={label ? undefined : true}
+      aria-label={label}
     />
   );
 }
 
-export function SectionHeader({ label, aside }: { label: string; aside: string }) {
+/** Section opener. Used sparingly: the page allows three across all sections. */
+export function SectionHeader({ label, aside }: { label: string; aside?: string }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
-      <h2 className="text-[15px] font-semibold uppercase tracking-[0.14em] text-ink-3">{label}</h2>
-      <p className="font-display text-[19px] font-medium italic text-moss">{aside}</p>
+      <h2 className="text-[15px] font-semibold uppercase tracking-[0.22em] text-ink-3">{label}</h2>
+      {aside && <p className="font-display text-[19px] font-medium italic leading-[1.1] text-moss">{aside}</p>}
     </div>
   );
 }
 
-export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "ai" | "muted" }) {
-  const tones = {
-    plain: "bg-white text-ink-2",
-    ai: "bg-tint-mint text-[#33603F]",
-    muted: "bg-[#F4F2EE] text-ink-3",
-  };
+export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "accent" }) {
   return (
-    <li className={`rounded-full px-[17px] py-[9px] text-[15px] font-semibold ${tones[tone]}`}>
+    <li
+      className={`rounded-full px-[17px] py-[9px] text-[15px] font-medium ${
+        tone === "accent" ? "bg-accent-soft text-moss" : "bg-raised text-ink-2"
+      }`}
+    >
       {children}
     </li>
-  );
-}
-
-/** A soft tinted panel — used by the numbers row and the "not working" tiles. */
-export function TintPanel({
-  tint,
-  title,
-  body,
-  titleClass = "font-display text-[30px] font-semibold -tracking-[0.02em] text-ink",
-}: {
-  tint: Tint;
-  title: string;
-  body: string;
-  titleClass?: string;
-}) {
-  return (
-    <div className={`flex flex-1 flex-col gap-2 rounded-[24px] px-[30px] py-7 ${TINT_BG[tint]}`}>
-      <p className={titleClass}>{title}</p>
-      <p className={`text-base leading-[26px] ${TINT_TEXT[tint]}`}>{body}</p>
-    </div>
   );
 }

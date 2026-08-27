@@ -1,101 +1,80 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
-import { TINT_BG, TINT_LINK, TINT_TEXT } from "./ui";
+import { Rule } from "./ui";
 
 /**
- * Full-width tinted card. Cards alternate sides so the page doesn't read as a grid.
- * Confidential client work has no shippable screenshot, so it gets a spec panel instead
- * of a faked mock — see `spec` in app/data/portfolio.ts.
+ * Wabi-sabi entry: no card, no tint block. A hairline opens the row, the
+ * image sits unframed, and space carries the grouping. Rows alternate so the
+ * page never settles into a single zigzag rhythm.
+ *
+ * Confidential client work has no shippable screenshot, so it gets a written
+ * list instead of a faked mock.
  */
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
-  const { tint } = project;
-
   return (
-    <article
-      className={`group/card flex flex-col items-center gap-8 rounded-[34px] p-8 transition-shadow duration-500 hover:shadow-[0_24px_60px_-30px_rgba(30,21,21,0.28)] lg:gap-12 md:p-11 ${TINT_BG[tint]} ${
-        flipped ? "lg:flex-row-reverse" : "lg:flex-row"
-      }`}
-    >
-      <div className="flex w-full flex-col gap-4 lg:w-[46%] lg:shrink-0">
-        <div className="flex items-center gap-3">
-          <span
-            aria-hidden
-            className="size-8 shrink-0 rounded-[10px]"
-            style={{ backgroundColor: project.markColor }}
-          />
-          <p className="text-[17px] font-bold text-ink">{project.name}</p>
-        </div>
+    <article className="group/card flex flex-col gap-8 py-14">
+      <Rule />
+      <div
+        className={`flex flex-col gap-10 lg:gap-16 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}
+      >
+        <div className="flex flex-col gap-5 lg:w-[46%] lg:shrink-0">
+          <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink-3">
+            {project.name}
+          </p>
 
-        <p className={`text-[13px] font-semibold uppercase tracking-[0.11em] ${TINT_TEXT[tint]}`}>
-          {project.meta}
-        </p>
+          <h3 className="max-w-[18ch] text-[30px] font-medium leading-[1.12] -tracking-[0.02em] text-ink md:text-[40px]">
+            {project.title}
+          </h3>
 
-        <h3 className="text-[28px] font-semibold leading-tight -tracking-[0.025em] text-ink md:text-4xl">
-          {project.title}
-        </h3>
+          <p className="max-w-[54ch] text-[17px] leading-[30px] text-ink-2">{project.description}</p>
 
-        <p className={`text-[17px] leading-7 ${TINT_TEXT[tint]}`}>{project.description}</p>
+          <p className="text-[15px] text-ink-3">{project.meta}</p>
 
-        <ul className="flex flex-wrap items-center gap-2 pt-1">
-          {project.tech.map((t) => (
-            <li
-              key={t}
-              className={`rounded-full bg-white px-3.5 py-[7px] text-[13px] font-semibold ${TINT_TEXT[tint]}`}
-            >
-              {t}
-            </li>
-          ))}
-        </ul>
-
-        <Link
-          href={`/work/${project.slug}`}
-          className={`inline-flex w-fit items-center gap-1.5 pt-2 text-base font-bold ${TINT_LINK[tint]}`}
-        >
-          {project.cta}
-          <ArrowRight size={17} strokeWidth={2.5} aria-hidden />
-        </Link>
-      </div>
-
-      {project.image ? (
-        <div className="h-[240px] w-full overflow-hidden rounded-3xl lg:h-[330px] lg:w-auto lg:min-w-0 lg:flex-1">
-          <Image
-            src={project.image}
-            alt={`${project.name}: ${project.title}`}
-            width={1400}
-            height={900}
-            className="size-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-[1.04]"
-          />
-        </div>
-      ) : (
-        project.spec && <SpecPanel project={project} />
-      )}
-    </article>
-  );
-}
-
-function SpecPanel({ project }: { project: Featured }) {
-  if (!project.spec) return null;
-  return (
-    <div className="flex w-full flex-col justify-center gap-[22px] rounded-3xl bg-white p-8 md:p-10 lg:h-[330px] lg:w-auto lg:min-w-0 lg:flex-1">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-ink-3">
-        What the work involved
-      </p>
-      <ul className="flex flex-col gap-[22px]">
-        {project.spec.points.map((point) => (
-          <li key={point} className="flex items-start gap-3.5">
-            <span
+          <Link
+            href={`/work/${project.slug}`}
+            className="mt-2 inline-flex min-h-[44px] w-fit items-center gap-2 border-b border-moss/40 pb-1 text-base font-medium text-moss transition-colors hover:border-moss"
+          >
+            {project.cta}
+            <ArrowRight
+              size={17}
+              weight="bold"
               aria-hidden
-              className="mt-2 size-[9px] shrink-0 rounded-full"
-              style={{ backgroundColor: project.markColor }}
+              className="transition-transform duration-500 group-hover/card:translate-x-1"
             />
-            <span className={`text-[17px] leading-[26px] ${TINT_TEXT[project.tint]}`}>{point}</span>
-          </li>
-        ))}
-      </ul>
-      <p className="font-display text-base italic text-ink-3">{project.spec.credit}</p>
-    </div>
+          </Link>
+        </div>
+
+        {project.image ? (
+          <div className="overflow-hidden rounded-[3px] lg:min-w-0 lg:flex-1">
+            {/* HIG dark mode: soften bright content images so they do not glow. */}
+            <Image
+              src={project.image}
+              alt={`${project.name}: ${project.title}`}
+              width={1400}
+              height={900}
+              loading="eager"
+              className="h-[240px] w-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-[1.03] lg:h-[380px]"
+            />
+          </div>
+        ) : (
+          project.spec && (
+            <ul className="flex flex-col justify-center gap-5 lg:min-w-0 lg:flex-1">
+              {project.spec.points.map((point) => (
+                <li key={point} className="flex flex-col gap-4">
+                  <span className="text-[17px] leading-[28px] text-ink-2">{point}</span>
+                  <Rule />
+                </li>
+              ))}
+              <li className="font-display text-base italic leading-[1.2] text-ink-3">
+                {project.spec.credit}
+              </li>
+            </ul>
+          )
+        )}
+      </div>
+    </article>
   );
 }
 
@@ -114,41 +93,28 @@ export function SmallCard({
 }) {
   const body = (
     <>
-      {!image && (
-        // Confidential client work has no shippable asset. A quiet band keeps the
-        // grid even rather than leaving a ragged text-only card.
-        <div
-          aria-hidden
-          className="mb-1 h-[132px] w-full rounded-[14px] bg-[linear-gradient(120deg,#EFEDE7_0%,#E6E9E4_52%,#EDE7EF_100%)]"
-        />
-      )}
       {image && (
-        <div className="mb-1 h-[132px] w-full overflow-hidden rounded-[14px] bg-[#F1EFEA]">
+        <div className="mb-5 overflow-hidden rounded-[3px]">
           <Image
             src={image}
             alt={`${name}: ${description.slice(0, 60)}`}
             width={1200}
             height={760}
-            className="size-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/small:scale-[1.05]"
+            loading="eager"
+            className="h-[150px] w-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/small:scale-[1.04]"
           />
         </div>
       )}
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-xl font-bold text-ink">{name}</h3>
-        <p
-          className={`text-xs font-bold uppercase tracking-[0.11em] ${
-            kind === "My game" ? "text-[#8C5A2E]" : "text-moss"
-          }`}
-        >
-          {kind}
-        </p>
+        <h3 className="text-xl font-medium text-ink">{name}</h3>
+        <p className="text-[13px] uppercase tracking-[0.14em] text-ink-3">{kind}</p>
       </div>
-      <p className="text-[15px] leading-6 text-[#6D625E]">{description}</p>
+      <p className="text-[15px] leading-[25px] text-ink-2">{description}</p>
     </>
   );
 
-  const className =
-    "group/small flex h-full w-full flex-col gap-2 rounded-[22px] bg-white p-5 transition-shadow duration-500 hover:shadow-[0_18px_44px_-24px_rgba(30,21,21,0.3)]";
+  // min-h keeps the interactive target comfortably over the HIG 44pt minimum.
+  const className = "group/small flex min-h-[44px] flex-col gap-2";
 
   return href ? (
     <Link href={href} className={className}>

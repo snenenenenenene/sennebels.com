@@ -5,24 +5,48 @@
 
 
 @layer base {
+  /* Wabi-sabi palette, read off unglazed stoneware in winter light.
+     One accent (celadon-moss), locked across every section. */
   :root {
-    --gray-1: #222227;
-    --gray-2: #494949;
-    --gray-3: #6b6b6b;
-    --black: black;
-    --color-background: #F9F8F5;
+    --paper: #EDE8DE;
+    --raised: #F5F2EA;
+    --ink: #2B2621;
+    --ink-2: #4A443C;
+    --ink-3: #6E665C;
+    --hairline: #D9D2C5;
+    --accent: #55694F;
+    --accent-soft: #E2E7DC;
+    /* kept: older utilities still reference these */
+    --gray-1: #2B2621;
+    --gray-2: #4A443C;
+    --gray-3: #6E665C;
+    --color-background: var(--paper);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1A1815;
+      --raised: #232019;
+      --ink: #EDE8DE;
+      --ink-2: #C4BCAE;
+      --ink-3: #9C9284;
+      --hairline: #35302A;
+      --accent: #9DB394;
+      --accent-soft: #2A302604;
+      --gray-1: #EDE8DE;
+      --gray-2: #C4BCAE;
+      --gray-3: #9C9284;
+    }
   }
 
   body {
-    color: var(--gray-1);
-    background-color: var(--color-background);
+    color: var(--ink);
+    background-color: var(--paper);
     font-family: var(--font-hanken), sans-serif;
     text-size-adjust: 100%;
     font-size: 1rem;
     font-weight: 400;
     line-height: 155%;
-    background-position: 0 0;
-    background-size: contain;
   }
 }
 
