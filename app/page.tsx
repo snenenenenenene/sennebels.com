@@ -61,7 +61,7 @@ function Nav() {
       <Link href="/" aria-label="Senne Bels, home" className="flex min-h-[44px] min-w-[44px] items-center">
         <Cat size={26} weight="duotone" className="text-moss" aria-hidden />
       </Link>
-      <div className="flex items-center gap-6 text-[15px] md:gap-8">
+      <div className="flex items-center gap-6 text-callout md:gap-8">
         <a href="#work" className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-ink">
           Work
         </a>
@@ -84,7 +84,7 @@ function Hero() {
     <header className="flex flex-col justify-center gap-9 pb-20 pt-20 md:pt-24">
       <Stagger className="flex flex-col gap-9">
         <Rise>
-          <h1 className="max-w-[17ch] text-[42px] font-medium leading-[1.06] -tracking-[0.025em] md:text-[68px]">
+          <h1 className="max-w-[17ch] text-display font-medium">
             {PERSON.name}, a{" "}
             <span className="font-display italic leading-[1.15] text-moss">creative</span> software
             engineer.
@@ -93,7 +93,7 @@ function Hero() {
 
         <Rise>
           {/* Rebus: the marks sit inside the sentence, so words and glyphs read as one line. */}
-          <p className="max-w-[56ch] text-[19px] leading-[34px] text-ink-2 md:text-[21px] md:leading-[38px]">
+          <p className="max-w-[56ch] text-lede text-ink-2">
             Six years remote-first building web, mobile and AI systems
             <Glyph icon={Terminal} />, a game developer
             <Glyph icon={GameController} /> on the side, and full-time staff to four cats
@@ -103,7 +103,7 @@ function Hero() {
 
         <Rise>
           <p className="sr-only">{PERSON.answerBlock}</p>
-          <ul className="flex flex-wrap items-center gap-x-7 gap-y-2 text-[15px]">
+          <ul className="flex flex-wrap items-center gap-x-7 gap-y-2 text-callout">
             <IconLink href={PERSON.resume} label="Resume" icon={FileText} />
             <IconLink href={PERSON.github} label="GitHub" icon={GithubLogo} />
             <IconLink href={PERSON.linkedin} label="LinkedIn" icon={LinkedinLogo} />
@@ -140,7 +140,7 @@ function IconLink({
 function Also() {
   return (
     <section className="flex flex-col gap-12 pt-24">
-      <h2 className="max-w-[24ch] text-[28px] font-medium leading-[1.15] -tracking-[0.02em] md:text-[34px]">
+      <h2 className="max-w-[24ch] text-title1 font-medium">
         Smaller things, still running.
       </h2>
       <div className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
@@ -166,10 +166,10 @@ function Numbers() {
             <div className="flex flex-col gap-3 border-b border-hairline py-10 pr-8 lg:border-b-0">
               <dt className="sr-only">{n.label}</dt>
               <dd className="flex flex-col gap-3">
-                <span className="font-display text-[46px] font-medium leading-[1.05] -tracking-[0.03em] text-ink">
+                <span className="font-display text-title1 font-medium text-ink">
                   {n.value}
                 </span>
-                <span className="max-w-[26ch] text-[15px] leading-[25px] text-ink-3">{n.label}</span>
+                <span className="max-w-[26ch] text-callout text-ink-3">{n.label}</span>
               </dd>
             </div>
           </Reveal>
@@ -187,7 +187,7 @@ function About() {
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
         <div className="flex flex-col">
-          <h3 className="pb-6 text-xl font-medium">Experience</h3>
+          <h3 className="pb-6 text-title3 font-medium">Experience</h3>
           <Rule />
           {EXPERIENCE.map((e) => (
             <div
@@ -195,23 +195,23 @@ function About() {
               className="flex flex-col gap-1 border-b border-hairline py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
               <div className="flex flex-col gap-0.5">
-                <p className="text-[17px] font-medium">{e.role}</p>
-                <p className="text-[15px] text-ink-3">{e.org}</p>
+                <p className="text-body font-medium">{e.role}</p>
+                <p className="text-callout text-ink-3">{e.org}</p>
               </div>
-              <p className="shrink-0 text-[14px] text-ink-3">{e.dates}</p>
+              <p className="shrink-0 text-caption text-ink-3">{e.dates}</p>
             </div>
           ))}
         </div>
 
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-3">
-            <h3 className="text-xl font-medium">Education</h3>
-            <p className="text-[17px]">{EDUCATION.degree}</p>
-            <p className="text-[15px] leading-[25px] text-ink-3">{EDUCATION.detail}</p>
+            <h3 className="text-title3 font-medium">Education</h3>
+            <p className="text-body">{EDUCATION.degree}</p>
+            <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="text-xl font-medium">Languages</h3>
-            <ul className="flex flex-col gap-2 text-[16px] text-ink-2">
+            <h3 className="text-title3 font-medium">Languages</h3>
+            <ul className="flex flex-col gap-2 text-body text-ink-2">
               {LANGUAGES.map((l) => (
                 <li key={l}>{l}</li>
               ))}
@@ -226,7 +226,7 @@ function About() {
 function Skills() {
   return (
     <section className="flex flex-col gap-6 pt-24">
-      <h3 className="text-xl font-medium">Skills</h3>
+      <h3 className="text-title3 font-medium">Skills</h3>
       <ul className="flex flex-wrap gap-2.5">
         {SKILLS.map((s) => (
           <Chip key={s.label} tone={s.ai ? "accent" : "plain"}>
@@ -242,7 +242,7 @@ function Fun() {
   const glyphs = [Cat, Mountains, GameController, Coffee];
   return (
     <section className="flex flex-col gap-12 pt-28">
-      <h2 className="max-w-[26ch] text-[28px] font-medium leading-[1.15] -tracking-[0.02em] md:text-[34px]">
+      <h2 className="max-w-[26ch] text-title1 font-medium">
         When I am not working
         <Glyph icon={Coffee} />
       </h2>
@@ -250,11 +250,11 @@ function Fun() {
         {FUN.map((f, i) => (
           <Reveal key={f.title} delay={i * 0.07} y={40}>
             <div className="flex max-w-[46ch] flex-col gap-3">
-              <h3 className="font-display text-[26px] font-medium leading-[1.15] text-ink">
+              <h3 className="font-display text-title2 font-medium text-ink">
                 {f.title}
                 <Glyph icon={glyphs[i % glyphs.length]} />
               </h3>
-              <p className="text-[16px] leading-[27px] text-ink-2">{f.body}</p>
+              <p className="text-body text-ink-2">{f.body}</p>
             </div>
           </Reveal>
         ))}
@@ -269,26 +269,26 @@ function Footer() {
       <Rule />
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div className="flex flex-col gap-5">
-          <h2 className="max-w-[16ch] font-display text-[38px] font-medium italic leading-[1.15] -tracking-[0.02em] text-moss md:text-[46px]">
+          <h2 className="max-w-[16ch] font-display text-title1 font-medium italic text-moss">
             Come say hi
             <Glyph icon={Mountains} />
           </h2>
-          <p className="max-w-[52ch] text-[17px] leading-[29px] text-ink-2">
+          <p className="max-w-[52ch] text-body text-ink-2">
             Open to contract work, and to full-time roles that can sponsor a move. Currently pointed
             at Vancouver, Edinburgh and San Francisco.
           </p>
           <a
             href={`mailto:${PERSON.email}`}
-            className="inline-flex min-h-[44px] w-fit items-center gap-2 border-b border-moss/40 pb-1 text-[19px] font-medium text-moss transition-colors hover:border-moss"
+            className="inline-flex min-h-[44px] w-fit items-center gap-2 border-b border-moss/40 pb-1 text-lede font-medium text-moss transition-colors hover:border-moss"
           >
             {PERSON.email}
             <ArrowUpRight size={19} weight="bold" aria-hidden />
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 text-[15px]">
+        <div className="grid grid-cols-2 gap-8 text-callout">
           <div className="flex flex-col gap-3">
-            <p className="text-[13px] uppercase tracking-[0.14em] text-ink-3">Elsewhere</p>
+            <p className="text-caption uppercase tracking-[0.14em] text-ink-3">Elsewhere</p>
             <a href={PERSON.github} className="flex min-h-[44px] items-center text-ink-2 transition-colors hover:text-moss">
               GitHub
             </a>
@@ -300,7 +300,7 @@ function Footer() {
             </a>
           </div>
           <div className="flex flex-col gap-3">
-            <p className="text-[13px] uppercase tracking-[0.14em] text-ink-3">Mine</p>
+            <p className="text-caption uppercase tracking-[0.14em] text-ink-3">Mine</p>
             {["Transita", "Korf", "Velso", "Ornitho"].map((n) => (
               <span key={n} className="text-ink-2">
                 {n}
@@ -310,7 +310,7 @@ function Footer() {
         </div>
       </div>
 
-      <p className="text-[14px] text-ink-3">
+      <p className="text-caption text-ink-3">
         &copy; 2026 {PERSON.name}, {PERSON.locality}. Made on too much coffee, with four cats
         actively in the way.
       </p>

@@ -34,8 +34,8 @@ export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
 export function SectionHeader({ label, aside }: { label: string; aside?: string }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
-      <h2 className="text-[15px] font-semibold uppercase tracking-[0.22em] text-ink-3">{label}</h2>
-      {aside && <p className="font-display text-[19px] font-medium italic leading-[1.1] text-moss">{aside}</p>}
+      <h2 className="text-callout font-semibold uppercase tracking-[0.22em] text-ink-3">{label}</h2>
+      {aside && <p className="font-display text-title3 font-medium italic text-moss">{aside}</p>}
     </div>
   );
 }
@@ -43,7 +43,7 @@ export function SectionHeader({ label, aside }: { label: string; aside?: string 
 export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "accent" }) {
   return (
     <li
-      className={`rounded-full px-[17px] py-[9px] text-[15px] font-medium ${
+      className={`rounded-full px-[17px] py-[9px] text-callout font-medium ${
         tone === "accent" ? "bg-accent-soft text-moss" : "bg-raised text-ink-2"
       }`}
     >

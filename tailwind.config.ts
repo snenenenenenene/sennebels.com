@@ -10,6 +10,19 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
+      // One editorial scale. Size, leading and tracking are bundled per step,
+      // because Apple's typography rule is that the three move together:
+      // tight negative tracking as type grows, looser leading as it shrinks.
+      fontSize: {
+        display: ["clamp(2.6rem,5.4vw,4rem)", { lineHeight: "1.03", letterSpacing: "-0.032em" }],
+        title1: ["clamp(1.75rem,3vw,2.5rem)", { lineHeight: "1.08", letterSpacing: "-0.026em" }],
+        title2: ["1.875rem", { lineHeight: "1.14", letterSpacing: "-0.02em" }],
+        title3: ["1.375rem", { lineHeight: "1.28", letterSpacing: "-0.012em" }],
+        lede: ["1.1875rem", { lineHeight: "1.68", letterSpacing: "-0.003em" }],
+        body: ["1.0625rem", { lineHeight: "1.72", letterSpacing: "0" }],
+        callout: ["0.9375rem", { lineHeight: "1.6", letterSpacing: "0.003em" }],
+        caption: ["0.8125rem", { lineHeight: "1.5", letterSpacing: "0.012em" }],
+      },
       fontFamily: {
         inter: ["Inter Tight", "sans-serif"],
         satoshi: ["Satoshi", "sans-serif"],

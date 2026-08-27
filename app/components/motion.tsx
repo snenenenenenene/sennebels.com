@@ -4,22 +4,26 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 /**
- * Motion lives in thin client wrappers that take server-rendered children.
- * The markup still ships in the HTML; only the animation is client-side.
+ * Motion lives in thin client wrappers that take server-rendered children,
+ * so the markup still ships in the HTML.
  *
- * Every effect here is motivated:
- *  - Rise / Stagger on load  -> hierarchy, leads the eye through the intro in reading order
- *  - Reveal on scroll        -> storytelling, work arrives one project at a time
- *  - Lift on hover           -> feedback, the card acknowledges the pointer
+ * Everything is a spring, never a fixed-duration curve. Apple's parameters are
+ * damping and response, not duration: damping 1.0 (critically damped, no
+ * overshoot) with a 0.4s response is their default for a move. In Framer
+ * Motion that maps to bounce: 0 and duration: 0.4.
+ *
+ * Bounce stays at 0 across the page. Overshoot is only honest when the user's
+ * own gesture carried momentum, and nothing here is dragged or flicked.
  */
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const SPRING = { type: "spring", bounce: 0, duration: 0.55 } as const;
+const SPRING_QUICK = { type: "spring", bounce: 0, duration: 0.4 } as const;
 
 /** Reveals children as they enter the viewport. Fires once. */
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 24,
   className,
 }: {
   children: ReactNode;
@@ -34,7 +38,7 @@ export function Reveal({
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15, margin: "0px 0px 200px 0px" }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
+      transition={{ ...SPRING, delay }}
     >
       {children}
     </motion.div>
@@ -43,12 +47,12 @@ export function Reveal({
 
 const stagger: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.04 } },
 };
 
 const riseItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: SPRING },
 };
 
 /** Page-load stagger for the hero. Children must be <Rise> elements. */
@@ -74,14 +78,14 @@ export function Rise({ children, className }: { children: ReactNode; className?:
   );
 }
 
-/** Project cards acknowledge the pointer with a small lift. */
+/** Cards acknowledge the pointer. Quick response: hover feedback must not lag. */
 export function LiftOnHover({ children, className }: { children: ReactNode; className?: string }) {
   const reduce = useReducedMotion();
   return (
     <motion.div
       className={className}
-      whileHover={reduce ? undefined : { y: -4 }}
-      transition={{ type: "spring", stiffness: 260, damping: 26 }}
+      whileHover={reduce ? undefined : { y: -3 }}
+      transition={SPRING_QUICK}
     >
       {children}
     </motion.div>

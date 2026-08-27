@@ -64,7 +64,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       <nav className="flex h-[68px] items-center">
         <Link
           href="/#work"
-          className="inline-flex min-h-[44px] items-center gap-2 text-[15px] text-ink-2 transition-colors hover:text-ink"
+          className="inline-flex min-h-[44px] items-center gap-2 text-callout text-ink-2 transition-colors hover:text-ink"
         >
           <ArrowLeft size={16} weight="bold" aria-hidden />
           All work
@@ -76,18 +76,18 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <Rule />
         <Stagger className="flex flex-col gap-5">
           <Rise>
-            <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink-3">
+            <p className="text-caption font-medium uppercase tracking-[0.2em] text-ink-3">
               {project.name}
             </p>
           </Rise>
-          <Rise><h1 className="max-w-[20ch] text-[36px] font-medium leading-[1.08] -tracking-[0.025em] md:text-[60px]">
+          <Rise><h1 className="max-w-[20ch] text-display font-medium">
             {project.title}
           </h1></Rise>
-          <Rise><p className="max-w-[62ch] text-[19px] leading-[34px] text-ink-2">{project.description}</p></Rise>
+          <Rise><p className="max-w-[62ch] text-lede text-ink-2">{project.description}</p></Rise>
           {project.live && (
             <Rise><a
               href={project.live.href}
-              className="inline-flex w-fit items-center gap-2 border-b border-moss/40 pb-1 text-base font-medium text-moss"
+              className="inline-flex w-fit items-center gap-2 border-b border-moss/40 pb-1 text-body font-medium text-moss"
             >
               {project.live.label}
               <ArrowUpRight size={17} weight="bold" aria-hidden />
@@ -101,7 +101,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <article className="flex flex-col gap-6">
           {project.story.map((para, i) => (
             <Reveal key={para.slice(0, 40)} delay={i * 0.06}>
-              <p className="max-w-[65ch] text-[18px] leading-[34px] text-ink-2">{para}</p>
+              <p className="max-w-[65ch] text-lede text-ink-2">{para}</p>
             </Reveal>
           ))}
         </article>
@@ -110,18 +110,18 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           <dl className="flex flex-col gap-5">
             {project.facts.map((fact) => (
               <div key={fact.label} className="flex flex-col gap-1">
-                <dt className="text-[13px] uppercase tracking-[0.14em] text-ink-3">{fact.label}</dt>
-                <dd className="text-[17px] text-ink-2">{fact.value}</dd>
+                <dt className="text-caption uppercase tracking-[0.14em] text-ink-3">{fact.label}</dt>
+                <dd className="text-body text-ink-2">{fact.value}</dd>
               </div>
             ))}
             <div className="flex flex-col gap-2">
-              <dt className="text-[13px] uppercase tracking-[0.14em] text-ink-3">Built with</dt>
+              <dt className="text-caption uppercase tracking-[0.14em] text-ink-3">Built with</dt>
               <dd>
                 <ul className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
                     <li
                       key={t}
-                      className="rounded-full bg-raised px-3.5 py-[7px] text-[13px] font-medium text-ink-2"
+                      className="rounded-full bg-raised px-3.5 py-[7px] text-caption font-medium text-ink-2"
                     >
                       {t}
                     </li>
@@ -146,16 +146,16 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       )}
 
       <section className="flex flex-col gap-8 pt-24">
-        <h2 className="text-[26px] font-medium -tracking-[0.02em]">Where it landed</h2>
+        <h2 className="text-title2 font-medium">Where it landed</h2>
         <Rule />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {project.outcomes.map((o, i) => (
             <Reveal key={o.label} delay={i * 0.08} className="flex flex-1">
             <div className="flex flex-col gap-3 border-b border-hairline py-8 pr-8">
-              <p className="font-display text-[40px] font-medium leading-[1.1] -tracking-[0.03em]">
+              <p className="font-display text-title1 font-medium">
                 {o.value}
               </p>
-              <p className="max-w-[28ch] text-[15px] leading-[25px] text-ink-3">{o.label}</p>
+              <p className="max-w-[28ch] text-callout text-ink-3">{o.label}</p>
             </div>
             </Reveal>
           ))}
@@ -166,14 +166,14 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         href={`/work/${next.slug}`}
         className="group mb-16 mt-24 flex flex-col gap-4 border-t border-hairline pt-12"
       >
-        <span className="text-[13px] uppercase tracking-[0.14em] text-ink-3">Next</span>
-        <span className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[28px] font-medium -tracking-[0.025em] text-ink md:text-[38px]">
+        <span className="text-caption uppercase tracking-[0.14em] text-ink-3">Next</span>
+        <span className="flex flex-wrap items-center gap-x-4 gap-y-2 text-title1 font-medium text-ink">
           {next.title}
           <ArrowRight
             size={30}
             weight="bold"
             aria-hidden
-            className="text-moss transition-transform duration-500 group-hover:translate-x-2"
+            className="text-moss transition-transform duration-300 group-hover:translate-x-2"
           />
         </span>
       </Link>
