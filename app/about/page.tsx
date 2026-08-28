@@ -12,7 +12,7 @@ import {
 import { EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
 import { ACCENT_TEXT, GlyphTile, Heading, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
-import { BrandMark, Flag, Mark, Monogram } from "../components/marks";
+import { BrandMark, CompanyLogo, Flag, Mark, Monogram } from "../components/marks";
 import { PageTitle } from "../components/section-header";
 
 export const metadata: Metadata = {
@@ -73,7 +73,9 @@ export default function About() {
               className="flex flex-col gap-1 rounded-tile px-4 py-3.5 transition-colors duration-200 odd:bg-raised hover:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
               <div className="flex items-center gap-3">
-                {e.slug ? (
+                {e.logo ? (
+                  <CompanyLogo src={e.logo} name={e.org} />
+                ) : e.slug ? (
                   <span className="grid size-7 shrink-0 place-items-center text-ink">
                     <BrandMark slug={e.slug} size={22} />
                   </span>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import * as si from "simple-icons";
 
 /**
@@ -134,4 +135,27 @@ export function Mark({
     );
   }
   return <Monogram name={name} tint={tint} size={size + 4} />;
+}
+
+
+/**
+ * A company's real logo, on a white plate. The plate is not decoration: these
+ * marks are supplied in one colourway each, and several are near-black, so
+ * without it they disappear in dark mode.
+ */
+export function CompanyLogo({ src, name, size = 28 }: { src: string; name: string; size?: number }) {
+  return (
+    <span
+      style={{ width: size, height: size }}
+      className="squircle grid shrink-0 place-items-center overflow-hidden rounded-[8px] bg-white shadow-[0_1px_2px_rgba(20,16,12,0.12)]"
+    >
+      <Image
+        src={src}
+        alt={`${name} logo`}
+        width={size * 2}
+        height={size * 2}
+        className="size-[76%] object-contain"
+      />
+    </span>
+  );
 }

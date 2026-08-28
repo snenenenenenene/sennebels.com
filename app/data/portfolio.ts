@@ -292,16 +292,17 @@ export const EXPERIENCE: {
   org: string;
   dates: string;
   slug?: string;
+  logo?: string;
   tint?: "red" | "blue" | "yellow" | "green";
 }[] = [
   { role: "Founder & Principal Engineer", org: "Okapi Works", tint: "green", dates: "Apr 2020 to now" },
-  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", tint: "red", dates: "Jul 2026 to now" },
+  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
   { role: "Full-Stack Engineer", org: "Outpost", tint: "blue", dates: "Jan 2026 to now" },
-  { role: "Frontend Lead", org: "BeeDee", tint: "red", dates: "Jan 2025 to now" },
-  { role: "AI Engineer", org: "Euroconsumers, via Nimble", tint: "blue", dates: "Aug 2025 to Apr 2026" },
-  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", tint: "yellow", slug: "ycombinator", dates: "2025" },
-  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
-  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", tint: "green", dates: "2021 to 2026" },
+  { role: "Frontend Lead", org: "BeeDee", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
+  { role: "AI Engineer", org: "Euroconsumers, via Nimble", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
+  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
+  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
+  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
 ];
 
 export const EDUCATION = {
