@@ -107,7 +107,7 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-// ProfilePage wrapping a Person is the highest-leverage snippet on a portfolio:
+// ProfilePage wrapping a Person is the snippet that does the most work on a portfolio:
 // it is what lets a knowledge graph resolve "Senne Bels" to one entity.
 const profileSchema = {
   "@context": "https://schema.org",

@@ -10,9 +10,10 @@ import {
   UsersThree,
   Wrench,
 } from "@phosphor-icons/react/dist/ssr";
-import { EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
+import { ABOUT_REBUS, EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
 import { ACCENT_TEXT, GlyphTile, Heading, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
+import { RebusText } from "../components/rebus-text";
 import { BrandMark, CompanyLogo, Flag, Mark, Monogram } from "../components/marks";
 import { PageTitle } from "../components/section-header";
 
@@ -37,7 +38,11 @@ export default function About() {
         lede="Six years of it, in the order it happened."
       />
 
-      <p className="mt-8 max-w-[62ch] text-lede text-ink-2">{PERSON.answerBlock}</p>
+      <RebusText
+        text={PERSON.answerBlock}
+        marks={ABOUT_REBUS}
+        className="mt-8 max-w-[62ch] text-lede leading-[1.95] text-ink-2"
+      />
 
       <section className="pt-16">
         <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

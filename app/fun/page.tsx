@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Cat, Coffee, GameController, Mountains } from "@phosphor-icons/react/dist/ssr";
-import { ASIDE, FUN, PERSON } from "../data/portfolio";
+import { ASIDE, FUN, FUN_REBUS, PERSON } from "../data/portfolio";
 import { GlyphTile, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
+import { RebusText } from "../components/rebus-text";
 import { PageTitle } from "../components/section-header";
 
 export const metadata: Metadata = {
@@ -14,9 +15,9 @@ export const metadata: Metadata = {
 
 const ICONS: { icon: typeof Cat; tint: Tint }[] = [
   { icon: Cat, tint: "red" },
-  { icon: Mountains, tint: "green" },
-  { icon: GameController, tint: "blue" },
-  { icon: Coffee, tint: "yellow" },
+  { icon: Mountains, tint: "blue" },
+  { icon: GameController, tint: "yellow" },
+  { icon: Coffee, tint: "red" },
 ];
 
 export default function Fun() {
@@ -26,9 +27,12 @@ export default function Fun() {
 
       <div className="mt-8 flex max-w-[62ch] flex-col gap-4">
         {ASIDE.map((line) => (
-          <p key={line.slice(0, 24)} className="text-lede text-ink-2">
-            {line}
-          </p>
+          <RebusText
+            key={line.slice(0, 24)}
+            text={line}
+            marks={FUN_REBUS}
+            className="text-lede leading-[1.95] text-ink-2"
+          />
         ))}
       </div>
 
@@ -40,7 +44,11 @@ export default function Fun() {
               <Surface className="squircle flex h-full flex-col gap-3 p-7">
                 <GlyphTile icon={ic.icon} tint={ic.tint} />
                 <h2 className="text-title2 font-medium text-ink">{f.title}</h2>
-                <p className="text-body text-ink-2">{f.body}</p>
+                <RebusText
+                  text={f.body}
+                  marks={FUN_REBUS}
+                  className="text-body leading-[1.85] text-ink-2"
+                />
               </Surface>
             </Reveal>
           );

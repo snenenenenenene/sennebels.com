@@ -1,5 +1,5 @@
 // Single source of truth for everything the page renders.
-// Every number here is taken from the 2026 resume — do not invent figures.
+// Every number here is taken from the 2026 resume. Do not invent figures.
 
 export const PERSON = {
   name: "Senne Bels",
@@ -368,12 +368,27 @@ export const SKILL_GROUPS = [
 
 /** Intro paragraphs for /fun. */
 export const ASIDE = [
-  "Four cats and a dog run this household. Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided.",
-  "Otherwise: long walks with a coffee, dinners more ambitious than the weeknight deserves, and Rocket League matches I had every right to win.",
-  "Belgium is flat and six metres above sea level, so the hiking happens elsewhere. That is part of why the plan points at mountains.",
+  "Most of what I do away from a keyboard ends up feeding what I do at one. Here is the honest version.",
 ];
 
 
+
+
+/** Rebus marks for the About lede. */
+export const ABOUT_REBUS = [
+  { phrase: "six years of remote-first experience", icon: "Clock", tint: "red" as const },
+  { phrase: "web, mobile and AI systems", icon: "Terminal", tint: "blue" as const },
+  { phrase: "140,000 users", icon: "UsersThree", tint: "yellow" as const },
+];
+
+/** Rebus marks for the Fun paragraphs. Keyed by the line they belong to. */
+export const FUN_REBUS = [
+  { phrase: "Four cats and a dog", icon: "Cat", tint: "red" as const },
+  { phrase: "long walks with a coffee", icon: "Coffee", tint: "blue" as const },
+  { phrase: "Rocket League", icon: "GameController", tint: "yellow" as const },
+  { phrase: "hiking", icon: "Mountains", tint: "red" as const },
+  { phrase: "flat and six metres above sea level", icon: "Ruler", tint: "blue" as const },
+];
 
 /** Longer-form personality, for /fun. Each has room to be an actual story. */
 export const FUN = [
@@ -387,7 +402,7 @@ export const FUN = [
   },
   {
     title: "Games, played and built",
-    body: "Overwatch, Hearts of Iron, Rocket League, Rivals of Aether. Half of it is research for Faultline and Ornitho. The other half is losing matches I had every right to win.",
+    body: "Overwatch, Hearts of Iron, Rocket League, Rivals of Aether. Half of it is research for Faultline. The other half is losing matches I had every right to win.",
   },
   {
     title: "Coffee, and cooking past my level",
