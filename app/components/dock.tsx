@@ -46,12 +46,16 @@ export function Dock({ links }: { links: Record<string, string> }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-5 pt-10">
-      {/* iOS 26 scroll edge effect: content passing beneath the functional
-          layer fades out, so the Dock never sits on top of live text. */}
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-5">
+      {/*
+        iOS 26 scroll edge effect. A band that progressively blurs the content
+        passing under it, faded in with a mask so the transition has no seam.
+        This is a blur, not a fill: what is behind stays visible, it just stops
+        competing with the controls. An opaque scrim here would kill the glass.
+      */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-paper via-paper/80 to-transparent"
+        className="absolute inset-x-0 bottom-0 -z-10 h-32 backdrop-blur-md [mask-image:linear-gradient(to_top,black_38%,transparent)]"
       />
       <motion.nav
         aria-label="Primary"
@@ -59,7 +63,7 @@ export function Dock({ links }: { links: Record<string, string> }) {
         // getBoundingClientRect below, which is viewport-relative.
         onMouseMove={(e) => !reduce && mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
-        className={`pointer-events-auto flex items-end gap-1.5 rounded-card px-3 pb-2.5 pt-2 ${GLASS}`}
+        className={`pointer-events-auto flex items-end gap-1.5 rounded-[26px] px-3 pb-2.5 pt-2 ${GLASS}`}
       >
         {ITEMS.map((item) => (
           <DockItem
@@ -116,7 +120,7 @@ function DockItem({
   );
 
   const cls =
-    "group/dock relative flex aspect-square items-center justify-center rounded-tile text-ink-2 transition-colors hover:text-moss";
+    "squircle group/dock relative flex aspect-square items-center justify-center rounded-tile text-ink-2 transition-colors hover:text-moss";
 
   return internal ? (
     <motion.a ref={ref} href={href} aria-label={label} style={{ width: reduce ? 44 : width }} className={cls}>

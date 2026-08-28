@@ -50,6 +50,43 @@
   }
 }
 
+
+  /* iOS 26 system accents. Vivid, used only on glyph tiles and controls so the
+     page keeps one identity accent (moss) while the chrome reads as iOS. */
+  :root {
+    --sys-blue: #0A84FF;
+    --sys-green: #30D158;
+    --sys-indigo: #5E5CE6;
+    --sys-orange: #FF9F0A;
+    --sys-pink: #FF375F;
+    --sys-teal: #40C8E0;
+    /* Glass is a tint over live content, never an opaque fill. */
+    --glass-tint: rgba(247, 244, 238, 0.82);
+    --glass-edge: rgba(255, 255, 255, 0.65);
+    --glass-shade: rgba(20, 16, 12, 0.10);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --sys-blue: #409CFF;
+      --sys-green: #30DB5B;
+      --sys-indigo: #7D7AFF;
+      --sys-orange: #FFB340;
+      --sys-pink: #FF6482;
+      --sys-teal: #5DE5FA;
+      --glass-tint: rgba(28, 25, 21, 0.78);
+      --glass-edge: rgba(255, 255, 255, 0.14);
+      --glass-shade: rgba(0, 0, 0, 0.34);
+    }
+  }
+
+  /* Continuous corner curvature. iOS never uses a circular arc for a rounded
+     rectangle; the curve eases into the straight edge. Progressive: browsers
+     without corner-shape keep the plain radius. */
+  @supports (corner-shape: squircle) {
+    .squircle { corner-shape: squircle; }
+  }
+
 @layer components {
   .container {
     @apply max-w-7xl mx-auto px-6 z-[1] flex flex-col justify-center;

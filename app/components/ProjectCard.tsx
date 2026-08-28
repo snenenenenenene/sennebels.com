@@ -12,7 +12,7 @@ import { Flavour, TAP, TypeLine } from "./ui";
  */
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
   return (
-    <article className="group/card rounded-card bg-raised p-6 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-8">
+    <article className="squircle group/card rounded-card bg-raised p-6 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-8">
       <div className={`flex flex-col gap-9 lg:gap-14 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
         <div className="flex flex-col gap-4 lg:w-[44%] lg:shrink-0">
           <TypeLine kind={project.typeLine.kind} sub={project.typeLine.sub} />
@@ -41,7 +41,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
 
         {project.image ? (
           <Tilt className="lg:min-w-0 lg:flex-1">
-            <div className="overflow-hidden rounded-media shadow-media">
+            <div className="squircle overflow-hidden rounded-media shadow-media">
               <Image
                 src={project.image}
                 alt={`${project.name}: ${project.title}`}
@@ -89,7 +89,7 @@ export function SmallCard({
     <>
       {image && (
         <Tilt max={6} className="mb-4">
-          <div className="overflow-hidden rounded-tile shadow-media">
+          <div className="squircle overflow-hidden rounded-tile shadow-media">
             <Image
               src={image}
               alt={`${name}: ${description.slice(0, 60)}`}
@@ -110,7 +110,7 @@ export function SmallCard({
   );
 
   const cls =
-    "group/small flex min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card transition-shadow duration-300 hover:shadow-card-hover";
+    "squircle group/small flex min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card transition-shadow duration-300 hover:shadow-card-hover";
 
   return href ? (
     <Link href={href} className={cls}>

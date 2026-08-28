@@ -12,16 +12,17 @@ export const TAP =
   "min-h-tap transition-transform duration-200 ease-out active:scale-[0.98]";
 
 /**
- * Liquid Glass, Regular variant. iOS 26 splits the interface into a content
- * layer and a functional layer that floats above it; this is that floating
- * material. Regular blurs and re-luminates whatever is behind it, which is
- * the correct choice wherever the panel carries text or controls.
+ * Liquid Glass, Regular variant.
  *
- * Glass has no colour of its own. The fill is a colour-mix against the live
- * surface token so it picks up whatever sits behind it, in either appearance.
+ * The point of glass is that live content passes underneath it. A translucent
+ * panel with an opaque backdrop behind it is just a grey rectangle, which is
+ * exactly what this was until the scrim came out. Nothing may sit between a
+ * glass surface and the scrolling content.
+ *
+ * The fill is a tint, not a surface colour, so what shows through is the page.
  */
 export const GLASS =
-  "border border-white/50 bg-[color-mix(in_srgb,var(--raised)_72%,transparent)] shadow-glass backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:shadow-glass-dark";
+  "squircle border border-glass-edge bg-glass-tint shadow-[0_10px_40px_-12px_var(--glass-shade),inset_0_1px_0_var(--glass-edge)] backdrop-blur-2xl backdrop-saturate-[1.8] supports-[backdrop-filter]:bg-glass-tint";
 
 /** A grouped content surface. Replaces rules: fill groups, elevation separates. */
 export function Surface({
@@ -63,11 +64,46 @@ export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
   );
 }
 
-/** Section sub-heading with its glyph. One definition, used by every section. */
-export function Heading({ icon: I, children }: { icon: Icon; children: ReactNode }) {
+export type Tint = "blue" | "green" | "indigo" | "orange" | "pink" | "teal";
+
+const TINT: Record<Tint, string> = {
+  blue: "bg-sys-blue",
+  green: "bg-sys-green",
+  indigo: "bg-sys-indigo",
+  orange: "bg-sys-orange",
+  pink: "bg-sys-pink",
+  teal: "bg-sys-teal",
+};
+
+/**
+ * Glyph tile. iOS renders a symbol as white on a vivid rounded-square fill,
+ * the way every row icon in Settings does, rather than as a bare outline in
+ * the text colour. Squircle corners where the browser supports them.
+ */
+export function GlyphTile({ icon: I, tint }: { icon: Icon; tint: Tint }) {
   return (
-    <h3 className="flex items-center gap-2 text-title3 font-medium">
-      <I size={21} weight="duotone" className="text-moss" aria-hidden />
+    <span
+      aria-hidden
+      className={`squircle grid size-7 shrink-0 place-items-center rounded-[9px] ${TINT[tint]} shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]`}
+    >
+      <I size={17} weight="fill" className="text-white" />
+    </span>
+  );
+}
+
+/** Section sub-heading with its glyph tile. One definition, every section. */
+export function Heading({
+  icon: I,
+  tint = "green",
+  children,
+}: {
+  icon: Icon;
+  tint?: Tint;
+  children: ReactNode;
+}) {
+  return (
+    <h3 className="flex items-center gap-2.5 text-title3 font-medium">
+      <GlyphTile icon={I} tint={tint} />
       {children}
     </h3>
   );
