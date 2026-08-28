@@ -54,7 +54,7 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
-  rebus: [{ phrase: "one app now", icon: "DeviceMobile", tint: "red" }, { phrase: "server-driven", icon: "Broadcast", tint: "blue" }, { phrase: "does not wait on an App Store review", icon: "Lightning", tint: "yellow" }],
+  rebus: [{ phrase: "live radio", icon: "Broadcast", tint: "red" }, { phrase: "bad network", icon: "WifiSlash", tint: "blue" }, { phrase: "CMS-driven containers", icon: "Stack", tint: "yellow" }],
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
   brandMono: true,
@@ -62,7 +62,7 @@ export const FEATURED: Featured[] = [
   accent: "red",
     title: "One app for a festival the whole world watches",
     description:
-      "Tomorrowland ran four apps. Radio, one per festival, and Account, each with its own release cycle. They are one app now. The UI is server-driven, so a lineup change on the day of the festival does not wait on an App Store review.",
+      "I joined the consolidated super app in July 2026. Most of my work since has been making live radio survive a bad network on Android, plus CMS-driven containers on the festival tab so content ships without an app release.",
     tech: ["React Native", "Expo", "Server-driven UI"],
     spec: {
       points: [
@@ -80,18 +80,19 @@ export const FEATURED: Featured[] = [
       { label: "Team", value: "Product owner, tech lead, mobile engineers" },
     ],
     story: [
-      "Tomorrowland ran several apps at once: Tomorrowland Radio, an app per festival, and Tomorrowland Account. Each had its own release cycle, its own content pipeline, and its own idea of what a user was. The brief was to fold all of it into one cross-platform product without losing what made each one useful.",
-      "The interesting constraint was editorial. A festival lineup changes on the day. If every content change needs an App Store review, the app is already wrong. So the UI is server-driven: an OpenAPI-specified NestJS backend-for-frontend describes what to render, and the app renders it. Prismic content objects are mirrored into Zod schemas, so a shape change in the CMS becomes a type error at build time rather than a crash in someone's pocket at a festival.",
-      "Delivery ran inside an agency team with CODEOWNERS-based review and EAS pipelines for preview, production and tagged releases.",
+      "Tomorrowland folded Radio, the per-festival apps and Account into one cross-platform product. I joined that app in July 2026, and most of what I have done since is make the live radio survive a bad network.",
+      "Android was the problem. The stream would stall inside the buffer and never recover, so Media3 now detects the stall itself rather than the app guessing at it. Connectivity is read from the active network instead of trusting the order callbacks arrive in. A queued reconnect no longer overrides someone deliberately hitting pause, and a play intent is recorded before a live-edge reload so the reload cannot swallow it. There is a RESILIENCE document in the repo because the failure modes needed writing down before they could be fixed.",
+      "The other half is the festival tab: CMS-driven containers rendered from the backend-for-frontend, a detail node browse screen, and link types extended so a container row can point at an external page or a webview. That work is aligned to a shared Container Block spec, so the app and the CMS agree on shape rather than each assuming.",
     ],
     outcomes: [
-      { value: "3 apps", label: "folded into one product" },
-      { value: "0 releases", label: "needed to ship a content change" },
+      { value: "9", label: "of my first 20 commits were live-radio resilience" },
+      { value: "Media3", label: "detects the Android buffering stall instead of the app guessing" },
+      { value: "1 spec", label: "shared Container Block, so app and CMS agree on shape" },
     ],
   },
   {
     slug: "euroconsumers",
-  rebus: [{ phrase: "retrieval tools over Qdrant", icon: "Database", tint: "red" }, { phrase: "scores its own groundedness", icon: "ShieldCheck", tint: "blue" }, { phrase: "Azure environments", icon: "Cloud", tint: "yellow" }],
+  rebus: [{ phrase: "Qdrant", icon: "Database", tint: "red" }, { phrase: "scores its own groundedness", icon: "ShieldCheck", tint: "blue" }, { phrase: "Azure", icon: "Cloud", tint: "yellow" }],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
@@ -116,13 +117,14 @@ export const FEATURED: Featured[] = [
       { label: "Team", value: "Eight engineers, two organisations" },
     ],
     story: [
-      "Euroconsumers wanted a legal assistant its members could actually rely on, first for Altroconsumo in Italy and then across the group. A wrong answer about somebody's consumer rights is worse than no answer, so the whole build was arranged around not being confidently wrong.",
-      "The agent calls dedicated retrieval tools over legal documents, articles and product data rather than doing a single-shot lookup, with hybrid sparse and dense retrieval out of Qdrant so an answer can cite the article it came from. Automated scorers measure groundedness, out-of-corpus guardrails catch questions the corpus cannot answer, and anything high-risk goes to a human. LangSmith traces the full pipeline so a regression can be found rather than guessed at.",
-      "A large part of the work was not the model at all. I set up and ran their development, staging and production environments on Azure, then maintained the system after launch, working with their teams across Portugal, France and Italy.",
+      "A wrong answer about your consumer rights is worse than no answer, so the whole build is arranged around not being confidently wrong.",
+      "The agent is Mastra in TypeScript, calling retrieval tools over Qdrant rather than doing a single-shot lookup, with LangSmith tracing the full pipeline so a regression can be found instead of guessed at. Ingestion runs on LlamaParse, and its polling ceiling went from three retries to twenty once real legal PDFs showed how long they actually take. Sources carry their publication date, because a consumer-rights article that was right two years ago may not be now.",
+      "The unglamorous half was the rest of it: product scores filtered client-side, prices parsed properly for a dot thousands separator, translations for every surface, guardrails for questions the corpus cannot answer, and a human in the loop on the answers that carry real risk. I also built and ran their development, staging and production environments on Azure, with teams in Portugal, France and Italy.",
     ],
     outcomes: [
-      { value: "100+", label: "daily active users on public sites" },
-      { value: "Multi-tenant", label: "one system, several consumer organisations" },
+      { value: "Qdrant", label: "hybrid retrieval, so an answer can cite the article it came from" },
+      { value: "3 to 20", label: "parse retries, once real legal PDFs showed their true length" },
+      { value: "3 markets", label: "Portugal, France and Italy, plus the Azure environments under it" },
     ],
   },
   {
