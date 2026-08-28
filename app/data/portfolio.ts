@@ -158,7 +158,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "beedee",
-  rebus: [{ phrase: "made it properly native", icon: "DeviceMobile", tint: "red" }, { phrase: "travel mode, localisation", icon: "Translate", tint: "blue" }, { phrase: "organic search", icon: "TrendUp", tint: "yellow" }],
+  rebus: [{ phrase: "made it native", icon: "DeviceMobile", tint: "red" }, { phrase: "signup flow", icon: "SignIn", tint: "blue" }, { phrase: "GitHub Actions", icon: "GitBranch", tint: "yellow" }],
     name: "BeeDee",
   brand: "/images/logos/beedee.png",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
@@ -176,14 +176,15 @@ export const FEATURED: Featured[] = [
       { label: "Ownership", value: "Frontend, end to end" },
     ],
     story: [
-      "I did not join BeeDee to make it faster. I joined because the app looked and felt unfinished, and a consumer product that feels unfinished does not get a second session. The first year was visual and interaction work: rebuilding the interface, making the React Native app feel native rather than wrapped, and getting the slowest interactions under a second.",
-      "After that it became ownership. Travel mode, localisation, and a run of features that gave people a reason to come back. GitHub Actions replaced manual releases. I made the architectural and infrastructure calls, put AI into the internal workflows, and did the technical SEO that took organic acquisition from nothing to an 18% click-through against a 2 to 5% benchmark, on a platform barred from paid advertising on Meta, Google and Reddit.",
-      "Four years of it, working directly with the CEO and with the engineering team in India, growing the thing steadily rather than rescuing it once.",
+      "BeeDee did not need to be faster. It needed to stop feeling like a website in a wrapper. So the first stretch was the native look: React Navigation headers instead of custom ones, SF Symbols in the chat inbox on iOS, and the image, list, toast and carousel libraries all swapped for ones that behave the way the platform does.",
+      "Then the signup flow, which turned into the single biggest thread of the whole engagement: sixteen separate pieces of work on it. Your answers survive going back to change your phone number. The BDSM test result you already added is still there when you resume. The safe-search choice persists through an interrupted signup. None of that is a feature anyone asks for. All of it is people not falling out of the funnel.",
+      "After that it was growth and the plumbing under it. Refer-a-friend for Superlikes and Supporter, the Superlike and Supporter purchase screens redesigned, and the Play Store screenshot set generated from the app itself rather than mocked up by hand. Travel mode, localisation, crash reports carrying the account context so a stack trace names a person, and GitHub Actions taking over the releases.",
+      "A hundred and fifty-five merged pull requests between January 2025 and August 2026, working directly with the CEO and with the engineering team in India.",
     ],
     outcomes: [
-      { value: "36,000", label: "monthly active users at peak, from a far smaller base" },
+      { value: "36,000", label: "monthly active users at peak" },
+      { value: "155", label: "pull requests merged, 16 of them the signup flow alone" },
       { value: "18%", label: "organic click-through, against a 2 to 5% benchmark" },
-      { value: "4 years", label: "owning frontend, infrastructure and release" },
     ],
   },
   {

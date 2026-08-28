@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowRight, ArrowUpRight, GitPullRequest, Target, TrendUp } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
-import { Surface, TAP } from "../../components/ui";
+import { RebusText } from "../../components/rebus-text";
+import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../components/ui";
 import { Reveal, Rise, Stagger } from "../../components/motion";
+
+const TRIO: Tint[] = ["red", "blue", "yellow"];
+const OUTCOME_ICONS = [TrendUp, GitPullRequest, Target];
 
 export function generateStaticParams() {
   return FEATURED.map((p) => ({ slug: p.slug }));
@@ -147,15 +151,18 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
       <section className="flex flex-col gap-8 pt-24">
         <h2 className="text-title2 font-medium">Where it landed</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {project.outcomes.map((o, i) => (
-            <Reveal key={o.label} delay={i * 0.08} className="flex flex-1">
-            <Surface className="flex h-full flex-col gap-2.5 p-6">
-              <p className="font-display text-title1 font-medium">
-                {o.value}
-              </p>
-              <p className="max-w-[28ch] text-callout text-ink-3">{o.label}</p>
-            </Surface>
+            <Reveal key={o.label} delay={i * 0.08} className="flex">
+              <div
+                className={`squircle group/card flex h-full w-full flex-col gap-2.5 rounded-panel p-6 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[TRIO[i % TRIO.length]]}`}
+              >
+                <GlyphTile icon={OUTCOME_ICONS[i % OUTCOME_ICONS.length]} tint={TRIO[i % TRIO.length]} />
+                <p className={`font-display text-title1 font-medium ${ACCENT_TEXT[TRIO[i % TRIO.length]]}`}>
+                  {o.value}
+                </p>
+                <p className="max-w-[28ch] text-callout text-ink-2">{o.label}</p>
+              </div>
             </Reveal>
           ))}
         </div>
