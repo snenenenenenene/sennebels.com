@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, MagnifyingGlass, TrendUp } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, Lightbulb, MagnifyingGlass, TrendUp } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
 import { RebusText } from "../../components/rebus-text";
@@ -69,6 +69,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
   const project = FEATURED[index];
   const next = FEATURED[(index + 1) % FEATURED.length];
+  const prev = FEATURED[(index - 1 + FEATURED.length) % FEATURED.length];
 
   const caseSchema = {
     "@context": "https://schema.org",
@@ -264,21 +265,82 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      <Link
-        href={`/work/${next.slug}`}
-        className="group mb-24 mt-24 flex flex-col gap-3 rounded-card bg-raised p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-12"
-      >
-        <span className="text-caption font-medium text-ink-3">Next</span>
-        <span className="flex flex-wrap items-center gap-x-4 gap-y-2 text-title1 font-medium text-ink">
-          {next.title}
-          <ArrowRight
-            size={30}
-            weight="bold"
-            aria-hidden
-            className="text-moss transition-transform duration-300 group-hover:translate-x-2"
-          />
-        </span>
-      </Link>
+      <section className="flex flex-col gap-8 pt-24">
+        <h2 className="text-title2 font-medium">What it taught me</h2>
+        <Reveal>
+          <div
+            className={`squircle rounded-card p-8 shadow-none md:p-12 ${CARD_TINT[project.accent]}`}
+          >
+            <GlyphTile icon={Lightbulb} tint={project.accent} />
+            <p className="mt-5 max-w-[62ch] font-display text-title3 font-normal italic leading-[1.55] text-ink">
+              {project.lesson}
+            </p>
+          </div>
+        </Reveal>
+      </section>
+
+      <nav aria-label="More work" className="grid grid-cols-1 gap-5 pb-24 pt-24 sm:grid-cols-2">
+        <PeekCard project={prev} direction="prev" />
+        <PeekCard project={next} direction="next" />
+      </nav>
     </main>
+  );
+}
+
+function PeekCard({
+  project,
+  direction,
+}: {
+  project: (typeof FEATURED)[number];
+  direction: "prev" | "next";
+}) {
+  const isPrev = direction === "prev";
+  const Arrow = isPrev ? ArrowLeft : ArrowRight;
+  return (
+    <Link
+      href={`/work/${project.slug}`}
+      className={`squircle group/peek flex flex-col gap-4 rounded-card p-5 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[project.accent]} ${isPrev ? "" : "sm:items-end sm:text-right"}`}
+    >
+      <div className="squircle overflow-hidden rounded-media shadow-media">
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt=""
+            width={800}
+            height={500}
+            className="h-[150px] w-full object-cover object-top transition-transform duration-500 ease-out group-hover/peek:scale-[1.03]"
+          />
+        ) : (
+          <div className="grid h-[150px] w-full place-items-center bg-paper/70">
+            {project.brand && (
+              <Image
+                src={project.brand}
+                alt=""
+                width={200}
+                height={80}
+                className={`h-9 w-auto object-contain ${BRAND_DARK[project.brandDark ?? "none"]}`}
+              />
+            )}
+          </div>
+        )}
+      </div>
+
+      <span
+        className={`flex items-center gap-2 text-caption font-medium ${ACCENT_TEXT[project.accent]} ${isPrev ? "" : "sm:flex-row-reverse"}`}
+      >
+        <Arrow
+          size={15}
+          weight="bold"
+          aria-hidden
+          className={`transition-transform duration-300 ${isPrev ? "group-hover/peek:-translate-x-1" : "group-hover/peek:translate-x-1"}`}
+        />
+        {isPrev ? "Previous" : "Next"}
+      </span>
+
+      <span className="flex flex-col gap-1">
+        <span className="font-display text-title3 font-medium text-ink">{project.name}</span>
+        <span className="max-w-[30ch] text-callout text-ink-2">{project.title}</span>
+      </span>
+    </Link>
   );
 }

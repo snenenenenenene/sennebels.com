@@ -47,6 +47,8 @@ export type Featured = {
   spec?: { points: string[]; credit: string };
   cta: string;
   /** Everything below powers /work/[slug] only. */
+  /** What the project taught, in one paragraph. Grounded in its own story. */
+  lesson: string;
   facts: { label: string; value: string }[];
   /** Platforms and tools, shown as marks. */
   stack?: string[];
@@ -88,6 +90,8 @@ export const FEATURED: Featured[] = [
       ],
       credit: "Freelance, engaged directly",
     },
+    lesson:
+      "Write down how a thing fails before you try to fix it. The radio only got better once the failure modes were on paper, because a stream that stalls, a network that dropped and a person who pressed pause look identical from the player and need three different answers. Guessing at that in code just moves the bug.",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Senior Mobile Engineer" },
@@ -127,6 +131,8 @@ export const FEATURED: Featured[] = [
       ],
       credit: "Delivered through Nimble, in a team of eight",
     },
+    lesson:
+      "Knowing when to say nothing is a feature. Vera is more useful for refusing a question her sources cannot support than she would be for answering everything fluently, and an answer you can check beats one you have to take on faith. Most of the trust came from the unglamorous half: dated sources, prices that parse, a person on anything risky.",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "AI Engineer" },
@@ -170,6 +176,8 @@ export const FEATURED: Featured[] = [
       "Kaedim turns a brief into 3D that a real team inspects and approves before it ships. I worked both ends of that: the onboarding and progress a customer sees, and the review queue and automated testing the design team leans on.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
     image: "/images/work/kaedim.webp",
+    lesson:
+      "Waiting is a design problem, not a backend one. Nothing about the generation got faster, but a skeleton loader turns a frozen screen into visible progress, and one bad item no longer takes a whole batch down with it. The same idea runs the other way too: failing bad assets automatically means a designer only spends attention on work worth looking at.",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Creative Engineer" },
@@ -216,6 +224,8 @@ export const FEATURED: Featured[] = [
       "BeeDee felt like a website in a wrapper. I made it native, then spent more work on the signup flow than on anything else, so people stopped falling out of it. Refer-a-friend, travel mode, localisation, and releases moved onto GitHub Actions. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry the growth, and daily clicks are up 84%. Reporting to the CEO, with the team in India.",
     tech: ["React Native", "Sockets", "Mollie"],
     image: "/images/work/beedee.webp",
+    lesson:
+      "The unglamorous flow is where the users actually are. More work went into signup than into any feature, and none of it is something a person would ever ask for. Keeping your answers when you go back to change your phone number does not demo well. It just means people finish.",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Frontend Lead" },
@@ -260,6 +270,8 @@ export const FEATURED: Featured[] = [
       "Every Belgian municipality publishes its decisions. Almost none of it was searchable. I made the first commit on the citizen-facing database and then built the validation toolchain that tells a municipality whether what it published actually meets the standard.",
     tech: ["Leaflet", "D3.js", "Semantic web"],
     image: "/images/work/lokaalbeslist.webp",
+    lesson:
+      "Publishing something is not the same as publishing it correctly. Scoring correct and complete separately sounds pedantic until you notice a municipality can be one without being the other, and that the fix differs for each. Fixing the data upstream is what makes the citizen-facing half worth searching at all.",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Full-Stack Developer" },
