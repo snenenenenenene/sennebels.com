@@ -57,15 +57,11 @@ export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
   features: [
-    "Live radio stall recovery, Android",
-    "Live radio stall recovery, iOS",
-    "On-demand clips no longer killed by the stall detector",
-    "CMS-driven containers on More",
-    "Single and multi-link block types",
-    "Content detail screen and link resolution",
+    "Live radio stall recovery on both platforms",
+    "Playback that survives losing signal",
+    "CMS-driven festival screens",
+    "Content detail screens",
     "Partners overview",
-    "Rich content schema",
-    "Coming-soon states for timetable, artists and map",
   ],
   rebus: [{ phrase: "Three or four apps became one", icon: "SquaresFour", tint: "red" }, { phrase: "CarPlay and Android Auto", icon: "Car", tint: "blue" }, { phrase: "live radio", icon: "Broadcast", tint: "yellow" }],
     name: "Tomorrowland",
@@ -94,25 +90,25 @@ export const FEATURED: Featured[] = [
     ],
     story: [
       "Tomorrowland ran three or four apps: Radio, an app per festival, and Account. They are one app now, covering every edition worldwide, with the old radio app's features carried into CarPlay and Android Auto, a full store, and a festival map that has to hold up with tens of thousands of people on it at once. The point of consolidating was not tidiness. It was that a Tomorrowland experience should exist in the eleven months you are not at a festival.",
-      "The radio is where I have spent most of my time, because a stream that dies on a train is a stream nobody trusts. It recovers from buffering stalls on both Android and iOS now. Media3 detects the Android stall rather than the app guessing at it. Connectivity is read from the active network instead of trusting the order callbacks arrive in. A queued reconnect no longer overrides someone deliberately hitting pause, a play intent is recorded before a live-edge reload so the reload cannot swallow it, and the eight-second stall detector stopped killing on-demand clips that were only buffering. There is a RESILIENCE document in the repo because the failure modes needed writing down before they could be fixed.",
-      "The other half is the content system the festival screens are built from: CMS-driven containers on the More tab with single and multi-link block types, a content detail screen and the link resolution behind it, a partners overview, a rich content schema, and coming-soon states for timetable, artists and map so an edition that has not published yet looks deliberate instead of broken.",
+      "The radio is where most of my time has gone, because a stream that dies on a train is a stream nobody trusts. It recovers from stalls on both platforms now, it knows the difference between a network that dropped and a person who pressed pause, and it stops fighting you when you walk back into signal. Getting there meant writing down how it fails before trying to fix it.",
+      "The other half is the content system behind the festival screens. Editorial teams shape what the app shows without waiting on a release, which matters when a lineup changes on the day.",
     ],
     outcomes: [
       { value: "4 to 1", label: "apps consolidated, across every edition worldwide" },
-      { value: "iOS and Android", label: "live radio recovering from buffering stalls on both" },
-      { value: "CMS-driven", label: "festival screens, so content ships without an app release" },
+      { value: "Both platforms", label: "live radio recovering from stalls on iOS and Android" },
+      { value: "No release needed", label: "for editorial teams to change what the app shows" },
     ],
   },
   {
     slug: "euroconsumers",
-  rebus: [{ phrase: "Qdrant", icon: "Database", tint: "red" }, { phrase: "scores its own groundedness", icon: "ShieldCheck", tint: "blue" }, { phrase: "Azure", icon: "Cloud", tint: "yellow" }],
+  rebus: [{ phrase: "looks things up rather than guessing", icon: "MagnifyingGlass", tint: "red" }, { phrase: "cites the article", icon: "Quotes", tint: "blue" }, { phrase: "hands anything risky to a person", icon: "HandHeart", tint: "yellow" }],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
   accent: "blue",
     title: "An AI legal assistant that has to be right",
     description:
-      "A wrong answer about your rights is worse than no answer. The agent calls retrieval tools over Qdrant instead of guessing, scores its own groundedness, and hands anything risky to a person. I built the Azure environments under it and kept it running after launch, with their teams in Portugal, France and Italy.",
+      "A wrong answer about your rights is worse than no answer. So it looks things up rather than guessing, cites the article it answered from, marks its own confidence, and hands anything risky to a person. I built the environments it runs on and kept it running after launch, with their teams in Portugal, France and Italy.",
     tech: ["Mastra", "RAG", "LangSmith"],
     spec: {
       points: [
@@ -131,12 +127,12 @@ export const FEATURED: Featured[] = [
     ],
     story: [
       "A wrong answer about your consumer rights is worse than no answer, so the whole build is arranged around not being confidently wrong.",
-      "The agent is Mastra in TypeScript, calling retrieval tools over Qdrant rather than doing a single-shot lookup, with LangSmith tracing the full pipeline so a regression can be found instead of guessed at. Ingestion runs on LlamaParse, and its polling ceiling went from three retries to twenty once real legal PDFs showed how long they actually take. Sources carry their publication date, because a consumer-rights article that was right two years ago may not be now.",
+      "The agent is Mastra in TypeScript, calling retrieval tools over Qdrant rather than doing a single-shot lookup, with LangSmith tracing the full pipeline so a regression can be found instead of guessed at. Ingestion had to be rebuilt around how long real legal documents actually take to process, rather than how long we had assumed. Sources carry their publication date, because a consumer-rights article that was right two years ago may not be now.",
       "The unglamorous half was the rest of it: product scores filtered client-side, prices parsed properly for a dot thousands separator, translations for every surface, guardrails for questions the corpus cannot answer, and a human in the loop on the answers that carry real risk. I also built and ran their development, staging and production environments on Azure, with teams in Portugal, France and Italy.",
     ],
     outcomes: [
       { value: "Qdrant", label: "hybrid retrieval, so an answer can cite the article it came from" },
-      { value: "3 to 20", label: "parse retries, once real legal PDFs showed their true length" },
+      { value: "Cited", label: "every answer traceable to the article it came from" },
       { value: "3 markets", label: "Portugal, France and Italy, plus the Azure environments under it" },
     ],
   },
@@ -146,7 +142,7 @@ export const FEATURED: Featured[] = [
     "Customer onboarding flow",
     "Customer-facing app redesign",
     "Skeleton loaders for slow generations",
-    "Async batch uploads that fail per item",
+    "Bulk uploads that survive a bad item",
     "Progress tracking for in-flight assets",
     "Internal review queue for the 3D team",
     "Blender testing over MCP",
@@ -172,7 +168,7 @@ export const FEATURED: Featured[] = [
     ],
     story: [
       "Kaedim is not a button that emits a finished model. A brief, a sketch or a reference pack goes in, and what comes out is inspected, marked up and approved by an actual 3D team before a customer sees it. That loop is the product, and it has two sides.",
-      "On the customer side I built the onboarding flow and redesigned the customer-facing app, added skeleton loaders so a slow generation reads as progress rather than a frozen screen, and reworked the asynchronous uploads so a batch of products does not fail as one unit. Progress tracking so someone can see where their asset actually is.",
+      "On the customer side I built the onboarding flow and redesigned the customer-facing app, added skeleton loaders so a slow generation reads as progress rather than a frozen screen, and reworked bulk uploads so one bad item stops taking the whole batch with it. Progress tracking so someone can see where their asset actually is.",
       "On the team's side, a review queue for the designers doing the inspecting, and an automated testing pipeline that pushes generated assets through Blender over the Model Context Protocol and fails the bad ones before a human spends attention on them. Fewer bad assets reaching a designer is the whole point.",
       "The handoff itself got faster too. Figma Dev MCP plus the automated tests meant a design became a reviewed implementation without the usual round trip, and I wrote the walkthrough that got the rest of engineering onto it. The team was spread across San Francisco, London and Singapore, and I worked directly with the CEO.",
     ],
@@ -236,7 +232,7 @@ export const FEATURED: Featured[] = [
     "Agenda item detail with every source",
     "Decision validation library",
     "Maturity levels for published decisions",
-    "Property and subject diff against the standard",
+    "A view of what is missing against the standard",
     "Correct and complete scored separately",
   ],
   rebus: [{ phrase: "first commit", icon: "GitCommit", tint: "red" }, { phrase: "citizen-facing database", icon: "Buildings", tint: "blue" }, { phrase: "validation toolchain", icon: "ShieldCheck", tint: "yellow" }],
@@ -258,7 +254,7 @@ export const FEATURED: Featured[] = [
     ],
     story: [
       "Flemish municipalities are required to publish their decisions. Hundreds of them do, as linked data, and until this existed almost none of it was findable by the people it concerns. I made the first commit on the citizen-facing database and worked on it across seventeen pull requests: search inside a session, keyword search, multiselect on classification, filters by governing body that actually stay open when you query them, and a detail view that shows an agenda item with the body that decided it and every source it came from.",
-      "The harder half is upstream. Publishing something is not the same as publishing it correctly, so I built a validation library and the tool on top of it: maturity levels for how complete a published decision is, a property and subject diff so you can see exactly what is missing against the standard, correct and complete scored separately because they are different failures, and a status pill that says which of the two you are looking at.",
+      "The harder half is upstream. Publishing something is not the same as publishing it correctly, so I built a validation library and the tool on top of it: maturity levels for how complete a published decision is, a view of exactly what is missing against the standard, and correct and complete scored separately, because a decision can be one without being the other.",
       "That is the part that turns a legal obligation into something a municipality can act on. It is also the part that means the citizen-facing side has data worth searching.",
     ],
     outcomes: [
