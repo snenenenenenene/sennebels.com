@@ -110,12 +110,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           <dl className="flex flex-col gap-5">
             {project.facts.map((fact) => (
               <div key={fact.label} className="flex flex-col gap-1">
-                <dt className="text-caption uppercase tracking-[0.14em] text-ink-3">{fact.label}</dt>
+                <dt className="text-caption font-medium text-ink-3">{fact.label}</dt>
                 <dd className="text-body text-ink-2">{fact.value}</dd>
               </div>
             ))}
             <div className="flex flex-col gap-2">
-              <dt className="text-caption uppercase tracking-[0.14em] text-ink-3">Built with</dt>
+              <dt className="text-caption font-medium text-ink-3">Built with</dt>
               <dd>
                 <ul className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
@@ -165,7 +165,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         href={`/work/${next.slug}`}
         className="group mb-24 mt-24 flex flex-col gap-3 rounded-card bg-raised p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-12"
       >
-        <span className="text-caption uppercase tracking-[0.14em] text-ink-3">Next</span>
+        <span className="text-caption font-medium text-ink-3">Next</span>
         <span className="flex flex-wrap items-center gap-x-4 gap-y-2 text-title1 font-medium text-ink">
           {next.title}
           <ArrowRight

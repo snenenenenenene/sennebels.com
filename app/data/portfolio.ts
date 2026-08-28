@@ -37,7 +37,7 @@ export const IDENTITY = {
 export type TypeLine = { kind: string; sub: string };
 
 /** iOS system accent carried by a project. Faded at rest, full on hover. */
-export type Accent = "blue" | "green" | "indigo" | "orange" | "pink" | "teal";
+export type Accent = "red" | "blue" | "yellow" | "green";
 
 export type Featured = {
   slug: string;
@@ -66,7 +66,7 @@ export const FEATURED: Featured[] = [
     slug: "tomorrowland",
     name: "Tomorrowland",
     typeLine: { kind: "Client work", sub: "Mobile" },
-  accent: "indigo",
+  accent: "blue",
   flavour: "Four apps walked in. One walked out, and it did not lose anything on the way.",
     title: "One app for a festival the whole world watches",
     description:
@@ -136,7 +136,7 @@ export const FEATURED: Featured[] = [
     slug: "kaedim",
     name: "Kaedim",
     typeLine: { kind: "Startup", sub: "3D and AI" },
-  accent: "pink",
+  accent: "red",
   flavour: "The model was the easy part. Making artists trust it was the work.",
     title: "Making AI 3D generation feel obvious",
     description:
@@ -165,7 +165,7 @@ export const FEATURED: Featured[] = [
     slug: "beedee",
     name: "BeeDee",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
-  accent: "orange",
+  accent: "yellow",
   flavour: "Nobody filed a bug about the fifteen seconds. They just stopped coming back.",
     title: "A social platform 93% faster than I found it",
     description:
@@ -194,7 +194,7 @@ export const FEATURED: Featured[] = [
     slug: "lokaal-beslist",
     name: "Lokaal Beslist",
     typeLine: { kind: "Government", sub: "Civic platform" },
-  accent: "teal",
+  accent: "green",
   flavour: "Every decision was already public. None of it was readable.",
     title: "Making government decisions readable by humans",
     description:
@@ -287,15 +287,21 @@ export const NUMBERS = [
   },
 ];
 
-export const EXPERIENCE = [
-  { role: "Founder & Principal Engineer", org: "Okapi Works", dates: "Apr 2020 to now" },
-  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", dates: "Jul 2026 to now" },
-  { role: "Full-Stack Engineer", org: "Outpost", dates: "Jan 2026 to now" },
-  { role: "Frontend Lead", org: "BeeDee", dates: "Jan 2025 to now" },
-  { role: "AI Engineer", org: "Euroconsumers, via Nimble", dates: "Aug 2025 to Apr 2026" },
-  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", dates: "2025" },
-  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", dates: "Jul 2022 to Jul 2024" },
-  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", dates: "2021 to 2026" },
+export const EXPERIENCE: {
+  role: string;
+  org: string;
+  dates: string;
+  slug?: string;
+  tint?: "red" | "blue" | "yellow" | "green";
+}[] = [
+  { role: "Founder & Principal Engineer", org: "Okapi Works", tint: "green", dates: "Apr 2020 to now" },
+  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", tint: "red", dates: "Jul 2026 to now" },
+  { role: "Full-Stack Engineer", org: "Outpost", tint: "blue", dates: "Jan 2026 to now" },
+  { role: "Frontend Lead", org: "BeeDee", tint: "red", dates: "Jan 2025 to now" },
+  { role: "AI Engineer", org: "Euroconsumers, via Nimble", tint: "blue", dates: "Aug 2025 to Apr 2026" },
+  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", tint: "yellow", slug: "ycombinator", dates: "2025" },
+  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
+  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", tint: "green", dates: "2021 to 2026" },
 ];
 
 export const EDUCATION = {
@@ -304,15 +310,74 @@ export const EDUCATION = {
     "AP University of Applied Sciences, Antwerp · 2019 to 2022. Big data, distributed systems, cloud.",
 };
 
-export const LANGUAGES = ["Dutch, native", "English, C2", "French, professional"];
+export const LANGUAGES = [
+  { code: "nl" as const, label: "Dutch", level: "native" },
+  { code: "gb" as const, label: "English", level: "C2" },
+  { code: "fr" as const, label: "French", level: "professional" },
+];
 
 /** `ai: true` chips are tinted so the in-demand half reads first. */
 export const SKILL_GROUPS = [
-  { label: "Languages", items: "TypeScript, JavaScript, Python, Java, C#, SQL" },
-  { label: "Frontend", items: "React, Next.js, React Native, Expo, Tailwind, Three.js" },
-  { label: "Backend", items: "Node, NestJS, Drizzle, Postgres, Prisma, REST and tRPC" },
-  { label: "AI", items: "RAG, tool-calling agents, evaluation and guardrails, LangChain" },
-  { label: "Platform", items: "AWS, Vercel, Docker, Turborepo, Playwright, CI and CD" },
+  {
+    label: "Languages",
+    tint: "blue" as const,
+    items: [
+      { name: "TypeScript", slug: "typescript" },
+      { name: "JavaScript", slug: "javascript" },
+      { name: "Python", slug: "python" },
+      { name: "Java", slug: "openjdk" },
+      { name: "C#", slug: "csharp" },
+      { name: "SQL", slug: "postgresql" },
+    ],
+  },
+  {
+    label: "Frontend",
+    tint: "red" as const,
+    items: [
+      { name: "React", slug: "react" },
+      { name: "Next.js", slug: "nextdotjs" },
+      { name: "React Native", slug: "react" },
+      { name: "Expo", slug: "expo" },
+      { name: "Tailwind", slug: "tailwindcss" },
+      { name: "Three.js", slug: "threedotjs" },
+    ],
+  },
+  {
+    label: "Backend",
+    tint: "green" as const,
+    items: [
+      { name: "Node", slug: "nodedotjs" },
+      { name: "NestJS", slug: "nestjs" },
+      { name: "Postgres", slug: "postgresql" },
+      { name: "Prisma", slug: "prisma" },
+      { name: "GraphQL", slug: "graphql" },
+      { name: "Redis", slug: "redis" },
+    ],
+  },
+  {
+    label: "AI",
+    tint: "yellow" as const,
+    items: [
+      { name: "OpenAI", slug: "openai" },
+      { name: "Anthropic", slug: "anthropic" },
+      { name: "LangChain", slug: "langchain" },
+      { name: "Hugging Face", slug: "huggingface" },
+      { name: "Ollama", slug: "ollama" },
+      { name: "Pinecone", slug: "pinecone" },
+    ],
+  },
+  {
+    label: "Platform",
+    tint: "blue" as const,
+    items: [
+      { name: "AWS", slug: "amazonwebservices" },
+      { name: "Vercel", slug: "vercel" },
+      { name: "Docker", slug: "docker" },
+      { name: "Turborepo", slug: "turborepo" },
+      { name: "Playwright", slug: "playwright" },
+      { name: "GitHub Actions", slug: "githubactions" },
+    ],
+  },
 ] as const;
 
 

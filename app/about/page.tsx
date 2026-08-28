@@ -12,7 +12,8 @@ import {
 import { EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
 import { ACCENT_TEXT, GlyphTile, Heading, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
-import { SectionHeader } from "../components/section-header";
+import { BrandMark, Flag, Mark, Monogram } from "../components/marks";
+import { PageTitle } from "../components/section-header";
 
 export const metadata: Metadata = {
   title: "About",
@@ -22,15 +23,18 @@ export const metadata: Metadata = {
 
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: UsersThree, tint: "blue" },
-  { icon: Lightning, tint: "orange" },
-  { icon: GitCommit, tint: "indigo" },
-  { icon: Clock, tint: "teal" },
+  { icon: Lightning, tint: "yellow" },
+  { icon: GitCommit, tint: "blue" },
+  { icon: Clock, tint: "green" },
 ];
 
 export default function About() {
   return (
     <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
-      <SectionHeader as="h1" label="About" aside="the short version" />
+      <PageTitle
+        title="About"
+        lede="Six years of it, in the order it happened."
+      />
 
       <p className="mt-8 max-w-[62ch] text-lede text-ink-2">{PERSON.answerBlock}</p>
 
@@ -59,7 +63,7 @@ export default function About() {
       <div className="grid grid-cols-1 gap-12 pt-20 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
         <section className="flex flex-col">
           <div className="pb-4">
-            <Heading icon={Briefcase} tint="indigo">
+            <Heading icon={Briefcase} tint="blue">
               Experience
             </Heading>
           </div>
@@ -68,9 +72,18 @@ export default function About() {
               key={e.role + e.org}
               className="flex flex-col gap-1 rounded-tile px-4 py-3.5 transition-colors duration-200 odd:bg-raised hover:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
-              <div className="flex flex-col gap-0.5">
-                <p className="text-body font-medium">{e.role}</p>
-                <p className="text-callout text-ink-3">{e.org}</p>
+              <div className="flex items-center gap-3">
+                {e.slug ? (
+                  <span className="grid size-7 shrink-0 place-items-center text-ink">
+                    <BrandMark slug={e.slug} size={22} />
+                  </span>
+                ) : (
+                  <Monogram name={e.org} tint={e.tint} />
+                )}
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-body font-medium">{e.role}</p>
+                  <p className="text-callout text-ink-3">{e.org}</p>
+                </div>
               </div>
               <p className="shrink-0 text-caption text-ink-3">{e.dates}</p>
             </div>
@@ -79,19 +92,23 @@ export default function About() {
 
         <div className="flex flex-col gap-10">
           <section className="flex flex-col gap-3">
-            <Heading icon={GraduationCap} tint="orange">
+            <Heading icon={GraduationCap} tint="yellow">
               Education
             </Heading>
             <p className="text-body">{EDUCATION.degree}</p>
             <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
           </section>
           <section className="flex flex-col gap-3">
-            <Heading icon={Translate} tint="teal">
+            <Heading icon={Translate} tint="green">
               Languages
             </Heading>
-            <ul className="flex flex-col gap-2 text-body text-ink-2">
+            <ul className="flex flex-col gap-2.5">
               {LANGUAGES.map((l) => (
-                <li key={l}>{l}</li>
+                <li key={l.code} className="flex items-center gap-2.5 text-body text-ink-2">
+                  <Flag code={l.code} />
+                  {l.label}
+                  <span className="text-callout text-ink-3">{l.level}</span>
+                </li>
               ))}
             </ul>
           </section>
@@ -103,14 +120,24 @@ export default function About() {
         <Heading icon={Wrench} tint="blue">
           Skills
         </Heading>
-        <dl className="flex flex-col">
+        <dl className="flex flex-col gap-2">
           {SKILL_GROUPS.map((g) => (
             <div
               key={g.label}
-              className="flex flex-col gap-1 rounded-tile px-4 py-3.5 odd:bg-raised sm:flex-row sm:gap-8"
+              className="flex flex-col gap-3 rounded-panel px-4 py-4 odd:bg-raised sm:flex-row sm:items-center sm:gap-8"
             >
-              <dt className="shrink-0 text-callout font-semibold sm:w-32">{g.label}</dt>
-              <dd className="text-callout text-ink-2">{g.items}</dd>
+              <dt className="shrink-0 text-callout font-semibold sm:w-28">{g.label}</dt>
+              <dd className="flex flex-wrap gap-2">
+                {g.items.map((it) => (
+                  <span
+                    key={g.label + it.name}
+                    className="flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-callout text-ink-2"
+                  >
+                    <Mark name={it.name} slug={it.slug} tint={g.tint} size={14} />
+                    {it.name}
+                  </span>
+                ))}
+              </dd>
             </div>
           ))}
         </dl>

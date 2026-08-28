@@ -10,42 +10,39 @@
   /* iOS 26 system accents. Vivid, used only on glyph tiles and controls so the
      page keeps one identity accent (moss) while the chrome reads as iOS. */
   :root {
-    --sys-blue: #0A84FF;
-    --sys-green: #30D158;
-    --sys-indigo: #5E5CE6;
-    --sys-orange: #FF9F0A;
-    --sys-pink: #FF375F;
-    --sys-teal: #40C8E0;
+    --sys-red: #C8102E;
+    --sys-blue: #0058A3;
+    --sys-yellow: #FFC700;
+    --sys-green: #007A33;
+    /* Fills for marks and tiles. Deliberately theme-independent. */
+    --mark-red: #C8102E;
+    --mark-blue: #0058A3;
+    --mark-yellow: #FFC700;
+    --mark-green: #007A33;
     /* Glass is a tint over live content, never an opaque fill. */
     --glass-tint: rgba(249, 248, 245, 0.72);
     --glass-edge: rgba(255, 255, 255, 0.65);
     --glass-shade: rgba(20, 16, 12, 0.10);
     /* Text-safe accents. The vivid values above are fills only. */
-    --ink-blue: #0060DF;
-    --ink-green: #17803D;
-    --ink-indigo: #4B49C6;
-    --ink-orange: #A85700;
-    --ink-pink: #C31B3E;
-    --ink-teal: #0F7C94;
+    --ink-red: #A70D26;
+    --ink-blue: #004C8C;
+    --ink-yellow: #7A5C00;
+    --ink-green: #00662B;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --sys-blue: #409CFF;
-      --sys-green: #30DB5B;
-      --sys-indigo: #7D7AFF;
-      --sys-orange: #FFB340;
-      --sys-pink: #FF6482;
-      --sys-teal: #5DE5FA;
+      --sys-red: #FF4D63;
+      --sys-blue: #4C9AE8;
+      --sys-yellow: #FFD84D;
+      --sys-green: #35B36A;
       --glass-tint: rgba(24, 21, 20, 0.72);
       --glass-edge: rgba(255, 255, 255, 0.14);
       --glass-shade: rgba(0, 0, 0, 0.34);
-      --ink-blue: #6FB6FF;
-      --ink-green: #56E07C;
-      --ink-indigo: #A5A2FF;
-      --ink-orange: #FFC46B;
-      --ink-pink: #FF8AA1;
-      --ink-teal: #7FE6F8;
+      --ink-red: #FF8A9B;
+      --ink-blue: #7FB8F0;
+      --ink-yellow: #F0C64A;
+      --ink-green: #5FCB8A;
     }
   }
 

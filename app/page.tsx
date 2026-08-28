@@ -39,7 +39,7 @@ export default function Home() {
 
       {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
       <section id="work" className="flex flex-col gap-stack pt-24">
-        <SectionHeader label="Selected work" aside="five that matter most" />
+        <h2 className="text-title1 font-medium text-ink">Selected work</h2>
         {FEATURED.map((project, i) => (
           <Reveal key={project.slug} y={40}>
             <ProjectCard project={project} flipped={i % 2 === 1} />
@@ -136,9 +136,9 @@ function Also() {
 
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: UsersThree, tint: "blue" },
-  { icon: Lightning, tint: "orange" },
-  { icon: GitCommit, tint: "indigo" },
-  { icon: Clock, tint: "teal" },
+  { icon: Lightning, tint: "yellow" },
+  { icon: GitCommit, tint: "blue" },
+  { icon: Clock, tint: "green" },
 ];
 
 const MINE = ["Transita", "Korf", "Velso", "Ornitho"];
@@ -170,7 +170,7 @@ function Footer() {
 
         <div className="grid grid-cols-2 gap-8 text-callout">
           <div className="flex flex-col gap-3">
-            <p className="text-caption uppercase tracking-[0.14em] text-ink-3">Elsewhere</p>
+            <p className="text-caption font-medium text-ink-3">Elsewhere</p>
             {[
               { label: "GitHub", href: PERSON.github },
               { label: "LinkedIn", href: PERSON.linkedin },
@@ -182,7 +182,7 @@ function Footer() {
             ))}
           </div>
           <div className="flex flex-col gap-3">
-            <p className="text-caption uppercase tracking-[0.14em] text-ink-3">Mine</p>
+            <p className="text-caption font-medium text-ink-3">Mine</p>
             {MINE.map((n) => (
               <span key={n} className="text-ink-2">
                 {n}

@@ -63,23 +63,25 @@ const config: Config = {
         moss: "var(--accent)",
         "accent-soft": "var(--accent-soft)",
         tan: "var(--tan)",
+        mark: {
+          red: "var(--mark-red)",
+          blue: "var(--mark-blue)",
+          yellow: "var(--mark-yellow)",
+          green: "var(--mark-green)",
+        },
         sys: {
+          red: "var(--sys-red)",
           blue: "var(--sys-blue)",
+          yellow: "var(--sys-yellow)",
           green: "var(--sys-green)",
-          indigo: "var(--sys-indigo)",
-          orange: "var(--sys-orange)",
-          pink: "var(--sys-pink)",
-          teal: "var(--sys-teal)",
         },
         // Text-safe accents. Named `tone` because `ink` is already the body
         // colour, and a key cannot appear twice in the colour scale.
         tone: {
+          red: "var(--ink-red)",
           blue: "var(--ink-blue)",
+          yellow: "var(--ink-yellow)",
           green: "var(--ink-green)",
-          indigo: "var(--ink-indigo)",
-          orange: "var(--ink-orange)",
-          pink: "var(--ink-pink)",
-          teal: "var(--ink-teal)",
         },
         glass: {
           tint: "var(--glass-tint)",

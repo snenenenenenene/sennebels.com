@@ -64,7 +64,7 @@ export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
   );
 }
 
-export type Tint = "blue" | "green" | "indigo" | "orange" | "pink" | "teal";
+export type Tint = "red" | "blue" | "yellow" | "green";
 
 /**
  * Project surface tint. The accent sits at a low mix with the page at rest and
@@ -73,12 +73,10 @@ export type Tint = "blue" | "green" | "indigo" | "orange" | "pink" | "teal";
  * which keeps both appearances correct from one declaration.
  */
 export const SURFACE_TINT: Record<Tint, string> = {
-  blue: "bg-[color-mix(in_srgb,var(--sys-blue)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-blue)_16%,var(--raised))]",
-  green: "bg-[color-mix(in_srgb,var(--sys-green)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-green)_16%,var(--raised))]",
-  indigo: "bg-[color-mix(in_srgb,var(--sys-indigo)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-indigo)_16%,var(--raised))]",
-  orange: "bg-[color-mix(in_srgb,var(--sys-orange)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-orange)_18%,var(--raised))]",
-  pink: "bg-[color-mix(in_srgb,var(--sys-pink)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-pink)_16%,var(--raised))]",
-  teal: "bg-[color-mix(in_srgb,var(--sys-teal)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-teal)_18%,var(--raised))]",
+  red: "bg-[color-mix(in_srgb,var(--sys-red)_6%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-red)_15%,var(--raised))]",
+  blue: "bg-[color-mix(in_srgb,var(--sys-blue)_6%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-blue)_15%,var(--raised))]",
+  yellow: "bg-[color-mix(in_srgb,var(--sys-yellow)_10%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-yellow)_24%,var(--raised))]",
+  green: "bg-[color-mix(in_srgb,var(--sys-green)_6%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-green)_15%,var(--raised))]",
 };
 
 /**
@@ -91,30 +89,24 @@ export const SURFACE_TINT: Record<Tint, string> = {
  * iOS ships the same split.
  */
 export const ACCENT_TEXT: Record<Tint, string> = {
+  red: "text-tone-red",
   blue: "text-tone-blue",
+  yellow: "text-tone-yellow",
   green: "text-tone-green",
-  indigo: "text-tone-indigo",
-  orange: "text-tone-orange",
-  pink: "text-tone-pink",
-  teal: "text-tone-teal",
 };
 
 export const ACCENT_HOVER: Record<Tint, string> = {
+  red: "group-hover/card:text-tone-red",
   blue: "group-hover/card:text-tone-blue",
+  yellow: "group-hover/card:text-tone-yellow",
   green: "group-hover/card:text-tone-green",
-  indigo: "group-hover/card:text-tone-indigo",
-  orange: "group-hover/card:text-tone-orange",
-  pink: "group-hover/card:text-tone-pink",
-  teal: "group-hover/card:text-tone-teal",
 };
 
 const TINT: Record<Tint, string> = {
-  blue: "bg-sys-blue",
-  green: "bg-sys-green",
-  indigo: "bg-sys-indigo",
-  orange: "bg-sys-orange",
-  pink: "bg-sys-pink",
-  teal: "bg-sys-teal",
+  red: "bg-mark-red",
+  blue: "bg-mark-blue",
+  yellow: "bg-mark-yellow",
+  green: "bg-mark-green",
 };
 
 /**
@@ -128,7 +120,8 @@ export function GlyphTile({ icon: I, tint }: { icon: Icon; tint: Tint }) {
       aria-hidden
       className={`squircle grid size-7 shrink-0 place-items-center rounded-[9px] ${TINT[tint]} shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]`}
     >
-      <I size={17} weight="fill" className="text-white" />
+      {/* Deep yellow is too light to carry a white glyph, so it takes ink. */}
+      <I size={17} weight="fill" className={tint === "yellow" ? "text-[#1E1515]" : "text-white"} />
     </span>
   );
 }

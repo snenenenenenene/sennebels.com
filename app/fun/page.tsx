@@ -3,7 +3,7 @@ import { Cat, Coffee, GameController, Mountains } from "@phosphor-icons/react/di
 import { ASIDE, FUN, PERSON } from "../data/portfolio";
 import { GlyphTile, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
-import { SectionHeader } from "../components/section-header";
+import { PageTitle } from "../components/section-header";
 
 export const metadata: Metadata = {
   title: "Fun",
@@ -13,16 +13,16 @@ export const metadata: Metadata = {
 };
 
 const ICONS: { icon: typeof Cat; tint: Tint }[] = [
-  { icon: Cat, tint: "pink" },
-  { icon: Mountains, tint: "teal" },
-  { icon: GameController, tint: "indigo" },
-  { icon: Coffee, tint: "orange" },
+  { icon: Cat, tint: "red" },
+  { icon: Mountains, tint: "green" },
+  { icon: GameController, tint: "blue" },
+  { icon: Coffee, tint: "yellow" },
 ];
 
 export default function Fun() {
   return (
     <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
-      <SectionHeader as="h1" label="When I am not working" aside="which is more than it should be" />
+      <PageTitle title="When I am not working" lede="Which happens more than it should, and most of it ends up feeding the work anyway." />
 
       <div className="mt-8 flex max-w-[62ch] flex-col gap-4">
         {ASIDE.map((line) => (

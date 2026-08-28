@@ -129,7 +129,7 @@ const profileSchema = {
       name: "AP University of Applied Sciences",
     },
     worksFor: { "@type": "Organization", name: "Okapi Works" },
-    knowsAbout: SKILL_GROUPS.flatMap((g) => g.items.split(", ")),
+    knowsAbout: SKILL_GROUPS.flatMap((g) => g.items.map((i) => i.name)),
     knowsLanguage: ["nl", "en", "fr"],
     sameAs: [PERSON.github, PERSON.linkedin],
   },
