@@ -37,7 +37,8 @@ export type Featured = {
   rebus: { phrase: string; icon: string; tint: "red" | "blue" | "yellow" }[];
   /** Client mark, shown at the top of the card the way a case study leads. */
   brand?: string;
-  brandMono?: boolean;
+  /** "invert" for a flat near-black mark; "lift" for one that has colour worth keeping. */
+  brandDark?: "invert" | "lift";
   title: string;
   description: string;
   tech: string[];
@@ -72,7 +73,7 @@ export const FEATURED: Featured[] = [
   rebus: [{ phrase: "Three or four apps became one", icon: "SquaresFour", tint: "red" }, { phrase: "CarPlay and Android Auto", icon: "Car", tint: "blue" }, { phrase: "live radio", icon: "Broadcast", tint: "yellow" }],
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
-  brandMono: true,
+  brandDark: "invert",
     typeLine: { kind: "Client work", sub: "Mobile" },
   accent: "red",
     title: "One app for every edition, all year round",
@@ -161,7 +162,7 @@ export const FEATURED: Featured[] = [
   rebus: [{ phrase: "onboarding and progress", icon: "SignIn", tint: "red" }, { phrase: "review queue", icon: "ListChecks", tint: "blue" }, { phrase: "automated testing", icon: "Robot", tint: "yellow" }],
     name: "Kaedim",
   brand: "/images/logos/kaedim.png",
-  brandMono: true,
+  brandDark: "lift",
     typeLine: { kind: "Startup", sub: "3D and AI" },
   accent: "yellow",
     title: "Both sides of a human-in-the-loop pipeline",
@@ -359,12 +360,12 @@ export const EXPERIENCE: {
   href?: string;
   tint?: "red" | "blue" | "yellow" | "green";
 }[] = [
-  { role: "Founder & Principal Engineer", org: "Okapi Works", tint: "green", dates: "Apr 2020 to now" },
+  
   { role: "Senior Mobile Engineer", org: "Tomorrowland", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
-  { role: "Full-Stack Engineer", org: "Outpost", tint: "blue", dates: "Jan 2026 to now" },
+  { role: "Full-Stack Engineer", org: "Outpost", href: "https://outpostplayers.com", logo: "/images/logos/outpost.webp", tint: "blue", dates: "Jan 2026 to now" },
   { role: "Frontend Lead", org: "BeeDee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
   { role: "AI Engineer", org: "Euroconsumers, via Nimble", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
-  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", logoMono: true, href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
+  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
   { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", href: "https://www.vlaanderen.be", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
   { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logoMono: true, href: "https://cronos-groep.be", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
 ];

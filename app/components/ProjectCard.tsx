@@ -12,6 +12,19 @@ import { CaseStudyButton } from "./cta";
  * with rules. There is not a single hairline in here: the fill does the
  * grouping and the shadow does the separating.
  */
+/**
+ * Two ways to survive dark mode, picked per mark rather than applied blindly.
+ */
+const BRAND_DARK: Record<string, string> = {
+  // A flat near-black mark inverts cleanly to white.
+  invert: "dark:brightness-0 dark:invert",
+  // One that carries colour cannot be rescued by brightness, because
+  // multiplying a near-black pixel leaves it near-black. It gets a light
+  // plate in dark mode instead, which keeps the colour and the contrast.
+  lift: "dark:rounded-[8px] dark:bg-white dark:p-1.5",
+  none: "",
+};
+
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
   return (
     <article
@@ -27,7 +40,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
                 alt=""
                 width={140}
                 height={56}
-                className={`h-8 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
+                className={`h-8 w-auto object-contain object-left ${BRAND_DARK[project.brandDark ?? "none"]}`}
               />
             )}
             <span className="font-display text-title3 font-medium text-ink">{project.name}</span>

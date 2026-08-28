@@ -21,6 +21,19 @@ const FEATURE_TINT: Record<Tint, string> = {
   green: "bg-[color-mix(in_srgb,var(--sys-green)_12%,var(--raised))] text-tone-green",
 };
 
+/**
+ * Two ways to survive dark mode, picked per mark rather than applied blindly.
+ */
+const BRAND_DARK: Record<string, string> = {
+  // A flat near-black mark inverts cleanly to white.
+  invert: "dark:brightness-0 dark:invert",
+  // One that carries colour cannot be rescued by brightness, because
+  // multiplying a near-black pixel leaves it near-black. It gets a light
+  // plate in dark mode instead, which keeps the colour and the contrast.
+  lift: "dark:rounded-[8px] dark:bg-white dark:p-1.5",
+  none: "",
+};
+
 export function generateStaticParams() {
   return FEATURED.map((p) => ({ slug: p.slug }));
 }
@@ -120,7 +133,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                   width={200}
                   height={80}
                   priority
-                  className={`h-10 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
+                  className={`h-10 w-auto object-contain object-left ${BRAND_DARK[project.brandDark ?? "none"]}`}
                 />
               )}
               {/* Serif beside the mark: the name is a proper noun, not a label. */}
