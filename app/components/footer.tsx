@@ -31,8 +31,8 @@ export function Footer() {
             Come say hi
           </h2>
           <p className="max-w-[52ch] text-body text-ink-2">
-            Open to contract work, and to full-time roles in Canada or the United States that can
-            sponsor a move. Currently pointed at Vancouver.
+            Open to contract work, and to full-time roles in Canada or the United States that
+            sponsor. The plan points at Vancouver.
           </p>
           <a
             href={`mailto:${PERSON.email}`}
@@ -60,8 +60,8 @@ export function Footer() {
       </div>
 
       <p className="text-caption text-ink-3">
-        &copy; 2026 {PERSON.name}, {PERSON.locality}. Made on too much coffee, with four cats
-        actively in the way.
+        &copy; 2026 {PERSON.name}, {PERSON.locality}. Built on too much coffee, with four cats in
+        the way.
       </p>
     </footer>
   );

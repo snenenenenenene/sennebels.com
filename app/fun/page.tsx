@@ -9,7 +9,7 @@ import { PageTitle } from "../components/section-header";
 export const metadata: Metadata = {
   title: "Fun",
   description:
-    "Four cats, a dog, mountains that are nowhere near Belgium, games played and built, and coffee. What Senne Bels does when he is not working.",
+    "Four cats, a dog, mountains nowhere near Belgium, and games. What Senne Bels does when he is not working.",
   alternates: { canonical: "https://sennebels.com/fun" },
 };
 
@@ -23,7 +23,7 @@ const ICONS: { icon: typeof Cat; tint: Tint }[] = [
 export default function Fun() {
   return (
     <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
-      <PageTitle title="When I am not working" lede="Which happens more than it should, and most of it ends up feeding the work anyway." />
+      <PageTitle title="When I am not working" lede="Which happens more than it should." />
 
       <div className="mt-8 flex max-w-[62ch] flex-col gap-4">
         {ASIDE.map((line) => (

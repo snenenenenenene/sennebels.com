@@ -5,7 +5,7 @@ export const PERSON = {
   name: "Senne Bels",
   jobTitle: "Senior Software Engineer",
   tagline:
-    "I'm a senior software engineer, a game developer on the side, and full-time staff to four cats. I build the kind of websites that people poke at instead of scroll past.",
+    "Senior software engineer. I build things people poke at instead of scroll past, and I have been doing it remote-first for six years.",
   email: "sennebels@gmail.com",
   locality: "Antwerp",
   country: "BE",
@@ -54,7 +54,7 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
-  rebus: [{ phrase: "consolidated super app", icon: "DeviceMobile", tint: "red" }, { phrase: "Server-driven UI", icon: "Broadcast", tint: "blue" }, { phrase: "without waiting on an app release", icon: "Lightning", tint: "yellow" }],
+  rebus: [{ phrase: "one app now", icon: "DeviceMobile", tint: "red" }, { phrase: "server-driven", icon: "Broadcast", tint: "blue" }, { phrase: "does not wait on an App Store review", icon: "Lightning", tint: "yellow" }],
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
   brandMono: true,
@@ -62,7 +62,7 @@ export const FEATURED: Featured[] = [
   accent: "red",
     title: "One app for a festival the whole world watches",
     description:
-      "Senior mobile engineer on the consolidated super app, merging Tomorrowland Radio, the per-festival apps and Tomorrowland Account into a single product. Server-driven UI over an OpenAPI NestJS backend-for-frontend, so content teams ship without waiting on an app release.",
+      "Tomorrowland ran four apps. Radio, one per festival, and Account, each with its own release cycle. They are one app now. The UI is server-driven, so a lineup change on the day of the festival does not wait on an App Store review.",
     tech: ["React Native", "Expo", "Server-driven UI"],
     spec: {
       points: [
@@ -91,14 +91,14 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "euroconsumers",
-  rebus: [{ phrase: "tool-calling agent", icon: "Robot", tint: "red" }, { phrase: "Qdrant", icon: "Database", tint: "blue" }, { phrase: "Azure environments", icon: "Cloud", tint: "yellow" }],
+  rebus: [{ phrase: "retrieval tools over Qdrant", icon: "Database", tint: "red" }, { phrase: "scores its own groundedness", icon: "ShieldCheck", tint: "blue" }, { phrase: "Azure environments", icon: "Cloud", tint: "yellow" }],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
   accent: "blue",
     title: "An AI legal assistant that has to be right",
     description:
-      "A legal assistant for Altroconsumo and its sister organisations, built on a tool-calling agent over Qdrant with groundedness scoring and guardrails. I also built and ran the Azure environments behind it, and maintained the thing after launch. Working with their teams in Portugal, France and Italy.",
+      "A wrong answer about your rights is worse than no answer. The agent calls retrieval tools over Qdrant instead of guessing, scores its own groundedness, and hands anything risky to a person. I built the Azure environments under it and kept it running after launch, with their teams in Portugal, France and Italy.",
     tech: ["Mastra", "RAG", "LangSmith"],
     spec: {
       points: [
@@ -127,7 +127,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "kaedim",
-  rebus: [{ phrase: "Experimental workflows", icon: "Flask", tint: "red" }, { phrase: "MCP automations", icon: "Cube", tint: "blue" }, { phrase: "AI-driven testing", icon: "Robot", tint: "yellow" }],
+  rebus: [{ phrase: "Blender over MCP", icon: "Cube", tint: "red" }, { phrase: "tested before a designer sees them", icon: "Robot", tint: "blue" }, { phrase: "Figma Dev MCP", icon: "Flask", tint: "yellow" }],
     name: "Kaedim",
   brand: "/images/logos/kaedim.png",
   brandMono: true,
@@ -135,7 +135,7 @@ export const FEATURED: Featured[] = [
   accent: "yellow",
     title: "Tooling for a 3D team that ships every day",
     description:
-      "Joined an established product to make it better rather than to build it. Experimental workflows for the 3D design team, MCP automations, and AI-driven testing for generated assets. Working across San Francisco, London and Singapore, and directly with the CEO.",
+      "Kaedim already had a product. I made it better. Generated assets go through Blender over MCP and get tested before a designer sees them, and the design-to-development handoff runs on Figma Dev MCP. Team across San Francisco, London and Singapore, working with the CEO.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
     image: "/images/work/kaedim.webp",
     cta: "read the write-up",
@@ -158,14 +158,14 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "beedee",
-  rebus: [{ phrase: "36,000 monthly actives", icon: "TrendUp", tint: "red" }, { phrase: "made it native", icon: "DeviceMobile", tint: "blue" }, { phrase: "travel mode and localisation", icon: "Translate", tint: "yellow" }],
+  rebus: [{ phrase: "made it properly native", icon: "DeviceMobile", tint: "red" }, { phrase: "travel mode, localisation", icon: "Translate", tint: "blue" }, { phrase: "organic search", icon: "TrendUp", tint: "yellow" }],
     name: "BeeDee",
   brand: "/images/logos/beedee.png",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
   accent: "red",
     title: "Four years of a consumer app, owned end to end",
     description:
-      "Took a consumer social app from a rough visual state to 36,000 monthly actives. Rebuilt the interface, made it native, shipped travel mode and localisation, moved the infrastructure onto GitHub Actions, and put AI into the internal workflows. Reporting to the CEO, with a team in India.",
+      "BeeDee looked unfinished when I got there, and an app that looks unfinished does not get a second session. I rebuilt the interface, made it properly native, then kept going: travel mode, localisation, GitHub Actions instead of manual releases, AI in the internal workflows. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry it. Four years, reporting to the CEO, with the team in India.",
     tech: ["React Native", "Sockets", "Mollie"],
     image: "/images/work/beedee.webp",
     cta: "read the write-up",
@@ -188,14 +188,14 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "lokaal-beslist",
-  rebus: [{ phrase: "local municipal decisions", icon: "Buildings", tint: "red" }, { phrase: "89% faster", icon: "Lightning", tint: "blue" }, { phrase: "manual government audit work", icon: "ShieldCheck", tint: "yellow" }],
+  rebus: [{ phrase: "hundreds of municipalities", icon: "Buildings", tint: "red" }, { phrase: "89% faster", icon: "Lightning", tint: "blue" }, { phrase: "manual audit work", icon: "ShieldCheck", tint: "yellow" }],
     name: "Lokaal Beslist",
   brand: "/images/logos/vlaanderen.png",
     typeLine: { kind: "Government", sub: "Civic platform" },
   accent: "blue",
     title: "Making government decisions readable by humans",
     description:
-      "A citizen-facing transparency platform for the Flanders Agency of Home Affairs, opening up local municipal decisions and financial data. Pages loaded 89% faster, and automated compliance tooling cut manual government audit work by 70%.",
+      "Every decision a Belgian municipality makes is already public. None of it was readable. This puts hundreds of municipalities in one place, loads pages 89% faster than before, and the compliance tooling took 70% of the manual audit work off people.",
     tech: ["Leaflet", "D3.js", "Semantic web"],
     image: "/images/work/lokaalbeslist.webp",
     cta: "read the write-up",
@@ -226,7 +226,7 @@ export const ALSO = [
     image: "/images/work/transita.webp",
     kind: "Live, paying customers",
     description:
-      "Built and run entirely by me, end to end. Claude ranks a person's best global immigration pathways from a three-minute questionnaire, and people pay for the result.",
+      "Answer nine questions and Claude ranks the immigration routes actually open to you. I built it, I run it, and people pay for it.",
     href: "https://transita.app",
   },
   {
@@ -235,7 +235,7 @@ export const ALSO = [
     image: "/images/work/korf-live.webp",
     kind: "App Store and Play Store",
     description:
-      "Belgian grocery price comparison, live on both stores. Next.js and Capacitor, with CI releasing to TestFlight and the Play Store internal track on every push to main.",
+      "Scan a receipt, find out where the same basket costs less. Live on both stores, and every push to main goes out to TestFlight and the Play Store.",
     href: "https://korf.app",
   },
   {
@@ -244,7 +244,7 @@ export const ALSO = [
     image: "/images/work/faultline.webp",
     kind: "In progress",
     description:
-      "Browser multiplayer on Three.js and Colyseus. Compound disasters, and dead players still get a vote on what happens next.",
+      "An earthquake cracks the dam, the dam breaks, the island floods. Twelve players, one seed disaster, and the cascade decides who survives. Dead players still get a vote.",
   },
 ];
 
@@ -368,7 +368,7 @@ export const SKILL_GROUPS = [
 
 /** Intro paragraphs for /fun. */
 export const ASIDE = [
-  "Most of what I do away from a keyboard ends up feeding what I do at one. Here is the honest version.",
+  "Most of what I do away from a keyboard ends up feeding what I do at one.",
 ];
 
 
@@ -384,28 +384,29 @@ export const ABOUT_REBUS = [
 /** Rebus marks for the Fun paragraphs. Keyed by the line they belong to. */
 export const FUN_REBUS = [
   { phrase: "Four cats and a dog", icon: "Cat", tint: "red" as const },
-  { phrase: "long walks with a coffee", icon: "Coffee", tint: "blue" as const },
+  { phrase: "long walk with a coffee", icon: "Coffee", tint: "blue" as const },
   { phrase: "Rocket League", icon: "GameController", tint: "yellow" as const },
-  { phrase: "hiking", icon: "Mountains", tint: "red" as const },
+  { phrase: "I hike", icon: "Mountains", tint: "red" as const },
   { phrase: "flat and six metres above sea level", icon: "Ruler", tint: "blue" as const },
+  { phrase: "Faultline", icon: "Cube", tint: "yellow" as const },
 ];
 
 /** Longer-form personality, for /fun. Each has room to be an actual story. */
 export const FUN = [
   {
     title: "Four cats and a dog",
-    body: "Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided in this house. The long-term plan involves opening a cat cafe. That is not a joke, it is a roadmap item.",
+    body: "Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided here. The long-term plan is a cat cafe. That is a roadmap item, not a joke.",
   },
   {
     title: "Mountains, eventually",
-    body: "I hike. Belgium is flat and six metres above sea level, so the hiking happens elsewhere, which is a large part of why the plan points west and upward.",
+    body: "I hike. Belgium is flat and six metres above sea level, so the hiking happens somewhere else. That is a large part of why the plan points west and upward.",
   },
   {
     title: "Games, played and built",
-    body: "Overwatch, Hearts of Iron, Rocket League, Rivals of Aether. Half of it is research for Faultline. The other half is losing matches I had every right to win.",
+    body: "Overwatch, Hearts of Iron, Rocket League, Rivals of Aether. Half of that is research for Faultline. The other half is losing matches I had every right to win.",
   },
   {
     title: "Coffee, and cooking past my level",
-    body: "Long walks with a coffee, and weeknight dinners more ambitious than a Tuesday can support. Both of these are how I think through a problem I am stuck on.",
+    body: "A long walk with a coffee, or a Tuesday dinner more ambitious than a Tuesday can support. Both are how I get unstuck.",
   },
 ] as const;
