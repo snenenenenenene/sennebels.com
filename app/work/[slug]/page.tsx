@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight, GitPullRequest, Target, TrendUp } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, MagnifyingGlass, TrendUp } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
 import { RebusText } from "../../components/rebus-text";
@@ -10,7 +10,15 @@ import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../compone
 import { Reveal, Rise, Stagger } from "../../components/motion";
 
 const TRIO: Tint[] = ["red", "blue", "yellow"];
-const OUTCOME_ICONS = [TrendUp, GitPullRequest, Target];
+const OUTCOME_ICONS = [TrendUp, MagnifyingGlass, Crown];
+
+/** Feature pills carry the trio, tinted rather than plain. */
+const FEATURE_TINT: Record<Tint, string> = {
+  red: "bg-[color-mix(in_srgb,var(--sys-red)_12%,var(--raised))] text-tone-red",
+  blue: "bg-[color-mix(in_srgb,var(--sys-blue)_12%,var(--raised))] text-tone-blue",
+  yellow: "bg-[color-mix(in_srgb,var(--sys-yellow)_22%,var(--raised))] text-tone-yellow",
+  green: "bg-[color-mix(in_srgb,var(--sys-green)_12%,var(--raised))] text-tone-green",
+};
 
 export function generateStaticParams() {
   return FEATURED.map((p) => ({ slug: p.slug }));
@@ -169,6 +177,23 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           </dl>
         </aside>
       </div>
+
+      {project.features && (
+        <section className="flex flex-col gap-5 pt-16">
+          <h2 className="text-title3 font-medium text-ink">What I shipped</h2>
+          <ul className="flex flex-wrap gap-2.5">
+            {project.features.map((f, i) => (
+              <li
+                key={f}
+                className={`squircle flex items-center gap-2 rounded-full px-4 py-2 text-callout font-medium transition-transform duration-200 ease-out hover:-translate-y-0.5 ${FEATURE_TINT[TRIO[i % TRIO.length]]}`}
+              >
+                <CheckCircle size={15} weight="fill" aria-hidden />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {project.image && (
         <Reveal className="pt-16"><figure><Tilt>
