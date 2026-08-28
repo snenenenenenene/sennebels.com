@@ -19,20 +19,6 @@ export const PERSON = {
 } as const;
 
 
-/**
- * Colour identity. The palette is Golgari: green for growth, black for
- * pragmatism. It is one scheme, locked, and every value lives in globals.css
- * as a CSS variable so both appearances stay in step. Nothing here is a hex.
- */
-export const IDENTITY = {
-  guild: "Golgari",
-  pips: [
-    { key: "B", name: "Black", gloss: "ship the pragmatic thing" },
-    { key: "G", name: "Green", gloss: "then grow it" },
-  ],
-  line: "Black for pragmatism, green for growth. Ship the useful version, then grow it.",
-} as const;
-
 /** Type line, in the Magic sense: what a thing is, then what kind. */
 export type TypeLine = { kind: string; sub: string };
 
@@ -47,8 +33,6 @@ export type Featured = {
   /** Client mark, shown at the top of the card the way a case study leads. */
   brand?: string;
   brandMono?: boolean;
-  /** Flavour text. Personality belongs on the work, not in a box at the end. */
-  flavour: string;
   title: string;
   description: string;
   tech: string[];
@@ -72,7 +56,6 @@ export const FEATURED: Featured[] = [
   brandMono: true,
     typeLine: { kind: "Client work", sub: "Mobile" },
   accent: "blue",
-  flavour: "Four apps walked in. One walked out, and it did not lose anything on the way.",
     title: "One app for a festival the whole world watches",
     description:
       "Senior mobile engineer on the consolidated super app, merging Tomorrowland Radio, the per-festival apps and Tomorrowland Account into a single product. Server-driven UI over an OpenAPI NestJS backend-for-frontend, so content teams ship without waiting on an app release.",
@@ -83,12 +66,12 @@ export const FEATURED: Featured[] = [
         "Prismic CMS objects mirrored into type-safe Zod schemas",
         "EAS preview, production and tagged-release pipelines",
       ],
-      credit: "Delivered through In The Pocket",
+      credit: "Freelance, engaged directly",
     },
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "Senior Mobile Engineer" },
-      { label: "Through", value: "In The Pocket" },
+      { label: "Through", value: "Direct, freelance" },
       { label: "Timeline", value: "Jul 2026 to now" },
       { label: "Team", value: "Product owner, tech lead, mobile engineers" },
     ],
@@ -108,10 +91,9 @@ export const FEATURED: Featured[] = [
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
   accent: "blue",
-  flavour: "A confident wrong answer about your rights is worse than no answer at all.",
     title: "An AI legal assistant that has to be right",
     description:
-      "A multi-tenant assistant for a European consumer-rights organisation, live on public sites. A tool-calling agent over hybrid retrieval, with automated groundedness scoring, out-of-corpus guardrails, and human review on the answers that carry real risk.",
+      "A legal assistant for Altroconsumo and its sister organisations, built on a tool-calling agent over Qdrant with groundedness scoring and guardrails. I also built and ran the Azure environments behind it, and maintained the thing after launch. Working with their teams in Portugal, France and Italy.",
     tech: ["Mastra", "RAG", "LangSmith"],
     spec: {
       points: [
@@ -129,9 +111,9 @@ export const FEATURED: Featured[] = [
       { label: "Team", value: "Eight engineers, two organisations" },
     ],
     story: [
-      "A European consumer-rights organisation wanted an assistant that could answer legal questions on its public sites. The hard part is not the chat interface. It is that a wrong answer about someone's rights is worse than no answer at all.",
-      "The first version used single-shot retrieval, which is fine for lookup and useless for reasoning across documents. I replaced it with a tool-calling agent in Mastra, given dedicated retrieval tools over legal documents, articles and product data, so it can take several steps toward an answer instead of guessing in one.",
-      "Around that sits the part that makes it shippable: an ingestion pipeline that parses and chunks PDFs into hybrid sparse and dense embeddings, automated scorers that measure whether an answer is actually grounded in the corpus, guardrails that refuse questions outside it, human review on high-risk answers, and LangSmith tracing across the whole retrieval and generation path so a regression can be debugged rather than argued about.",
+      "Euroconsumers wanted a legal assistant its members could actually rely on, first for Altroconsumo in Italy and then across the group. A wrong answer about somebody's consumer rights is worse than no answer, so the whole build was arranged around not being confidently wrong.",
+      "The agent calls dedicated retrieval tools over legal documents, articles and product data rather than doing a single-shot lookup, with hybrid sparse and dense retrieval out of Qdrant so an answer can cite the article it came from. Automated scorers measure groundedness, out-of-corpus guardrails catch questions the corpus cannot answer, and anything high-risk goes to a human. LangSmith traces the full pipeline so a regression can be found rather than guessed at.",
+      "A large part of the work was not the model at all. I set up and ran their development, staging and production environments on Azure, then maintained the system after launch, working with their teams across Portugal, France and Italy.",
     ],
     outcomes: [
       { value: "100+", label: "daily active users on public sites" },
@@ -145,10 +127,9 @@ export const FEATURED: Featured[] = [
   brandMono: true,
     typeLine: { kind: "Startup", sub: "3D and AI" },
   accent: "red",
-  flavour: "The model was the easy part. Making artists trust it was the work.",
-    title: "Making AI 3D generation feel obvious",
+    title: "Tooling for a 3D team that ships every day",
     description:
-      "An AI 3D copilot joining chat and canvas, plus a pipeline that pushes every generated asset through Blender over the Model Context Protocol and tests it automatically.",
+      "Joined an established product to make it better rather than to build it. Experimental workflows for the 3D design team, MCP automations, and AI-driven testing for generated assets. Working across San Francisco, London and Singapore, and directly with the CEO.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
     image: "/images/work/kaedim.webp",
     cta: "read the write-up",
@@ -159,9 +140,9 @@ export const FEATURED: Featured[] = [
       { label: "Scope", value: "Five or more repositories" },
     ],
     story: [
-      "Kaedim turns concept art into production 3D assets. The generation was strong; the way people worked with it was not. Getting from an idea to a usable model meant leaving the product, and there was no reliable way to know whether a generated asset was actually good before a customer saw it.",
-      "I built an AI 3D copilot that puts an LLM chat next to a drag-and-drop canvas, so describing what you want and manipulating it happen in the same place, over interactive WebGL.",
-      "Then the unglamorous half: an end-to-end pipeline covering idea capture, generation in Blender over the Model Context Protocol, an internal review queue for designers, and customer-facing progress tracking. Large assets move through AWS S3. I also automated the design-to-development handoff with Figma Dev MCP and recorded the walkthrough that onboarded the rest of the team onto it.",
+      "Kaedim already had a product and customers when I arrived. The job was not to build it, it was to make it better and to give the 3D design team tooling they did not have.",
+      "That meant experimental workflows for the designers, automations over the Model Context Protocol that pushed generated assets through Blender, and an AI-driven testing pipeline so a bad asset was caught before a human saw it. I automated the design-to-development handoff with Figma Dev MCP and wrote the walkthrough that got the rest of engineering onto it.",
+      "The team was spread across San Francisco, London and Singapore, and I worked directly with the CEO. Coordinating a change often meant touching five or more repositories across frontend, backend and test infrastructure.",
     ],
     outcomes: [
       { value: "Thousands", label: "of users on the platform" },
@@ -175,10 +156,9 @@ export const FEATURED: Featured[] = [
   brand: "/images/logos/beedee.png",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
   accent: "yellow",
-  flavour: "Nobody filed a bug about the fifteen seconds. They just stopped coming back.",
-    title: "A social platform 93% faster than I found it",
+    title: "Four years of a consumer app, owned end to end",
     description:
-      "Led frontend on a consumer social platform: cut the slowest interactions from 15 seconds to under one, held real-time sockets steady at 10,000 daily actives, and shipped the iOS app.",
+      "Took a consumer social app from a rough visual state to 36,000 monthly actives. Rebuilt the interface, made it native, shipped travel mode and localisation, moved the infrastructure onto GitHub Actions, and put AI into the internal workflows. Reporting to the CEO, with a team in India.",
     tech: ["React Native", "Sockets", "Mollie"],
     image: "/images/work/beedee.webp",
     cta: "read the write-up",
@@ -189,14 +169,14 @@ export const FEATURED: Featured[] = [
       { label: "Ownership", value: "Frontend, end to end" },
     ],
     story: [
-      "BeeDee is a consumer social platform with 140,000 users. When I picked up frontend, the most-used interaction in the product took more than fifteen seconds. People were not complaining about it. They were leaving.",
-      "Getting it under one second was React rendering work and a caching strategy, not a rewrite. Real-time sockets were the next failure: connections dropped under load, so reconnect logic and connection pooling had to hold at 10,000 daily actives. Discovery had degraded separately, and came back through query caching and database index work.",
-      "The other constraint was that the platform is barred from paid advertising on Meta, Google and Reddit. Growth had to be organic, which made technical SEO a revenue channel rather than a checkbox: an 18% click-through rate against a 2 to 5% industry benchmark, and first-position ranking on target terms. I also shipped the iOS app in React Native and integrated multi-currency payments through Mollie.",
+      "I did not join BeeDee to make it faster. I joined because the app looked and felt unfinished, and a consumer product that feels unfinished does not get a second session. The first year was visual and interaction work: rebuilding the interface, making the React Native app feel native rather than wrapped, and getting the slowest interactions under a second.",
+      "After that it became ownership. Travel mode, localisation, and a run of features that gave people a reason to come back. GitHub Actions replaced manual releases. I made the architectural and infrastructure calls, put AI into the internal workflows, and did the technical SEO that took organic acquisition from nothing to an 18% click-through against a 2 to 5% benchmark, on a platform barred from paid advertising on Meta, Google and Reddit.",
+      "Four years of it, working directly with the CEO and with the engineering team in India, growing the thing steadily rather than rescuing it once.",
     ],
     outcomes: [
-      { value: "93%", label: "faster on the critical interaction, 15s to under 1s" },
+      { value: "36,000", label: "monthly active users at peak, from a far smaller base" },
       { value: "18%", label: "organic click-through, against a 2 to 5% benchmark" },
-      { value: "32%", label: "revenue growth from initiatives I contributed to" },
+      { value: "4 years", label: "owning frontend, infrastructure and release" },
     ],
   },
   {
@@ -205,7 +185,6 @@ export const FEATURED: Featured[] = [
   brand: "/images/logos/vlaanderen.png",
     typeLine: { kind: "Government", sub: "Civic platform" },
   accent: "green",
-  flavour: "Every decision was already public. None of it was readable.",
     title: "Making government decisions readable by humans",
     description:
       "A citizen-facing transparency platform for the Flanders Agency of Home Affairs, opening up local municipal decisions and financial data. Pages loaded 89% faster, and automated compliance tooling cut manual government audit work by 70%.",
@@ -290,7 +269,7 @@ export const EXPERIENCE: {
   tint?: "red" | "blue" | "yellow" | "green";
 }[] = [
   { role: "Founder & Principal Engineer", org: "Okapi Works", tint: "green", dates: "Apr 2020 to now" },
-  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
+  { role: "Senior Mobile Engineer", org: "Tomorrowland", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
   { role: "Full-Stack Engineer", org: "Outpost", tint: "blue", dates: "Jan 2026 to now" },
   { role: "Frontend Lead", org: "BeeDee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
   { role: "AI Engineer", org: "Euroconsumers, via Nimble", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },

@@ -27,7 +27,6 @@ import {
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
 import { Chip, Glyph, GlyphTile, Heading, Surface, TAP, type Tint } from "./components/ui";
 import { SectionHeader } from "./components/section-header";
-import { Pips } from "./components/pips";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -76,10 +75,6 @@ function Hero() {
         </Rise>
 
         <Rise>
-          <Pips />
-        </Rise>
-
-        <Rise>
           <p className="sr-only">{PERSON.answerBlock}</p>
           <ul className="flex flex-wrap items-center gap-x-7 gap-y-2 text-callout">
             <IconLink href={PERSON.resume} label="Resume" icon={FileText} />
@@ -121,10 +116,10 @@ function Also() {
       <h2 className="max-w-[24ch] text-title1 font-medium">
         Things I build on my own time.
       </h2>
-      <div className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
         {ALSO.map((item, i) => (
-          <Reveal key={item.name} delay={(i % 3) * 0.07} y={40}>
-            <LiftOnHover>
+          <Reveal key={item.name} delay={(i % 3) * 0.07} y={40} className="flex">
+            <LiftOnHover className="flex w-full">
               <SmallCard {...item} />
             </LiftOnHover>
           </Reveal>
@@ -141,10 +136,13 @@ const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: Clock, tint: "green" },
 ];
 
-const MINE = ["Transita", "Korf", "Velso", "Ornitho"];
+const MINE = [
+  { label: "Transita", href: "https://transita.app" },
+  { label: "Korf", href: "https://korf.app" },
+];
 
 const FOOTER_LINK =
-  "flex min-h-tap items-center text-ink-2 transition-colors duration-200 hover:text-moss";
+  "flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-moss";
 
 function Footer() {
   return (
@@ -172,21 +170,23 @@ function Footer() {
           <div className="flex flex-col gap-3">
             <p className="text-caption font-medium text-ink-3">Elsewhere</p>
             {[
-              { label: "GitHub", href: PERSON.github },
-              { label: "LinkedIn", href: PERSON.linkedin },
-              { label: "Resume", href: PERSON.resume },
+              { label: "GitHub", href: PERSON.github, icon: GithubLogo },
+              { label: "LinkedIn", href: PERSON.linkedin, icon: LinkedinLogo },
+              { label: "Resume", href: PERSON.resume, icon: FileText },
             ].map((l) => (
               <a key={l.label} href={l.href} className={FOOTER_LINK}>
+                <l.icon size={17} weight="fill" aria-hidden className="text-ink-3" />
                 {l.label}
               </a>
             ))}
           </div>
           <div className="flex flex-col gap-3">
             <p className="text-caption font-medium text-ink-3">Mine</p>
-            {MINE.map((n) => (
-              <span key={n} className="text-ink-2">
-                {n}
-              </span>
+            {MINE.map((m) => (
+              <a key={m.label} href={m.href} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
+                <ArrowUpRight size={14} weight="bold" aria-hidden className="text-ink-3" />
+                {m.label}
+              </a>
             ))}
           </div>
         </div>

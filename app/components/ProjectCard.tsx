@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
-import { CARD_TINT, Flavour, TypeLine } from "./ui";
+import { CARD_TINT } from "./ui";
 import { CaseStudyButton } from "./cta";
 
 /**
@@ -31,15 +31,9 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             <p className="mb-8 text-title3 font-semibold text-ink">{project.name}</p>
           )}
 
-          <TypeLine kind={project.typeLine.kind} sub={project.typeLine.sub} />
-
-          <h3 className="mt-3 max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
+          <h3 className="max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
 
           <p className="mt-6 max-w-[52ch] text-body text-ink-2">{project.description}</p>
-
-          <div className="mt-5">
-            <Flavour>{project.flavour}</Flavour>
-          </div>
 
           <Link href={`/work/${project.slug}`} className="mt-9 w-fit">
             <CaseStudyButton label={project.cta} />
@@ -73,7 +67,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
                   <span className="text-body text-ink-2">{point}</span>
                 </li>
               ))}
-              <li className="pl-1 font-display text-callout italic text-ink-3">{project.spec.credit}</li>
+              <li className="pl-1 text-callout text-ink-3">{project.spec.credit}</li>
             </ul>
           )
         )}
@@ -120,7 +114,7 @@ export function SmallCard({
   );
 
   const cls =
-    "squircle group/small flex min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card transition-shadow duration-300 hover:shadow-card-hover";
+    "squircle group/small flex h-full w-full min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card transition-shadow duration-300 hover:shadow-card-hover";
 
   return href ? (
     <Link href={href} className={cls}>

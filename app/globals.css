@@ -62,8 +62,8 @@
     --ink-2: #4A3F3F;
     --ink-3: #736A64;
     --hairline: #E4E1DA;
-    --accent: #4D6043;
-    --accent-soft: #DFEFD7;
+    --accent: #0058A3;
+    --accent-soft: #DCEAF8;
     --tan: #87684A;
     /* kept: older utilities still reference these */
     --gray-1: #1E1515;
@@ -80,8 +80,8 @@
       --ink-2: #C9C2BC;
       --ink-3: #978E87;
       --hairline: #302B28;
-      --accent: #A8C39A;
-      --accent-soft: #26302170;
+      --accent: #6FB2F0;
+      --accent-soft: #12294070;
       --tan: #C0A183;
       --gray-1: #F9F8F5;
       --gray-2: #C9C2BC;
