@@ -48,6 +48,26 @@ export const LINK_HOVER: Record<Tint, string> = {
   green: "hover:text-tone-green",
 };
 
+/** Row hover, written out for the same reason LINK_HOVER is. */
+export const ROW_TEXT: Record<Tint, string> = {
+  red: "group-hover/row:text-tone-red",
+  blue: "group-hover/row:text-tone-blue",
+  yellow: "group-hover/row:text-tone-yellow",
+  green: "group-hover/row:text-tone-green",
+};
+
+/**
+ * Skill pill hover. A light ground with the dark text variant on top, so the
+ * label and its mark stay readable: the vivid fill is bright enough to carry a
+ * white glyph but nowhere near dark enough to be read as type.
+ */
+export const PILL_HOVER: Record<Tint, string> = {
+  red: "hover:bg-[color-mix(in_srgb,var(--sys-red)_16%,var(--raised))] hover:text-tone-red",
+  blue: "hover:bg-[color-mix(in_srgb,var(--sys-blue)_16%,var(--raised))] hover:text-tone-blue",
+  yellow: "hover:bg-[color-mix(in_srgb,var(--sys-yellow)_30%,var(--raised))] hover:text-tone-yellow",
+  green: "hover:bg-[color-mix(in_srgb,var(--sys-green)_16%,var(--raised))] hover:text-tone-green",
+};
+
 export const RULE_BG: Record<Tint, string> = {
   red: "bg-tone-red",
   blue: "bg-tone-blue",

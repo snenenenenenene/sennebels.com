@@ -305,7 +305,7 @@ export const LANGUAGES = [
 export const SKILL_GROUPS = [
   {
     label: "Languages",
-    tint: "blue" as const,
+    tint: "red" as const,
     items: [
       { name: "TypeScript", slug: "typescript" },
       { name: "JavaScript", slug: "javascript" },
@@ -317,7 +317,7 @@ export const SKILL_GROUPS = [
   },
   {
     label: "Frontend",
-    tint: "red" as const,
+    tint: "blue" as const,
     items: [
       { name: "React", slug: "react" },
       { name: "Next.js", slug: "nextdotjs" },
@@ -329,7 +329,7 @@ export const SKILL_GROUPS = [
   },
   {
     label: "Backend",
-    tint: "green" as const,
+    tint: "yellow" as const,
     items: [
       { name: "Node", slug: "nodedotjs" },
       { name: "NestJS", slug: "nestjs" },
@@ -341,7 +341,7 @@ export const SKILL_GROUPS = [
   },
   {
     label: "AI",
-    tint: "yellow" as const,
+    tint: "red" as const,
     items: [
       { name: "OpenAI", slug: "openai" },
       { name: "Anthropic", slug: "anthropic" },

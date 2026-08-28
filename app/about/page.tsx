@@ -11,7 +11,7 @@ import {
   Wrench,
 } from "@phosphor-icons/react/dist/ssr";
 import { ABOUT_REBUS, EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
-import { ACCENT_TEXT, GlyphTile, Heading, Surface, type Tint } from "../components/ui";
+import { ACCENT_TEXT, GlyphTile, Heading, PILL_HOVER, ROW_TEXT, RULE_BG, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
 import { BrandMark, CompanyLogo, Flag, Mark, Monogram } from "../components/marks";
@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   description: PERSON.answerBlock,
   alternates: { canonical: "https://sennebels.com/about" },
 };
+
+const TRIO: Tint[] = ["red", "blue", "yellow"];
 
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: UsersThree, tint: "blue" },
@@ -73,7 +75,8 @@ export default function About() {
               Experience
             </Heading>
           </div>
-          {EXPERIENCE.map((e) => {
+          {EXPERIENCE.map((e, rowIndex) => {
+            const rowTint = TRIO[rowIndex % TRIO.length];
             const mark = e.logo ? (
               <span className="transition-transform duration-300 ease-out group-hover/row:-translate-y-px">
                 <CompanyLogo src={e.logo} name={e.org} mono={e.logoMono} />
@@ -91,7 +94,7 @@ export default function About() {
                 {mark}
                 <div className="flex min-w-0 flex-1 flex-col">
                   <p className="truncate text-body font-medium leading-[1.35]">{e.role}</p>
-                  <p className="flex items-center gap-1 text-callout text-ink-3 transition-colors duration-200 group-hover/row:text-moss">
+                  <p className={`flex items-center gap-1 text-callout text-ink-3 transition-colors duration-200 ${ROW_TEXT[rowTint]}`}>
                     {/*
                       The rule wipes in from the left on scaleX rather than
                       animating width, so it stays on the compositor. The arrow
@@ -102,7 +105,7 @@ export default function About() {
                       {e.href && (
                         <span
                           aria-hidden
-                          className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-moss transition-transform duration-300 ease-out group-hover/row:scale-x-100"
+                          className={`absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/row:scale-x-100 ${RULE_BG[rowTint]}`}
                         />
                       )}
                     </span>
@@ -184,7 +187,7 @@ export default function About() {
                 {g.items.map((it) => (
                   <span
                     key={g.label + it.name}
-                    className="flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-callout text-ink-2"
+                    className={`flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-callout text-ink-2 transition-colors duration-200 ${PILL_HOVER[g.tint]}`}
                   >
                     <Mark name={it.name} slug={it.slug} tint={g.tint} size={14} />
                     {it.name}

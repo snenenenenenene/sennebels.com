@@ -27,18 +27,10 @@ import {
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
 import { Chip, GlyphTile, Heading, Rebus, Surface, TAP, type Tint } from "./components/ui";
 import { IconLink } from "./components/icon-link";
+import { SOCIALS } from "./components/footer";
 import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
-/** One list, used by the hero and the footer. Each social owns a primary. */
-const TRIO: Tint[] = ["red", "blue", "yellow"];
-
-const SOCIALS = [
-  { label: "Resume", href: PERSON.resume, icon: FileText, tint: "red" as Tint, external: false },
-  { label: "GitHub", href: PERSON.github, icon: GithubLogo, tint: "blue" as Tint },
-  { label: "LinkedIn", href: PERSON.linkedin, icon: LinkedinLogo, tint: "yellow" as Tint },
-  { label: "Email", href: `mailto:${PERSON.email}`, icon: EnvelopeSimple, tint: "red" as Tint, external: false },
-];
 
 // Server component on purpose: every claim below ships in the HTML, so search
 // engines and answer engines can read it without executing any JavaScript.
@@ -58,7 +50,6 @@ export default function Home() {
       </section>
 
       <Also />
-      <Footer />
     </main>
   );
 }
@@ -134,53 +125,3 @@ const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: GitCommit, tint: "blue" },
   { icon: Clock, tint: "green" },
 ];
-
-const MINE = [
-  { label: "Transita", href: "https://transita.app" },
-  { label: "Korf", href: "https://korf.app" },
-];
-
-function Footer() {
-  return (
-    <footer className="flex flex-col gap-12 pb-16 pt-28">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
-        <div className="flex flex-col gap-5">
-          <h2 className="max-w-[16ch] font-display text-title1 font-medium italic text-tone-blue">
-            Come say hi
-          </h2>
-          <p className="max-w-[52ch] text-body text-ink-2">
-            Open to contract work, and to full-time roles in Canada or the United States that can
-            sponsor a move. Currently pointed at Vancouver.
-          </p>
-          <a
-            href={`mailto:${PERSON.email}`}
-            className={`inline-flex w-fit items-center gap-2.5 rounded-full bg-mark-yellow px-6 py-3 text-body font-semibold text-[#1E1515] shadow-card-hover ${TAP}`}
-          >
-            {PERSON.email}
-            <ArrowUpRight size={19} weight="bold" aria-hidden />
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8 text-callout">
-          <div className="flex flex-col gap-3">
-            <p className="text-caption font-medium text-ink-3">Elsewhere</p>
-            {SOCIALS.map((l) => (
-              <IconLink key={l.label} {...l} />
-            ))}
-          </div>
-          <div className="flex flex-col gap-3">
-            <p className="text-caption font-medium text-ink-3">Mine</p>
-            {MINE.map((m, i) => (
-              <IconLink key={m.label} {...m} icon={ArrowUpRight} tint={TRIO[i % TRIO.length]} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <p className="text-caption text-ink-3">
-        &copy; 2026 {PERSON.name}, {PERSON.locality}. Made on too much coffee, with four cats
-        actively in the way.
-      </p>
-    </footer>
-  );
-}

@@ -8,6 +8,7 @@ import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
 // import { Dock } from "./components/dock";
 // import { TopBar } from "./components/topbar";
 import { Navbar } from "./components/navbar";
+import { Footer } from "./components/footer";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -171,6 +172,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         {children}
+        <Footer />
       </body>
     </html>
   );
