@@ -60,7 +60,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
+    <main className="relative isolate mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseSchema) }}
@@ -77,17 +77,50 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       </nav>
 
       {/* Tinted opener carries the project's own colour through from the index. */}
+      {/*
+        Apple puts light behind the top of a page rather than a gradient bar:
+        large, heavily blurred colour fields that read as illumination. These
+        are static and pointer-events-none, so they never cost a repaint, and
+        they carry the project's own accent.
+      */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+        <div
+          className="absolute -top-40 left-[8%] size-[560px] rounded-full blur-[110px]"
+          style={{ backgroundColor: `var(--sys-${project.accent})`, opacity: 0.16 }}
+        />
+        <div
+          className="absolute -top-24 right-[4%] size-[420px] rounded-full blur-[100px]"
+          style={{ backgroundColor: "var(--sys-blue)", opacity: 0.1 }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-paper" />
+      </div>
+
       <header className="flex flex-col gap-8 pb-16 pt-16">
         <Stagger className="flex flex-col gap-5">
           <Rise>
-            <p className="text-caption font-medium uppercase tracking-[0.2em] text-ink-3">
-              {project.name}
-            </p>
+            {project.brand ? (
+              <Image
+                src={project.brand}
+                alt={`${project.name} logo`}
+                width={200}
+                height={80}
+                priority
+                className={`h-10 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
+              />
+            ) : (
+              <p className="text-title3 font-semibold text-ink">{project.name}</p>
+            )}
           </Rise>
           <Rise><h1 className="max-w-[20ch] text-display font-medium">
             {project.title}
           </h1></Rise>
-          <Rise><p className="max-w-[62ch] text-lede text-ink-2">{project.description}</p></Rise>
+          <Rise>
+            <RebusText
+              text={project.description}
+              marks={project.rebus}
+              className="max-w-[62ch] text-lede leading-[2.1] text-ink-2"
+            />
+          </Rise>
           {project.live && (
             <Rise><a
               href={project.live.href}
