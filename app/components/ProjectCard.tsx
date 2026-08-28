@@ -107,7 +107,7 @@ export function SmallCard({
               width={1200}
               height={760}
               loading="eager"
-              className="h-[148px] w-full object-cover object-top"
+              className="h-[210px] w-full object-cover object-top"
             />
           </div>
         </Tilt>

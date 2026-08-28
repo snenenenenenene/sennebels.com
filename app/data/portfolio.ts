@@ -230,8 +230,17 @@ export const ALSO = [
     href: "https://transita.app",
   },
   {
-    name: "Korf",
+    name: "Keepr",
     tint: "blue" as const,
+    image: "/images/work/keepr.webp",
+    kind: "Live",
+    description:
+      "A Belgian landlord signs a new tenant and the paperwork eats the week. Keepr writes the plaatsbeschrijving from photos and runs the rest of the lease from one place.",
+    href: "https://joinkeepr.com",
+  },
+  {
+    name: "Korf",
+    tint: "yellow" as const,
     image: "/images/work/korf-live.webp",
     kind: "App Store and Play Store",
     description:
@@ -240,13 +249,14 @@ export const ALSO = [
   },
   {
     name: "Faultline",
-    tint: "yellow" as const,
+    tint: "red" as const,
     image: "/images/work/faultline.webp",
     kind: "In progress",
     description:
       "An earthquake cracks the dam, the dam breaks, the island floods. Twelve players, one seed disaster, and the cascade decides who survives. Dead players still get a vote.",
   },
 ];
+
 
 
 export const NUMBERS = [
