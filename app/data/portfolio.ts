@@ -293,16 +293,19 @@ export const EXPERIENCE: {
   dates: string;
   slug?: string;
   logo?: string;
+  /** Marks supplied in a single near-black colourway need inverting in dark. */
+  logoMono?: boolean;
+  href?: string;
   tint?: "red" | "blue" | "yellow" | "green";
 }[] = [
   { role: "Founder & Principal Engineer", org: "Okapi Works", tint: "green", dates: "Apr 2020 to now" },
-  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
+  { role: "Senior Mobile Engineer", org: "Tomorrowland, via In The Pocket", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
   { role: "Full-Stack Engineer", org: "Outpost", tint: "blue", dates: "Jan 2026 to now" },
-  { role: "Frontend Lead", org: "BeeDee", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
-  { role: "AI Engineer", org: "Euroconsumers, via Nimble", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
-  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
-  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
-  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
+  { role: "Frontend Lead", org: "BeeDee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
+  { role: "AI Engineer", org: "Euroconsumers, via Nimble", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
+  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", logoMono: true, href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
+  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", href: "https://www.vlaanderen.be", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
+  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logoMono: true, href: "https://cronos-groep.be", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
 ];
 
 export const EDUCATION = {

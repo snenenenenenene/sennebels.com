@@ -139,23 +139,32 @@ export function Mark({
 
 
 /**
- * A company's real logo, on a white plate. The plate is not decoration: these
- * marks are supplied in one colourway each, and several are near-black, so
- * without it they disappear in dark mode.
+ * A company's logo, flat. No plate, no card: the mark sits directly on the row
+ * the way an icon does in an iOS list.
+ *
+ * 29pt is the size a list-row icon takes in iOS, which is why it is the size
+ * here. Marks supplied in a single near-black colourway are inverted in dark
+ * mode rather than being given a background to survive on.
  */
-export function CompanyLogo({ src, name, size = 28 }: { src: string; name: string; size?: number }) {
+export function CompanyLogo({
+  src,
+  name,
+  mono = false,
+  size = 29,
+}: {
+  src: string;
+  name: string;
+  mono?: boolean;
+  size?: number;
+}) {
   return (
-    <span
+    <Image
+      src={src}
+      alt={`${name} logo`}
+      width={size * 2}
+      height={size * 2}
       style={{ width: size, height: size }}
-      className="squircle grid shrink-0 place-items-center overflow-hidden rounded-[8px] bg-white shadow-[0_1px_2px_rgba(20,16,12,0.12)]"
-    >
-      <Image
-        src={src}
-        alt={`${name} logo`}
-        width={size * 2}
-        height={size * 2}
-        className="size-[76%] object-contain"
-      />
-    </span>
+      className={`shrink-0 object-contain ${mono ? "dark:brightness-0 dark:invert" : ""}`}
+    />
   );
 }

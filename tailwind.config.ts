@@ -7,7 +7,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
+  darkMode: 'media',
   theme: {
     extend: {
       // One editorial scale. Size, leading and tracking are bundled per step,

@@ -3,6 +3,7 @@ import {
   Briefcase,
   Clock,
   GitCommit,
+  ArrowUpRight,
   GraduationCap,
   Lightning,
   Translate,
@@ -67,29 +68,52 @@ export default function About() {
               Experience
             </Heading>
           </div>
-          {EXPERIENCE.map((e) => (
-            <div
-              key={e.role + e.org}
-              className="flex flex-col gap-1 rounded-tile px-4 py-3.5 transition-colors duration-200 odd:bg-raised hover:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-            >
-              <div className="flex items-center gap-3">
-                {e.logo ? (
-                  <CompanyLogo src={e.logo} name={e.org} />
-                ) : e.slug ? (
-                  <span className="grid size-7 shrink-0 place-items-center text-ink">
-                    <BrandMark slug={e.slug} size={22} />
-                  </span>
-                ) : (
-                  <Monogram name={e.org} tint={e.tint} />
-                )}
-                <div className="flex flex-col gap-0.5">
-                  <p className="text-body font-medium">{e.role}</p>
-                  <p className="text-callout text-ink-3">{e.org}</p>
+          {EXPERIENCE.map((e) => {
+            const mark = e.logo ? (
+              <CompanyLogo src={e.logo} name={e.org} mono={e.logoMono} />
+            ) : e.slug ? (
+              <span className="grid size-[29px] shrink-0 place-items-center text-ink">
+                <BrandMark slug={e.slug} size={24} />
+              </span>
+            ) : (
+              <Monogram name={e.org} tint={e.tint} size={29} />
+            );
+
+            const body = (
+              <>
+                {mark}
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <p className="truncate text-body font-medium leading-[1.35]">{e.role}</p>
+                  <p className="flex items-center gap-1 text-callout text-ink-3">
+                    {e.org}
+                    {e.href && <ArrowUpRight size={12} weight="bold" aria-hidden />}
+                  </p>
                 </div>
+                <p className="shrink-0 text-callout tabular-nums text-ink-3">{e.dates}</p>
+              </>
+            );
+
+            // The whole row is the target, which is both the iOS list pattern
+            // and the only way a 29pt mark and one line of copy clear 44pt.
+            const cls =
+              "flex min-h-tap items-center gap-3 rounded-tile px-4 py-[11px] transition-colors duration-200 odd:bg-raised hover:bg-raised";
+
+            return e.href ? (
+              <a
+                key={e.role + e.org}
+                href={e.href}
+                target="_blank"
+                rel="noreferrer"
+                className={`${cls} group/row`}
+              >
+                {body}
+              </a>
+            ) : (
+              <div key={e.role + e.org} className={cls}>
+                {body}
               </div>
-              <p className="shrink-0 text-caption text-ink-3">{e.dates}</p>
-            </div>
-          ))}
+            );
+          })}
         </section>
 
         <div className="flex flex-col gap-10">

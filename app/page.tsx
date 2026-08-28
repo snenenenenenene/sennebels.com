@@ -156,8 +156,8 @@ function Footer() {
             <Glyph icon={Mountains} />
           </h2>
           <p className="max-w-[52ch] text-body text-ink-2">
-            Open to contract work, and to full-time roles that can sponsor a move. Currently pointed
-            at Vancouver, Edinburgh and San Francisco.
+            Open to contract work, and to full-time roles in Canada or the United States that can
+            sponsor a move. Currently pointed at Vancouver.
           </p>
           <a
             href={`mailto:${PERSON.email}`}
