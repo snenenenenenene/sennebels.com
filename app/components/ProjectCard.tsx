@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
-import { CARD_TINT } from "./ui";
+import { ACCENT_TEXT, CARD_TINT, type Tint } from "./ui";
+import { GlyphRow } from "./glyph-row";
 import { CaseStudyButton } from "./cta";
 
 /**
@@ -34,6 +35,10 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
           <h3 className="max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
 
           <p className="mt-6 max-w-[52ch] text-body text-ink-2">{project.description}</p>
+
+          <div className="mt-7">
+            <GlyphRow names={project.glyphs} />
+          </div>
 
           <Link href={`/work/${project.slug}`} className="mt-9 w-fit">
             <CaseStudyButton label={project.cta} />
@@ -82,12 +87,14 @@ export function SmallCard({
   description,
   href,
   image,
+  tint = "blue",
 }: {
   name: string;
   kind: string;
   description: string;
   href?: string;
   image?: string;
+  tint?: Tint;
 }) {
   const body = (
     <>
@@ -107,7 +114,7 @@ export function SmallCard({
       )}
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="text-title3 font-medium text-ink">{name}</h3>
-        <p className="shrink-0 text-caption font-medium text-ink-3">{kind}</p>
+        <p className={`shrink-0 text-caption font-medium ${ACCENT_TEXT[tint]}`}>{kind}</p>
       </div>
       <p className="text-callout text-ink-2">{description}</p>
     </>

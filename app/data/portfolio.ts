@@ -30,6 +30,8 @@ export type Featured = {
   name: string;
   typeLine: TypeLine;
   accent: Accent;
+  /** Rebus glyphs woven into the card copy. */
+  glyphs: string[];
   /** Client mark, shown at the top of the card the way a case study leads. */
   brand?: string;
   brandMono?: boolean;
@@ -51,11 +53,12 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
+  glyphs: ["DeviceMobile", "Broadcast", "Stack"],
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
   brandMono: true,
     typeLine: { kind: "Client work", sub: "Mobile" },
-  accent: "blue",
+  accent: "red",
     title: "One app for a festival the whole world watches",
     description:
       "Senior mobile engineer on the consolidated super app, merging Tomorrowland Radio, the per-festival apps and Tomorrowland Account into a single product. Server-driven UI over an OpenAPI NestJS backend-for-frontend, so content teams ship without waiting on an app release.",
@@ -87,6 +90,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "euroconsumers",
+  glyphs: ["Scales", "Brain", "ShieldCheck"],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
@@ -122,11 +126,12 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "kaedim",
+  glyphs: ["Cube", "Robot", "TestTube"],
     name: "Kaedim",
   brand: "/images/logos/kaedim.png",
   brandMono: true,
     typeLine: { kind: "Startup", sub: "3D and AI" },
-  accent: "red",
+  accent: "yellow",
     title: "Tooling for a 3D team that ships every day",
     description:
       "Joined an established product to make it better rather than to build it. Experimental workflows for the 3D design team, MCP automations, and AI-driven testing for generated assets. Working across San Francisco, London and Singapore, and directly with the CEO.",
@@ -152,10 +157,11 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "beedee",
+  glyphs: ["Users", "Lightning", "TrendUp"],
     name: "BeeDee",
   brand: "/images/logos/beedee.png",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
-  accent: "yellow",
+  accent: "red",
     title: "Four years of a consumer app, owned end to end",
     description:
       "Took a consumer social app from a rough visual state to 36,000 monthly actives. Rebuilt the interface, made it native, shipped travel mode and localisation, moved the infrastructure onto GitHub Actions, and put AI into the internal workflows. Reporting to the CEO, with a team in India.",
@@ -181,10 +187,11 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "lokaal-beslist",
+  glyphs: ["Buildings", "MapTrifold", "Eye"],
     name: "Lokaal Beslist",
   brand: "/images/logos/vlaanderen.png",
     typeLine: { kind: "Government", sub: "Civic platform" },
-  accent: "green",
+  accent: "blue",
     title: "Making government decisions readable by humans",
     description:
       "A citizen-facing transparency platform for the Flanders Agency of Home Affairs, opening up local municipal decisions and financial data. Pages loaded 89% faster, and automated compliance tooling cut manual government audit work by 70%.",
@@ -214,6 +221,7 @@ export const FEATURED: Featured[] = [
 export const ALSO = [
   {
     name: "Transita",
+    tint: "red" as const,
     image: "/images/work/transita.webp",
     kind: "Live, paying customers",
     description:
@@ -222,6 +230,7 @@ export const ALSO = [
   },
   {
     name: "Korf",
+    tint: "blue" as const,
     image: "/images/work/korf-live.webp",
     kind: "App Store and Play Store",
     description:
@@ -230,6 +239,7 @@ export const ALSO = [
   },
   {
     name: "Faultline",
+    tint: "yellow" as const,
     image: "/images/work/faultline.webp",
     kind: "In progress",
     description:
