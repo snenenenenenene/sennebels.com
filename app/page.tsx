@@ -30,6 +30,7 @@ import { IconLink } from "./components/icon-link";
 import { SOCIALS } from "./components/footer";
 import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
+import Image from "next/image";
 
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -56,8 +57,8 @@ export default function Home() {
 
 function Hero() {
   return (
-    <header className="flex flex-col justify-center gap-9 pb-20 pt-20 md:pt-24">
-      <Stagger className="flex flex-col gap-9">
+    <header className="flex flex-col gap-14 pb-20 pt-20 md:pt-24 lg:flex-row lg:items-center lg:gap-16">
+      <Stagger className="flex flex-col gap-9 lg:flex-1">
         <Rise>
           <h1 className="max-w-[17ch] text-display font-medium">
             {PERSON.name}, a{" "}
@@ -96,7 +97,44 @@ function Hero() {
           </ul>
         </Rise>
       </Stagger>
+
+      <HeroScreens />
     </header>
+  );
+}
+
+/**
+ * The work itself, in the empty half of the hero. Real screens rather than a
+ * decorative shape, fanned so they read as a stack and not as a gallery. They
+ * sit on the page with no plate or shadow behind them, so the screens are the
+ * only thing on show.
+ */
+const HERO_SHOTS = [
+  { src: "/images/work/beedee-profile.webp", rotate: "-7deg", z: "z-10", pos: "left-0 top-8" },
+  { src: "/images/work/tomorrowland-explore.webp", rotate: "2deg", z: "z-20", pos: "left-[104px] top-0" },
+  { src: "/images/work/beedee-travel.webp", rotate: "10deg", z: "z-10", pos: "left-[208px] top-10" },
+];
+
+function HeroScreens() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none relative hidden h-[430px] w-[420px] shrink-0 lg:block"
+    >
+      {HERO_SHOTS.map((shot, i) => (
+        <Reveal key={shot.src} delay={0.15 + i * 0.1} y={26} className={`absolute ${shot.pos} ${shot.z}`}>
+          <Image
+            src={shot.src}
+            alt=""
+            width={430}
+            height={880}
+            priority
+            className="w-[150px] rounded-[18px]"
+            style={{ transform: `rotate(${shot.rotate})` }}
+          />
+        </Reveal>
+      ))}
+    </div>
   );
 }
 

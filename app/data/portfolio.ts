@@ -49,6 +49,8 @@ export type Featured = {
   gallery?: { src: string; caption: string }[];
   cta: string;
   /** Everything below powers /work/[slug] only. */
+  /** Countries the work actually spanned: teams, markets or editions. */
+  regions?: { codes: string[]; label: string };
   /** What the project taught, in one paragraph. Grounded in its own story. */
   lesson: string;
   facts: { label: string; value: string }[];
@@ -89,6 +91,7 @@ export const FEATURED: Featured[] = [
       { src: "/images/work/tomorrowland-explore.webp", caption: "Every edition in one place, plus the eleven months you are not at one" },
       { src: "/images/work/tomorrowland-search.webp", caption: "Search across DJ sets and One World Radio shows" },
     ],
+    regions: { codes: ["be", "br"], label: "Editions worldwide, Belgium and Brazil among them" },
     lesson:
       "Write down how a thing fails before you try to fix it. The radio only got better once the failure modes were on paper, because a stream that stalls, a network that dropped and a person who pressed pause look identical from the player and need three different answers. Guessing at that in code just moves the bug.",
     cta: "read the write-up",
@@ -130,6 +133,7 @@ export const FEATURED: Featured[] = [
       ],
       credit: "Delivered through Nimble, in a team of eight",
     },
+    regions: { codes: ["pt", "fr", "it"], label: "Teams in Portugal, France and Italy" },
     lesson:
       "Knowing when to say nothing is a feature. Vera is more useful for refusing a question her sources cannot support than she would be for answering everything fluently, and an answer you can check beats one you have to take on faith. Most of the trust came from the unglamorous half: dated sources, prices that parse, a person on anything risky.",
     cta: "read the write-up",
@@ -175,6 +179,7 @@ export const FEATURED: Featured[] = [
       "Kaedim turns a brief into 3D that a real team inspects and approves before it ships. I worked both ends of that: the onboarding and progress a customer sees, and the review queue and automated testing the design team leans on.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
     image: "/images/work/kaedim.webp",
+    regions: { codes: ["us", "gb", "sg"], label: "Team across San Francisco, London and Singapore" },
     lesson:
       "Waiting is a design problem, not a backend one. Nothing about the generation got faster, but a skeleton loader turns a frozen screen into visible progress, and one bad item no longer takes a whole batch down with it. The same idea runs the other way too: failing bad assets automatically means a designer only spends attention on work worth looking at.",
     cta: "read the write-up",
@@ -229,6 +234,7 @@ export const FEATURED: Featured[] = [
       { src: "/images/work/beedee-likes.webp", caption: "Who liked you, kept separate from who you liked" },
     ],
     image: "/images/work/beedee.webp",
+    regions: { codes: ["be", "in"], label: "Belgium, with the engineering team in India" },
     lesson:
       "The unglamorous flow is where the users actually are. More work went into signup than into any feature, and none of it is something a person would ever ask for. Keeping your answers when you go back to change your phone number does not demo well. It just means people finish.",
     cta: "read the write-up",
@@ -275,6 +281,7 @@ export const FEATURED: Featured[] = [
       "Every Belgian municipality publishes its decisions. Almost none of it was searchable. I made the first commit on the citizen-facing database and then built the validation toolchain that tells a municipality whether what it published actually meets the standard.",
     tech: ["Leaflet", "D3.js", "Semantic web"],
     image: "/images/work/lokaalbeslist.webp",
+    regions: { codes: ["be"], label: "300+ Belgian municipalities" },
     lesson:
       "Publishing something is not the same as publishing it correctly. Scoring correct and complete separately sounds pedantic until you notice a municipality can be one without being the other, and that the fix differs for each. Fixing the data upstream is what makes the citizen-facing half worth searching at all.",
     cta: "read the write-up",
@@ -470,13 +477,12 @@ export const ASIDE = [
 ];
 
 /** Recent shows. Kept as a list because that is how it reads on a poster. */
-export const CONCERTS = [
-  { act: "Bring Me The Horizon", where: "Graspop", year: "2026", tint: "red" as const },
-  { act: "Bad Omens", where: "Graspop", year: "2026", tint: "red" as const },
-  { act: "Tame Impala", where: "", year: "2026", tint: "blue" as const },
-  { act: "Joji", where: "", year: "2026", tint: "yellow" as const },
-];
-
+/**
+ * Everything rated on one scale, the way a film diary does it. The top is
+ * what he actually said he loves; the bottom is life and work, not other
+ * people's art, because panning real films in someone else's name is not a
+ * joke worth making.
+ */
 /**
  * The Bumble move: short claims that state something true rather than describe
  * a hobby. These say more in six words than a paragraph would.
@@ -490,27 +496,56 @@ export const TRAITS = [
   { text: "Cooks past his level on a Tuesday", icon: "CookingPot", tint: "yellow" as const },
 ];
 
-/** Six of the thirty-one films Senne has given five stars. */
-export const FILM_STRIP = [
-  { title: "Mad Max: Fury Road", year: "2015", img: "/images/film/mad-max-fury-road.webp" },
-  { title: "The Truman Show", year: "1998", img: "/images/film/the-truman-show.webp" },
-  { title: "WALL-E", year: "2008", img: "/images/film/wall-e.webp" },
-  { title: "Interstellar", year: "2014", img: "/images/film/interstellar.webp" },
-  { title: "Across the Spider-Verse", year: "2023", img: "/images/film/spider-man-across-the-spider-verse.webp" },
-  { title: "The Wild Robot", year: "2024", img: "/images/film/the-wild-robot.webp" },
-];
-
 /** Services a card actually points at, so the mark is real rather than generic. */
 export const FUN_BRANDS: Record<string, string[]> = {
-  "Marvel Rivals, HOI4, Wingspan": ["steam", "boardgamegeek"],
+  "Achievement hunting, and Magic": ["steam", "boardgamegeek"],
   "Guitar at home, loud rooms elsewhere": ["spotify"],
 };
 
-/** Real counts from his own viewing log. Kept as numbers, not as a profile. */
-export const FILM_STATS = [
-  { value: "198", label: "films rated since August 2023" },
-  { value: "31", label: "of them got five stars" },
-  { value: "49", label: "still sitting on the watchlist" },
+export type Rated = { name: string; img?: string };
+
+/**
+ * The scale, with cover art. Only things there is a real image for: the point
+ * is images and titles, and a title on a blank tile is the fluff this was
+ * meant to remove. Magic, both Pokémon games, the Cameron films and the four
+ * concerts belong here too and are waiting on art.
+ */
+export const RATINGS: { stars: number; items: Rated[] }[] = [
+  {
+    stars: 5,
+    items: [
+      { name: "Mad Max: Fury Road", img: "/images/film/mad-max-fury-road.webp" },
+      { name: "Phasmophobia", img: "/images/rated/phasmophobia.webp" },
+      { name: "Interstellar", img: "/images/film/interstellar.webp" },
+    ],
+  },
+  {
+    stars: 4.5,
+    items: [
+      { name: "The Truman Show", img: "/images/film/the-truman-show.webp" },
+      { name: "Europa Universalis IV", img: "/images/rated/eu4.webp" },
+      { name: "WALL-E", img: "/images/film/wall-e.webp" },
+    ],
+  },
+  {
+    stars: 4,
+    items: [
+      { name: "Across the Spider-Verse", img: "/images/film/spider-man-across-the-spider-verse.webp" },
+      { name: "Hearts of Iron IV", img: "/images/rated/hoi4.webp" },
+      { name: "The Wild Robot", img: "/images/film/the-wild-robot.webp" },
+    ],
+  },
+  {
+    stars: 3.5,
+    items: [
+      { name: "Marvel Rivals", img: "/images/rated/marvel-rivals.webp" },
+      { name: "Rocket League", img: "/images/rated/rocket-league.webp" },
+    ],
+  },
+  {
+    stars: 3,
+    items: [{ name: "Overwatch 2", img: "/images/rated/overwatch.webp" }],
+  },
 ];
 
 
@@ -542,8 +577,8 @@ export const FUN = [
     body: "Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided here. The long-term plan is a cat cafe. That is a roadmap item, not a joke.",
   },
   {
-    title: "198 films and a generous hand",
-    body: "Four films in that list ever got half a star. Most land on four or four and a half, because I would rather enjoy a thing than be right about it. Fury Road, The Truman Show and WALL-E are the ones I keep going back to.",
+    title: "Cinephile, horror-leaning",
+    body: "Most things land on four or four and a half, because I would rather enjoy a thing than be right about it. Horror is the genre I will watch at its worst, and Cameron is the director I will defend at his. Aliens, Terminator 2 and The Abyss, in that order, and I will take the argument.",
   },
   {
     title: "Guitar at home, loud rooms elsewhere",
@@ -554,8 +589,8 @@ export const FUN = [
     body: "The flat is closer to a greenhouse than a flat at this point. Belgium is flat and six metres above sea level, so the hiking happens somewhere else. That is a large part of why the plan points west and upward.",
   },
   {
-    title: "Marvel Rivals, HOI4, Wingspan",
-    body: "Marvel Rivals and Rocket League when I want to lose a match I had every right to win. Hearts of Iron when I want to lose four hours instead. Wingspan is the one everyone gets talked into and nobody regrets.",
+    title: "Achievement hunting, and Magic",
+    body: "Hearts of Iron and EU4, where the actual game is the achievement list and the run is just how you get there. Phasmophobia when there are four of us. Marvel Rivals and Rocket League when I want to lose a match I had every right to win. Magic since long before any of it, and Wingspan is the one everyone gets talked into and nobody regrets.",
   },
   {
     title: "Coffee, and cooking past my level",

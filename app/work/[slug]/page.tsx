@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, Lightbulb, Mag
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
 import { RebusText } from "../../components/rebus-text";
-import { BrandMark } from "../../components/marks";
+import { BrandMark, Flags, type FlagCode } from "../../components/marks";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../components/ui";
 import { Reveal, Rise, Stagger } from "../../components/motion";
 
@@ -241,9 +241,16 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             alt={`${project.name}: ${project.title}`}
             width={1400}
             height={900}
-            className="w-full rounded-panel object-cover shadow-media"
+            className="w-full object-contain"
           />
         </Tilt></figure></Reveal>
+      )}
+
+      {project.regions && (
+        <p className="flex flex-wrap items-center gap-3 pt-12 text-callout text-ink-2">
+          <Flags codes={project.regions.codes as FlagCode[]} />
+          {project.regions.label}
+        </p>
       )}
 
       {project.gallery && (
@@ -254,8 +261,8 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           <ul className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 md:-mx-12 md:px-12">
             {project.gallery.map((shot) => (
               <li key={shot.src} className="flex w-[210px] shrink-0 snap-start flex-col gap-3 sm:w-[240px]">
-                <div className="squircle overflow-hidden rounded-media shadow-media">
-                  <Image src={shot.src} alt={shot.caption} width={620} height={1275} className="w-full" />
+                <div>
+                  <Image src={shot.src} alt={shot.caption} width={620} height={1275} className="w-full rounded-[20px]" />
                 </div>
                 <p className="text-callout leading-[1.5] text-ink-2">{shot.caption}</p>
               </li>
@@ -319,7 +326,7 @@ function PeekCard({
       href={`/work/${project.slug}`}
       className={`squircle group/peek flex flex-col gap-4 rounded-card p-5 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[project.accent]} ${isPrev ? "" : "sm:items-end sm:text-right"}`}
     >
-      <div className="squircle overflow-hidden rounded-media shadow-media">
+      <div className="overflow-hidden">
         {project.image ? (
           <Image
             src={project.image}
@@ -329,7 +336,7 @@ function PeekCard({
             className="h-[150px] w-full object-cover object-top transition-transform duration-500 ease-out group-hover/peek:scale-[1.03]"
           />
         ) : (
-          <div className="grid h-[150px] w-full place-items-center bg-paper/70">
+          <div className="grid h-[150px] w-full place-items-center">
             {project.brand && (
               <Image
                 src={project.brand}

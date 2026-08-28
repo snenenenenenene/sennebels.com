@@ -1,3 +1,14 @@
+import NL from "country-flag-icons/react/3x2/NL";
+import GB from "country-flag-icons/react/3x2/GB";
+import FR from "country-flag-icons/react/3x2/FR";
+import BE from "country-flag-icons/react/3x2/BE";
+import PT from "country-flag-icons/react/3x2/PT";
+import IT from "country-flag-icons/react/3x2/IT";
+import IN from "country-flag-icons/react/3x2/IN";
+import SG from "country-flag-icons/react/3x2/SG";
+import US from "country-flag-icons/react/3x2/US";
+import CA from "country-flag-icons/react/3x2/CA";
+import BR from "country-flag-icons/react/3x2/BR";
 import Image from "next/image";
 import * as si from "simple-icons";
 
@@ -74,39 +85,54 @@ export function Monogram({
  * Flat flag, drawn from plain rectangles rather than an emoji. Senne's rule is
  * flat SVG flags, never emoji flags. Only the three he actually speaks.
  */
-const FLAGS: Record<string, { label: string; bars: string[]; vertical?: boolean }> = {
-  nl: { label: "Dutch", bars: ["#AE1C28", "#FFFFFF", "#21468B"] },
-  gb: { label: "English", bars: [] },
-  fr: { label: "French", bars: ["#002395", "#FFFFFF", "#ED2939"], vertical: true },
+/**
+ * Real flags, from a maintained set. The hand-drawn three-bar version could
+ * only ever be right for tricolours, and quietly drew India, Singapore and
+ * Brazil as stripes they are not.
+ */
+const FLAGS: Record<string, { Icon: (p: { title?: string }) => JSX.Element; label: string }> = {
+  nl: { Icon: NL, label: "Netherlands" },
+  gb: { Icon: GB, label: "United Kingdom" },
+  fr: { Icon: FR, label: "France" },
+  be: { Icon: BE, label: "Belgium" },
+  pt: { Icon: PT, label: "Portugal" },
+  it: { Icon: IT, label: "Italy" },
+  in: { Icon: IN, label: "India" },
+  sg: { Icon: SG, label: "Singapore" },
+  us: { Icon: US, label: "United States" },
+  ca: { Icon: CA, label: "Canada" },
+  br: { Icon: BR, label: "Brazil" },
 };
 
-export function Flag({ code, size = 20 }: { code: keyof typeof FLAGS; size?: number }) {
+export type FlagCode = keyof typeof FLAGS;
+
+export function Flag({ code, size = 20 }: { code: FlagCode; size?: number }) {
   const f = FLAGS[code];
   if (!f) return null;
-  const h = size * 0.7;
-  if (code === "gb") {
-    return (
-      <svg role="img" aria-label={f.label} viewBox="0 0 60 42" width={size} height={h} className="shrink-0 rounded-[3px]">
-        <rect width="60" height="42" fill="#012169" />
-        <path d="M0 0l60 42M60 0L0 42" stroke="#FFF" strokeWidth="8" />
-        <path d="M0 0l60 42M60 0L0 42" stroke="#C8102E" strokeWidth="4" />
-        <path d="M30 0v42M0 21h60" stroke="#FFF" strokeWidth="14" />
-        <path d="M30 0v42M0 21h60" stroke="#C8102E" strokeWidth="8" />
-      </svg>
-    );
-  }
+  const { Icon } = f;
   return (
-    <svg role="img" aria-label={f.label} viewBox="0 0 60 42" width={size} height={h} className="shrink-0 rounded-[3px]">
-      {f.bars.map((c, i) =>
-        f.vertical ? (
-          <rect key={c} x={i * 20} width="20" height="42" fill={c} />
-        ) : (
-          <rect key={c} y={i * 14} width="60" height="14" fill={c} />
-        ),
-      )}
-    </svg>
+    <span
+      className="inline-flex shrink-0 overflow-hidden rounded-[3px]"
+      style={{ width: size, height: size * (2 / 3) }}
+      role="img"
+      aria-label={f.label}
+    >
+      <Icon title={f.label} />
+    </span>
   );
 }
+
+/** A short row of flags, for a list of markets or offices. */
+export function Flags({ codes, size = 18 }: { codes: FlagCode[]; size?: number }) {
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      {codes.map((c) => (
+        <Flag key={c} code={c} size={size} />
+      ))}
+    </span>
+  );
+}
+
 
 
 /**

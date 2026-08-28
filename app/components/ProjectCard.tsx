@@ -61,7 +61,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
 
         {project.image ? (
           <Tilt className="lg:min-w-0 lg:flex-1">
-            <div className="squircle overflow-hidden rounded-media shadow-media">
+            <div className="overflow-hidden">
               <Image
                 src={project.image}
                 alt={`${project.name}: ${project.title}`}
@@ -116,7 +116,7 @@ export function SmallCard({
     <>
       {image && (
         <Tilt max={6} className="mb-4">
-          <div className="squircle overflow-hidden rounded-tile shadow-media">
+          <div className="overflow-hidden">
             <Image
               src={image}
               alt={`${name}: ${description.slice(0, 60)}`}
