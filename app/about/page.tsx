@@ -43,7 +43,7 @@ export default function About() {
       <RebusText
         text={PERSON.answerBlock}
         marks={ABOUT_REBUS}
-        className="mt-8 max-w-[62ch] text-lede leading-[1.95] text-ink-2"
+        className="mt-8 max-w-[62ch] text-lede leading-[2.2] text-ink-2"
       />
 
       <section className="pt-16">

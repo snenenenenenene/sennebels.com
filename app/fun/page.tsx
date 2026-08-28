@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Cat, Coffee, GameController, Mountains } from "@phosphor-icons/react/dist/ssr";
-import { ASIDE, FUN, FUN_REBUS, PERSON } from "../data/portfolio";
+import { ASIDE, FUN, FUN_REBUS } from "../data/portfolio";
 import { GlyphTile, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
@@ -31,7 +31,7 @@ export default function Fun() {
             key={line.slice(0, 24)}
             text={line}
             marks={FUN_REBUS}
-            className="text-lede leading-[1.95] text-ink-2"
+            className="text-lede leading-[2.2] text-ink-2"
           />
         ))}
       </div>
@@ -47,7 +47,7 @@ export default function Fun() {
                 <RebusText
                   text={f.body}
                   marks={FUN_REBUS}
-                  className="text-body leading-[1.85] text-ink-2"
+                  className="text-body leading-[2.05] text-ink-2"
                 />
               </Surface>
             </Reveal>
@@ -55,13 +55,6 @@ export default function Fun() {
         })}
       </div>
 
-      <p className="pt-16 text-callout text-ink-3">
-        Say hello at{" "}
-        <a href={`mailto:${PERSON.email}`} className="inline-flex min-h-tap items-center font-medium text-moss">
-          {PERSON.email}
-        </a>
-        .
-      </p>
     </main>
   );
 }

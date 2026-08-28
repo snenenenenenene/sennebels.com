@@ -101,7 +101,7 @@ export function Navbar({ email }: { email: string }) {
                 refs.current[i] = el;
               }}
               aria-current={active ? "page" : undefined}
-              className={`relative z-10 flex min-h-tap items-center px-3.5 text-callout font-medium transition-colors duration-200 ${
+              className={`relative z-10 flex min-h-tap w-[74px] items-center justify-center text-callout font-medium transition-colors duration-200 ${
                 active ? PILL[l.tint].text : "text-ink-2 hover:text-ink"
               }`}
             >

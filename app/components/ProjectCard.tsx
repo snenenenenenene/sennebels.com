@@ -37,7 +37,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
           <RebusText
             text={project.description}
             marks={project.rebus}
-            className="mt-6 max-w-[52ch] text-body leading-[1.9] text-ink-2"
+            className="mt-6 max-w-[52ch] text-body leading-[2.1] text-ink-2"
           />
 
           <Link href={`/work/${project.slug}`} className="mt-9 w-fit">

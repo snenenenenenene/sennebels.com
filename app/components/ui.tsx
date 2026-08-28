@@ -130,14 +130,18 @@ export function Rebus({
 }) {
   return (
     <span
-      className={`mx-[0.06em] inline-flex items-center gap-[0.4ch] whitespace-nowrap rounded-[0.4em] px-[0.42ch] py-[0.06em] ${REBUS_GROUND[tint]}`}
+      // Horizontal inset gives the unit room; vertical inset stays small on
+      // purpose, because an inline object taller than its line box overflows
+      // into the line above and two of them on adjacent lines will touch.
+      // Space between lines is the paragraph's leading, not the chip's padding.
+      className={`mx-[0.18em] inline-flex items-center gap-[0.55ch] whitespace-nowrap rounded-[0.5em] px-[0.7ch] py-[0.14em] align-middle leading-[1.15] ${REBUS_GROUND[tint]}`}
     >
       <I
         size="1.05ch"
         weight="fill"
         aria-hidden
         className={`shrink-0 ${ACCENT_TEXT[tint]}`}
-        style={{ width: "1.15ch", height: "1.15ch" }}
+        style={{ width: "1.05ch", height: "1.05ch" }}
       />
       {children}
     </span>
