@@ -167,7 +167,7 @@ export const FEATURED: Featured[] = [
   accent: "red",
     title: "Four years of a consumer app, owned end to end",
     description:
-      "BeeDee felt like a website in a wrapper. I made it native, then spent sixteen of my 155 pull requests on the signup flow alone, so people stopped falling out of it. Refer-a-friend, travel mode, localisation, and releases moved onto GitHub Actions. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry the growth. Reporting to the CEO, with the team in India.",
+      "BeeDee felt like a website in a wrapper. I made it native, then spent sixteen of my 155 pull requests on the signup flow alone, so people stopped falling out of it. Refer-a-friend, travel mode, localisation, and releases moved onto GitHub Actions. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry the growth, from 63 clicks a day to 116. Reporting to the CEO, with the team in India.",
     tech: ["React Native", "Sockets", "Mollie"],
     image: "/images/work/beedee.webp",
     cta: "read the write-up",
@@ -181,12 +181,13 @@ export const FEATURED: Featured[] = [
       "BeeDee did not need to be faster. It needed to stop feeling like a website in a wrapper. So the first stretch was the native look: React Navigation headers instead of custom ones, SF Symbols in the chat inbox on iOS, and the image, list, toast and carousel libraries all swapped for ones that behave the way the platform does.",
       "Then the signup flow, which turned into the single biggest thread of the whole engagement: sixteen separate pieces of work on it. Your answers survive going back to change your phone number. The BDSM test result you already added is still there when you resume. The safe-search choice persists through an interrupted signup. None of that is a feature anyone asks for. All of it is people not falling out of the funnel.",
       "After that it was growth and the plumbing under it. Refer-a-friend for Superlikes and Supporter, the Superlike and Supporter purchase screens redesigned, and the Play Store screenshot set generated from the app itself rather than mocked up by hand. Travel mode, localisation, crash reports carrying the account context so a stack trace names a person, and GitHub Actions taking over the releases.",
+      "Growth had to come from somewhere else, because the platform is barred from paid advertising on Meta, Google and Reddit. So it came from search. Over the last 164 days the site went from 63 clicks a day to 116, 954 non-brand queries rank, and 83 of them sit in position one. The best of those is bdsm test app at position 1.3, which is the kind of term that brings people who are already looking.",
       "A hundred and fifty-five merged pull requests between January 2025 and August 2026, working directly with the CEO and with the engineering team in India.",
     ],
     outcomes: [
-      { value: "36,000", label: "monthly active users at peak" },
+      { value: "63 to 116", label: "search clicks a day over the last 164 days" },
+      { value: "954", label: "non-brand queries ranking, 83 of them in position one" },
       { value: "155", label: "pull requests merged, 16 of them the signup flow alone" },
-      { value: "18%", label: "organic click-through, against a 2 to 5% benchmark" },
     ],
   },
   {
