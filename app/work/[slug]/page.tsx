@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, MagnifyingGlas
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
 import { RebusText } from "../../components/rebus-text";
+import { BrandMark } from "../../components/marks";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../components/ui";
 import { Reveal, Rise, Stagger } from "../../components/motion";
 
@@ -111,18 +112,20 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       <header className="flex flex-col gap-8 pb-16 pt-16">
         <Stagger className="flex flex-col gap-5">
           <Rise>
-            {project.brand ? (
-              <Image
-                src={project.brand}
-                alt={`${project.name} logo`}
-                width={200}
-                height={80}
-                priority
-                className={`h-10 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
-              />
-            ) : (
-              <p className="text-title3 font-semibold text-ink">{project.name}</p>
-            )}
+            <div className="flex items-center gap-3.5">
+              {project.brand && (
+                <Image
+                  src={project.brand}
+                  alt=""
+                  width={200}
+                  height={80}
+                  priority
+                  className={`h-10 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
+                />
+              )}
+              {/* Serif beside the mark: the name is a proper noun, not a label. */}
+              <span className="font-display text-title2 font-medium text-ink">{project.name}</span>
+            </div>
           </Rise>
           <Rise><h1 className="max-w-[20ch] text-display font-medium">
             {project.title}
@@ -151,7 +154,11 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <article className="flex flex-col gap-6">
           {project.story.map((para, i) => (
             <Reveal key={para.slice(0, 40)} delay={i * 0.06}>
-              <p className="max-w-[65ch] text-lede text-ink-2">{para}</p>
+              <RebusText
+                text={para}
+                marks={project.storyRebus ?? project.rebus}
+                className="max-w-[65ch] text-body leading-[2.1] text-ink-2"
+              />
             </Reveal>
           ))}
         </article>
@@ -182,6 +189,19 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           </dl>
         </aside>
       </div>
+
+      {project.stack && (
+        <ul className="flex flex-wrap items-center gap-2.5 pt-2">
+          {project.stack.map((slug) => (
+            <li
+              key={slug}
+              className="squircle flex size-9 items-center justify-center rounded-tile bg-raised text-ink shadow-card"
+            >
+              <BrandMark slug={slug} size={18} />
+            </li>
+          ))}
+        </ul>
+      )}
 
       {project.features && (
         <section className="flex flex-col gap-5 pt-16">

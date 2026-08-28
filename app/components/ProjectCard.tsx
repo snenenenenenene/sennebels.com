@@ -20,17 +20,18 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
       <div className={`flex flex-col gap-10 lg:gap-16 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
         <div className="flex flex-col lg:w-[45%] lg:shrink-0">
           {/* The client's own mark leads, the way a case study opens. */}
-          {project.brand ? (
-            <Image
-              src={project.brand}
-              alt={`${project.name} logo`}
-              width={140}
-              height={56}
-              className={`mb-8 h-8 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
-            />
-          ) : (
-            <p className="mb-8 text-title3 font-semibold text-ink">{project.name}</p>
-          )}
+          <div className="mb-8 flex items-center gap-3">
+            {project.brand && (
+              <Image
+                src={project.brand}
+                alt=""
+                width={140}
+                height={56}
+                className={`h-8 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
+              />
+            )}
+            <span className="font-display text-title3 font-medium text-ink">{project.name}</span>
+          </div>
 
           <h3 className="max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
 

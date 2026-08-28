@@ -31,6 +31,8 @@ export type Featured = {
   typeLine: TypeLine;
   accent: Accent;
   /** Rebus glyphs woven into the card copy. */
+  /** Phrases in the story that carry a rebus mark. */
+  storyRebus?: { phrase: string; icon: string; tint: "red" | "blue" | "yellow" }[];
   /** Phrases in the description that carry a rebus mark. */
   rebus: { phrase: string; icon: string; tint: "red" | "blue" | "yellow" }[];
   /** Client mark, shown at the top of the card the way a case study leads. */
@@ -45,6 +47,8 @@ export type Featured = {
   cta: string;
   /** Everything below powers /work/[slug] only. */
   facts: { label: string; value: string }[];
+  /** Platforms and tools, shown as marks. */
+  stack?: string[];
   /** Features shipped, named. Optional. */
   features?: string[];
   /** Two or three paragraphs. No headings inside; the page supplies structure. */
@@ -56,6 +60,8 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
+  stack: ["react", "expo", "nestjs", "typescript"],
+  storyRebus: [{ phrase: "one app now", icon: "SquaresFour", tint: "red" }, { phrase: "a stream that dies on a train", icon: "WifiSlash", tint: "blue" }, { phrase: "without waiting on a release", icon: "Lightning", tint: "yellow" }],
   features: [
     "Live radio stall recovery on both platforms",
     "Playback that survives losing signal",
@@ -101,14 +107,16 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "euroconsumers",
+  stack: ["typescript", "qdrant", "langchain", "docker"],
+  storyRebus: [{ phrase: "not being confidently wrong", icon: "ShieldCheck", tint: "red" }, { phrase: "the article it came from", icon: "Quotes", tint: "blue" }, { phrase: "human in the loop", icon: "HandHeart", tint: "yellow" }],
   rebus: [{ phrase: "looks things up rather than guessing", icon: "MagnifyingGlass", tint: "red" }, { phrase: "cites the article", icon: "Quotes", tint: "blue" }, { phrase: "hands anything risky to a person", icon: "HandHeart", tint: "yellow" }],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
   accent: "blue",
-    title: "An AI legal assistant that has to be right",
+    title: "Vera, a legal assistant that has to be right",
     description:
-      "A wrong answer about your rights is worse than no answer. So it looks things up rather than guessing, cites the article it answered from, marks its own confidence, and hands anything risky to a person. I built the environments it runs on and kept it running after launch, with their teams in Portugal, France and Italy.",
+      "Vera answers consumer-rights questions for Altroconsumo and its sister organisations. A wrong answer about your rights is worse than no answer, so she looks things up rather than guessing, cites the article she answered from, marks her own confidence, and hands anything risky to a person. I built the environments it runs on and kept it running after launch, with their teams in Portugal, France and Italy.",
     tech: ["Mastra", "RAG", "LangSmith"],
     spec: {
       points: [
@@ -127,8 +135,8 @@ export const FEATURED: Featured[] = [
     ],
     story: [
       "A wrong answer about your consumer rights is worse than no answer, so the whole build is arranged around not being confidently wrong.",
-      "The agent is Mastra in TypeScript, calling retrieval tools over Qdrant rather than doing a single-shot lookup, with LangSmith tracing the full pipeline so a regression can be found instead of guessed at. Ingestion had to be rebuilt around how long real legal documents actually take to process, rather than how long we had assumed. Sources carry their publication date, because a consumer-rights article that was right two years ago may not be now.",
-      "The unglamorous half was the rest of it: product scores filtered client-side, prices parsed properly for a dot thousands separator, translations for every surface, guardrails for questions the corpus cannot answer, and a human in the loop on the answers that carry real risk. I also built and ran their development, staging and production environments on Azure, with teams in Portugal, France and Italy.",
+      "Vera looks things up before she answers rather than reciting from memory, and every answer carries the article it came from, so a member can check her. Sources show their publication date, because a consumer-rights article that was right two years ago may not be now. Ingestion had to be rebuilt around how long real legal documents actually take to process, rather than how long we had assumed.",
+      "The rest was the unglamorous half that decides whether people trust it: prices that parse correctly in every market, translations for every surface, a refusal to answer questions the sources cannot support, and a human in the loop on anything carrying real risk. I also built and ran the environments it lives on, working with teams in Portugal, France and Italy.",
     ],
     outcomes: [
       { value: "Qdrant", label: "hybrid retrieval, so an answer can cite the article it came from" },
@@ -138,6 +146,8 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "kaedim",
+  stack: ["react", "typescript", "blender", "figma"],
+  storyRebus: [{ phrase: "inspected, marked up and approved", icon: "ListChecks", tint: "red" }, { phrase: "reads as progress", icon: "Hourglass", tint: "blue" }, { phrase: "before a human spends attention", icon: "Robot", tint: "yellow" }],
   features: [
     "Customer onboarding flow",
     "Customer-facing app redesign",
@@ -181,6 +191,8 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "beedee",
+  stack: ["react", "expo", "typescript", "githubactions", "firebase"],
+  storyRebus: [{ phrase: "website in a wrapper", icon: "DeviceMobile", tint: "red" }, { phrase: "signup flow", icon: "SignIn", tint: "blue" }, { phrase: "it came from search", icon: "MagnifyingGlass", tint: "yellow" }],
   features: [
     "Travel Mode, passport-style redesign",
     "Incognito mode",
@@ -225,6 +237,8 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "lokaal-beslist",
+  stack: ["emberdotjs", "typescript", "docker"],
+  storyRebus: [{ phrase: "required to publish", icon: "Scales", tint: "red" }, { phrase: "first commit", icon: "GitCommit", tint: "blue" }, { phrase: "maturity levels", icon: "ChartBar", tint: "yellow" }],
   features: [
     "Keyword and session search",
     "Filter by governing body",
