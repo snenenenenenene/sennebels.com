@@ -72,6 +72,14 @@ export type Tint = "red" | "blue" | "yellow" | "green";
  * something rather than constant noise. Mixed against the live surface token,
  * which keeps both appearances correct from one declaration.
  */
+/** Card fill at rest and on hover, plus the shadow that arrives with it. */
+export const CARD_TINT: Record<Tint, string> = {
+  red: "bg-[color-mix(in_srgb,var(--sys-red)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-red)_17%,var(--raised))]",
+  blue: "bg-[color-mix(in_srgb,var(--sys-blue)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-blue)_17%,var(--raised))]",
+  yellow: "bg-[color-mix(in_srgb,var(--sys-yellow)_13%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-yellow)_26%,var(--raised))]",
+  green: "bg-[color-mix(in_srgb,var(--sys-green)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-green)_17%,var(--raised))]",
+};
+
 export const SURFACE_TINT: Record<Tint, string> = {
   red: "bg-[color-mix(in_srgb,var(--sys-red)_6%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-red)_15%,var(--raised))]",
   blue: "bg-[color-mix(in_srgb,var(--sys-blue)_6%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-blue)_15%,var(--raised))]",

@@ -44,6 +44,9 @@ export type Featured = {
   name: string;
   typeLine: TypeLine;
   accent: Accent;
+  /** Client mark, shown at the top of the card the way a case study leads. */
+  brand?: string;
+  brandMono?: boolean;
   /** Flavour text. Personality belongs on the work, not in a box at the end. */
   flavour: string;
   title: string;
@@ -65,6 +68,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
     name: "Tomorrowland",
+  brand: "/images/logos/tomorrowland.svg",
+  brandMono: true,
     typeLine: { kind: "Client work", sub: "Mobile" },
   accent: "blue",
   flavour: "Four apps walked in. One walked out, and it did not lose anything on the way.",
@@ -100,6 +105,7 @@ export const FEATURED: Featured[] = [
   {
     slug: "euroconsumers",
     name: "Euroconsumers",
+  brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
   accent: "blue",
   flavour: "A confident wrong answer about your rights is worse than no answer at all.",
@@ -135,6 +141,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "kaedim",
     name: "Kaedim",
+  brand: "/images/logos/kaedim.png",
+  brandMono: true,
     typeLine: { kind: "Startup", sub: "3D and AI" },
   accent: "red",
   flavour: "The model was the easy part. Making artists trust it was the work.",
@@ -164,6 +172,7 @@ export const FEATURED: Featured[] = [
   {
     slug: "beedee",
     name: "BeeDee",
+  brand: "/images/logos/beedee.png",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
   accent: "yellow",
   flavour: "Nobody filed a bug about the fifteen seconds. They just stopped coming back.",
@@ -193,6 +202,7 @@ export const FEATURED: Featured[] = [
   {
     slug: "lokaal-beslist",
     name: "Lokaal Beslist",
+  brand: "/images/logos/vlaanderen.png",
     typeLine: { kind: "Government", sub: "Civic platform" },
   accent: "green",
   flavour: "Every decision was already public. None of it was readable.",

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
-import { ACCENT_HOVER, Flavour, SURFACE_TINT, TAP, TypeLine } from "./ui";
+import { CARD_TINT, Flavour, TypeLine } from "./ui";
+import { CaseStudyButton } from "./cta";
 
 /**
  * Apple groups related content on a raised surface rather than separating it
@@ -12,34 +13,36 @@ import { ACCENT_HOVER, Flavour, SURFACE_TINT, TAP, TypeLine } from "./ui";
  */
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
   return (
-    <article className={`squircle group/card rounded-card p-6 shadow-card transition-[background-color,box-shadow] duration-300 ease-out hover:shadow-card-hover md:p-8 ${SURFACE_TINT[project.accent]}`}>
-      <div className={`flex flex-col gap-9 lg:gap-14 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
-        <div className="flex flex-col gap-4 lg:w-[44%] lg:shrink-0">
+    <article
+      className={`group/card squircle rounded-card p-7 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover md:p-10 ${CARD_TINT[project.accent]}`}
+    >
+      <div className={`flex flex-col gap-10 lg:gap-16 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+        <div className="flex flex-col lg:w-[45%] lg:shrink-0">
+          {/* The client's own mark leads, the way a case study opens. */}
+          {project.brand ? (
+            <Image
+              src={project.brand}
+              alt={`${project.name} logo`}
+              width={140}
+              height={56}
+              className={`mb-8 h-8 w-auto object-contain object-left ${project.brandMono ? "dark:brightness-0 dark:invert" : ""}`}
+            />
+          ) : (
+            <p className="mb-8 text-title3 font-semibold text-ink">{project.name}</p>
+          )}
+
           <TypeLine kind={project.typeLine.kind} sub={project.typeLine.sub} />
 
-          <p
-            className={`text-callout font-semibold text-ink-3 transition-colors duration-300 ${ACCENT_HOVER[project.accent]}`}
-          >
-            {project.name}
-          </p>
+          <h3 className="mt-3 max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
 
-          <h3 className="max-w-[18ch] text-title1 font-medium text-ink">{project.title}</h3>
+          <p className="mt-6 max-w-[52ch] text-body text-ink-2">{project.description}</p>
 
-          <p className="max-w-[54ch] text-body text-ink-2">{project.description}</p>
+          <div className="mt-5">
+            <Flavour>{project.flavour}</Flavour>
+          </div>
 
-          <Flavour>{project.flavour}</Flavour>
-
-          <Link
-            href={`/work/${project.slug}`}
-            className={`mt-1 inline-flex w-fit items-center gap-2 text-body font-medium text-moss ${TAP}`}
-          >
-            {project.cta}
-            <ArrowRight
-              size={17}
-              weight="bold"
-              aria-hidden
-              className="transition-transform duration-300 ease-out group-hover/card:translate-x-1"
-            />
+          <Link href={`/work/${project.slug}`} className="mt-9 w-fit">
+            <CaseStudyButton label={project.cta} />
           </Link>
         </div>
 
@@ -52,17 +55,20 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
                 width={1400}
                 height={900}
                 loading="eager"
-                className="h-[230px] w-full object-cover object-top lg:h-[370px]"
+                className="h-[230px] w-full object-cover object-top lg:h-[400px]"
               />
             </div>
           </Tilt>
         ) : (
           project.spec && (
-            // Confidential client work has no shippable screenshot, so it gets a
-            // written list rather than a faked mock.
+            // Confidential client work has no shippable screenshot, so it gets
+            // a written list rather than a faked mock.
             <ul className="flex flex-col justify-center gap-4 lg:min-w-0 lg:flex-1">
               {project.spec.points.map((point) => (
-                <li key={point} className="flex items-start gap-3 rounded-tile bg-paper/60 px-4 py-3.5 transition-colors duration-200 hover:bg-paper">
+                <li
+                  key={point}
+                  className="squircle flex items-start gap-3 rounded-tile bg-paper/70 px-4 py-3.5"
+                >
                   <CheckCircle size={19} weight="fill" className="mt-0.5 shrink-0 text-moss" aria-hidden />
                   <span className="text-body text-ink-2">{point}</span>
                 </li>
