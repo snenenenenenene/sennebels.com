@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { FEATURED, PERSON, SKILLS } from "./data/portfolio";
+import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
+import { Dock } from "./components/dock";
+import { TopBar } from "./components/topbar";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -125,7 +127,7 @@ const profileSchema = {
       name: "AP University of Applied Sciences",
     },
     worksFor: { "@type": "Organization", name: "Okapi Works" },
-    knowsAbout: SKILLS.map((s) => s.label),
+    knowsAbout: SKILL_GROUPS.flatMap((g) => g.items.split(", ")),
     knowsLanguage: ["nl", "en", "fr"],
     sameAs: [PERSON.github, PERSON.linkedin],
   },
@@ -156,6 +158,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#1A1815" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="min-h-full bg-paper font-sans">
+        <TopBar name={PERSON.name} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
@@ -166,6 +169,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         {children}
+        <Dock
+          links={{
+            resume: PERSON.resume,
+            github: PERSON.github,
+            linkedin: PERSON.linkedin,
+            email: `mailto:${PERSON.email}`,
+          }}
+        />
       </body>
     </html>
   );

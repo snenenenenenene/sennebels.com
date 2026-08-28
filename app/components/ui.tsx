@@ -85,13 +85,27 @@ export const SURFACE_TINT: Record<Tint, string> = {
  * Full-strength accent on hover. These are written out rather than composed at
  * runtime, because Tailwind only ships classes it can see as literal strings.
  */
+/**
+ * Accent as TEXT. Separate from the fill values, because a colour bright
+ * enough to sit behind a white glyph is not dark enough to be read on paper.
+ * iOS ships the same split.
+ */
+export const ACCENT_TEXT: Record<Tint, string> = {
+  blue: "text-tone-blue",
+  green: "text-tone-green",
+  indigo: "text-tone-indigo",
+  orange: "text-tone-orange",
+  pink: "text-tone-pink",
+  teal: "text-tone-teal",
+};
+
 export const ACCENT_HOVER: Record<Tint, string> = {
-  blue: "group-hover/card:text-sys-blue",
-  green: "group-hover/card:text-sys-green",
-  indigo: "group-hover/card:text-sys-indigo",
-  orange: "group-hover/card:text-sys-orange",
-  pink: "group-hover/card:text-sys-pink",
-  teal: "group-hover/card:text-sys-teal",
+  blue: "group-hover/card:text-tone-blue",
+  green: "group-hover/card:text-tone-green",
+  indigo: "group-hover/card:text-tone-indigo",
+  orange: "group-hover/card:text-tone-orange",
+  pink: "group-hover/card:text-tone-pink",
+  teal: "group-hover/card:text-tone-teal",
 };
 
 const TINT: Record<Tint, string> = {

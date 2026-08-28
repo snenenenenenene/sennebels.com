@@ -32,9 +32,9 @@ import {
  */
 
 const ITEMS = [
-  { label: "Top", href: "#top", icon: House },
-  { label: "Work", href: "#work", icon: Briefcase },
-  { label: "About", href: "#about", icon: Cat },
+  { label: "Work", href: "/", icon: Briefcase },
+  { label: "About", href: "/about", icon: House },
+  { label: "Fun", href: "/fun", icon: Cat },
   { label: "Resume", href: null as string | null, icon: FileText, key: "resume" },
   { label: "GitHub", href: null as string | null, icon: GithubLogo, key: "github" },
   { label: "LinkedIn", href: null as string | null, icon: LinkedinLogo, key: "linkedin" },
@@ -107,7 +107,7 @@ function DockItem({
   const width = useSpring(raw, { stiffness: 320, damping: 26, mass: 0.18 });
   const glyph = useTransform(width, (w) => w * 0.46);
 
-  const internal = href.startsWith("#");
+  const internal = href.startsWith("/");
   const inner = (
     <>
       <motion.span style={{ width: glyph, height: glyph }} className="flex items-center justify-center">

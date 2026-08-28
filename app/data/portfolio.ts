@@ -307,20 +307,16 @@ export const EDUCATION = {
 export const LANGUAGES = ["Dutch, native", "English, C2", "French, professional"];
 
 /** `ai: true` chips are tinted so the in-demand half reads first. */
-export const SKILLS = [
-  { label: "TypeScript" }, { label: "React" }, { label: "Next.js" },
-  { label: "React Native" }, { label: "Expo" }, { label: "Node.js" },
-  { label: "NestJS" }, { label: "Three.js" }, { label: "WebGL" },
-  { label: "RAG", ai: true }, { label: "AI agents", ai: true },
-  { label: "Tool calling", ai: true }, { label: "LLM evals", ai: true },
-  { label: "Guardrails", ai: true }, { label: "MCP", ai: true },
-  { label: "Vector search", ai: true },
-  { label: "PostgreSQL" }, { label: "Drizzle" }, { label: "Prisma" },
-  { label: "Docker" }, { label: "Playwright" }, { label: "Turborepo" },
-  { label: "Python" }, { label: "Accessibility" }, { label: "Technical SEO" },
-];
+export const SKILL_GROUPS = [
+  { label: "Languages", items: "TypeScript, JavaScript, Python, Java, C#, SQL" },
+  { label: "Frontend", items: "React, Next.js, React Native, Expo, Tailwind, Three.js" },
+  { label: "Backend", items: "Node, NestJS, Drizzle, Postgres, Prisma, REST and tRPC" },
+  { label: "AI", items: "RAG, tool-calling agents, evaluation and guardrails, LangChain" },
+  { label: "Platform", items: "AWS, Vercel, Docker, Turborepo, Playwright, CI and CD" },
+] as const;
 
-/** Lives in the About column now, in Senne's own voice, not in a tile grid. */
+
+/** Intro paragraphs for /fun. */
 export const ASIDE = [
   "Four cats and a dog run this household. Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided.",
   "Otherwise: long walks with a coffee, dinners more ambitious than the weeknight deserves, and Rocket League matches I had every right to win.",
@@ -328,3 +324,23 @@ export const ASIDE = [
 ];
 
 
+
+/** Longer-form personality, for /fun. Each has room to be an actual story. */
+export const FUN = [
+  {
+    title: "Four cats and a dog",
+    body: "Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided in this house. The long-term plan involves opening a cat cafe. That is not a joke, it is a roadmap item.",
+  },
+  {
+    title: "Mountains, eventually",
+    body: "I hike. Belgium is flat and six metres above sea level, so the hiking happens elsewhere, which is a large part of why the plan points west and upward.",
+  },
+  {
+    title: "Games, played and built",
+    body: "Overwatch, Hearts of Iron, Rocket League, Rivals of Aether. Half of it is research for Faultline and Ornitho. The other half is losing matches I had every right to win.",
+  },
+  {
+    title: "Coffee, and cooking past my level",
+    body: "Long walks with a coffee, and weeknight dinners more ambitious than a Tuesday can support. Both of these are how I think through a problem I am stuck on.",
+  },
+] as const;

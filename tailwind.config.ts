@@ -70,6 +70,16 @@ const config: Config = {
           pink: "var(--sys-pink)",
           teal: "var(--sys-teal)",
         },
+        // Text-safe accents. Named `tone` because `ink` is already the body
+        // colour, and a key cannot appear twice in the colour scale.
+        tone: {
+          blue: "var(--ink-blue)",
+          green: "var(--ink-green)",
+          indigo: "var(--ink-indigo)",
+          orange: "var(--ink-orange)",
+          pink: "var(--ink-pink)",
+          teal: "var(--ink-teal)",
+        },
         glass: {
           tint: "var(--glass-tint)",
           edge: "var(--glass-edge)",

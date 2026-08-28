@@ -21,21 +21,13 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import {
   ALSO,
-  EDUCATION,
-  EXPERIENCE,
   FEATURED,
-  LANGUAGES,
-  ASIDE,
-  NUMBERS,
   PERSON,
-  SKILLS,
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
-import { Dock } from "./components/dock";
 import { Chip, Glyph, GlyphTile, Heading, Surface, TAP, type Tint } from "./components/ui";
 import { SectionHeader } from "./components/section-header";
 import { Pips } from "./components/pips";
-import { TopBar } from "./components/topbar";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -43,7 +35,6 @@ import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 export default function Home() {
   return (
     <main id="top" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-28 md:px-12 lg:px-16">
-      <TopBar name={PERSON.name} />
       <Hero />
 
       {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
@@ -57,18 +48,7 @@ export default function Home() {
       </section>
 
       <Also />
-      <Numbers />
-      <About />
-      <Skills />
       <Footer />
-      <Dock
-        links={{
-          resume: PERSON.resume,
-          github: PERSON.github,
-          linkedin: PERSON.linkedin,
-          email: `mailto:${PERSON.email}`,
-        }}
-      />
     </main>
   );
 }
@@ -160,97 +140,6 @@ const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: GitCommit, tint: "indigo" },
   { icon: Clock, tint: "teal" },
 ];
-
-function Numbers() {
-  return (
-    <section className="flex flex-col pt-28">
-      <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {NUMBERS.map((n, i) => {
-          const st = STATS[i % STATS.length];
-          return (
-          <Reveal key={n.value} delay={i * 0.08}>
-            <Surface className="squircle flex h-full flex-col gap-2.5 p-6">
-              <GlyphTile icon={st.icon} tint={st.tint} />
-              <dt className="sr-only">{n.label}</dt>
-              <dd className="flex flex-col gap-2">
-                <span className="font-display text-title1 font-medium text-ink">
-                  {n.value}
-                </span>
-                <span className="max-w-[26ch] text-callout text-ink-3">{n.label}</span>
-              </dd>
-            </Surface>
-          </Reveal>
-          );
-        })}
-      </dl>
-    </section>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="flex flex-col gap-12 pt-28">
-      <SectionHeader label="About" aside="the short version" />
-
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-        <div className="flex flex-col">
-          <div className="pb-4"><Heading icon={Briefcase} tint="indigo">Experience</Heading></div>
-              {EXPERIENCE.map((e) => (
-            <div
-              key={e.role + e.org}
-              className="flex flex-col gap-1 rounded-tile px-4 py-3.5 transition-colors duration-200 odd:bg-raised hover:bg-raised sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-            >
-              <div className="flex flex-col gap-0.5">
-                <p className="text-body font-medium">{e.role}</p>
-                <p className="text-callout text-ink-3">{e.org}</p>
-              </div>
-              <p className="shrink-0 text-caption text-ink-3">{e.dates}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-10">
-          <div className="flex flex-col gap-3">
-            <Heading icon={GraduationCap} tint="orange">Education</Heading>
-            <p className="text-body">{EDUCATION.degree}</p>
-            <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
-          </div>
-          <div className="flex flex-col gap-3">
-            <Heading icon={Cat} tint="pink">Off the clock</Heading>
-            {ASIDE.map((line) => (
-              <p key={line.slice(0, 24)} className="text-callout text-ink-2">
-                {line}
-              </p>
-            ))}
-          </div>
-          <div className="flex flex-col gap-3">
-            <Heading icon={Translate} tint="teal">Languages</Heading>
-            <ul className="flex flex-col gap-2 text-body text-ink-2">
-              {LANGUAGES.map((l) => (
-                <li key={l}>{l}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Skills() {
-  return (
-    <section className="flex flex-col gap-6 pt-24">
-      <Heading icon={Wrench} tint="blue">Skills</Heading>
-      <ul className="flex flex-wrap gap-2.5">
-        {SKILLS.map((s) => (
-          <Chip key={s.label} tone={s.ai ? "accent" : "plain"}>
-            {s.label}
-          </Chip>
-        ))}
-      </ul>
-    </section>
-  );
-}
 
 const MINE = ["Transita", "Korf", "Velso", "Ornitho"];
 

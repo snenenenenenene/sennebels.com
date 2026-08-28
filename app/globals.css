@@ -20,6 +20,13 @@
     --glass-tint: rgba(247, 244, 238, 0.82);
     --glass-edge: rgba(255, 255, 255, 0.65);
     --glass-shade: rgba(20, 16, 12, 0.10);
+    /* Text-safe accents. The vivid values above are fills only. */
+    --ink-blue: #0060DF;
+    --ink-green: #17803D;
+    --ink-indigo: #4B49C6;
+    --ink-orange: #A85700;
+    --ink-pink: #C31B3E;
+    --ink-teal: #0F7C94;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -33,6 +40,12 @@
       --glass-tint: rgba(28, 25, 21, 0.78);
       --glass-edge: rgba(255, 255, 255, 0.14);
       --glass-shade: rgba(0, 0, 0, 0.34);
+      --ink-blue: #6FB6FF;
+      --ink-green: #56E07C;
+      --ink-indigo: #A5A2FF;
+      --ink-orange: #FFC46B;
+      --ink-pink: #FF8AA1;
+      --ink-teal: #7FE6F8;
     }
   }
 
