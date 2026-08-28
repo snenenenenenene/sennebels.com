@@ -91,7 +91,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         are static and pointer-events-none, so they never cost a repaint, and
         they carry the project's own accent.
       */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+      {/* Full bleed: main is capped at 1280px, so the field has to break out of
+          it or the light stops at the content edge. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[520px] w-screen -translate-x-1/2 overflow-hidden"
+      >
         <div
           className="absolute -top-40 left-[8%] size-[560px] rounded-full blur-[110px]"
           style={{ backgroundColor: `var(--sys-${project.accent})`, opacity: 0.16 }}
