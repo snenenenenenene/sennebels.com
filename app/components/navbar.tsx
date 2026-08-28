@@ -55,7 +55,7 @@ export function Navbar({ email }: { email: string }) {
         <Link
           href="/"
           aria-label="Senne Bels, home"
-          className="grid size-tap place-items-center rounded-full text-moss"
+          className="grid size-tap place-items-center rounded-full text-tone-red"
         >
           <Cat size={20} weight="fill" aria-hidden />
         </Link>
@@ -63,7 +63,7 @@ export function Navbar({ email }: { email: string }) {
         {pill && (
           <motion.span
             aria-hidden
-            className="absolute inset-y-1.5 rounded-full bg-accent-soft"
+            className="absolute inset-y-1.5 rounded-full bg-[color-mix(in_srgb,var(--sys-blue)_16%,var(--raised))]"
             initial={false}
             animate={{ x: pill.x, width: pill.w }}
             style={{ left: 0 }}
@@ -84,7 +84,7 @@ export function Navbar({ email }: { email: string }) {
               }}
               aria-current={active ? "page" : undefined}
               className={`relative z-10 flex min-h-tap items-center px-3.5 text-callout font-medium transition-colors duration-200 ${
-                active ? "text-moss" : "text-ink-2 hover:text-ink"
+                active ? "text-tone-blue" : "text-ink-2 hover:text-ink"
               }`}
             >
               {l.label}
@@ -94,7 +94,7 @@ export function Navbar({ email }: { email: string }) {
 
         <a
           href={`mailto:${email}`}
-          className={`relative z-10 ml-1 flex min-h-tap items-center rounded-full bg-moss px-4 text-callout font-semibold text-paper ${TAP}`}
+          className={`relative z-10 ml-1 flex min-h-tap items-center rounded-full bg-mark-yellow px-4 text-callout font-semibold text-[#1E1515] ${TAP}`}
         >
           Get in touch
         </a>

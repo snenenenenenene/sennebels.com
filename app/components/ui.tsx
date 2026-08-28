@@ -24,6 +24,20 @@ export const TAP =
 export const GLASS =
   "squircle bg-glass-tint shadow-pane backdrop-blur-2xl backdrop-saturate-[1.8]";
 
+export const ACCENT_TEXT: Record<Tint, string> = {
+  red: "text-tone-red",
+  blue: "text-tone-blue",
+  yellow: "text-tone-yellow",
+  green: "text-tone-green",
+};
+
+export const ACCENT_HOVER: Record<Tint, string> = {
+  red: "group-hover/card:text-tone-red",
+  blue: "group-hover/card:text-tone-blue",
+  yellow: "group-hover/card:text-tone-yellow",
+  green: "group-hover/card:text-tone-green",
+};
+
 /** A grouped content surface. Replaces rules: fill groups, elevation separates. */
 export function Surface({
   children,
@@ -52,12 +66,20 @@ export function Surface({
  * words and the marks read as one line. Icons come from Phosphor, never
  * hand-drawn paths.
  */
-export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
+export function Glyph({
+  icon: I,
+  label,
+  tint = "blue",
+}: {
+  icon: Icon;
+  label?: string;
+  tint?: Tint;
+}) {
   return (
     <I
       size="0.92em"
       weight="fill"
-      className="mx-[0.18em] inline-block shrink-0 -translate-y-[0.06em] align-baseline text-moss"
+      className={`mx-[0.18em] inline-block shrink-0 -translate-y-[0.06em] align-baseline ${ACCENT_TEXT[tint]}`}
       aria-hidden={label ? undefined : true}
       aria-label={label}
     />
@@ -96,19 +118,6 @@ export const SURFACE_TINT: Record<Tint, string> = {
  * enough to sit behind a white glyph is not dark enough to be read on paper.
  * iOS ships the same split.
  */
-export const ACCENT_TEXT: Record<Tint, string> = {
-  red: "text-tone-red",
-  blue: "text-tone-blue",
-  yellow: "text-tone-yellow",
-  green: "text-tone-green",
-};
-
-export const ACCENT_HOVER: Record<Tint, string> = {
-  red: "group-hover/card:text-tone-red",
-  blue: "group-hover/card:text-tone-blue",
-  yellow: "group-hover/card:text-tone-yellow",
-  green: "group-hover/card:text-tone-green",
-};
 
 const TINT: Record<Tint, string> = {
   red: "bg-mark-red",

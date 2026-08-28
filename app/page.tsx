@@ -25,7 +25,7 @@ import {
   PERSON,
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
-import { Chip, Glyph, GlyphTile, Heading, Surface, TAP, type Tint } from "./components/ui";
+import { ACCENT_TEXT, Chip, Glyph, GlyphTile, Heading, Surface, TAP, type Tint } from "./components/ui";
 import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
@@ -59,7 +59,7 @@ function Hero() {
         <Rise>
           <h1 className="max-w-[17ch] text-display font-medium">
             {PERSON.name}, a{" "}
-            <span className="font-display italic leading-[1.15] text-moss">creative</span> software
+            <span className="font-display italic leading-[1.15] text-tone-red">creative</span> software
             engineer.
           </h1>
         </Rise>
@@ -68,19 +68,19 @@ function Hero() {
           {/* Rebus: the marks sit inside the sentence, so words and glyphs read as one line. */}
           <p className="max-w-[56ch] text-lede text-ink-2">
             Six years remote-first building web, mobile and AI systems
-            <Glyph icon={Terminal} />, a game developer
-            <Glyph icon={GameController} /> on the side, and full-time staff to four cats
-            <Glyph icon={Cat} />.
+            <Glyph icon={Terminal} tint="red" />, a game developer
+            <Glyph icon={GameController} tint="blue" /> on the side, and full-time staff to four cats
+            <Glyph icon={Cat} tint="yellow" />.
           </p>
         </Rise>
 
         <Rise>
           <p className="sr-only">{PERSON.answerBlock}</p>
           <ul className="flex flex-wrap items-center gap-x-7 gap-y-2 text-callout">
-            <IconLink href={PERSON.resume} label="Resume" icon={FileText} />
-            <IconLink href={PERSON.github} label="GitHub" icon={GithubLogo} />
-            <IconLink href={PERSON.linkedin} label="LinkedIn" icon={LinkedinLogo} />
-            <IconLink href={`mailto:${PERSON.email}`} label="Email" icon={EnvelopeSimple} />
+            <IconLink href={PERSON.resume} label="Resume" icon={FileText} tint="red" />
+            <IconLink href={PERSON.github} label="GitHub" icon={GithubLogo} tint="blue" />
+            <IconLink href={PERSON.linkedin} label="LinkedIn" icon={LinkedinLogo} tint="yellow" />
+            <IconLink href={`mailto:${PERSON.email}`} label="Email" icon={EnvelopeSimple} tint="red" />
           </ul>
         </Rise>
       </Stagger>
@@ -92,18 +92,17 @@ function IconLink({
   href,
   label,
   icon: I,
+  tint,
 }: {
   href: string;
   label: string;
   icon: typeof FileText;
+  tint: Tint;
 }) {
   return (
     <li>
-      <a
-        href={href}
-        className="flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-moss"
-      >
-        <I size={19} weight="fill" aria-hidden />
+      <a href={href} className="flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-ink">
+        <I size={19} weight="fill" aria-hidden className={ACCENT_TEXT[tint]} />
         {label}
       </a>
     </li>
@@ -142,7 +141,7 @@ const MINE = [
 ];
 
 const FOOTER_LINK =
-  "flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-moss";
+  "flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-tone-blue";
 
 function Footer() {
   return (
@@ -151,7 +150,7 @@ function Footer() {
         <div className="flex flex-col gap-5">
           <h2 className="max-w-[16ch] font-display text-title1 font-medium italic text-moss">
             Come say hi
-            <Glyph icon={Mountains} />
+            <Glyph icon={Mountains} tint="yellow" />
           </h2>
           <p className="max-w-[52ch] text-body text-ink-2">
             Open to contract work, and to full-time roles in Canada or the United States that can
@@ -159,7 +158,7 @@ function Footer() {
           </p>
           <a
             href={`mailto:${PERSON.email}`}
-            className={`inline-flex w-fit items-center gap-2.5 rounded-full bg-moss px-6 py-3 text-body font-semibold text-paper shadow-card-hover ${TAP}`}
+            className={`inline-flex w-fit items-center gap-2.5 rounded-full bg-mark-yellow px-6 py-3 text-body font-semibold text-[#1E1515] shadow-card-hover ${TAP}`}
           >
             {PERSON.email}
             <ArrowUpRight size={19} weight="bold" aria-hidden />
