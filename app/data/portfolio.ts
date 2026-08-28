@@ -392,10 +392,23 @@ export const ASIDE = [
 
 /** Recent shows. Kept as a list because that is how it reads on a poster. */
 export const CONCERTS = [
-  { act: "Bring Me The Horizon", where: "Graspop" },
-  { act: "Bad Omens", where: "Graspop" },
-  { act: "Tame Impala", where: "" },
-  { act: "Joji", where: "" },
+  { act: "Bring Me The Horizon", where: "Graspop", year: "2026", tint: "red" as const },
+  { act: "Bad Omens", where: "Graspop", year: "2026", tint: "red" as const },
+  { act: "Tame Impala", where: "", year: "2026", tint: "blue" as const },
+  { act: "Joji", where: "", year: "2026", tint: "yellow" as const },
+];
+
+/**
+ * The Bumble move: short claims that state something true rather than describe
+ * a hobby. These say more in six words than a paragraph would.
+ */
+export const TRAITS = [
+  { text: "Emotionally reliant on a one-eyed cat", icon: "Cat", tint: "red" as const },
+  { text: "Owns more plants than shelf", icon: "Plant", tint: "blue" as const },
+  { text: "Rates four stars, means it", icon: "Star", tint: "yellow" as const },
+  { text: "Plays guitar at a volume nobody asked for", icon: "Guitar", tint: "red" as const },
+  { text: "Will lose a Rocket League match on purpose, apparently", icon: "GameController", tint: "blue" as const },
+  { text: "Cooks past his level on a Tuesday", icon: "CookingPot", tint: "yellow" as const },
 ];
 
 /** Six of the thirty-one films Senne has given five stars. */
@@ -455,7 +468,7 @@ export const FUN = [
   },
   {
     title: "Guitar at home, loud rooms elsewhere",
-    body: "I play most days. Nobody has asked me to play in front of them twice, which I choose to read as a compliment to the volume. Recently, in rooms considerably louder than mine:",
+    body: "I play most days. Nobody has asked me to play in front of them twice, which I choose to read as a compliment to the volume.",
   },
   {
     title: "Plants, and getting outside",
