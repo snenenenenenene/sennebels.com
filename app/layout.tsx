@@ -4,8 +4,10 @@ import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
-import { Dock } from "./components/dock";
-import { TopBar } from "./components/topbar";
+// Dock and TopBar are kept for reference; the Navbar replaces both for now.
+// import { Dock } from "./components/dock";
+// import { TopBar } from "./components/topbar";
+import { Navbar } from "./components/navbar";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -95,7 +97,7 @@ export const metadata: Metadata = {
       { url: "/images/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [{ url: "/images/logo.png" }],
-    other: [{ rel: "mask-icon", url: "/images/safari-pinned-tab.svg", color: "#2B2621" }],
+    other: [{ rel: "mask-icon", url: "/images/safari-pinned-tab.svg", color: "#1E1515" }],
   },
   manifest: "/manifest.json",
   alternates: {
@@ -154,11 +156,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`h-full ${hanken.variable} ${fraunces.variable}`}>
       <head>
-        <meta name="theme-color" content="#EDE8DE" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#1A1815" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#F9F8F5" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="min-h-full bg-paper font-sans">
-        <TopBar name={PERSON.name} />
+        <Navbar email={PERSON.email} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
@@ -169,14 +171,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         {children}
-        <Dock
-          links={{
-            resume: PERSON.resume,
-            github: PERSON.github,
-            linkedin: PERSON.linkedin,
-            email: `mailto:${PERSON.email}`,
-          }}
-        />
       </body>
     </html>
   );

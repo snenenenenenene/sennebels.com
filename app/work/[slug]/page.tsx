@@ -56,7 +56,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-28 md:px-12 lg:px-16">
+    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseSchema) }}

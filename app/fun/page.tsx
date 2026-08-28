@@ -21,7 +21,7 @@ const ICONS: { icon: typeof Cat; tint: Tint }[] = [
 
 export default function Fun() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-28 pt-24 md:px-12 lg:px-16">
+    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <SectionHeader as="h1" label="When I am not working" aside="which is more than it should be" />
 
       <div className="mt-8 flex max-w-[62ch] flex-col gap-4">

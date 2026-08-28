@@ -29,7 +29,7 @@ const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
 
 export default function About() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-28 pt-24 md:px-12 lg:px-16">
+    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <SectionHeader as="h1" label="About" aside="the short version" />
 
       <p className="mt-8 max-w-[62ch] text-lede text-ink-2">{PERSON.answerBlock}</p>

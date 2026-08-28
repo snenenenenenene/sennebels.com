@@ -17,7 +17,7 @@
     --sys-pink: #FF375F;
     --sys-teal: #40C8E0;
     /* Glass is a tint over live content, never an opaque fill. */
-    --glass-tint: rgba(247, 244, 238, 0.82);
+    --glass-tint: rgba(249, 248, 245, 0.72);
     --glass-edge: rgba(255, 255, 255, 0.65);
     --glass-shade: rgba(20, 16, 12, 0.10);
     /* Text-safe accents. The vivid values above are fills only. */
@@ -37,7 +37,7 @@
       --sys-orange: #FFB340;
       --sys-pink: #FF6482;
       --sys-teal: #5DE5FA;
-      --glass-tint: rgba(28, 25, 21, 0.78);
+      --glass-tint: rgba(24, 21, 20, 0.72);
       --glass-edge: rgba(255, 255, 255, 0.14);
       --glass-shade: rgba(0, 0, 0, 0.34);
       --ink-blue: #6FB6FF;
@@ -59,34 +59,36 @@
   /* Wabi-sabi palette, read off unglazed stoneware in winter light.
      One accent (celadon-moss), locked across every section. */
   :root {
-    --paper: #EDE8DE;
-    --raised: #F5F2EA;
-    --ink: #2B2621;
-    --ink-2: #4A443C;
-    --ink-3: #6E665C;
-    --hairline: #D9D2C5;
-    --accent: #55694F;
-    --accent-soft: #E2E7DC;
+    --paper: #F9F8F5;
+    --raised: #FFFFFF;
+    --ink: #1E1515;
+    --ink-2: #4A3F3F;
+    --ink-3: #736A64;
+    --hairline: #E4E1DA;
+    --accent: #4D6043;
+    --accent-soft: #DFEFD7;
+    --tan: #87684A;
     /* kept: older utilities still reference these */
-    --gray-1: #2B2621;
-    --gray-2: #4A443C;
-    --gray-3: #6E665C;
+    --gray-1: #1E1515;
+    --gray-2: #4A3F3F;
+    --gray-3: #736A64;
     --color-background: var(--paper);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #1A1815;
-      --raised: #232019;
-      --ink: #EDE8DE;
-      --ink-2: #C4BCAE;
-      --ink-3: #9C9284;
-      --hairline: #35302A;
-      --accent: #9DB394;
-      --accent-soft: #2A302604;
-      --gray-1: #EDE8DE;
-      --gray-2: #C4BCAE;
-      --gray-3: #9C9284;
+      --paper: #141110;
+      --raised: #1F1B19;
+      --ink: #F9F8F5;
+      --ink-2: #C9C2BC;
+      --ink-3: #978E87;
+      --hairline: #302B28;
+      --accent: #A8C39A;
+      --accent-soft: #26302170;
+      --tan: #C0A183;
+      --gray-1: #F9F8F5;
+      --gray-2: #C9C2BC;
+      --gray-3: #978E87;
     }
   }
 

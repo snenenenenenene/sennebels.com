@@ -62,6 +62,7 @@ const config: Config = {
         hairline: "var(--hairline)",
         moss: "var(--accent)",
         "accent-soft": "var(--accent-soft)",
+        tan: "var(--tan)",
         sys: {
           blue: "var(--sys-blue)",
           green: "var(--sys-green)",
