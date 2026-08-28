@@ -165,7 +165,7 @@ export const FEATURED: Featured[] = [
   accent: "red",
     title: "Four years of a consumer app, owned end to end",
     description:
-      "BeeDee looked unfinished when I got there, and an app that looks unfinished does not get a second session. I rebuilt the interface, made it properly native, then kept going: travel mode, localisation, GitHub Actions instead of manual releases, AI in the internal workflows. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry it. Four years, reporting to the CEO, with the team in India.",
+      "BeeDee felt like a website in a wrapper. I made it native, then spent sixteen of my 155 pull requests on the signup flow alone, so people stopped falling out of it. Refer-a-friend, travel mode, localisation, and releases moved onto GitHub Actions. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry the growth. Reporting to the CEO, with the team in India.",
     tech: ["React Native", "Sockets", "Mollie"],
     image: "/images/work/beedee.webp",
     cta: "read the write-up",
