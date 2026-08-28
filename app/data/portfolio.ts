@@ -381,6 +381,23 @@ export const ASIDE = [
   "Most of what I do away from a keyboard ends up feeding what I do at one.",
 ];
 
+/** Six of the 31 five-star films, with stills pulled from their Letterboxd pages. */
+export const FILM_STRIP = [
+  { title: "Mad Max: Fury Road", year: "2015", img: "/images/film/mad-max-fury-road.webp" },
+  { title: "The Truman Show", year: "1998", img: "/images/film/the-truman-show.webp" },
+  { title: "WALL-E", year: "2008", img: "/images/film/wall-e.webp" },
+  { title: "Interstellar", year: "2014", img: "/images/film/interstellar.webp" },
+  { title: "Across the Spider-Verse", year: "2023", img: "/images/film/spider-man-across-the-spider-verse.webp" },
+  { title: "The Wild Robot", year: "2024", img: "/images/film/the-wild-robot.webp" },
+];
+
+/** Services a card actually points at, so the mark is real rather than generic. */
+export const FUN_BRANDS: Record<string, string[]> = {
+  "198 films and a generous hand": ["letterboxd"],
+  "Marvel Rivals, HOI4, Wingspan": ["steam", "boardgamegeek"],
+  "Electric guitar, badly, loudly": ["spotify"],
+};
+
 /** Real numbers, straight out of the Letterboxd export. */
 export const FILM_STATS = [
   { value: "198", label: "films rated since August 2023" },

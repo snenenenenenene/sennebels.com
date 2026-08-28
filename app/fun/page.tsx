@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor-icons/react/dist/ssr";
-import { ASIDE, FILM_STATS, FUN, FUN_REBUS } from "../data/portfolio";
+import { ASIDE, FILM_STATS, FILM_STRIP, FUN, FUN_BRANDS, FUN_REBUS } from "../data/portfolio";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
+import { FilmStrip } from "../components/filmstrip";
+import { BrandMark } from "../components/marks";
 import { PageTitle } from "../components/section-header";
 
 export const metadata: Metadata = {
@@ -55,15 +57,9 @@ export default function Fun() {
         ))}
       </dl>
 
-      <a
-        href="https://letterboxd.com/___mclovin____/"
-        target="_blank"
-        rel="noreferrer"
-        className="mt-5 inline-flex min-h-tap w-fit items-center gap-2 text-callout font-medium text-tone-blue"
-      >
-        The whole list is on Letterboxd
-        <ArrowUpRight size={15} weight="bold" aria-hidden />
-      </a>
+      <div className="mt-8">
+        <FilmStrip films={FILM_STRIP} href="https://letterboxd.com/___mclovin____/" />
+      </div>
 
       <div className="grid grid-cols-1 gap-5 pt-14 md:grid-cols-2">
         {FUN.map((f, i) => {
@@ -73,7 +69,16 @@ export default function Fun() {
               <div
                 className={`squircle group/card flex h-full flex-col gap-3 rounded-card p-7 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[ic.tint]}`}
               >
-                <GlyphTile icon={ic.icon} tint={ic.tint} />
+                <div className="flex items-center justify-between gap-3">
+                  <GlyphTile icon={ic.icon} tint={ic.tint} />
+                  {FUN_BRANDS[f.title] && (
+                    <span className="flex items-center gap-2 text-ink-3">
+                      {FUN_BRANDS[f.title].map((slug) => (
+                        <BrandMark key={slug} slug={slug} size={17} />
+                      ))}
+                    </span>
+                  )}
+                </div>
                 <h2 className="text-title2 font-medium text-ink">{f.title}</h2>
                 <RebusText
                   text={f.body}
