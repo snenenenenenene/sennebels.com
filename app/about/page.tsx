@@ -70,7 +70,9 @@ export default function About() {
           </div>
           {EXPERIENCE.map((e) => {
             const mark = e.logo ? (
-              <CompanyLogo src={e.logo} name={e.org} mono={e.logoMono} />
+              <span className="transition-transform duration-300 ease-out group-hover/row:-translate-y-px">
+                <CompanyLogo src={e.logo} name={e.org} mono={e.logoMono} />
+              </span>
             ) : e.slug ? (
               <span className="grid size-[29px] shrink-0 place-items-center text-ink">
                 <BrandMark slug={e.slug} size={24} />
@@ -84,9 +86,29 @@ export default function About() {
                 {mark}
                 <div className="flex min-w-0 flex-1 flex-col">
                   <p className="truncate text-body font-medium leading-[1.35]">{e.role}</p>
-                  <p className="flex items-center gap-1 text-callout text-ink-3">
-                    {e.org}
-                    {e.href && <ArrowUpRight size={12} weight="bold" aria-hidden />}
+                  <p className="flex items-center gap-1 text-callout text-ink-3 transition-colors duration-200 group-hover/row:text-moss">
+                    {/*
+                      The rule wipes in from the left on scaleX rather than
+                      animating width, so it stays on the compositor. The arrow
+                      leaves with it, in the direction it points.
+                    */}
+                    <span className="relative">
+                      {e.org}
+                      {e.href && (
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-moss transition-transform duration-300 ease-out group-hover/row:scale-x-100"
+                        />
+                      )}
+                    </span>
+                    {e.href && (
+                      <ArrowUpRight
+                        size={12}
+                        weight="bold"
+                        aria-hidden
+                        className="translate-y-px opacity-0 transition-all duration-300 ease-out group-hover/row:translate-x-0.5 group-hover/row:opacity-100"
+                      />
+                    )}
                   </p>
                 </div>
                 <p className="shrink-0 text-callout tabular-nums text-ink-3">{e.dates}</p>
