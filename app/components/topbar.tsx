@@ -27,7 +27,7 @@ export function TopBar({ name }: { name: string }) {
       <div
         className={`pointer-events-auto flex items-center gap-2.5 rounded-full px-5 py-2.5 ${GLASS}`}
       >
-        <Cat size={19} weight="duotone" className="text-moss" aria-hidden />
+        <Cat size={19} weight="fill" className="text-moss" aria-hidden />
         <span className="text-callout font-semibold tracking-[-0.01em] text-ink">{name}</span>
       </div>
     </motion.header>

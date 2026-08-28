@@ -36,10 +36,14 @@ export const IDENTITY = {
 /** Type line, in the Magic sense: what a thing is, then what kind. */
 export type TypeLine = { kind: string; sub: string };
 
+/** iOS system accent carried by a project. Faded at rest, full on hover. */
+export type Accent = "blue" | "green" | "indigo" | "orange" | "pink" | "teal";
+
 export type Featured = {
   slug: string;
   name: string;
   typeLine: TypeLine;
+  accent: Accent;
   /** Flavour text. Personality belongs on the work, not in a box at the end. */
   flavour: string;
   title: string;
@@ -62,6 +66,7 @@ export const FEATURED: Featured[] = [
     slug: "tomorrowland",
     name: "Tomorrowland",
     typeLine: { kind: "Client work", sub: "Mobile" },
+  accent: "indigo",
   flavour: "Four apps walked in. One walked out, and it did not lose anything on the way.",
     title: "One app for a festival the whole world watches",
     description:
@@ -96,6 +101,7 @@ export const FEATURED: Featured[] = [
     slug: "euroconsumers",
     name: "Euroconsumers",
     typeLine: { kind: "Client work", sub: "AI systems" },
+  accent: "blue",
   flavour: "A confident wrong answer about your rights is worse than no answer at all.",
     title: "An AI legal assistant that has to be right",
     description:
@@ -130,6 +136,7 @@ export const FEATURED: Featured[] = [
     slug: "kaedim",
     name: "Kaedim",
     typeLine: { kind: "Startup", sub: "3D and AI" },
+  accent: "pink",
   flavour: "The model was the easy part. Making artists trust it was the work.",
     title: "Making AI 3D generation feel obvious",
     description:
@@ -158,6 +165,7 @@ export const FEATURED: Featured[] = [
     slug: "beedee",
     name: "BeeDee",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
+  accent: "orange",
   flavour: "Nobody filed a bug about the fifteen seconds. They just stopped coming back.",
     title: "A social platform 93% faster than I found it",
     description:
@@ -186,6 +194,7 @@ export const FEATURED: Featured[] = [
     slug: "lokaal-beslist",
     name: "Lokaal Beslist",
     typeLine: { kind: "Government", sub: "Civic platform" },
+  accent: "teal",
   flavour: "Every decision was already public. None of it was readable.",
     title: "Making government decisions readable by humans",
     description:

@@ -111,7 +111,7 @@ function DockItem({
   const inner = (
     <>
       <motion.span style={{ width: glyph, height: glyph }} className="flex items-center justify-center">
-        <I size="100%" weight="duotone" aria-hidden />
+        <I size="100%" weight="fill" aria-hidden />
       </motion.span>
       <span className="pointer-events-none absolute -top-9 whitespace-nowrap rounded-lg bg-ink px-2.5 py-1 text-caption font-medium text-paper opacity-0 transition-all duration-200 ease-out group-hover/dock:-top-10 group-hover/dock:opacity-100">
         {label}

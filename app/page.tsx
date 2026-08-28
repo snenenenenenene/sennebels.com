@@ -128,7 +128,7 @@ function IconLink({
         href={href}
         className="flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-moss"
       >
-        <I size={19} weight="duotone" aria-hidden />
+        <I size={19} weight="fill" aria-hidden />
         {label}
       </a>
     </li>

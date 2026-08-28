@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
-import { Flavour, TAP, TypeLine } from "./ui";
+import { ACCENT_HOVER, Flavour, SURFACE_TINT, TAP, TypeLine } from "./ui";
 
 /**
  * Apple groups related content on a raised surface rather than separating it
@@ -12,12 +12,16 @@ import { Flavour, TAP, TypeLine } from "./ui";
  */
 export function ProjectCard({ project, flipped }: { project: Featured; flipped: boolean }) {
   return (
-    <article className="squircle group/card rounded-card bg-raised p-6 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-8">
+    <article className={`squircle group/card rounded-card p-6 shadow-card transition-[background-color,box-shadow] duration-300 ease-out hover:shadow-card-hover md:p-8 ${SURFACE_TINT[project.accent]}`}>
       <div className={`flex flex-col gap-9 lg:gap-14 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
         <div className="flex flex-col gap-4 lg:w-[44%] lg:shrink-0">
           <TypeLine kind={project.typeLine.kind} sub={project.typeLine.sub} />
 
-          <p className="text-callout font-semibold text-moss">{project.name}</p>
+          <p
+            className={`text-callout font-semibold text-ink-3 transition-colors duration-300 ${ACCENT_HOVER[project.accent]}`}
+          >
+            {project.name}
+          </p>
 
           <h3 className="max-w-[18ch] text-title1 font-medium text-ink">{project.title}</h3>
 
@@ -59,7 +63,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             <ul className="flex flex-col justify-center gap-4 lg:min-w-0 lg:flex-1">
               {project.spec.points.map((point) => (
                 <li key={point} className="flex items-start gap-3 rounded-tile bg-paper/60 px-4 py-3.5 transition-colors duration-200 hover:bg-paper">
-                  <CheckCircle size={19} weight="duotone" className="mt-0.5 shrink-0 text-moss" aria-hidden />
+                  <CheckCircle size={19} weight="fill" className="mt-0.5 shrink-0 text-moss" aria-hidden />
                   <span className="text-body text-ink-2">{point}</span>
                 </li>
               ))}

@@ -22,7 +22,7 @@ export const TAP =
  * The fill is a tint, not a surface colour, so what shows through is the page.
  */
 export const GLASS =
-  "squircle border border-glass-edge bg-glass-tint shadow-[0_10px_40px_-12px_var(--glass-shade),inset_0_1px_0_var(--glass-edge)] backdrop-blur-2xl backdrop-saturate-[1.8] supports-[backdrop-filter]:bg-glass-tint";
+  "squircle bg-glass-tint shadow-pane backdrop-blur-2xl backdrop-saturate-[1.8]";
 
 /** A grouped content surface. Replaces rules: fill groups, elevation separates. */
 export function Surface({
@@ -56,7 +56,7 @@ export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
   return (
     <I
       size="0.92em"
-      weight="duotone"
+      weight="fill"
       className="mx-[0.18em] inline-block shrink-0 -translate-y-[0.06em] align-baseline text-moss"
       aria-hidden={label ? undefined : true}
       aria-label={label}
@@ -65,6 +65,34 @@ export function Glyph({ icon: I, label }: { icon: Icon; label?: string }) {
 }
 
 export type Tint = "blue" | "green" | "indigo" | "orange" | "pink" | "teal";
+
+/**
+ * Project surface tint. The accent sits at a low mix with the page at rest and
+ * comes up to full strength on hover, so colour is a reward for pointing at
+ * something rather than constant noise. Mixed against the live surface token,
+ * which keeps both appearances correct from one declaration.
+ */
+export const SURFACE_TINT: Record<Tint, string> = {
+  blue: "bg-[color-mix(in_srgb,var(--sys-blue)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-blue)_16%,var(--raised))]",
+  green: "bg-[color-mix(in_srgb,var(--sys-green)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-green)_16%,var(--raised))]",
+  indigo: "bg-[color-mix(in_srgb,var(--sys-indigo)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-indigo)_16%,var(--raised))]",
+  orange: "bg-[color-mix(in_srgb,var(--sys-orange)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-orange)_18%,var(--raised))]",
+  pink: "bg-[color-mix(in_srgb,var(--sys-pink)_7%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-pink)_16%,var(--raised))]",
+  teal: "bg-[color-mix(in_srgb,var(--sys-teal)_8%,var(--raised))] hover:bg-[color-mix(in_srgb,var(--sys-teal)_18%,var(--raised))]",
+};
+
+/**
+ * Full-strength accent on hover. These are written out rather than composed at
+ * runtime, because Tailwind only ships classes it can see as literal strings.
+ */
+export const ACCENT_HOVER: Record<Tint, string> = {
+  blue: "group-hover/card:text-sys-blue",
+  green: "group-hover/card:text-sys-green",
+  indigo: "group-hover/card:text-sys-indigo",
+  orange: "group-hover/card:text-sys-orange",
+  pink: "group-hover/card:text-sys-pink",
+  teal: "group-hover/card:text-sys-teal",
+};
 
 const TINT: Record<Tint, string> = {
   blue: "bg-sys-blue",
