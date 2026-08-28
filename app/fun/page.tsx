@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor-icons/react/dist/ssr";
-import { ASIDE, FILM_STATS, FILM_STRIP, FUN, FUN_BRANDS, FUN_REBUS } from "../data/portfolio";
+import { Cat, Coffee, FilmSlate, GameController, Guitar, MicrophoneStage, Plant } from "@phosphor-icons/react/dist/ssr";
+import { ASIDE, CONCERTS, FILM_STATS, FILM_STRIP, FUN, FUN_BRANDS, FUN_REBUS } from "../data/portfolio";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
@@ -85,6 +85,21 @@ export default function Fun() {
                   marks={FUN_REBUS}
                   className="text-body leading-[2.05] text-ink-2"
                 />
+
+                {f.title.startsWith("Guitar") && (
+                  <ul className="mt-1 flex flex-wrap gap-2">
+                    {CONCERTS.map((c) => (
+                      <li
+                        key={c.act}
+                        className="squircle flex items-center gap-2 rounded-full bg-paper/70 px-3 py-1.5 text-caption font-medium text-ink-2"
+                      >
+                        <MicrophoneStage size={13} weight="fill" aria-hidden className="text-tone-red" />
+                        {c.act}
+                        {c.where && <span className="text-ink-3">{c.where}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </Reveal>
           );

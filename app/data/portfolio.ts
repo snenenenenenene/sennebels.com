@@ -390,6 +390,14 @@ export const ASIDE = [
   "Most of what I do away from a keyboard ends up feeding what I do at one.",
 ];
 
+/** Recent shows. Kept as a list because that is how it reads on a poster. */
+export const CONCERTS = [
+  { act: "Bring Me The Horizon", where: "Graspop" },
+  { act: "Bad Omens", where: "Graspop" },
+  { act: "Tame Impala", where: "" },
+  { act: "Joji", where: "" },
+];
+
 /** Six of the thirty-one films Senne has given five stars. */
 export const FILM_STRIP = [
   { title: "Mad Max: Fury Road", year: "2015", img: "/images/film/mad-max-fury-road.webp" },
@@ -403,7 +411,7 @@ export const FILM_STRIP = [
 /** Services a card actually points at, so the mark is real rather than generic. */
 export const FUN_BRANDS: Record<string, string[]> = {
   "Marvel Rivals, HOI4, Wingspan": ["steam", "boardgamegeek"],
-  "Electric guitar, badly, loudly": ["spotify"],
+  "Guitar at home, loud rooms elsewhere": ["spotify"],
 };
 
 /** Real counts from his own viewing log. Kept as numbers, not as a profile. */
@@ -446,8 +454,8 @@ export const FUN = [
     body: "Four films in that list ever got half a star. Most land on four or four and a half, because I would rather enjoy a thing than be right about it. Fury Road, The Truman Show and WALL-E are the ones I keep going back to.",
   },
   {
-    title: "Electric guitar, badly, loudly",
-    body: "I play most days. Nobody has asked me to play in front of them twice, which I choose to read as a compliment to the volume.",
+    title: "Guitar at home, loud rooms elsewhere",
+    body: "I play most days. Nobody has asked me to play in front of them twice, which I choose to read as a compliment to the volume. Recently, in rooms considerably louder than mine:",
   },
   {
     title: "Plants, and getting outside",
