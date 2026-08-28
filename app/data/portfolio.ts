@@ -381,6 +381,13 @@ export const ASIDE = [
   "Most of what I do away from a keyboard ends up feeding what I do at one.",
 ];
 
+/** Real numbers, straight out of the Letterboxd export. */
+export const FILM_STATS = [
+  { value: "198", label: "films rated since August 2023" },
+  { value: "31", label: "of them got five stars" },
+  { value: "49", label: "still sitting on the watchlist" },
+];
+
 
 
 
@@ -395,10 +402,12 @@ export const ABOUT_REBUS = [
 export const FUN_REBUS = [
   { phrase: "Four cats and a dog", icon: "Cat", tint: "red" as const },
   { phrase: "long walk with a coffee", icon: "Coffee", tint: "blue" as const },
-  { phrase: "Rocket League", icon: "GameController", tint: "yellow" as const },
-  { phrase: "I hike", icon: "Mountains", tint: "red" as const },
-  { phrase: "flat and six metres above sea level", icon: "Ruler", tint: "blue" as const },
-  { phrase: "Faultline", icon: "Cube", tint: "yellow" as const },
+  { phrase: "Marvel Rivals", icon: "GameController", tint: "yellow" as const },
+  { phrase: "Wingspan", icon: "Bird", tint: "red" as const },
+  { phrase: "I play most days", icon: "Guitar", tint: "blue" as const },
+  { phrase: "closer to a greenhouse", icon: "Plant", tint: "yellow" as const },
+  { phrase: "flat and six metres above sea level", icon: "Ruler", tint: "red" as const },
+  { phrase: "Fury Road", icon: "FilmSlate", tint: "blue" as const },
 ];
 
 /** Longer-form personality, for /fun. Each has room to be an actual story. */
@@ -408,12 +417,20 @@ export const FUN = [
     body: "Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided here. The long-term plan is a cat cafe. That is a roadmap item, not a joke.",
   },
   {
-    title: "Mountains, eventually",
-    body: "I hike. Belgium is flat and six metres above sea level, so the hiking happens somewhere else. That is a large part of why the plan points west and upward.",
+    title: "198 films and a generous hand",
+    body: "Four films in that list ever got half a star. Most land on four or four and a half, because I would rather enjoy a thing than be right about it. Fury Road, The Truman Show and WALL-E are the ones I keep going back to. My Letterboxd bio says literally ryan gosling and I stand by it.",
   },
   {
-    title: "Games, played and built",
-    body: "Overwatch, Hearts of Iron, Rocket League, Rivals of Aether. Half of that is research for Faultline. The other half is losing matches I had every right to win.",
+    title: "Electric guitar, badly, loudly",
+    body: "I play most days. Nobody has asked me to play in front of them twice, which I choose to read as a compliment to the volume.",
+  },
+  {
+    title: "Plants, and getting outside",
+    body: "The flat is closer to a greenhouse than a flat at this point. Belgium is flat and six metres above sea level, so the hiking happens somewhere else. That is a large part of why the plan points west and upward.",
+  },
+  {
+    title: "Marvel Rivals, HOI4, Wingspan",
+    body: "Marvel Rivals and Rocket League when I want to lose a match I had every right to win. Hearts of Iron when I want to lose four hours instead. Wingspan is the one everyone gets talked into and nobody regrets.",
   },
   {
     title: "Coffee, and cooking past my level",

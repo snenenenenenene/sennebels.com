@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Cat, Coffee, GameController, Mountains } from "@phosphor-icons/react/dist/ssr";
-import { ASIDE, FUN, FUN_REBUS } from "../data/portfolio";
+import { ArrowUpRight, Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor-icons/react/dist/ssr";
+import { ASIDE, FILM_STATS, FUN, FUN_REBUS } from "../data/portfolio";
 import { GlyphTile, Surface, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
@@ -15,9 +15,11 @@ export const metadata: Metadata = {
 
 const ICONS: { icon: typeof Cat; tint: Tint }[] = [
   { icon: Cat, tint: "red" },
-  { icon: Mountains, tint: "blue" },
-  { icon: GameController, tint: "yellow" },
-  { icon: Coffee, tint: "red" },
+  { icon: FilmSlate, tint: "blue" },
+  { icon: Guitar, tint: "yellow" },
+  { icon: Plant, tint: "red" },
+  { icon: GameController, tint: "blue" },
+  { icon: Coffee, tint: "yellow" },
 ];
 
 export default function Fun() {
@@ -35,6 +37,28 @@ export default function Fun() {
           />
         ))}
       </div>
+
+      {/* Numbers from the Letterboxd export, not estimated. */}
+      <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {FILM_STATS.map((f, i) => (
+          <Surface key={f.value} className="squircle flex flex-col-reverse justify-end gap-1.5 p-5">
+            <dt className="text-callout text-ink-3">{f.label}</dt>
+            <dd className={`font-display text-title1 font-medium ${["text-tone-red","text-tone-blue","text-tone-yellow"][i]}`}>
+              {f.value}
+            </dd>
+          </Surface>
+        ))}
+      </dl>
+
+      <a
+        href="https://letterboxd.com/___mclovin____/"
+        target="_blank"
+        rel="noreferrer"
+        className="mt-5 inline-flex min-h-tap w-fit items-center gap-2 text-callout font-medium text-tone-blue"
+      >
+        The whole list is on Letterboxd
+        <ArrowUpRight size={15} weight="bold" aria-hidden />
+      </a>
 
       <div className="grid grid-cols-1 gap-5 pt-14 md:grid-cols-2">
         {FUN.map((f, i) => {
