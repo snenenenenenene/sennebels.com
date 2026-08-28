@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor-icons/react/dist/ssr";
 import { ASIDE, FILM_STATS, FUN, FUN_REBUS } from "../data/portfolio";
-import { GlyphTile, Surface, type Tint } from "../components/ui";
+import { ACCENT_TEXT, CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
 import { PageTitle } from "../components/section-header";
@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Four cats, a dog, mountains nowhere near Belgium, and games. What Senne Bels does when he is not working.",
   alternates: { canonical: "https://sennebels.com/fun" },
 };
+
+const TRIO: Tint[] = ["red", "blue", "yellow"];
 
 const ICONS: { icon: typeof Cat; tint: Tint }[] = [
   { icon: Cat, tint: "red" },
@@ -41,12 +43,15 @@ export default function Fun() {
       {/* Numbers from the Letterboxd export, not estimated. */}
       <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {FILM_STATS.map((f, i) => (
-          <Surface key={f.value} className="squircle flex flex-col-reverse justify-end gap-1.5 p-5">
-            <dt className="text-callout text-ink-3">{f.label}</dt>
-            <dd className={`font-display text-title1 font-medium ${["text-tone-red","text-tone-blue","text-tone-yellow"][i]}`}>
+          <div
+            key={f.value}
+            className={`squircle group/card flex flex-col-reverse justify-end gap-1.5 rounded-panel p-5 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[TRIO[i % TRIO.length]]}`}
+          >
+            <dt className="text-callout text-ink-2">{f.label}</dt>
+            <dd className={`font-display text-title1 font-medium ${ACCENT_TEXT[TRIO[i % TRIO.length]]}`}>
               {f.value}
             </dd>
-          </Surface>
+          </div>
         ))}
       </dl>
 
@@ -65,7 +70,9 @@ export default function Fun() {
           const ic = ICONS[i % ICONS.length];
           return (
             <Reveal key={f.title} delay={(i % 2) * 0.07} y={32}>
-              <Surface className="squircle flex h-full flex-col gap-3 p-7">
+              <div
+                className={`squircle group/card flex h-full flex-col gap-3 rounded-card p-7 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[ic.tint]}`}
+              >
                 <GlyphTile icon={ic.icon} tint={ic.tint} />
                 <h2 className="text-title2 font-medium text-ink">{f.title}</h2>
                 <RebusText
@@ -73,7 +80,7 @@ export default function Fun() {
                   marks={FUN_REBUS}
                   className="text-body leading-[2.05] text-ink-2"
                 />
-              </Surface>
+              </div>
             </Reveal>
           );
         })}

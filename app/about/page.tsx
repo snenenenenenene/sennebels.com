@@ -11,7 +11,7 @@ import {
   Wrench,
 } from "@phosphor-icons/react/dist/ssr";
 import { ABOUT_REBUS, EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
-import { ACCENT_TEXT, GlyphTile, Heading, PILL_HOVER, ROW_TEXT, RULE_BG, Surface, type Tint } from "../components/ui";
+import { ACCENT_TEXT, CARD_TINT, GlyphTile, Heading, PILL_HOVER, ROW_TEXT, RULE_BG, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
 import { BrandMark, CompanyLogo, Flag, Mark, Monogram } from "../components/marks";
@@ -26,10 +26,10 @@ export const metadata: Metadata = {
 const TRIO: Tint[] = ["red", "blue", "yellow"];
 
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
-  { icon: UsersThree, tint: "blue" },
-  { icon: Lightning, tint: "yellow" },
-  { icon: GitCommit, tint: "blue" },
-  { icon: Clock, tint: "green" },
+  { icon: UsersThree, tint: "red" },
+  { icon: Lightning, tint: "blue" },
+  { icon: GitCommit, tint: "yellow" },
+  { icon: Clock, tint: "red" },
 ];
 
 export default function About() {
@@ -55,13 +55,15 @@ export default function About() {
                 {/* dt then dd, in that order, because that is what a definition
                     list means. Column-reverse puts the numeral on top visually
                     without the label being announced twice. */}
-                <Surface className="squircle flex h-full flex-col-reverse justify-end gap-2 p-6">
-                  <dt className="max-w-[24ch] text-callout text-ink-3">{n.label}</dt>
+                <div
+                  className={`squircle group/card flex h-full flex-col-reverse justify-end gap-2 rounded-panel p-6 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[st.tint]}`}
+                >
+                  <dt className="max-w-[24ch] text-callout text-ink-2">{n.label}</dt>
                   <dd className={`font-display text-title1 font-medium ${ACCENT_TEXT[st.tint]}`}>
                     {n.value}
                   </dd>
                   <GlyphTile icon={st.icon} tint={st.tint} />
-                </Surface>
+                </div>
               </Reveal>
             );
           })}
