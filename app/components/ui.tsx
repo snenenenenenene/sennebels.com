@@ -31,6 +31,30 @@ export const ACCENT_TEXT: Record<Tint, string> = {
   green: "text-tone-green",
 };
 
+/**
+ * Written out, never composed at runtime. Tailwind only emits classes it can
+ * see as literal strings in the source, so a class built with .replace() or a
+ * template exists in the markup and nowhere in the stylesheet.
+ */
+/**
+ * Plain hover:, not group-hover/link:. This colours the anchor itself, and a
+ * group-hover variant compiles to a DESCENDANT selector, so an element that is
+ * the group can never match its own group-hover rule.
+ */
+export const LINK_HOVER: Record<Tint, string> = {
+  red: "hover:text-tone-red",
+  blue: "hover:text-tone-blue",
+  yellow: "hover:text-tone-yellow",
+  green: "hover:text-tone-green",
+};
+
+export const RULE_BG: Record<Tint, string> = {
+  red: "bg-tone-red",
+  blue: "bg-tone-blue",
+  yellow: "bg-tone-yellow",
+  green: "bg-tone-green",
+};
+
 export const ACCENT_HOVER: Record<Tint, string> = {
   red: "group-hover/card:text-tone-red",
   blue: "group-hover/card:text-tone-blue",
@@ -66,6 +90,49 @@ export function Surface({
  * words and the marks read as one line. Icons come from Phosphor, never
  * hand-drawn paths.
  */
+/**
+ * Rebus, done as a bound unit rather than a loose glyph.
+ *
+ * An icon dropped after a word floats: nothing ties it to the text, it breaks
+ * the line rhythm, and it can wrap away from the word it belongs to. Binding
+ * the mark and its noun into one inline-flex run with a tinted ground fixes all
+ * three. The icon is sized in ch so it tracks the text, and sits at cap height
+ * rather than on the baseline.
+ */
+export function Rebus({
+  icon: I,
+  tint = "blue",
+  children,
+}: {
+  icon: Icon;
+  tint?: Tint;
+  children: ReactNode;
+}) {
+  return (
+    <span
+      className={`mx-[0.06em] inline-flex items-center gap-[0.4ch] whitespace-nowrap rounded-[0.4em] px-[0.42ch] py-[0.06em] ${REBUS_GROUND[tint]}`}
+    >
+      <I
+        size="1.05ch"
+        weight="fill"
+        aria-hidden
+        className={`shrink-0 ${ACCENT_TEXT[tint]}`}
+        style={{ width: "1.15ch", height: "1.15ch" }}
+      />
+      {children}
+    </span>
+  );
+}
+
+/** A very light ground, so the unit reads as one object without shouting. */
+const REBUS_GROUND: Record<Tint, string> = {
+  red: "bg-[color-mix(in_srgb,var(--sys-red)_10%,transparent)]",
+  blue: "bg-[color-mix(in_srgb,var(--sys-blue)_10%,transparent)]",
+  yellow: "bg-[color-mix(in_srgb,var(--sys-yellow)_18%,transparent)]",
+  green: "bg-[color-mix(in_srgb,var(--sys-green)_10%,transparent)]",
+};
+
+/** Bare inline glyph, kept for places where a ground would be too much. */
 export function Glyph({
   icon: I,
   label,

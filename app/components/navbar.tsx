@@ -18,10 +18,26 @@ import { GLASS, TAP } from "./ui";
  */
 
 const LINKS = [
-  { href: "/", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/fun", label: "Fun" },
+  { href: "/", label: "Work", tint: "red" as const },
+  { href: "/about", label: "About", tint: "blue" as const },
+  { href: "/fun", label: "Fun", tint: "yellow" as const },
 ];
+
+/** Pill ground and the type colour that sits on it, per destination. */
+const PILL: Record<string, { bg: string; text: string }> = {
+  red: {
+    bg: "bg-[color-mix(in_srgb,var(--sys-red)_15%,var(--raised))]",
+    text: "text-tone-red",
+  },
+  blue: {
+    bg: "bg-[color-mix(in_srgb,var(--sys-blue)_15%,var(--raised))]",
+    text: "text-tone-blue",
+  },
+  yellow: {
+    bg: "bg-[color-mix(in_srgb,var(--sys-yellow)_28%,var(--raised))]",
+    text: "text-tone-yellow",
+  },
+};
 
 export function Navbar({ email }: { email: string }) {
   const pathname = usePathname();
@@ -63,7 +79,9 @@ export function Navbar({ email }: { email: string }) {
         {pill && (
           <motion.span
             aria-hidden
-            className="absolute inset-y-1.5 rounded-full bg-[color-mix(in_srgb,var(--sys-blue)_16%,var(--raised))]"
+            className={`absolute inset-y-1.5 rounded-full ${
+              PILL[LINKS[activeIndex]?.tint ?? "blue"].bg
+            }`}
             initial={false}
             animate={{ x: pill.x, width: pill.w }}
             style={{ left: 0 }}
@@ -84,7 +102,7 @@ export function Navbar({ email }: { email: string }) {
               }}
               aria-current={active ? "page" : undefined}
               className={`relative z-10 flex min-h-tap items-center px-3.5 text-callout font-medium transition-colors duration-200 ${
-                active ? "text-tone-blue" : "text-ink-2 hover:text-ink"
+                active ? PILL[l.tint].text : "text-ink-2 hover:text-ink"
               }`}
             >
               {l.label}

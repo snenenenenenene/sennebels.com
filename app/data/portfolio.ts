@@ -31,7 +31,8 @@ export type Featured = {
   typeLine: TypeLine;
   accent: Accent;
   /** Rebus glyphs woven into the card copy. */
-  glyphs: string[];
+  /** Phrases in the description that carry a rebus mark. */
+  rebus: { phrase: string; icon: string; tint: "red" | "blue" | "yellow" }[];
   /** Client mark, shown at the top of the card the way a case study leads. */
   brand?: string;
   brandMono?: boolean;
@@ -53,7 +54,7 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
-  glyphs: ["DeviceMobile", "Broadcast", "Stack"],
+  rebus: [{ phrase: "consolidated super app", icon: "DeviceMobile", tint: "red" }, { phrase: "Server-driven UI", icon: "Broadcast", tint: "blue" }, { phrase: "without waiting on an app release", icon: "Lightning", tint: "yellow" }],
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
   brandMono: true,
@@ -90,7 +91,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "euroconsumers",
-  glyphs: ["Scales", "Brain", "ShieldCheck"],
+  rebus: [{ phrase: "tool-calling agent", icon: "Robot", tint: "red" }, { phrase: "Qdrant", icon: "Database", tint: "blue" }, { phrase: "Azure environments", icon: "Cloud", tint: "yellow" }],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
     typeLine: { kind: "Client work", sub: "AI systems" },
@@ -126,7 +127,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "kaedim",
-  glyphs: ["Cube", "Robot", "TestTube"],
+  rebus: [{ phrase: "Experimental workflows", icon: "Flask", tint: "red" }, { phrase: "MCP automations", icon: "Cube", tint: "blue" }, { phrase: "AI-driven testing", icon: "Robot", tint: "yellow" }],
     name: "Kaedim",
   brand: "/images/logos/kaedim.png",
   brandMono: true,
@@ -157,7 +158,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "beedee",
-  glyphs: ["Users", "Lightning", "TrendUp"],
+  rebus: [{ phrase: "36,000 monthly actives", icon: "TrendUp", tint: "red" }, { phrase: "made it native", icon: "DeviceMobile", tint: "blue" }, { phrase: "travel mode and localisation", icon: "Translate", tint: "yellow" }],
     name: "BeeDee",
   brand: "/images/logos/beedee.png",
     typeLine: { kind: "Client work", sub: "Frontend lead" },
@@ -187,7 +188,7 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "lokaal-beslist",
-  glyphs: ["Buildings", "MapTrifold", "Eye"],
+  rebus: [{ phrase: "local municipal decisions", icon: "Buildings", tint: "red" }, { phrase: "89% faster", icon: "Lightning", tint: "blue" }, { phrase: "manual government audit work", icon: "ShieldCheck", tint: "yellow" }],
     name: "Lokaal Beslist",
   brand: "/images/logos/vlaanderen.png",
     typeLine: { kind: "Government", sub: "Civic platform" },

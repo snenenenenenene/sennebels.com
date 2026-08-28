@@ -25,9 +25,20 @@ import {
   PERSON,
 } from "./data/portfolio";
 import { ProjectCard, SmallCard } from "./components/ProjectCard";
-import { ACCENT_TEXT, Chip, Glyph, GlyphTile, Heading, Surface, TAP, type Tint } from "./components/ui";
+import { Chip, GlyphTile, Heading, Rebus, Surface, TAP, type Tint } from "./components/ui";
+import { IconLink } from "./components/icon-link";
 import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
+
+/** One list, used by the hero and the footer. Each social owns a primary. */
+const TRIO: Tint[] = ["red", "blue", "yellow"];
+
+const SOCIALS = [
+  { label: "Resume", href: PERSON.resume, icon: FileText, tint: "red" as Tint, external: false },
+  { label: "GitHub", href: PERSON.github, icon: GithubLogo, tint: "blue" as Tint },
+  { label: "LinkedIn", href: PERSON.linkedin, icon: LinkedinLogo, tint: "yellow" as Tint },
+  { label: "Email", href: `mailto:${PERSON.email}`, icon: EnvelopeSimple, tint: "red" as Tint, external: false },
+];
 
 // Server component on purpose: every claim below ships in the HTML, so search
 // engines and answer engines can read it without executing any JavaScript.
@@ -67,45 +78,34 @@ function Hero() {
         <Rise>
           {/* Rebus: the marks sit inside the sentence, so words and glyphs read as one line. */}
           <p className="max-w-[56ch] text-lede text-ink-2">
-            Six years remote-first building web, mobile and AI systems
-            <Glyph icon={Terminal} tint="red" />, a game developer
-            <Glyph icon={GameController} tint="blue" /> on the side, and full-time staff to four cats
-            <Glyph icon={Cat} tint="yellow" />.
+            Six years remote-first building{" "}
+            <Rebus icon={Terminal} tint="red">
+              web, mobile and AI systems
+            </Rebus>
+            , a{" "}
+            <Rebus icon={GameController} tint="blue">
+              game developer
+            </Rebus>{" "}
+            on the side, and full-time staff to{" "}
+            <Rebus icon={Cat} tint="yellow">
+              four cats
+            </Rebus>
+            .
           </p>
         </Rise>
 
         <Rise>
           <p className="sr-only">{PERSON.answerBlock}</p>
           <ul className="flex flex-wrap items-center gap-x-7 gap-y-2 text-callout">
-            <IconLink href={PERSON.resume} label="Resume" icon={FileText} tint="red" />
-            <IconLink href={PERSON.github} label="GitHub" icon={GithubLogo} tint="blue" />
-            <IconLink href={PERSON.linkedin} label="LinkedIn" icon={LinkedinLogo} tint="yellow" />
-            <IconLink href={`mailto:${PERSON.email}`} label="Email" icon={EnvelopeSimple} tint="red" />
+            {SOCIALS.map((l) => (
+              <li key={l.label}>
+                <IconLink {...l} />
+              </li>
+            ))}
           </ul>
         </Rise>
       </Stagger>
     </header>
-  );
-}
-
-function IconLink({
-  href,
-  label,
-  icon: I,
-  tint,
-}: {
-  href: string;
-  label: string;
-  icon: typeof FileText;
-  tint: Tint;
-}) {
-  return (
-    <li>
-      <a href={href} className="flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-ink">
-        <I size={19} weight="fill" aria-hidden className={ACCENT_TEXT[tint]} />
-        {label}
-      </a>
-    </li>
   );
 }
 
@@ -140,17 +140,13 @@ const MINE = [
   { label: "Korf", href: "https://korf.app" },
 ];
 
-const FOOTER_LINK =
-  "flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-tone-blue";
-
 function Footer() {
   return (
     <footer className="flex flex-col gap-12 pb-16 pt-28">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div className="flex flex-col gap-5">
-          <h2 className="max-w-[16ch] font-display text-title1 font-medium italic text-moss">
+          <h2 className="max-w-[16ch] font-display text-title1 font-medium italic text-tone-blue">
             Come say hi
-            <Glyph icon={Mountains} tint="yellow" />
           </h2>
           <p className="max-w-[52ch] text-body text-ink-2">
             Open to contract work, and to full-time roles in Canada or the United States that can
@@ -168,24 +164,14 @@ function Footer() {
         <div className="grid grid-cols-2 gap-8 text-callout">
           <div className="flex flex-col gap-3">
             <p className="text-caption font-medium text-ink-3">Elsewhere</p>
-            {[
-              { label: "GitHub", href: PERSON.github, icon: GithubLogo },
-              { label: "LinkedIn", href: PERSON.linkedin, icon: LinkedinLogo },
-              { label: "Resume", href: PERSON.resume, icon: FileText },
-            ].map((l) => (
-              <a key={l.label} href={l.href} className={FOOTER_LINK}>
-                <l.icon size={17} weight="fill" aria-hidden className="text-ink-3" />
-                {l.label}
-              </a>
+            {SOCIALS.map((l) => (
+              <IconLink key={l.label} {...l} />
             ))}
           </div>
           <div className="flex flex-col gap-3">
             <p className="text-caption font-medium text-ink-3">Mine</p>
-            {MINE.map((m) => (
-              <a key={m.label} href={m.href} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-                <ArrowUpRight size={14} weight="bold" aria-hidden className="text-ink-3" />
-                {m.label}
-              </a>
+            {MINE.map((m, i) => (
+              <IconLink key={m.label} {...m} icon={ArrowUpRight} tint={TRIO[i % TRIO.length]} />
             ))}
           </div>
         </div>
