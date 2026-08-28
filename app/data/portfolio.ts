@@ -185,8 +185,8 @@ export const FEATURED: Featured[] = [
       "A hundred and fifty-five merged pull requests between January 2025 and August 2026, working directly with the CEO and with the engineering team in India.",
     ],
     outcomes: [
-      { value: "63 to 116", label: "search clicks a day over the last 164 days" },
-      { value: "954", label: "non-brand queries ranking, 83 of them in position one" },
+      { value: "27.8k to 35.4k", label: "monthly active users across 2026, peaking at 36,098" },
+      { value: "63 to 116", label: "search clicks a day, with 83 queries in position one" },
       { value: "155", label: "pull requests merged, 16 of them the signup flow alone" },
     ],
   },
