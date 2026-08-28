@@ -246,6 +246,24 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </Tilt></figure></Reveal>
       )}
 
+      {project.gallery && (
+        // Phone screens are tall, so they scroll sideways rather than
+        // shrinking to fit a row. The rail bleeds past the text column.
+        <section className="flex flex-col gap-8 pt-24">
+          <h2 className="text-title2 font-medium">In the app</h2>
+          <ul className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 md:-mx-12 md:px-12">
+            {project.gallery.map((shot) => (
+              <li key={shot.src} className="flex w-[210px] shrink-0 snap-start flex-col gap-3 sm:w-[240px]">
+                <div className="squircle overflow-hidden rounded-media shadow-media">
+                  <Image src={shot.src} alt={shot.caption} width={620} height={1275} className="w-full" />
+                </div>
+                <p className="text-callout leading-[1.5] text-ink-2">{shot.caption}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="flex flex-col gap-8 pt-24">
         <h2 className="text-title2 font-medium">Where it landed</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

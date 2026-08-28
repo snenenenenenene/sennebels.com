@@ -45,6 +45,8 @@ export type Featured = {
   /** Real screenshot, or a spec panel when the work is confidential / has no shippable asset. */
   image?: string;
   spec?: { points: string[]; credit: string };
+  /** Real screens from the shipped app, shown as a row on the case study. */
+  gallery?: { src: string; caption: string }[];
   cta: string;
   /** Everything below powers /work/[slug] only. */
   /** What the project taught, in one paragraph. Grounded in its own story. */
@@ -82,14 +84,11 @@ export const FEATURED: Featured[] = [
     description:
       "Three or four apps became one, covering every Tomorrowland edition worldwide and carrying the old radio app's features into CarPlay and Android Auto. My work is the live radio surviving a bad network on both platforms, and the CMS-driven content system the festival screens are built from.",
     tech: ["React Native", "Expo", "Server-driven UI"],
-    spec: {
-      points: [
-        "Three separate apps merged into one cross-platform product",
-        "Prismic CMS objects mirrored into type-safe Zod schemas",
-        "EAS preview, production and tagged-release pipelines",
-      ],
-      credit: "Freelance, engaged directly",
-    },
+    image: "/images/work/tomorrowland.webp",
+    gallery: [
+      { src: "/images/work/tomorrowland-explore.webp", caption: "Every edition in one place, plus the eleven months you are not at one" },
+      { src: "/images/work/tomorrowland-search.webp", caption: "Search across DJ sets and One World Radio shows" },
+    ],
     lesson:
       "Write down how a thing fails before you try to fix it. The radio only got better once the failure modes were on paper, because a stream that stalls, a network that dropped and a person who pressed pause look identical from the player and need three different answers. Guessing at that in code just moves the bug.",
     cta: "read the write-up",
@@ -223,6 +222,12 @@ export const FEATURED: Featured[] = [
     description:
       "BeeDee felt like a website in a wrapper. I made it native, then spent more work on the signup flow than on anything else, so people stopped falling out of it. Refer-a-friend, travel mode, localisation, and releases moved onto GitHub Actions. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry the growth, and daily clicks are up 84%. Reporting to the CEO, with the team in India.",
     tech: ["React Native", "Sockets", "Mollie"],
+    gallery: [
+      { src: "/images/work/beedee-profile.webp", caption: "Supporter, Superlikes and refer-a-friend, all off one screen" },
+      { src: "/images/work/beedee-incognito.webp", caption: "Incognito, so you only surface to people you already liked" },
+      { src: "/images/work/beedee-travel.webp", caption: "Travel mode, with the places you keep going back to" },
+      { src: "/images/work/beedee-likes.webp", caption: "Who liked you, kept separate from who you liked" },
+    ],
     image: "/images/work/beedee.webp",
     lesson:
       "The unglamorous flow is where the users actually are. More work went into signup than into any feature, and none of it is something a person would ever ask for. Keeping your answers when you go back to change your phone number does not demo well. It just means people finish.",
