@@ -221,6 +221,15 @@ export const FEATURED: Featured[] = [
 
 export const ALSO = [
   {
+    name: "Stadiq",
+    tint: "blue" as const,
+    image: "/images/work/stadiq.webp",
+    kind: "In private beta",
+    wide: true,
+    description:
+      "A roadworks permit, a bridge closure and a festival all land in the same street in the same week, and nobody tells the businesses on it. Stadiq reads Antwerp's open data and tells an operator what is about to disrupt them, in plain language, with the estimate stated as an estimate.",
+  },
+  {
     name: "Transita",
     tint: "red" as const,
     image: "/images/work/transita.webp",

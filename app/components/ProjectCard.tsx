@@ -88,6 +88,7 @@ export function SmallCard({
   href,
   image,
   tint = "blue",
+  wide = false,
 }: {
   name: string;
   kind: string;
@@ -95,6 +96,7 @@ export function SmallCard({
   href?: string;
   image?: string;
   tint?: Tint;
+  wide?: boolean;
 }) {
   const body = (
     <>
@@ -107,7 +109,7 @@ export function SmallCard({
               width={1200}
               height={760}
               loading="eager"
-              className="h-[210px] w-full object-cover object-top"
+              className={`w-full object-cover object-top ${wide ? "h-[300px]" : "h-[210px]"}`}
             />
           </div>
         </Tilt>

@@ -108,7 +108,12 @@ function Also() {
       </h2>
       <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-2">
         {ALSO.map((item, i) => (
-          <Reveal key={item.name} delay={(i % 2) * 0.07} y={40} className="flex">
+          <Reveal
+            key={item.name}
+            delay={(i % 2) * 0.07}
+            y={40}
+            className={`flex ${"wide" in item && item.wide ? "md:col-span-2" : ""}`}
+          >
             <LiftOnHover className="flex w-full">
               <SmallCard {...item} />
             </LiftOnHover>
