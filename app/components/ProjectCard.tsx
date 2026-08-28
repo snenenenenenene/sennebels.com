@@ -113,7 +113,7 @@ export function SmallCard({
       )}
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="text-title3 font-medium text-ink">{name}</h3>
-        <p className="rounded-full bg-accent-soft px-2.5 py-0.5 text-caption font-medium text-moss">{kind}</p>
+        <p className="shrink-0 text-caption font-medium text-ink-3">{kind}</p>
       </div>
       <p className="text-callout text-ink-2">{description}</p>
     </>

@@ -119,7 +119,7 @@ function Also() {
   return (
     <section className="flex flex-col gap-12 pt-24">
       <h2 className="max-w-[24ch] text-title1 font-medium">
-        Smaller things, still running.
+        Things I build on my own time.
       </h2>
       <div className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
         {ALSO.map((item, i) => (

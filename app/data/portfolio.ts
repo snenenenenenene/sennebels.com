@@ -186,7 +186,7 @@ export const FEATURED: Featured[] = [
       { label: "Role", value: "Frontend Lead" },
       { label: "Timeline", value: "Jan 2025 to now" },
       { label: "Team", value: "One engineer plus rotating interns" },
-      { label: "Contribution", value: "1,100+ commits, top contributor" },
+      { label: "Ownership", value: "Frontend, end to end" },
     ],
     story: [
       "BeeDee is a consumer social platform with 140,000 users. When I picked up frontend, the most-used interaction in the product took more than fifteen seconds. People were not complaining about it. They were leaving.",
@@ -236,47 +236,28 @@ export const ALSO = [
   {
     name: "Transita",
     image: "/images/work/transita.webp",
-    kind: "My product",
+    kind: "Live, paying customers",
     description:
-      "Solo-built and operated, 759 of 760 commits, with paying customers. Claude ranks a person's best global immigration pathways from a three-minute questionnaire.",
+      "Built and run entirely by me, end to end. Claude ranks a person's best global immigration pathways from a three-minute questionnaire, and people pay for the result.",
     href: "https://transita.app",
-  },
-  {
-    name: "Outpost",
-    kind: "Client",
-    description:
-      "A whole e-commerce platform rebuilt alone: 944 of 946 commits across storefront, REST API, database schema, Docker and deployment.",
-  },
-  {
-    name: "Ornitho",
-    image: "/images/work/ornitho.webp",
-    kind: "My game",
-    description:
-      "A dinosaur horror game set in Antwerp. Actual Antwerp, actual dinosaurs. The reason everything above behaves the way it does.",
-  },
-  {
-    name: "Faultline",
-    image: "/images/work/faultline.webp",
-    kind: "My game",
-    description:
-      "Browser multiplayer on Three.js and Colyseus. Compound disasters, and dead players still get a vote on what happens next.",
-  },
-  {
-    name: "Velso",
-    image: "/images/work/velso.webp",
-    kind: "My product",
-    description:
-      "An AI ops layer for solo freelancers: intake, scope briefs, contracts, invoicing and scope-creep detection, automated end to end.",
   },
   {
     name: "Korf",
     image: "/images/work/korf-live.webp",
-    kind: "My product",
+    kind: "App Store and Play Store",
     description:
-      "Belgian grocery price comparison, live on the App Store and Google Play, shipping to TestFlight on every push to main.",
+      "Belgian grocery price comparison, live on both stores. Next.js and Capacitor, with CI releasing to TestFlight and the Play Store internal track on every push to main.",
     href: "https://korf.app",
   },
+  {
+    name: "Faultline",
+    image: "/images/work/faultline.webp",
+    kind: "In progress",
+    description:
+      "Browser multiplayer on Three.js and Colyseus. Compound disasters, and dead players still get a vote on what happens next.",
+  },
 ];
+
 
 export const NUMBERS = [
   {
@@ -288,8 +269,8 @@ export const NUMBERS = [
     label: "what I did to their slowest screen, a 93% cut",
   },
   {
-    value: "944 of 946",
-    label: "commits on a whole e-commerce rebuild, alone",
+    value: "89%",
+    label: "faster page loads on a national government platform",
   },
   {
     value: "6 years",
