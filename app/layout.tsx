@@ -93,7 +93,7 @@ export const metadata: Metadata = {
       { url: "/images/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [{ url: "/images/logo.png" }],
-    other: [{ rel: "mask-icon", url: "/images/safari-pinned-tab.svg", color: "#1E1515" }],
+    other: [{ rel: "mask-icon", url: "/images/safari-pinned-tab.svg", color: "#2B2621" }],
   },
   manifest: "/manifest.json",
   alternates: {
@@ -152,7 +152,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`h-full ${hanken.variable} ${fraunces.variable}`}>
       <head>
-        <meta name="theme-color" content="#F9F8F5" />
+        <meta name="theme-color" content="#EDE8DE" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#1A1815" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="min-h-full bg-paper font-sans">
         <script

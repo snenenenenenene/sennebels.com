@@ -18,10 +18,30 @@ export const PERSON = {
     "Senne Bels is a senior software engineer based in Antwerp, Belgium, with six years of remote-first experience building web, mobile and AI systems in TypeScript. He leads frontend for a consumer platform serving 140,000 users, has delivered production LLM systems with retrieval, evaluation and guardrails, and has shipped work for Tomorrowland, the Y Combinator-backed startup Kaedim, and the Flanders Agency of Home Affairs.",
 } as const;
 
+
+/**
+ * Colour identity. The palette is Golgari: green for growth, black for
+ * pragmatism. It is one scheme, locked, and every value lives in globals.css
+ * as a CSS variable so both appearances stay in step. Nothing here is a hex.
+ */
+export const IDENTITY = {
+  guild: "Golgari",
+  pips: [
+    { key: "B", name: "Black", gloss: "ship the pragmatic thing" },
+    { key: "G", name: "Green", gloss: "then grow it" },
+  ],
+  line: "Black for pragmatism, green for growth. Ship the useful version, then grow it.",
+} as const;
+
+/** Type line, in the Magic sense: what a thing is, then what kind. */
+export type TypeLine = { kind: string; sub: string };
+
 export type Featured = {
   slug: string;
   name: string;
-  meta: string;
+  typeLine: TypeLine;
+  /** Flavour text. Personality belongs on the work, not in a box at the end. */
+  flavour: string;
   title: string;
   description: string;
   tech: string[];
@@ -41,7 +61,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
     name: "Tomorrowland",
-    meta: "Client · React Native + Expo · global consumer app",
+    typeLine: { kind: "Client work", sub: "Mobile" },
+  flavour: "Four apps walked in. One walked out, and it did not lose anything on the way.",
     title: "One app for a festival the whole world watches",
     description:
       "Senior mobile engineer on the consolidated super app, merging Tomorrowland Radio, the per-festival apps and Tomorrowland Account into a single product. Server-driven UI over an OpenAPI NestJS backend-for-frontend, so content teams ship without waiting on an app release.",
@@ -74,7 +95,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "euroconsumers",
     name: "Euroconsumers",
-    meta: "Client · production LLM system · 100+ daily users",
+    typeLine: { kind: "Client work", sub: "AI systems" },
+  flavour: "A confident wrong answer about your rights is worse than no answer at all.",
     title: "An AI legal assistant that has to be right",
     description:
       "A multi-tenant assistant for a European consumer-rights organisation, live on public sites. A tool-calling agent over hybrid retrieval, with automated groundedness scoring, out-of-corpus guardrails, and human review on the answers that carry real risk.",
@@ -107,7 +129,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "kaedim",
     name: "Kaedim",
-    meta: "Client · Y Combinator-backed · WebGL",
+    typeLine: { kind: "Startup", sub: "3D and AI" },
+  flavour: "The model was the easy part. Making artists trust it was the work.",
     title: "Making AI 3D generation feel obvious",
     description:
       "An AI 3D copilot joining chat and canvas, plus a pipeline that pushes every generated asset through Blender over the Model Context Protocol and tests it automatically.",
@@ -134,7 +157,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "beedee",
     name: "BeeDee",
-    meta: "Client · frontend lead · 140,000 users",
+    typeLine: { kind: "Client work", sub: "Frontend lead" },
+  flavour: "Nobody filed a bug about the fifteen seconds. They just stopped coming back.",
     title: "A social platform 93% faster than I found it",
     description:
       "Led frontend on a consumer social platform: cut the slowest interactions from 15 seconds to under one, held real-time sockets steady at 10,000 daily actives, and shipped the iOS app.",
@@ -161,7 +185,8 @@ export const FEATURED: Featured[] = [
   {
     slug: "lokaal-beslist",
     name: "Lokaal Beslist",
-    meta: "Belgian government · 300+ municipalities · WCAG AAA",
+    typeLine: { kind: "Government", sub: "Civic platform" },
+  flavour: "Every decision was already public. None of it was readable.",
     title: "Making government decisions readable by humans",
     description:
       "A citizen-facing transparency platform for the Flanders Agency of Home Affairs, opening up local municipal decisions and financial data. Pages loaded 89% faster, and automated compliance tooling cut manual government audit work by 70%.",
@@ -286,24 +311,11 @@ export const SKILLS = [
   { label: "Python" }, { label: "Accessibility" }, { label: "Technical SEO" },
 ];
 
-export const FUN_INTRO =
-  "You can usually find me on a long walk with a coffee, cooking something ambitious on a weeknight, or losing a Rocket League match I had every right to win. Four cats and a dog run the household. One of them, Maria, has a single eye and full veto power over the radiator.";
-
-export const FUN = [
-  {
-    title: "Four cats, one dog",
-    body: "The long-term plan involves opening a cat cafe. This is not a joke, it is a roadmap item.",
-  },
-  {
-    title: "Mountains, eventually",
-    body: "I hike. Belgium is six metres above sea level and entirely flat. You can see the problem.",
-  },
-  {
-    title: "Overwatch & HOI4",
-    body: "Plus Rocket League and Rivals of Aether. Half research, half genuinely just playing games.",
-  },
-  {
-    title: "Coffee, obviously",
-    body: "Usually paired with a walk, and occasionally with a suspiciously ambitious dinner plan.",
-  },
+/** Lives in the About column now, in Senne's own voice, not in a tile grid. */
+export const ASIDE = [
+  "Four cats and a dog run this household. Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided.",
+  "Otherwise: long walks with a coffee, dinners more ambitious than the weeknight deserves, and Rocket League matches I had every right to win.",
+  "Belgium is flat and six metres above sea level, so the hiking happens elsewhere. That is part of why the plan points at mountains.",
 ];
+
+

@@ -63,7 +63,6 @@ const config: Config = {
         hairline: "var(--hairline)",
         moss: "var(--accent)",
         "accent-soft": "var(--accent-soft)",
-        'dark-accent': '#bc6c25',
         gray: {
           1: "var(--gray-1)",
           2: "var(--gray-2)",
@@ -73,20 +72,6 @@ const config: Config = {
         text: "var(--color-text)",
       },
       backgroundColor: {
-        light: {
-          primary: "#ccd5ae",
-          secondary: "#e9edc9",
-          tertiary: "#fefae0",
-          quaternary: "#faedcd",
-          accent: "#d4a373"
-        },
-        dark: {
-          primary: "#606c38",
-          secondary: "#283618",
-          tertiary: "#fefae0",
-          quaternary: "#dda15e",
-          accent: "#bc6c25"
-        },
       }
     },
   },

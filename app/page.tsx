@@ -24,8 +24,8 @@ import {
   EDUCATION,
   EXPERIENCE,
   FEATURED,
-  FUN,
   LANGUAGES,
+  ASIDE,
   NUMBERS,
   PERSON,
   SKILLS,
@@ -34,6 +34,7 @@ import { ProjectCard, SmallCard } from "./components/ProjectCard";
 import { Dock } from "./components/dock";
 import { Chip, Glyph, Heading, Surface, TAP } from "./components/ui";
 import { SectionHeader } from "./components/section-header";
+import { Pips } from "./components/pips";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -57,7 +58,6 @@ export default function Home() {
       <Numbers />
       <About />
       <Skills />
-      <Fun />
       <Footer />
       <Dock
         links={{
@@ -91,6 +91,10 @@ function Hero() {
             <Glyph icon={GameController} /> on the side, and full-time staff to four cats
             <Glyph icon={Cat} />.
           </p>
+        </Rise>
+
+        <Rise>
+          <Pips />
         </Rise>
 
         <Rise>
@@ -205,6 +209,14 @@ function About() {
             <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
           </div>
           <div className="flex flex-col gap-3">
+            <Heading icon={Cat}>Off the clock</Heading>
+            {ASIDE.map((line) => (
+              <p key={line.slice(0, 24)} className="text-callout text-ink-2">
+                {line}
+              </p>
+            ))}
+          </div>
+          <div className="flex flex-col gap-3">
             <Heading icon={Translate}>Languages</Heading>
             <ul className="flex flex-col gap-2 text-body text-ink-2">
               {LANGUAGES.map((l) => (
@@ -229,31 +241,6 @@ function Skills() {
           </Chip>
         ))}
       </ul>
-    </section>
-  );
-}
-
-function Fun() {
-  const glyphs = [Cat, Mountains, GameController, Coffee];
-  return (
-    <section className="flex flex-col gap-12 pt-28">
-      <h2 className="max-w-[26ch] text-title1 font-medium">
-        When I am not working
-        <Glyph icon={Coffee} />
-      </h2>
-      <div className="grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-2">
-        {FUN.map((f, i) => (
-          <Reveal key={f.title} delay={i * 0.07} y={40}>
-            <div className="flex max-w-[46ch] flex-col gap-3">
-              <h3 className="font-display text-title2 font-medium text-ink">
-                {f.title}
-                <Glyph icon={glyphs[i % glyphs.length]} />
-              </h3>
-              <p className="text-body text-ink-2">{f.body}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
     </section>
   );
 }

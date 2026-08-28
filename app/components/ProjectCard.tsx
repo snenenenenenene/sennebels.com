@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
-import { TAP } from "./ui";
+import { Flavour, TAP, TypeLine } from "./ui";
 
 /**
  * Apple groups related content on a raised surface rather than separating it
@@ -15,13 +15,15 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
     <article className="group/card rounded-card bg-raised p-6 shadow-card transition-shadow duration-300 hover:shadow-card-hover md:p-8">
       <div className={`flex flex-col gap-9 lg:gap-14 ${flipped ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
         <div className="flex flex-col gap-4 lg:w-[44%] lg:shrink-0">
-          <p className="text-caption font-medium uppercase tracking-[0.2em] text-ink-3">{project.name}</p>
+          <TypeLine kind={project.typeLine.kind} sub={project.typeLine.sub} />
+
+          <p className="text-callout font-semibold text-moss">{project.name}</p>
 
           <h3 className="max-w-[18ch] text-title1 font-medium text-ink">{project.title}</h3>
 
           <p className="max-w-[54ch] text-body text-ink-2">{project.description}</p>
 
-          <p className="text-callout text-ink-3">{project.meta}</p>
+          <Flavour>{project.flavour}</Flavour>
 
           <Link
             href={`/work/${project.slug}`}
