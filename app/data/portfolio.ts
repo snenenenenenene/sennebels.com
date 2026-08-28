@@ -381,7 +381,7 @@ export const ASIDE = [
   "Most of what I do away from a keyboard ends up feeding what I do at one.",
 ];
 
-/** Six of the 31 five-star films, with stills pulled from their Letterboxd pages. */
+/** Six of the thirty-one films Senne has given five stars. */
 export const FILM_STRIP = [
   { title: "Mad Max: Fury Road", year: "2015", img: "/images/film/mad-max-fury-road.webp" },
   { title: "The Truman Show", year: "1998", img: "/images/film/the-truman-show.webp" },
@@ -393,12 +393,11 @@ export const FILM_STRIP = [
 
 /** Services a card actually points at, so the mark is real rather than generic. */
 export const FUN_BRANDS: Record<string, string[]> = {
-  "198 films and a generous hand": ["letterboxd"],
   "Marvel Rivals, HOI4, Wingspan": ["steam", "boardgamegeek"],
   "Electric guitar, badly, loudly": ["spotify"],
 };
 
-/** Real numbers, straight out of the Letterboxd export. */
+/** Real counts from his own viewing log. Kept as numbers, not as a profile. */
 export const FILM_STATS = [
   { value: "198", label: "films rated since August 2023" },
   { value: "31", label: "of them got five stars" },
@@ -435,7 +434,7 @@ export const FUN = [
   },
   {
     title: "198 films and a generous hand",
-    body: "Four films in that list ever got half a star. Most land on four or four and a half, because I would rather enjoy a thing than be right about it. Fury Road, The Truman Show and WALL-E are the ones I keep going back to. My Letterboxd bio says literally ryan gosling and I stand by it.",
+    body: "Four films in that list ever got half a star. Most land on four or four and a half, because I would rather enjoy a thing than be right about it. Fury Road, The Truman Show and WALL-E are the ones I keep going back to.",
   },
   {
     title: "Electric guitar, badly, loudly",

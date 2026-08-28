@@ -42,7 +42,7 @@ export default function Fun() {
         ))}
       </div>
 
-      {/* Numbers from the Letterboxd export, not estimated. */}
+      {/* Real counts from his own viewing log, not estimated. */}
       <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {FILM_STATS.map((f, i) => (
           <div
@@ -58,7 +58,7 @@ export default function Fun() {
       </dl>
 
       <div className="mt-8">
-        <FilmStrip films={FILM_STRIP} href="https://letterboxd.com/___mclovin____/" />
+        <FilmStrip films={FILM_STRIP} />
       </div>
 
       <div className="grid grid-cols-1 gap-5 pt-14 md:grid-cols-2">
