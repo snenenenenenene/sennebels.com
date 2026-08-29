@@ -29,7 +29,7 @@ export function Browser({
         <span aria-hidden className="size-2.5 rounded-full bg-[#f5bf4f]" />
         <span aria-hidden className="size-2.5 rounded-full bg-[#61c454]" />
         {url && (
-          <span className="ml-2 truncate rounded-full bg-paper/70 px-2.5 py-0.5 text-[11px] leading-[1.6] text-ink-3">
+          <span className="ml-2 truncate rounded-full bg-paper px-2.5 py-0.5 text-[11px] leading-[1.6] text-ink-2">
             {url}
           </span>
         )}

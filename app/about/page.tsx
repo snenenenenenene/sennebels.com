@@ -39,7 +39,7 @@ const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
 
 export default function About() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
+    <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <PageTitle
         title="About"
         lede="The work, the numbers, and the tools I actually use."
@@ -52,7 +52,10 @@ export default function About() {
       />
 
       <section className="pt-16">
-        <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* role=list on a plain container: the stats read as term/definition
+            pairs, but a <dl> may only nest one <div> deep and the reveal
+            wrapper already spends that level. */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {NUMBERS.map((n, i) => {
             const st = STATS[i % STATS.length];
             return (
@@ -63,16 +66,16 @@ export default function About() {
                 <div
                   className={`squircle group/card flex h-full flex-col-reverse justify-end gap-2 rounded-panel p-6 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[st.tint]}`}
                 >
-                  <dt className="max-w-[24ch] text-callout text-ink-2">{n.label}</dt>
-                  <dd className={`font-display text-title1 font-medium ${ACCENT_TEXT[st.tint]}`}>
+                  <p className="max-w-[24ch] text-callout text-ink-2">{n.label}</p>
+                  <p className={`font-display text-title1 font-medium ${ACCENT_TEXT[st.tint]}`}>
                     {n.value}
-                  </dd>
+                  </p>
                   <GlyphTile icon={st.icon} tint={st.tint} />
                 </div>
               </Reveal>
             );
           })}
-        </dl>
+        </div>
       </section>
 
       <div className="grid grid-cols-1 gap-12 pt-20 lg:grid-cols-[1.4fr_1fr] lg:gap-20">

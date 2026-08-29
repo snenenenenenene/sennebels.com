@@ -37,7 +37,7 @@ const SPAN = ["md:col-span-3", "md:col-span-3", "md:col-span-2", "md:col-span-4"
 
 export default function Fun() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
+    <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <PageTitle title="When I’m not working" lede="Cats, games, films, guitar, coffee and too many plants." />
 
       <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">

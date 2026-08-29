@@ -43,7 +43,7 @@ const NOW = [
 
 export default function Now() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
+    <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <PageTitle
         title="What I’m doing now"
         lede="A current snapshot, because a job title is a fairly bad summary of a person."

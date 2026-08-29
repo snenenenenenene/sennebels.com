@@ -163,6 +163,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="min-h-full bg-paper font-sans">
+        {/*
+          WCAG 2.4.1: a keyboard user should be able to get past the navigation
+          without tabbing through it on every page. Off-screen until focused.
+        */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-body focus:font-medium focus:text-paper"
+        >
+          Skip to content
+        </a>
         <Navbar email={PERSON.email} />
         <script
           type="application/ld+json"

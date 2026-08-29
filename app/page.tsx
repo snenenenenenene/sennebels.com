@@ -37,7 +37,7 @@ import { Phone } from "./components/phone";
 // engines and answer engines can read it without executing any JavaScript.
 export default function Home() {
   return (
-    <main id="top" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
+    <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
       <Hero />
 
       {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
