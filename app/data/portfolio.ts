@@ -448,7 +448,7 @@ export const EXPERIENCE: {
   tint?: "red" | "blue" | "yellow" | "green";
 }[] = [
   
-  { role: "Senior Mobile Engineer", org: "Tomorrowland", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
+  { role: "Senior Mobile Engineer", org: "Tomorrowland", caseStudy: "tomorrowland", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
   { role: "Full-Stack Engineer", org: "Outpost", href: "https://outpostplayers.com", logo: "/images/logos/outpost.webp", tint: "blue", dates: "Jan 2026 to now" },
   { role: "Frontend Lead", org: "BeeDee", caseStudy: "beedee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
   { role: "AI Engineer", org: "Euroconsumers, via Nimble", caseStudy: "euroconsumers", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
