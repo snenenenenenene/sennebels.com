@@ -1,61 +1,82 @@
 // app/layout.tsx
 import type { Metadata } from "next";
+import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
-import { projects } from "./constants"; // Import projects data
+import { Analytics } from "@vercel/analytics/react";
+import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
+// Dock and TopBar are kept for reference; the Navbar replaces both for now.
+// import { Dock } from "./components/dock";
+// import { TopBar } from "./components/topbar";
+import { Navbar } from "./components/navbar";
+import { Footer } from "./components/footer";
+import { Konami } from "./components/konami";
+
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-hanken",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["italic", "normal"],
+  weight: ["500", "600"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const TITLE = `${PERSON.name}, ${PERSON.jobTitle}`;
+const DESCRIPTION =
+  "Senior software engineer in Antwerp, Belgium. Six years remote-first building full-stack web, mobile and production AI systems in TypeScript, for Tomorrowland, Kaedim (Y Combinator) and the Belgian government.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sennebels.com'),
+  metadataBase: new URL("https://sennebels.com"),
   title: {
-    default: "Senne Bels - Creative Developer",
-    template: "%s | Senne Bels"
+    default: TITLE,
+    template: `%s | ${PERSON.name}`,
   },
-  description: "Creative developer focused on building interactive and innovative digital experiences. Specializing in web development and creative technologies.",
+  description: DESCRIPTION,
   keywords: [
-    "Creative Developer",
-    "Web Development",
-    "UI/UX Design",
-    "Interactive Websites",
-    "Full Stack Developer",
-    "Frontend Developer",
-    "React Developer",
+    "Senior Software Engineer",
+    "Full-Stack Engineer",
+    "AI Engineer",
+    "LLM Systems",
+    "Retrieval-Augmented Generation",
+    "React",
     "Next.js",
+    "React Native",
     "TypeScript",
-    "Tailwind CSS",
-    "Node.js",
-    "PostgreSQL",
+    "Three.js",
     "Senne Bels",
+    "Antwerp Developer",
     "Belgium Developer",
-    "Antwerp Developer"
+    "Visa Sponsorship",
   ],
-  authors: [{ name: "Senne Bels", url: "https://sennebels.com" }],
-  creator: "Senne Bels",
-  publisher: "Senne Bels",
-  formatDetection: {
-    email: false,
-    telephone: false,
-    address: false,
-  },
+  authors: [{ name: PERSON.name, url: "https://sennebels.com" }],
+  creator: PERSON.name,
+  publisher: PERSON.name,
+  formatDetection: { email: false, telephone: false, address: false },
   openGraph: {
-    type: "website",
-    locale: "en_UK",
+    type: "profile",
+    locale: "en_GB",
     url: "https://sennebels.com",
-    siteName: "Senne Bels",
-    title: "Senne Bels - Creative Developer",
-    description: "Creative developer focused on building interactive, game-like websites and innovative digital experiences.",
+    siteName: PERSON.name,
+    title: TITLE,
+    description: DESCRIPTION,
     images: [
       {
         url: "/assets/screenshot.png",
         width: 1200,
         height: 630,
-        alt: "Senne Bels - Creative Developer Portfolio",
+        alt: `${PERSON.name}, ${PERSON.jobTitle}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Senne Bels - Creative Developer",
-    description: "Creative developer focused on building interactive websites and innovative digital experiences.",
+    title: TITLE,
+    description: DESCRIPTION,
     creator: "@snenenenene",
     images: ["/assets/screenshot.png"],
   },
@@ -77,88 +98,83 @@ export const metadata: Metadata = {
       { url: "/images/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/images/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [
-      { url: "/images/logo.png" },
-    ],
-    other: [
-      { rel: "mask-icon", url: "/images/safari-pinned-tab.svg", color: "#000000" },
-    ],
+    apple: [{ url: "/images/logo.png" }],
+    other: [{ rel: "mask-icon", url: "/images/safari-pinned-tab.svg", color: "#1E1515" }],
   },
   manifest: "/manifest.json",
-  verification: {
-    google: "your-google-site-verification",
-    yandex: "yandex-verification",
-    me: ["mailto:sennebels@gmail.com"],
-  },
   alternates: {
     canonical: "https://sennebels.com",
-    languages: {
-      'en-US': 'https://sennebels.com',
-    },
+    languages: { "en-GB": "https://sennebels.com" },
   },
   category: "technology",
 };
 
-const personSchema = {
+// ProfilePage wrapping a Person is the snippet that does the most work on a portfolio:
+// it is what lets a knowledge graph resolve "Senne Bels" to one entity.
+const profileSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Senne Bels",
-  "url": "https://sennebels.com",
-  "sameAs": [
-    // Add links to your social profiles here if available, e.g.:
-    // "https://www.linkedin.com/in/yourprofile",
-    // "https://github.com/yourprofile",
-    // "https://twitter.com/yourprofile"
-  ],
-  "jobTitle": "Creative Developer",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Freelance" // Or your current company
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: PERSON.name,
+    jobTitle: PERSON.jobTitle,
+    description: PERSON.answerBlock,
+    url: "https://sennebels.com",
+    email: `mailto:${PERSON.email}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: PERSON.locality,
+      addressCountry: PERSON.country,
+    },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "AP University of Applied Sciences",
+    },
+    worksFor: { "@type": "Organization", name: "Okapi Works" },
+    knowsAbout: SKILL_GROUPS.flatMap((g) => g.items.map((i) => i.name)),
+    knowsLanguage: ["nl", "en", "fr"],
+    sameAs: [PERSON.github, PERSON.linkedin],
   },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Antwerp",
-    "addressCountry": "BE"
-  },
-  "email": "mailto:sennebels@gmail.com"
-  // Add "image": "URL_to_your_profile_picture.jpg" if you have one
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const workSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Selected work",
+  itemListElement: FEATURED.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: project.name,
+      headline: project.title,
+      description: project.description,
+      author: { "@type": "Person", name: PERSON.name },
+    },
+  })),
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`h-full ${hanken.variable} ${fraunces.variable}`}>
       <head>
-        {/* Preload all project images with priority for first few */}
-        {projects.map((project, index) => (
-          <link
-            key={`preload-${project.title}`}
-            rel="preload"
-            as="image"
-            href={project.image}
-            type="image/png"
-            fetchPriority={index < 3 ? "high" : "low"}
-            // @ts-ignore - fetchpriority is valid but not in types
-            fetchpriority={index < 3 ? "high" : "low"}
-          />
-        ))}
-        
-        <script src="https://cdn.jsdelivr.net/npm/circletype@2.3.0/dist/circletype.min.js" defer />
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="theme-color" content="#F9F8F5" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
       </head>
-      <body className="min-h-full">
+      <body className="min-h-full bg-paper font-sans">
+        <Navbar email={PERSON.email} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(workSchema) }}
         />
         <Analytics />
         {children}
+        <Footer />
+        <Konami />
       </body>
     </html>
   );
