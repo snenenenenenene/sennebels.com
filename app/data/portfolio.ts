@@ -178,7 +178,15 @@ export const FEATURED: Featured[] = [
     description:
       "Kaedim turns a brief into 3D that a real team inspects and approves before it ships. I worked both ends of that: the onboarding and progress a customer sees, and the review queue and automated testing the design team leans on.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
-    image: "/images/work/kaedim.webp",
+    spec: {
+      points: [
+        "Onboarding and the customer-facing app, redesigned",
+        "Skeleton loaders, so a slow generation reads as progress",
+        "Bulk uploads where one bad item no longer sinks the batch",
+        "A review queue for the 3D team, and automated asset testing",
+      ],
+      credit: "The product itself sits behind a login, so no screenshot.",
+    },
     regions: { codes: ["us", "gb", "sg"], label: "Team across San Francisco, London and Singapore" },
     lesson:
       "Waiting is a design problem, not a backend one. Nothing about the generation got faster, but a skeleton loader turns a frozen screen into visible progress, and one bad item no longer takes a whole batch down with it. The same idea runs the other way too: failing bad assets automatically means a designer only spends attention on work worth looking at.",
