@@ -27,7 +27,7 @@ export function IconLink({
     <a
       href={href}
       {...(outbound ? { target: "_blank", rel: "noreferrer" } : {})}
-      className={`group/link flex min-h-tap items-center gap-2 text-ink-2 transition-colors duration-200 ${LINK_HOVER[tint]}`}
+      className={`group/link flex min-h-tap min-w-tap items-center justify-center gap-2 text-ink-2 transition-colors duration-200 sm:justify-start ${LINK_HOVER[tint]}`}
     >
       <I
         size={19}

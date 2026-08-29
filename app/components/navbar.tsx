@@ -92,7 +92,7 @@ export function Navbar({ email }: { email: string }) {
         <Link
           href="/"
           aria-label="Senne Bels, home"
-          className="grid size-tap place-items-center rounded-full text-tone-red"
+          className="grid size-tap shrink-0 place-items-center rounded-full text-tone-red"
         >
           <Cat size={20} weight="fill" aria-hidden />
         </Link>
