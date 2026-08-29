@@ -29,7 +29,7 @@ const PEOPLE = [
 
 export default function Friends() {
   return (
-    <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
+    <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <PageTitle
         title="Friends of the site"
         lede="People whose work sent me down a useful rabbit hole."
