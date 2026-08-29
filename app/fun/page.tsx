@@ -6,6 +6,10 @@ import { ASIDE, FUN, FUN_BRANDS, FUN_REBUS, TRAITS } from "../data/portfolio";
 import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 import { Ratings } from "../components/ratings";
+// Imported directly: Maria is already a client component, and ssr:false is
+// not allowed from a server component. three itself is still kept out of the
+// bundle by the dynamic import inside her effect.
+import { Maria } from "../components/maria";
 import { PageTitle } from "../components/section-header";
 import { RebusText } from "../components/rebus-text";
 import { BrandMark } from "../components/marks";
@@ -36,7 +40,8 @@ export default function Fun() {
     <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <PageTitle title="When I am not working" lede="Which happens more than it should." />
 
-      <div className="mt-8 flex max-w-[62ch] flex-col gap-4">
+      <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
+        <div className="flex max-w-[62ch] flex-col gap-4 lg:flex-1">
         {ASIDE.map((line) => (
           <RebusText
             key={line.slice(0, 24)}
@@ -44,7 +49,12 @@ export default function Fun() {
             marks={FUN_REBUS}
             className="text-lede leading-[2.2] text-ink-2"
           />
-        ))}
+          ))}
+        </div>
+
+        <div className="lg:w-[46%] lg:shrink-0">
+          <Maria />
+        </div>
       </div>
 
       {/* Short claims rather than descriptions. Six words each, no hedging. */}
