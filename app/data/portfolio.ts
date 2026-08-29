@@ -116,8 +116,8 @@ export const FEATURED: Featured[] = [
     ],
     outcomes: [
       { value: "4 to 1", label: "apps consolidated, across every edition worldwide" },
-      { value: "Both platforms", label: "live radio recovering from stalls on iOS and Android" },
-      { value: "No release needed", label: "for editorial teams to change what the app shows" },
+      { value: "2 platforms", label: "live radio recovering from stalls on iOS and Android" },
+      { value: "No app-store release", label: "needed for editorial teams to change what the app shows" },
     ],
   },
   {
@@ -157,9 +157,9 @@ export const FEATURED: Featured[] = [
       "The rest was the unglamorous half that decides whether people trust it: prices that parse correctly in every market, translations for every surface, a refusal to answer questions the sources cannot support, and a human in the loop on anything carrying real risk. I also built and ran the environments it lives on, working with teams in Portugal, France and Italy.",
     ],
     outcomes: [
-      { value: "Qdrant", label: "hybrid retrieval, so an answer can cite the article it came from" },
-      { value: "Cited", label: "every answer traceable to the article it came from" },
-      { value: "3 markets", label: "Portugal, France and Italy, plus the Azure environments under it" },
+      { value: "100% cited", label: "answers traceable to their source articles" },
+      { value: "3 markets", label: "Portugal, France and Italy" },
+      { value: "Human review", label: "for answers carrying real risk" },
     ],
   },
   {
@@ -208,9 +208,9 @@ export const FEATURED: Featured[] = [
       "The handoff itself got faster too. Figma Dev MCP plus the automated tests meant a design became a reviewed implementation without the usual round trip, and I wrote the walkthrough that got the rest of engineering onto it. The team was spread across San Francisco, London and Singapore, and I worked directly with the CEO.",
     ],
     outcomes: [
-      { value: "Both ends", label: "the customer's view of the pipeline, and the team's" },
-      { value: "Fewer", label: "bad assets reaching a designer, caught by tests first" },
-      { value: "Faster", label: "design to reviewed implementation, via Figma Dev MCP" },
+      { value: "5+ repos", label: "covered by the engagement" },
+      { value: "2 sides", label: "customer pipeline and internal review queue" },
+      { value: "Blender + MCP", label: "generated assets tested before designer review" },
     ],
     live: { label: "kaedim3d.com", href: "https://www.kaedim3d.com/" },
   },
@@ -269,8 +269,8 @@ export const FEATURED: Featured[] = [
     ],
     outcomes: [
       { value: "+27%", label: "monthly active users across 2026" },
-      { value: "+84%", label: "search clicks a day, at a 9.2% click-through against a 2 to 5% benchmark" },
-      { value: "Lead", label: "frontend owned end to end since the start of 2025, reporting to the CEO" },
+      { value: "+84%", label: "daily search clicks over five months" },
+      { value: "83", label: "non-brand queries ranking in position one" },
     ],
   },
   {
@@ -313,9 +313,9 @@ export const FEATURED: Featured[] = [
       "That is the part that turns a legal obligation into something a municipality can act on. It is also the part that means the citizen-facing side has data worth searching.",
     ],
     outcomes: [
-      { value: "First commit", label: "on the citizen-facing decisions database" },
-      { value: "Correct and complete", label: "scored separately, because they are different failures" },
-      { value: "89%", label: "faster page loads, and 70% less manual audit work" },
+      { value: "89%", label: "faster page loads" },
+      { value: "70%", label: "less manual audit work" },
+      { value: "300+", label: "Belgian municipalities covered" },
     ],
     live: { label: "lokaalbeslist.vlaanderen.be", href: "https://lokaalbeslist.vlaanderen.be/" },
   },
@@ -384,8 +384,8 @@ export const NUMBERS = [
     label: "faster page loads on a Flemish government platform",
   },
   {
-    value: "6 years",
-    label: "working remote-first across startups, agencies and government",
+    value: "954",
+    label: "non-brand queries ranking for BeeDee",
   },
 ];
 
