@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { Cat } from "@phosphor-icons/react";
 import { GLASS, TAP } from "./ui";
+import { DirectionalLink } from "./transition";
 
 /**
  * Top navigation on Liquid Glass, with the page scrolling underneath.
@@ -84,7 +85,10 @@ export function Navbar({ email }: { email: string }) {
   }, [activeIndex, pathname]);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-3.5">
+    <div
+      style={{ viewTransitionName: "persistent-nav" }}
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-3.5"
+    >
       <nav
         aria-label="Primary"
         className={`pointer-events-auto relative flex items-center gap-1 rounded-full py-1.5 pl-2 pr-1.5 ${GLASS}`}
@@ -115,9 +119,10 @@ export function Navbar({ email }: { email: string }) {
         {LINKS.map((l, i) => {
           const active = i === activeIndex;
           return (
-            <Link
+            <DirectionalLink
               key={l.href}
               href={l.href}
+              direction="nav-lateral"
               ref={(el) => {
                 refs.current[i] = el;
               }}
@@ -129,7 +134,7 @@ export function Navbar({ email }: { email: string }) {
               }`}
             >
               {l.label}
-            </Link>
+            </DirectionalLink>
           );
         })}
 

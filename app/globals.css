@@ -445,3 +445,83 @@ html {
 .dark .particle {
   background: rgba(255,255,255,0.05);
 }
+/* ---------------------------------------------------------------------------
+   View transitions. Recipes taken as-is from the skill rather than hand-rolled:
+   they handle staggered timing, motion blur across a morph, and reduced motion.
+   --------------------------------------------------------------------------- */
+:root {
+  --duration-exit: 150ms;
+  --duration-enter: 210ms;
+  --duration-move: 400ms;
+}
+
+@keyframes fade {
+  from { filter: blur(3px); opacity: 0; }
+  to { filter: blur(0); opacity: 1; }
+}
+@keyframes slide {
+  from { translate: var(--slide-offset); }
+  to { translate: 0; }
+}
+@keyframes via-blur {
+  30% { filter: blur(3px); }
+}
+
+/* Hierarchical navigation: index -> case study and back. */
+::view-transition-old(.nav-forward) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-exit) ease-in both fade reverse,
+    var(--duration-move) ease-in-out both slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both fade,
+    var(--duration-move) ease-in-out both slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-exit) ease-in both fade reverse,
+    var(--duration-move) ease-in-out both slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both fade,
+    var(--duration-move) ease-in-out both slide;
+}
+
+/* Lateral moves between the top-level pages: no depth to communicate. */
+::view-transition-old(.fade-out) { animation: var(--duration-exit) ease-in fade reverse; }
+::view-transition-new(.fade-in) { animation: var(--duration-enter) ease-out var(--duration-exit) both fade; }
+
+/* The screenshot that grows from a card into the case study header. */
+::view-transition-group(.morph) { animation-duration: var(--duration-move); }
+::view-transition-image-pair(.morph) { animation-name: via-blur; }
+
+/* Text is re-rendered rather than scaled: a raster snapshot of a heading
+   blown up from card size to display size ghosts badly. */
+::view-transition-group(.text-morph) { animation-duration: var(--duration-move); }
+::view-transition-old(.text-morph) { display: none; }
+::view-transition-new(.text-morph) {
+  animation: none;
+  object-fit: none;
+  object-position: left top;
+}
+
+/* The navbar stays put while pages slide underneath it. It carries a
+   backdrop-filter, so the old snapshot is dropped rather than cross-faded. */
+::view-transition-group(persistent-nav) { animation: none; z-index: 100; }
+::view-transition-old(persistent-nav) { display: none; }
+::view-transition-new(persistent-nav) { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

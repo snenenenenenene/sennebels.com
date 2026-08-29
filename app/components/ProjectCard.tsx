@@ -5,6 +5,7 @@ import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
 import { Phone } from "./phone";
 import { Browser } from "./browser";
+import { DirectionalLink, SharedMedia, SharedTitle } from "./transition";
 import { ACCENT_TEXT, CARD_TINT, type Tint } from "./ui";
 import { RebusText } from "./rebus-text";
 import { CaseStudyButton } from "./cta";
@@ -45,7 +46,9 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
                 className={`h-8 w-auto object-contain object-left ${BRAND_DARK[project.brandDark ?? "none"]}`}
               />
             )}
-            <span className="font-display text-title3 font-medium text-ink">{project.name}</span>
+            <SharedTitle slug={project.slug}>
+              <span className="font-display text-title3 font-medium text-ink">{project.name}</span>
+            </SharedTitle>
           </div>
 
           <h3 className="max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
@@ -56,15 +59,16 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             className="mt-6 max-w-[52ch] text-body leading-[2.1] text-ink-2"
           />
 
-          <Link href={`/work/${project.slug}`} className="mt-9 w-fit">
+          <DirectionalLink href={`/work/${project.slug}`} direction="nav-forward" className="mt-9 w-fit">
             <CaseStudyButton label={project.cta} />
-          </Link>
+          </DirectionalLink>
         </div>
 
         {project.phones ? (
           // Three phones are wider than a phone-sized viewport, so on small
           // screens the row bleeds to the card edge and scrolls instead of
           // spilling off the page.
+          <SharedMedia slug={project.slug}>
           <div className="-mx-7 flex items-start gap-4 overflow-x-auto px-7 md:-mx-10 md:px-10 lg:mx-0 lg:min-w-0 lg:flex-1 lg:justify-center lg:overflow-visible lg:px-0">
             {project.phones.map((src, i) => (
               <Phone
@@ -76,16 +80,17 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
               />
             ))}
           </div>
+          </SharedMedia>
         ) : project.image ? (
           // Natural aspect, not a fixed height with object-cover: that was
           // slicing the bottom off every web capture.
           <Tilt className="lg:min-w-0 lg:flex-1">
-            <Browser
+            <SharedMedia slug={project.slug}><Browser
               src={project.image}
               alt={`${project.name}: ${project.title}`}
               url={project.live?.label}
               priority
-            />
+            /></SharedMedia>
           </Tilt>
         ) : (
           project.spec && (
