@@ -70,7 +70,7 @@ function Hero() {
         <Rise>
           {/* Rebus: the marks sit inside the sentence, so words and glyphs read as one line. */}
           <p className="max-w-[56ch] text-lede text-ink-2">
-            Six years remote-first building{" "}
+            Six years building{" "}
             <Rebus icon={Terminal} tint="red">
               web, mobile and AI systems
             </Rebus>

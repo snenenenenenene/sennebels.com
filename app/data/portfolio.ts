@@ -5,7 +5,7 @@ export const PERSON = {
   name: "Senne Bels",
   jobTitle: "Senior Software Engineer",
   tagline:
-    "Senior software engineer. I build things people poke at instead of scroll past, and I have been doing it remote-first for six years.",
+    "Senior software engineer. I build things people poke at instead of scroll past, and I have been doing it for six years.",
   email: "sennebels@gmail.com",
   locality: "Antwerp",
   country: "BE",
@@ -16,7 +16,7 @@ export const PERSON = {
   relocation: "Open to relocating abroad",
   // The one self-contained passage an answer engine can lift verbatim.
   answerBlock:
-    "I’m Senne, a software engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, mostly remote, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
+    "I’m Senne, a software engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
 } as const;
 
 
@@ -405,22 +405,30 @@ export const ALSO = [
 
 
 
+/**
+ * Four figures that mean something without a paragraph of setup.
+ *
+ * Deliberately not here: a before-and-after load time on a greenfield build,
+ * where there was no "before" to improve on, and a count of ranking search
+ * queries, which is an SEO-internal number rather than a reason to hire
+ * anyone. Each of these is one client, so none of them is a total.
+ */
 export const NUMBERS = [
   {
     value: "140,000",
-    label: "people use the platform I lead frontend for",
+    label: "people on the consumer app I lead frontend for",
   },
   {
-    value: "15s → 1s",
-    label: "load time on the platform’s slowest screen",
+    value: "2.9M",
+    label: "public decisions I helped make searchable",
   },
   {
-    value: "89%",
-    label: "faster page loads on a Flemish government platform",
+    value: "4 into 1",
+    label: "festival apps merged into one, running worldwide",
   },
   {
-    value: "954",
-    label: "non-brand queries ranking for BeeDee",
+    value: "300+",
+    label: "Belgian municipalities publishing through it",
   },
 ];
 
