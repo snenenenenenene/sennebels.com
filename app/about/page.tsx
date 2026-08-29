@@ -9,6 +9,9 @@ import {
   Translate,
   UsersThree,
   Wrench,
+  MagnifyingGlass,
+  SquaresFour,
+  Buildings,
 } from "@phosphor-icons/react/dist/ssr";
 import { ABOUT_REBUS, EDUCATION, EXPERIENCE, LANGUAGES, NUMBERS, PERSON, SKILL_GROUPS } from "../data/portfolio";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, Heading, PILL_HOVER, ROW_TEXT, RULE_BG, type Tint } from "../components/ui";
@@ -30,11 +33,13 @@ export const metadata: Metadata = {
 
 const TRIO: Tint[] = ["red", "blue", "yellow"];
 
+// Paired to the figure they sit behind, not to their position in the list:
+// a clock behind "300+ municipalities" is just decoration that lies.
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: UsersThree, tint: "red" },
-  { icon: Lightning, tint: "blue" },
-  { icon: GitCommit, tint: "yellow" },
-  { icon: Clock, tint: "red" },
+  { icon: MagnifyingGlass, tint: "blue" },
+  { icon: SquaresFour, tint: "yellow" },
+  { icon: Buildings, tint: "red" },
 ];
 
 export default function About() {
@@ -52,25 +57,38 @@ export default function About() {
       />
 
       <section className="pt-16">
-        {/* role=list on a plain container: the stats read as term/definition
-            pairs, but a <dl> may only nest one <div> deep and the reveal
-            wrapper already spends that level. */}
+        {/*
+          The numeral is the reason the card exists, so it gets the display
+          size and the accent, and the icon steps back to a quiet mark in the
+          corner. A hairline in the accent sits under the figure to tie the two
+          together without another filled shape competing with it.
+        */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {NUMBERS.map((n, i) => {
             const st = STATS[i % STATS.length];
             return (
               <Reveal key={n.value} delay={i * 0.07}>
-                {/* dt then dd, in that order, because that is what a definition
-                    list means. Column-reverse puts the numeral on top visually
-                    without the label being announced twice. */}
                 <div
-                  className={`squircle group/card flex h-full flex-col-reverse justify-end gap-2 rounded-panel p-6 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[st.tint]}`}
+                  className={`squircle group/card relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-card p-6 pt-7 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:shadow-card-hover ${CARD_TINT[st.tint]}`}
                 >
-                  <p className="max-w-[24ch] text-callout text-ink-2">{n.label}</p>
-                  <p className={`font-display text-title1 font-medium ${ACCENT_TEXT[st.tint]}`}>
-                    {n.value}
-                  </p>
-                  <GlyphTile icon={st.icon} tint={st.tint} />
+                  <st.icon
+                    size={64}
+                    weight="fill"
+                    aria-hidden
+                    className={`pointer-events-none absolute -right-3 -top-3 opacity-[0.09] transition-transform duration-500 ease-out group-hover/card:scale-110 ${ACCENT_TEXT[st.tint]}`}
+                  />
+                  <div className="flex flex-col gap-3">
+                    <p
+                      className={`font-display text-[2.6rem] font-medium leading-[0.95] tracking-[-0.02em] ${ACCENT_TEXT[st.tint]}`}
+                    >
+                      {n.value}
+                    </p>
+                    <span
+                      aria-hidden
+                      className={`h-[3px] w-9 rounded-full transition-[width] duration-500 ease-out group-hover/card:w-16 ${RULE_BG[st.tint]}`}
+                    />
+                  </div>
+                  <p className="max-w-[22ch] text-callout leading-[1.5] text-ink-2">{n.label}</p>
                 </div>
               </Reveal>
             );
