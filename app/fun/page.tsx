@@ -5,7 +5,6 @@ import { Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor
 import { ASIDE, FUN, FUN_BRANDS, FUN_REBUS, TRAITS } from "../data/portfolio";
 import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
-import { Ratings } from "../components/ratings";
 // Imported directly: Maria is already a client component, and ssr:false is
 // not allowed from a server component. three itself is still kept out of the
 // bundle by the dynamic import inside her effect.
@@ -72,10 +71,6 @@ export default function Fun() {
           );
         })}
       </ul>
-
-      <div className="mt-14">
-        <Ratings />
-      </div>
 
       {/* Mixed spans, so no two rows are the same shape. */}
       <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-6">

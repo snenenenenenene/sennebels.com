@@ -160,6 +160,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="theme-color" content="#F9F8F5" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
+        {/*
+          Warm Maria and her decoder from every page, so /fun has her ready
+          rather than fetching on arrival. rel=prefetch, not preload: the
+          browser runs it at idle priority and it never competes with the
+          page you are actually on.
+        */}
+        <link rel="prefetch" href="/models/maria.glb" as="fetch" crossOrigin="anonymous" />
+        <link rel="prefetch" href="/draco/draco_decoder.wasm" as="fetch" crossOrigin="anonymous" />
       </head>
       <body className="min-h-full bg-paper font-sans">
         <Navbar email={PERSON.email} />

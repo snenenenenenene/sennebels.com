@@ -516,57 +516,6 @@ export const TRAITS = [
   { text: "Cooks past his level on a Tuesday", icon: "CookingPot", tint: "yellow" as const },
 ];
 
-/** Services a card actually points at, so the mark is real rather than generic. */
-export const FUN_BRANDS: Record<string, string[]> = {
-  "Achievement hunting, and Magic": ["steam", "boardgamegeek"],
-  "Guitar at home, loud rooms elsewhere": ["spotify"],
-};
-
-export type Rated = { name: string; img?: string };
-
-/**
- * The scale, with cover art. Only things there is a real image for: the point
- * is images and titles, and a title on a blank tile is the fluff this was
- * meant to remove. Magic, both Pokémon games, the Cameron films and the four
- * concerts belong here too and are waiting on art.
- */
-export const RATINGS: { stars: number; items: Rated[] }[] = [
-  {
-    stars: 5,
-    items: [
-      { name: "Mad Max: Fury Road", img: "/images/film/mad-max-fury-road.webp" },
-      { name: "Phasmophobia", img: "/images/rated/phasmophobia.webp" },
-      { name: "Interstellar", img: "/images/film/interstellar.webp" },
-    ],
-  },
-  {
-    stars: 4.5,
-    items: [
-      { name: "The Truman Show", img: "/images/film/the-truman-show.webp" },
-      { name: "Europa Universalis IV", img: "/images/rated/eu4.webp" },
-      { name: "WALL-E", img: "/images/film/wall-e.webp" },
-    ],
-  },
-  {
-    stars: 4,
-    items: [
-      { name: "Across the Spider-Verse", img: "/images/film/spider-man-across-the-spider-verse.webp" },
-      { name: "Hearts of Iron IV", img: "/images/rated/hoi4.webp" },
-      { name: "The Wild Robot", img: "/images/film/the-wild-robot.webp" },
-    ],
-  },
-  {
-    stars: 3.5,
-    items: [
-      { name: "Marvel Rivals", img: "/images/rated/marvel-rivals.webp" },
-      { name: "Rocket League", img: "/images/rated/rocket-league.webp" },
-    ],
-  },
-  {
-    stars: 3,
-    items: [{ name: "Overwatch 2", img: "/images/rated/overwatch.webp" }],
-  },
-];
 
 
 
@@ -591,6 +540,12 @@ export const FUN_REBUS = [
 ];
 
 /** Longer-form personality, for /fun. Each has room to be an actual story. */
+/** Services a card actually points at, so the mark is real rather than generic. */
+export const FUN_BRANDS: Record<string, string[]> = {
+  "Achievement hunting, and Magic": ["steam", "boardgamegeek"],
+  "Guitar at home, loud rooms elsewhere": ["spotify"],
+};
+
 export const FUN = [
   {
     title: "Four cats and a dog",

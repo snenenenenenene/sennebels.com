@@ -34,7 +34,7 @@ export function Maria() {
       // Filmic response with the exposure pulled down, so her white fur rolls
       // off instead of clipping to a flat sheet.
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.85;
+      renderer.toneMappingExposure = 0.82;
       el.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
@@ -45,10 +45,14 @@ export function Maria() {
       // and a black side with nothing in between.
       const pmrem = new THREE.PMREMGenerator(renderer);
       scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      // The room is a bright neutral box. At full strength it washes a mostly
+      // white cat out against a cream page, so it only sets the shaping and
+      // her own colour does the rest.
+      scene.environmentIntensity = 0.78;
 
-      const fill = new THREE.HemisphereLight(0xfff6ec, 0x8d8878, 0.5);
+      const fill = new THREE.HemisphereLight(0xfff6ec, 0x8d8878, 0.45);
       scene.add(fill);
-      const key = new THREE.DirectionalLight(0xffffff, 0.55);
+      const key = new THREE.DirectionalLight(0xfff4e8, 0.45);
       key.position.set(2.5, 4, 3.5);
       scene.add(key);
 
