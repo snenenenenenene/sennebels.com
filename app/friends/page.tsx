@@ -7,7 +7,8 @@ import { PERSON } from "../data/portfolio";
 
 export const metadata: Metadata = {
   title: "Friends",
-  description: "People and personal websites Senne Bels wants to keep finding on the open web.",
+  description:
+    "People and personal websites worth finding on the open web, collected by Senne Bels. Independent blogs, /now pages and small corners of the internet.",
   alternates: { canonical: "https://sennebels.com/friends" },
 };
 

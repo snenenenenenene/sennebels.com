@@ -16,7 +16,7 @@ import { BrandMark } from "../components/marks";
 export const metadata: Metadata = {
   title: "Fun",
   description:
-    "Four cats, a dog, games, films, guitar, coffee and too many plants. What Senne Bels does away from work.",
+    "Four cats, a dog, guitar, horror films, Magic, and strategy-game achievement runs. What Senne Bels does away from the keyboard, plus Maria in 3D.",
   alternates: { canonical: "https://sennebels.com/fun" },
 };
 

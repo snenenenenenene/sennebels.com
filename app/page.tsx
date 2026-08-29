@@ -110,21 +110,19 @@ function Hero() {
  * only thing on show.
  */
 const HERO_SHOTS = [
-  { src: "/images/work/beedee-profile.webp", rotate: "-7deg", z: "z-10", pos: "left-0 top-8", island: true },
-  { src: "/images/work/tomorrowland-explore.webp", rotate: "2deg", z: "z-20", pos: "left-[104px] top-0", island: false },
-  { src: "/images/work/beedee-travel.webp", rotate: "10deg", z: "z-10", pos: "left-[208px] top-10", island: true },
+  { src: "/images/work/beedee-profile.webp", alt: "The BeeDee profile screen", rotate: "-7deg", z: "z-10", pos: "left-0 top-8", island: true },
+  { src: "/images/work/tomorrowland-explore.webp", alt: "The Tomorrowland app's Explore screen", rotate: "2deg", z: "z-20", pos: "left-[104px] top-0", island: false },
+  { src: "/images/work/beedee-travel.webp", alt: "BeeDee's travel mode", rotate: "10deg", z: "z-10", pos: "left-[208px] top-10", island: true },
 ];
 
 function HeroScreens() {
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none relative hidden h-[430px] w-[420px] shrink-0 lg:block"
-    >
+    <div className="pointer-events-none relative hidden h-[430px] w-[420px] shrink-0 lg:block">
       {HERO_SHOTS.map((shot, i) => (
         <Reveal key={shot.src} delay={0.15 + i * 0.1} y={26} className={`absolute ${shot.pos} ${shot.z}`}>
           <Phone
             src={shot.src}
+            alt={shot.alt}
             width={150}
             island={shot.island}
             priority

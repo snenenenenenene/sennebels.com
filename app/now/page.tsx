@@ -6,7 +6,8 @@ import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 
 export const metadata: Metadata = {
   title: "Now",
-  description: "What Senne Bels is working on, building and thinking about in August 2026.",
+  description:
+    "What Senne Bels is working on in August 2026: the Tomorrowland app, frontend lead at BeeDee, Outpost, and his own products. Updated monthly.",
   alternates: { canonical: "https://sennebels.com/now" },
 };
 
