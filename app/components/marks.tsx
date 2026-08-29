@@ -1,3 +1,4 @@
+import type React from "react";
 import ES from "country-flag-icons/react/3x2/ES";
 import PL from "country-flag-icons/react/3x2/PL";
 import IT from "country-flag-icons/react/3x2/IT";
@@ -102,7 +103,7 @@ export function Monogram({
  * only ever be right for tricolours, and quietly drew India, Singapore and
  * Brazil as stripes they are not.
  */
-const FLAGS: Record<string, { Icon: (p: { title?: string }) => JSX.Element; label: string }> = {
+const FLAGS: Record<string, { Icon: (p: { title?: string }) => React.JSX.Element; label: string }> = {
   nl: { Icon: NL, label: "Netherlands" },
   gb: { Icon: GB, label: "United Kingdom" },
   fr: { Icon: FR, label: "France" },

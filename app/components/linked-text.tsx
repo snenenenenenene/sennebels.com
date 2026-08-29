@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { DirectionalLink } from "./transition";
 import { FEATURED } from "../data/portfolio";
 
 /**
@@ -37,13 +37,14 @@ export function LinkedText({
         const hit = targets.find((t) => t.name === part);
         if (!hit) return part;
         return (
-          <Link
+          <DirectionalLink
             key={`${hit.slug}-${i}`}
             href={`/work/${hit.slug}`}
+            direction="nav-forward"
             className="font-medium text-ink underline decoration-tone-red/35 decoration-2 underline-offset-[3px] transition-colors duration-200 hover:decoration-tone-red"
           >
             {part}
-          </Link>
+          </DirectionalLink>
         );
       })}
     </p>
