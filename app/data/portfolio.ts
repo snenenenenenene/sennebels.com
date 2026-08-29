@@ -11,6 +11,7 @@ export const PERSON = {
   country: "BE",
   github: "https://github.com/snenenenenenene",
   linkedin: "https://linkedin.com/in/sennebels",
+  x: "https://x.com/snenenenene",
   resume: "/assets/CV Senne Bels.pdf",
   relocation: "Open to relocation",
   // The one self-contained passage an answer engine can lift verbatim.

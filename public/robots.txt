@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap location (Update if using a different path)
-Sitemap: https://sennebels.xyz/sitemap.xml 
+Sitemap: https://sennebels.com/sitemap.xml

@@ -1,4 +1,4 @@
-import { ArrowUpRight, EnvelopeSimple, FileText, GithubLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Clock, EnvelopeSimple, FileText, GithubLogo, LinkedinLogo, UsersThree, XLogo } from "@phosphor-icons/react/dist/ssr";
 import { PERSON } from "../data/portfolio";
 import { TAP, type Tint } from "./ui";
 import { IconLink } from "./icon-link";
@@ -14,12 +14,15 @@ export const SOCIALS = [
   { label: "Resume", href: PERSON.resume, icon: FileText, tint: "red" as Tint, external: false },
   { label: "GitHub", href: PERSON.github, icon: GithubLogo, tint: "blue" as Tint },
   { label: "LinkedIn", href: PERSON.linkedin, icon: LinkedinLogo, tint: "yellow" as Tint },
+  { label: "X", href: PERSON.x, icon: XLogo, tint: "red" as Tint },
   { label: "Email", href: `mailto:${PERSON.email}`, icon: EnvelopeSimple, tint: "red" as Tint, external: false },
 ];
 
-const MINE = [
-  { label: "Transita", href: "https://transita.app" },
-  { label: "Korf", href: "https://korf.app" },
+const MORE = [
+  { label: "Now", href: "/now", icon: Clock, external: false },
+  { label: "Friends", href: "/friends", icon: UsersThree, external: false },
+  { label: "Transita", href: "https://transita.app", icon: ArrowUpRight },
+  { label: "Korf", href: "https://korf.app", icon: ArrowUpRight },
 ];
 
 export function Footer() {
@@ -51,9 +54,9 @@ export function Footer() {
             ))}
           </div>
           <div className="flex flex-col gap-3">
-            <p className="text-caption font-medium text-ink-3">Mine</p>
-            {MINE.map((m, i) => (
-              <IconLink key={m.label} {...m} icon={ArrowUpRight} tint={TRIO[i % TRIO.length]} />
+            <p className="text-caption font-medium text-ink-3">More</p>
+            {MORE.map((m, i) => (
+              <IconLink key={m.label} {...m} tint={TRIO[i % TRIO.length]} />
             ))}
           </div>
         </div>
