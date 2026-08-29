@@ -117,7 +117,7 @@ export default function About() {
                   <BrandMark slug={e.slug} size={24} />
                 </span>
               ) : (
-                <Monogram name={e.org} tint={e.tint} size={29} />
+                <Monogram name={e.org} size={29} />
               );
   
               const body = (
