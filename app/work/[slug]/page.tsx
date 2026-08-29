@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, Lightbulb, Mag
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
 import { Phone } from "../../components/phone";
+import { Browser } from "../../components/browser";
 import { RebusText } from "../../components/rebus-text";
 import { BrandMark, Flags, type FlagCode } from "../../components/marks";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../components/ui";
@@ -114,7 +115,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
     headline: project.title,
     description: project.description,
     url: `https://sennebels.com/work/${project.slug}`,
-    keywords: project.tech.join(", "),
+    keywords: project.builtWith.map((t) => t.name).join(", "),
     author: { "@type": "Person", name: PERSON.name, url: "https://sennebels.com" },
   };
 
@@ -221,37 +222,27 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                 <dd className="text-body text-ink-2">{fact.value}</dd>
               </div>
             ))}
-            <div className="flex flex-col gap-2">
-              <dt className="text-caption font-medium text-ink-3">Built with</dt>
-              <dd>
-                <ul className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-full bg-accent-soft px-3.5 py-[7px] text-caption font-medium text-moss transition-transform duration-200 hover:-translate-y-0.5"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
           </dl>
         </aside>
       </div>
 
-      {project.stack && (
-        <ul className="flex flex-wrap items-center gap-2.5 pt-2">
-          {project.stack.map((slug) => (
-            <li
-              key={slug}
-              className="squircle flex size-9 items-center justify-center rounded-tile bg-raised text-ink shadow-card"
-            >
-              <BrandMark slug={slug} size={18} />
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* Built with, once. The marks row and the side panel's text pills were
+          two lists of the same thing that did not even agree with each other. */}
+      <ul className="flex flex-wrap items-center gap-2.5 pt-2">
+        {project.builtWith.map((t) => (
+          <li
+            key={t.name}
+            className="squircle flex items-center gap-2 rounded-full bg-raised py-1.5 pl-2.5 pr-4 text-callout text-ink-2 shadow-card"
+          >
+            {t.slug ? (
+              <BrandMark slug={t.slug} size={17} />
+            ) : (
+              <span aria-hidden className="size-[7px] rounded-full bg-ink-3/40" />
+            )}
+            {t.name}
+          </li>
+        ))}
+      </ul>
 
       {project.features && (
         <section className="flex flex-col gap-5 pt-16">
@@ -281,15 +272,13 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       )}
 
       {project.image && (
-        <Reveal className="pt-16"><figure><Tilt>
-          <Image
-            src={project.image}
-            alt={`${project.name}: ${project.title}`}
-            width={1400}
-            height={900}
-            className="w-full object-contain"
-          />
-        </Tilt></figure></Reveal>
+        <Reveal className="pt-16">
+          <figure>
+            <Tilt>
+              <Browser src={project.image} alt={`${project.name}: ${project.title}`} url={project.live?.label} />
+            </Tilt>
+          </figure>
+        </Reveal>
       )}
 
       {project.regions && (
@@ -312,7 +301,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                 {project.phones ? (
                   <Phone src={shot.src} alt={shot.caption} width={228} island={project.phonesHaveIsland} className="w-full" />
                 ) : (
-                  <Image src={shot.src} alt={shot.caption} width={1600} height={840} className="w-full rounded-[10px]" />
+                  <Browser src={shot.src} alt={shot.caption} />
                 )}
                 <p className="text-callout leading-[1.5] text-ink-2">{shot.caption}</p>
               </li>

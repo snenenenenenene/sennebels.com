@@ -228,6 +228,9 @@
 
 /* Smooth scrolling */
 html {
+  /* No rubber-band past the page: the bounce reveals the browser's own
+     background behind a design that is meant to run edge to edge. */
+  overscroll-behavior: none;
   scroll-behavior: smooth;
 }
 

@@ -42,7 +42,8 @@ export type Featured = {
   brandDark?: "invert" | "lift";
   title: string;
   description: string;
-  tech: string[];
+  /** One list, name plus a mark where one exists. Replaces tech + stack. */
+  builtWith: { name: string; slug?: string }[];
   /** Real screenshot, or a spec panel when the work is confidential / has no shippable asset. */
   image?: string;
   spec?: { points: string[]; credit: string };
@@ -61,8 +62,6 @@ export type Featured = {
   /** What the project taught, in one paragraph. Grounded in its own story. */
   lesson: string;
   facts: { label: string; value: string }[];
-  /** Platforms and tools, shown as marks. */
-  stack?: string[];
   /** Features shipped, named. Optional. */
   features?: string[];
   /** Two or three paragraphs. No headings inside; the page supplies structure. */
@@ -74,7 +73,6 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
-  stack: ["react", "expo", "nestjs", "typescript"],
   storyRebus: [{ phrase: "one app now", icon: "SquaresFour", tint: "red" }, { phrase: "a stream that dies on a train", icon: "WifiSlash", tint: "blue" }, { phrase: "without waiting on a release", icon: "Lightning", tint: "yellow" }],
   features: [
     "Live radio stall recovery on both platforms",
@@ -92,7 +90,13 @@ export const FEATURED: Featured[] = [
     title: "One app for every edition, all year round",
     description:
       "Three or four apps became one, covering every Tomorrowland edition worldwide and carrying the old radio app's features into CarPlay and Android Auto. My work is the live radio surviving a bad network on both platforms, and the CMS-driven content system the festival screens are built from.",
-    tech: ["React Native", "Expo", "Server-driven UI"],
+    builtWith: [
+      { name: "React Native", slug: "react" },
+      { name: "Expo", slug: "expo" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "NestJS", slug: "nestjs" },
+      { name: "Server-driven UI" },
+    ],
     phones: [
       "/images/work/tomorrowland-explore.webp",
       "/images/work/tomorrowland-search.webp",
@@ -126,7 +130,6 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "euroconsumers",
-  stack: ["typescript", "qdrant", "langchain", "docker"],
   storyRebus: [{ phrase: "not being confidently wrong", icon: "ShieldCheck", tint: "red" }, { phrase: "the article it came from", icon: "Quotes", tint: "blue" }, { phrase: "human in the loop", icon: "HandHeart", tint: "yellow" }],
   rebus: [{ phrase: "looks things up rather than guessing", icon: "MagnifyingGlass", tint: "red" }, { phrase: "cites the article", icon: "Quotes", tint: "blue" }, { phrase: "hands anything risky to a person", icon: "HandHeart", tint: "yellow" }],
     name: "Euroconsumers",
@@ -136,7 +139,14 @@ export const FEATURED: Featured[] = [
     title: "Vera, a legal assistant that has to be right",
     description:
       "Vera answers consumer-rights questions for Altroconsumo and its sister organisations. A wrong answer about your rights is worse than no answer, so she looks things up rather than guessing, cites the article she answered from, marks her own confidence, and hands anything risky to a person. I built the environments it runs on and kept it running after launch, with their teams in Portugal, France and Italy.",
-    tech: ["Mastra", "RAG", "LangSmith"],
+    builtWith: [
+      { name: "TypeScript", slug: "typescript" },
+      { name: "Mastra" },
+      { name: "LangChain", slug: "langchain" },
+      { name: "Qdrant", slug: "qdrant" },
+      { name: "Docker", slug: "docker" },
+      { name: "LangSmith" },
+    ],
     spec: {
       points: [
         "A tool-calling agent replacing single-shot retrieval with multi-step reasoning",
@@ -169,7 +179,6 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "kaedim",
-  stack: ["react", "typescript", "blender", "figma"],
   storyRebus: [{ phrase: "inspected, marked up and approved", icon: "ListChecks", tint: "red" }, { phrase: "reads as progress", icon: "Hourglass", tint: "blue" }, { phrase: "before a human spends attention", icon: "Robot", tint: "yellow" }],
   features: [
     "Customer onboarding flow",
@@ -190,7 +199,14 @@ export const FEATURED: Featured[] = [
     title: "Both sides of a human-in-the-loop pipeline",
     description:
       "Kaedim turns a brief into 3D that a real team inspects and approves before it ships. I worked both ends of that: the onboarding and progress a customer sees, and the review queue and automated testing the design team leans on.",
-    tech: ["Three.js", "WebGL", "Blender MCP"],
+    builtWith: [
+      { name: "React", slug: "react" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "Three.js", slug: "threedotjs" },
+      { name: "WebGL" },
+      { name: "Blender", slug: "blender" },
+      { name: "Figma", slug: "figma" },
+    ],
     image: "/images/work/kaedim.webp",
     gallery: [
       // The asset grid is already the hero image above, so it is not repeated here.
@@ -222,7 +238,6 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "beedee",
-  stack: ["react", "expo", "typescript", "githubactions", "firebase"],
   storyRebus: [{ phrase: "website in a wrapper", icon: "DeviceMobile", tint: "red" }, { phrase: "signup flow", icon: "SignIn", tint: "blue" }, { phrase: "it came from search", icon: "MagnifyingGlass", tint: "yellow" }],
   features: [
     "Travel Mode, passport-style redesign",
@@ -244,7 +259,14 @@ export const FEATURED: Featured[] = [
     title: "A consumer app, owned end to end",
     description:
       "BeeDee felt like a website in a wrapper. I made it native, then spent more work on the signup flow than on anything else, so people stopped falling out of it. Refer-a-friend, travel mode, localisation, and releases moved onto GitHub Actions. It cannot buy ads on Meta, Google or Reddit, so organic search had to carry the growth, and daily clicks are up 84%. Reporting to the CEO, with the team in India.",
-    tech: ["React Native", "Sockets", "Mollie"],
+    builtWith: [
+      { name: "React Native", slug: "react" },
+      { name: "Expo", slug: "expo" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "Firebase", slug: "firebase" },
+      { name: "GitHub Actions", slug: "githubactions" },
+      { name: "Mollie" },
+    ],
     gallery: [
       { src: "/images/work/beedee-profile.webp", caption: "Supporter, Superlikes and refer-a-friend, all off one screen" },
       { src: "/images/work/beedee-incognito.webp", caption: "Incognito, so you only surface to people you already liked" },
@@ -281,7 +303,6 @@ export const FEATURED: Featured[] = [
   },
   {
     slug: "lokaal-beslist",
-  stack: ["emberdotjs", "typescript", "docker"],
   storyRebus: [{ phrase: "required to publish", icon: "Scales", tint: "red" }, { phrase: "first commit", icon: "GitCommit", tint: "blue" }, { phrase: "maturity levels", icon: "ChartBar", tint: "yellow" }],
   features: [
     "Keyword and session search",
@@ -301,7 +322,14 @@ export const FEATURED: Featured[] = [
     title: "Public by law, readable by nobody",
     description:
       "Every Belgian municipality publishes its decisions. Almost none of it was searchable. I made the first commit on the citizen-facing database and then built the validation toolchain that tells a municipality whether what it published actually meets the standard.",
-    tech: ["Leaflet", "D3.js", "Semantic web"],
+    builtWith: [
+      { name: "Ember.js", slug: "emberdotjs" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "Docker", slug: "docker" },
+      { name: "Leaflet" },
+      { name: "D3.js" },
+      { name: "Semantic web" },
+    ],
     image: "/images/work/lokaalbeslist.webp",
     seoTitle: "Lokaal Beslist: public decisions, searchable",
     regions: { codes: ["be"], label: "300+ Belgian municipalities" },
@@ -397,6 +425,8 @@ export const NUMBERS = [
 ];
 
 export const EXPERIENCE: {
+  /** Slug of the case study for this role, where one exists. */
+  caseStudy?: string;
   role: string;
   org: string;
   dates: string;
@@ -410,10 +440,10 @@ export const EXPERIENCE: {
   
   { role: "Senior Mobile Engineer", org: "Tomorrowland", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
   { role: "Full-Stack Engineer", org: "Outpost", href: "https://outpostplayers.com", logo: "/images/logos/outpost.webp", tint: "blue", dates: "Jan 2026 to now" },
-  { role: "Frontend Lead", org: "BeeDee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
-  { role: "AI Engineer", org: "Euroconsumers, via Nimble", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
-  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
-  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", href: "https://www.vlaanderen.be", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
+  { role: "Frontend Lead", org: "BeeDee", caseStudy: "beedee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
+  { role: "AI Engineer", org: "Euroconsumers, via Nimble", caseStudy: "euroconsumers", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
+  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", caseStudy: "kaedim", href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
+  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", caseStudy: "lokaal-beslist", href: "https://www.vlaanderen.be", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
   { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logoMono: true, href: "https://cronos-groep.be", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
 ];
 
