@@ -96,10 +96,18 @@ export function Maria() {
       const up = () => {
         dragging = false;
       };
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+        e.preventDefault();
+        velocity = e.key === "ArrowLeft" ? -0.06 : 0.06;
+        spin += velocity;
+      };
+
       el.addEventListener("pointerdown", down);
       el.addEventListener("pointermove", move);
       el.addEventListener("pointerup", up);
       el.addEventListener("pointercancel", up);
+      el.addEventListener("keydown", onKey);
 
       const resize = () => {
         renderer.setSize(el.clientWidth, el.clientHeight);
@@ -129,6 +137,7 @@ export function Maria() {
         el.removeEventListener("pointermove", move);
         el.removeEventListener("pointerup", up);
         el.removeEventListener("pointercancel", up);
+        el.removeEventListener("keydown", onKey);
         renderer.dispose();
         draco.dispose();
         pmrem.dispose();
@@ -146,12 +155,13 @@ export function Maria() {
     <div className="flex flex-col gap-4">
       <div
         ref={host}
-        className="h-[340px] w-full cursor-grab touch-pan-y active:cursor-grabbing sm:h-[440px]"
-        aria-label="Maria, in 3D, standing over a row of houseplants"
+        tabIndex={0}
+        className="h-[340px] w-full cursor-grab touch-pan-y rounded-panel outline-offset-4 active:cursor-grabbing sm:h-[440px]"
+        aria-label="Maria, in 3D, standing over a row of houseplants. Use the left and right arrow keys to turn her."
         role="img"
       />
       <p className="text-caption text-ink-3">
-        {ready ? "Drag to turn her." : "Fetching Maria."}
+        {ready ? "Drag her, or use the arrow keys." : "Fetching Maria."}
       </p>
     </div>
   );
