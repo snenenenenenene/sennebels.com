@@ -16,6 +16,7 @@ import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
 import { BrandMark, CompanyLogo, Flag, Mark, Monogram } from "../components/marks";
 import { PageTitle } from "../components/section-header";
+import Link from "next/link";
 import { Greeting } from "../components/greeting";
 
 export const metadata: Metadata = {
@@ -100,6 +101,14 @@ export default function About() {
                 {mark}
                 <div className="flex min-w-0 flex-1 flex-col">
                   <p className="truncate text-body font-medium leading-[1.35]">{e.role}</p>
+                  {e.caseStudy && (
+                    <Link
+                      href={`/work/${e.caseStudy}`}
+                      className="w-fit text-caption text-ink-3 underline decoration-ink-3/30 underline-offset-[3px] transition-colors duration-200 hover:text-ink hover:decoration-ink"
+                    >
+                      Read the case study
+                    </Link>
+                  )}
                   <p className={`flex items-center gap-1 text-callout text-ink-3 transition-colors duration-200 ${ROW_TEXT[rowTint]}`}>
                     {/*
                       The rule wipes in from the left on scaleX rather than

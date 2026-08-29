@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Briefcase, Cat, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";
+import { LinkedText } from "../components/linked-text";
 import { PageTitle } from "../components/section-header";
 import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 
@@ -58,7 +59,7 @@ export default function Now() {
             >
               <GlyphTile icon={item.icon} tint={item.tint} />
               <h2 className="text-title2 font-medium text-ink">{item.title}</h2>
-              <p className="text-body leading-[1.75] text-ink-2">{item.body}</p>
+              <LinkedText text={item.body} className="text-body leading-[1.75] text-ink-2" />
             </section>
           </Reveal>
         ))}

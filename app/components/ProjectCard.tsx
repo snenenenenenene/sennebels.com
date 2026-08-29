@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
 import { Phone } from "./phone";
+import { Browser } from "./browser";
 import { ACCENT_TEXT, CARD_TINT, type Tint } from "./ui";
 import { RebusText } from "./rebus-text";
 import { CaseStudyButton } from "./cta";
@@ -76,17 +77,15 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             ))}
           </div>
         ) : project.image ? (
+          // Natural aspect, not a fixed height with object-cover: that was
+          // slicing the bottom off every web capture.
           <Tilt className="lg:min-w-0 lg:flex-1">
-            <div className="overflow-hidden">
-              <Image
-                src={project.image}
-                alt={`${project.name}: ${project.title}`}
-                width={1400}
-                height={900}
-                loading="eager"
-                className="h-[230px] w-full object-cover object-top lg:h-[400px]"
-              />
-            </div>
+            <Browser
+              src={project.image}
+              alt={`${project.name}: ${project.title}`}
+              url={project.live?.label}
+              priority
+            />
           </Tilt>
         ) : (
           project.spec && (
