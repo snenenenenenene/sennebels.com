@@ -37,7 +37,7 @@ export default function About() {
     <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
       <PageTitle
         title="About"
-        lede="Six years of it, in the order it happened."
+        lede="The work, the numbers, and the tools I actually use."
       />
 
       <RebusText

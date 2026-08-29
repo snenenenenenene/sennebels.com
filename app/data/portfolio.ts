@@ -15,7 +15,7 @@ export const PERSON = {
   relocation: "Open to relocation",
   // The one self-contained passage an answer engine can lift verbatim.
   answerBlock:
-    "Senne Bels is a senior software engineer based in Antwerp, Belgium, with six years of remote-first experience building web, mobile and AI systems in TypeScript. He leads frontend for a consumer platform serving 140,000 users, has delivered production LLM systems with retrieval, evaluation and guardrails, and has shipped work for Tomorrowland, the Y Combinator-backed startup Kaedim, and the Flanders Agency of Home Affairs.",
+    "I’m Senne, a software engineer from Antwerp. For the past six years I’ve built web, mobile and AI products for startups, agencies and the Flemish government. I currently lead frontend for a platform used by 140,000 people, work on the Tomorrowland app, and build my own products on the side.",
 } as const;
 
 
@@ -186,15 +186,11 @@ export const FEATURED: Featured[] = [
     description:
       "Kaedim turns a brief into 3D that a real team inspects and approves before it ships. I worked both ends of that: the onboarding and progress a customer sees, and the review queue and automated testing the design team leans on.",
     tech: ["Three.js", "WebGL", "Blender MCP"],
-    spec: {
-      points: [
-        "Onboarding and the customer-facing app, redesigned",
-        "Skeleton loaders, so a slow generation reads as progress",
-        "Bulk uploads where one bad item no longer sinks the batch",
-        "A review queue for the 3D team, and automated asset testing",
-      ],
-      credit: "The product itself sits behind a login, so no screenshot.",
-    },
+    image: "/images/work/kaedim.webp",
+    gallery: [
+      // The asset grid is already the hero image above, so it is not repeated here.
+      { src: "/images/work/kaedim-viewer.webp", caption: "UV and texture views, and the stage-by-stage history beside them" },
+    ],
     regions: { codes: ["us", "gb", "sg"], label: "Team across San Francisco, London and Singapore" },
     lesson:
       "Waiting is a design problem, not a backend one. Nothing about the generation got faster, but a skeleton loader turns a frozen screen into visible progress, and one bad item no longer takes a whole batch down with it. The same idea runs the other way too: failing bad assets automatically means a designer only spends attention on work worth looking at.",
@@ -377,19 +373,19 @@ export const ALSO = [
 export const NUMBERS = [
   {
     value: "140,000",
-    label: "people using the platform I lead frontend for",
+    label: "people use the platform I lead frontend for",
   },
   {
     value: "15s → 1s",
-    label: "what I did to their slowest screen, a 93% cut",
+    label: "load time on the platform’s slowest screen",
   },
   {
     value: "89%",
-    label: "faster page loads on a national government platform",
+    label: "faster page loads on a Flemish government platform",
   },
   {
     value: "6 years",
-    label: "remote-first: agency, government, YC-backed",
+    label: "working remote-first across startups, agencies and government",
   },
 ];
 
@@ -493,7 +489,7 @@ export const SKILL_GROUPS = [
 
 /** Intro paragraphs for /fun. */
 export const ASIDE = [
-  "Most of what I do away from a keyboard ends up feeding what I do at one.",
+  "This is Maria. She has one eye, likes the radiator, and runs the house. Three other cats and a dog also live here.",
 ];
 
 /** Recent shows. Kept as a list because that is how it reads on a poster. */
@@ -508,12 +504,12 @@ export const ASIDE = [
  * a hobby. These say more in six words than a paragraph would.
  */
 export const TRAITS = [
-  { text: "Emotionally reliant on a one-eyed cat", icon: "Cat", tint: "red" as const },
-  { text: "Owns more plants than shelf", icon: "Plant", tint: "blue" as const },
-  { text: "Rates four stars, means it", icon: "Star", tint: "yellow" as const },
-  { text: "Plays guitar at a volume nobody asked for", icon: "Guitar", tint: "red" as const },
-  { text: "Will lose a Rocket League match on purpose, apparently", icon: "GameController", tint: "blue" as const },
-  { text: "Cooks past his level on a Tuesday", icon: "CookingPot", tint: "yellow" as const },
+  { text: "Four cats and a dog", icon: "Cat", tint: "red" as const },
+  { text: "Too many plants for one flat", icon: "Plant", tint: "blue" as const },
+  { text: "Almost every film gets four stars", icon: "Star", tint: "yellow" as const },
+  { text: "Guitar most days", icon: "Guitar", tint: "red" as const },
+  { text: "Achievement runs in strategy games", icon: "GameController", tint: "blue" as const },
+  { text: "Cooking something too ambitious", icon: "CookingPot", tint: "yellow" as const },
 ];
 
 
@@ -522,53 +518,52 @@ export const TRAITS = [
 
 /** Rebus marks for the About lede. */
 export const ABOUT_REBUS = [
-  { phrase: "six years of remote-first experience", icon: "Clock", tint: "red" as const },
-  { phrase: "web, mobile and AI systems", icon: "Terminal", tint: "blue" as const },
-  { phrase: "140,000 users", icon: "UsersThree", tint: "yellow" as const },
+  { phrase: "past six years", icon: "Clock", tint: "red" as const },
+  { phrase: "web, mobile and AI products", icon: "Terminal", tint: "blue" as const },
+  { phrase: "140,000 people", icon: "UsersThree", tint: "yellow" as const },
 ];
 
 /** Rebus marks for the Fun paragraphs. Keyed by the line they belong to. */
 export const FUN_REBUS = [
-  { phrase: "Four cats and a dog", icon: "Cat", tint: "red" as const },
+  { phrase: "Maria", icon: "Cat", tint: "red" as const },
   { phrase: "long walk with a coffee", icon: "Coffee", tint: "blue" as const },
   { phrase: "Marvel Rivals", icon: "GameController", tint: "yellow" as const },
   { phrase: "Wingspan", icon: "Bird", tint: "red" as const },
-  { phrase: "I play most days", icon: "Guitar", tint: "blue" as const },
-  { phrase: "closer to a greenhouse", icon: "Plant", tint: "yellow" as const },
-  { phrase: "flat and six metres above sea level", icon: "Ruler", tint: "red" as const },
-  { phrase: "Fury Road", icon: "FilmSlate", tint: "blue" as const },
+  { phrase: "guitar most days", icon: "Guitar", tint: "blue" as const },
+  { phrase: "too many plants", icon: "Plant", tint: "yellow" as const },
+  { phrase: "four stars", icon: "FilmSlate", tint: "blue" as const },
 ];
 
 /** Longer-form personality, for /fun. Each has room to be an actual story. */
 /** Services a card actually points at, so the mark is real rather than generic. */
 export const FUN_BRANDS: Record<string, string[]> = {
-  "Achievement hunting, and Magic": ["steam", "boardgamegeek"],
-  "Guitar at home, loud rooms elsewhere": ["spotify"],
+  "Games and achievement hunting": ["steam", "boardgamegeek"],
+  "Guitar and live music": ["spotify"],
 };
 
 export const FUN = [
   {
     title: "Four cats and a dog",
-    body: "Maria has one eye and full veto power over the radiator, which is how the heating bill gets decided here. The long-term plan is a cat cafe. That is a roadmap item, not a joke.",
+    body: "Maria has one eye and likes to sit on the radiator. She is the one in the model above. There are three more cats and a dog at home, and yes, I still want to open a cat café one day.",
   },
   {
-    title: "Cinephile, horror-leaning",
-    body: "Most things land on four or four and a half, because I would rather enjoy a thing than be right about it. Horror is the genre I will watch at its worst, and Cameron is the director I will defend at his. Aliens, Terminator 2 and The Abyss, in that order, and I will take the argument.",
+    title: "Films, mostly horror",
+    body: "I watch a lot of films and rate almost all of them four stars. Horror is what I come back to most. I’ll also defend James Cameron every time, especially Aliens, Terminator 2 and The Abyss.",
   },
   {
-    title: "Guitar at home, loud rooms elsewhere",
-    body: "I play most days. Nobody has asked me to play in front of them twice, which I choose to read as a compliment to the volume.",
+    title: "Guitar and live music",
+    body: "I play guitar most days, mostly at home. Live music is better when somebody else is playing.",
   },
   {
-    title: "Plants, and getting outside",
-    body: "The flat is closer to a greenhouse than a flat at this point. Belgium is flat and six metres above sea level, so the hiking happens somewhere else. That is a large part of why the plan points west and upward.",
+    title: "Plants and getting outside",
+    body: "I have too many plants for the flat and still bring home more. For actual greenery, I like long walks and hiking. Belgium is not much help with the mountain part, so I travel for that.",
   },
   {
-    title: "Achievement hunting, and Magic",
-    body: "Hearts of Iron and EU4, where the actual game is the achievement list and the run is just how you get there. Phasmophobia when there are four of us. Marvel Rivals and Rocket League when I want to lose a match I had every right to win. Magic since long before any of it, and Wingspan is the one everyone gets talked into and nobody regrets.",
+    title: "Games and achievement hunting",
+    body: "Hearts of Iron and Europa Universalis for the achievement runs. Phasmophobia with friends. Marvel Rivals and Rocket League when I want something quicker. I’ve played Magic for years, and Wingspan is the board game I talk everyone into.",
   },
   {
-    title: "Coffee, and cooking past my level",
-    body: "A long walk with a coffee, or a Tuesday dinner more ambitious than a Tuesday can support. Both are how I get unstuck.",
+    title: "Coffee and cooking",
+    body: "A long walk with a coffee is usually enough to get me unstuck. If not, I cook something far too ambitious for a Tuesday.",
   },
 ] as const;

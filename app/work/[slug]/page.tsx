@@ -271,8 +271,14 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           <h2 className="text-title2 font-medium">In the app</h2>
           <ul className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 md:-mx-12 md:px-12">
             {project.gallery.map((shot) => (
-              <li key={shot.src} className="flex w-[210px] shrink-0 snap-start flex-col gap-3 sm:w-[240px]">
-                <Phone src={shot.src} alt={shot.caption} width={228} island={project.phonesHaveIsland} className="w-full" />
+              <li key={shot.src} className={`flex shrink-0 snap-start flex-col gap-3 ${project.phones ? "w-[210px] sm:w-[240px]" : "w-[320px] sm:w-[440px]"}`}>
+                {/* Phone frames only for the apps that are phones. A desktop
+                    capture in a handset bezel would be a lie about the product. */}
+                {project.phones ? (
+                  <Phone src={shot.src} alt={shot.caption} width={228} island={project.phonesHaveIsland} className="w-full" />
+                ) : (
+                  <Image src={shot.src} alt={shot.caption} width={1600} height={840} className="w-full rounded-[10px]" />
+                )}
                 <p className="text-callout leading-[1.5] text-ink-2">{shot.caption}</p>
               </li>
             ))}

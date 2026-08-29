@@ -17,10 +17,31 @@ import { GLASS, TAP } from "./ui";
  * active link and moving a single pill to it cannot desynchronise that way.
  */
 
+/**
+ * Pull a route's heavy assets into cache when someone points at its link.
+ * Maria is 1.3 MB, which is not worth spending on every visitor who never
+ * opens /fun, but is worth spending the moment they look like they might.
+ * Fires once per asset for the life of the page.
+ */
+const warmed = new Set<string>();
+function warm(urls?: string[]) {
+  if (!urls) return;
+  for (const url of urls) {
+    if (warmed.has(url)) continue;
+    warmed.add(url);
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.as = "fetch";
+    link.crossOrigin = "anonymous";
+    link.href = url;
+    document.head.appendChild(link);
+  }
+}
+
 const LINKS = [
   { href: "/", label: "Work", tint: "red" as const },
   { href: "/about", label: "About", tint: "blue" as const },
-  { href: "/fun", label: "Fun", tint: "yellow" as const },
+  { href: "/fun", label: "Fun", tint: "yellow" as const, warm: ["/models/maria.glb", "/draco/draco_decoder.wasm"] },
 ];
 
 /** Pill ground and the type colour that sits on it, per destination. */
@@ -101,6 +122,8 @@ export function Navbar({ email }: { email: string }) {
                 refs.current[i] = el;
               }}
               aria-current={active ? "page" : undefined}
+              onMouseEnter={() => warm(l.warm)}
+              onFocus={() => warm(l.warm)}
               className={`relative z-10 flex min-h-tap w-[74px] items-center justify-center text-callout font-medium transition-colors duration-200 ${
                 active ? PILL[l.tint].text : "text-ink-2 hover:text-ink"
               }`}

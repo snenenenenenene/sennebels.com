@@ -16,7 +16,7 @@ import { BrandMark } from "../components/marks";
 export const metadata: Metadata = {
   title: "Fun",
   description:
-    "Four cats, a dog, mountains nowhere near Belgium, and games. What Senne Bels does when he is not working.",
+    "Four cats, a dog, games, films, guitar, coffee and too many plants. What Senne Bels does away from work.",
   alternates: { canonical: "https://sennebels.com/fun" },
 };
 
@@ -37,7 +37,7 @@ const SPAN = ["md:col-span-3", "md:col-span-3", "md:col-span-2", "md:col-span-4"
 export default function Fun() {
   return (
     <main className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16">
-      <PageTitle title="When I am not working" lede="Which happens more than it should." />
+      <PageTitle title="When I’m not working" lede="Cats, games, films, guitar, coffee and too many plants." />
 
       <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
         <div className="flex max-w-[62ch] flex-col gap-4 lg:flex-1">
@@ -56,7 +56,7 @@ export default function Fun() {
         </div>
       </div>
 
-      {/* Short claims rather than descriptions. Six words each, no hedging. */}
+      {/* Short, literal fragments before the longer stories below. */}
       <ul className="mt-10 flex flex-wrap gap-2.5">
         {TRAITS.map((t, i) => {
           const I = (Ph as unknown as Record<string, Icon>)[t.icon];
