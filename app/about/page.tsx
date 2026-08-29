@@ -38,8 +38,7 @@ const TRIO: Tint[] = ["red", "blue", "yellow"];
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
   { icon: UsersThree, tint: "red" },
   { icon: MagnifyingGlass, tint: "blue" },
-  { icon: SquaresFour, tint: "yellow" },
-  { icon: Buildings, tint: "red" },
+  { icon: Clock, tint: "yellow" },
 ];
 
 export default function About() {
@@ -63,7 +62,7 @@ export default function About() {
           corner. A hairline in the accent sits under the figure to tie the two
           together without another filled shape competing with it.
         */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {NUMBERS.map((n, i) => {
             const st = STATS[i % STATS.length];
             return (

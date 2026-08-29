@@ -73,7 +73,7 @@ export type Featured = {
 export const FEATURED: Featured[] = [
   {
     slug: "tomorrowland",
-  storyRebus: [{ phrase: "one app now", icon: "SquaresFour", tint: "red" }, { phrase: "a stream that dies on a train", icon: "WifiSlash", tint: "blue" }, { phrase: "without waiting on a release", icon: "Lightning", tint: "yellow" }],
+  storyRebus: [{ phrase: "one React Native codebase now", icon: "SquaresFour", tint: "red" }, { phrase: "a stream that dies on a train", icon: "WifiSlash", tint: "blue" }, { phrase: "without waiting on a release", icon: "Lightning", tint: "yellow" }],
   features: [
     "Live radio stall recovery on both platforms",
     "Playback that survives losing signal",
@@ -81,7 +81,7 @@ export const FEATURED: Featured[] = [
     "Content detail screens",
     "Partners overview",
   ],
-  rebus: [{ phrase: "Three or four apps became one", icon: "SquaresFour", tint: "red" }, { phrase: "CarPlay and Android Auto", icon: "Car", tint: "blue" }, { phrase: "live radio", icon: "Broadcast", tint: "yellow" }],
+  rebus: [{ phrase: "Three or four Flutter apps became one React Native codebase", icon: "SquaresFour", tint: "red" }, { phrase: "CarPlay and Android Auto", icon: "Car", tint: "blue" }, { phrase: "live radio", icon: "Broadcast", tint: "yellow" }],
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
   brandDark: "invert",
@@ -89,7 +89,7 @@ export const FEATURED: Featured[] = [
   accent: "red",
     title: "One app for every edition, all year round",
     description:
-      "Three or four apps became one, covering every Tomorrowland edition worldwide and carrying the old radio app's features into CarPlay and Android Auto. My work is the live radio surviving a bad network on both platforms, and the CMS-driven content system the festival screens are built from.",
+      "Three or four Flutter apps became one React Native codebase, covering every Tomorrowland edition worldwide and carrying the old radio app's features into CarPlay and Android Auto. My work is the live radio surviving a bad network on both platforms, and the CMS-driven content system the festival screens are built from.",
     builtWith: [
       { name: "React Native", slug: "react" },
       { name: "Expo", slug: "expo" },
@@ -118,12 +118,12 @@ export const FEATURED: Featured[] = [
       { label: "Team", value: "Product owner, tech lead, mobile engineers" },
     ],
     story: [
-      "Tomorrowland ran three or four apps: Radio, an app per festival, and Account. They are one app now, covering every edition worldwide, with the old radio app's features carried into CarPlay and Android Auto, a full store, and a festival map that has to hold up with tens of thousands of people on it at once. The point of consolidating was not tidiness. It was that a Tomorrowland experience should exist in the eleven months you are not at a festival.",
+      "Tomorrowland ran three or four separate Flutter apps: Radio, an app per festival, and Account. They are one React Native codebase now, covering every edition worldwide, with the old radio app's features carried into CarPlay and Android Auto, a full store, and a festival map that has to hold up with tens of thousands of people on it at once. The point of consolidating was not tidiness. It was that a Tomorrowland experience should exist in the eleven months you are not at a festival.",
       "The radio is where most of my time has gone, because a stream that dies on a train is a stream nobody trusts. It recovers from stalls on both platforms now, it knows the difference between a network that dropped and a person who pressed pause, and it stops fighting you when you walk back into signal. Getting there meant writing down how it fails before trying to fix it.",
       "The other half is the content system behind the festival screens. Editorial teams shape what the app shows without waiting on a release, which matters when a lineup changes on the day.",
     ],
     outcomes: [
-      { value: "4 to 1", label: "apps consolidated, across every edition worldwide" },
+      { value: "Flutter to RN", label: "four codebases replaced by one, on Expo" },
       { value: "2 platforms", label: "live radio recovering from stalls on iOS and Android" },
       { value: "No app-store release", label: "needed for editorial teams to change what the app shows" },
     ],
@@ -413,6 +413,12 @@ export const ALSO = [
  * queries, which is an SEO-internal number rather than a reason to hire
  * anyone. Each of these is one client, so none of them is a total.
  */
+/**
+ * Three, not four. There were only ever two figures here that land without a
+ * paragraph of setup, and padding the row to a grid of four meant keeping
+ * ones that need explaining before they mean anything. Each is one client, so
+ * none of them is a total.
+ */
 export const NUMBERS = [
   {
     value: "140,000",
@@ -423,12 +429,8 @@ export const NUMBERS = [
     label: "public decisions I helped make searchable",
   },
   {
-    value: "4 into 1",
-    label: "festival apps merged into one, running worldwide",
-  },
-  {
-    value: "300+",
-    label: "Belgian municipalities publishing through it",
+    value: "6 years",
+    label: "shipping production software people rely on",
   },
 ];
 
