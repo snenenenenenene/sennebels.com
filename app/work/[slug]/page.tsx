@@ -237,7 +237,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
       {project.phones && (
         <Reveal className="pt-16">
-          <figure className="flex flex-wrap items-start justify-center gap-6">
+          <figure className="-mx-6 flex items-start gap-6 overflow-x-auto px-6 md:-mx-12 md:px-12 lg:mx-0 lg:justify-center lg:overflow-visible lg:px-0">
             {project.phones.map((src, i) => (
               <Phone key={src} src={src} width={236} island={project.phonesHaveIsland} className={i % 2 ? "" : "sm:mt-10"} />
             ))}

@@ -61,7 +61,10 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
         </div>
 
         {project.phones ? (
-          <div className="flex items-start justify-center gap-4 lg:min-w-0 lg:flex-1">
+          // Three phones are wider than a phone-sized viewport, so on small
+          // screens the row bleeds to the card edge and scrolls instead of
+          // spilling off the page.
+          <div className="-mx-7 flex items-start gap-4 overflow-x-auto px-7 md:-mx-10 md:px-10 lg:mx-0 lg:min-w-0 lg:flex-1 lg:justify-center lg:overflow-visible lg:px-0">
             {project.phones.map((src, i) => (
               <Phone
                 key={src}
