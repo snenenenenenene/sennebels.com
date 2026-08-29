@@ -39,6 +39,20 @@ export function generateStaticParams() {
   return FEATURED.map((p) => ({ slug: p.slug }));
 }
 
+/**
+ * Cut to the last whole sentence that fits. If that leaves the description far
+ * short of the space a result actually renders, fall back to a word-boundary
+ * cut instead: an 85-character description wastes half the snippet, and Google
+ * tends to write its own when you hand it too little.
+ */
+function trim(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("? "));
+  if (stop > max * 0.72) return cut.slice(0, stop + 1);
+  return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -48,17 +62,38 @@ export async function generateMetadata({
   const project = FEATURED.find((p) => p.slug === slug);
   if (!project) return {};
 
-  const title = `${project.name}: ${project.title}`;
+  // The layout appends " | Senne Bels", so the full name plus this has to stay
+  // inside the ~60 characters a result actually shows. seoTitle is the short
+  // form for projects whose headline is too long to survive that.
+  const title = project.seoTitle ?? `${project.name}: ${project.title}`;
+
+  // Descriptions get trimmed at a sentence boundary rather than mid-word,
+  // because the card copy is written to be read on the page, not in a SERP.
+  const description = trim(project.description, 155);
+
+  // Three of these have no screenshot, and passing undefined meant those pages
+  // shipped no og:image at all while still inheriting a twitter:image from the
+  // layout. Falling back to the site card keeps a share looking deliberate.
+  const image = project.image ?? "/assets/og.png";
+
   return {
     title,
-    description: project.description,
+    description,
     alternates: { canonical: `https://sennebels.com/work/${project.slug}` },
     openGraph: {
       type: "article",
+      siteName: PERSON.name,
+      locale: "en_GB",
       title,
-      description: project.description,
+      description,
       url: `https://sennebels.com/work/${project.slug}`,
-      images: project.image ? [{ url: project.image, width: 1400, height: 900 }] : undefined,
+      images: [{ url: image, width: 1200, height: 630, alt: `${project.name}: ${project.title}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -239,7 +274,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <Reveal className="pt-16">
           <figure className="-mx-6 flex items-start gap-6 overflow-x-auto px-6 md:-mx-12 md:px-12 lg:mx-0 lg:justify-center lg:overflow-visible lg:px-0">
             {project.phones.map((src, i) => (
-              <Phone key={src} src={src} width={236} island={project.phonesHaveIsland} className={i % 2 ? "" : "sm:mt-10"} />
+              <Phone key={src} src={src} alt={`${project.name} on iPhone`} width={236} island={project.phonesHaveIsland} className={i % 2 ? "" : "sm:mt-10"} />
             ))}
           </figure>
         </Reveal>
@@ -347,7 +382,7 @@ function PeekCard({
         ) : project.image ? (
           <Image
             src={project.image}
-            alt=""
+            alt={`${project.name}: ${project.title}`}
             width={800}
             height={500}
             className="h-[150px] w-full object-cover object-top transition-transform duration-500 ease-out group-hover/peek:scale-[1.03]"

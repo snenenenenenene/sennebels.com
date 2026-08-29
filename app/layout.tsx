@@ -27,8 +27,9 @@ const fraunces = Fraunces({
 });
 
 const TITLE = `${PERSON.name}, ${PERSON.jobTitle}`;
+/** Kept under 160 characters: past that, Google truncates it in the result. */
 const DESCRIPTION =
-  "Senior software engineer in Antwerp, Belgium. Six years remote-first building full-stack web, mobile and production AI systems in TypeScript, for Tomorrowland, Kaedim (Y Combinator) and the Belgian government.";
+  "Senior software engineer in Antwerp. Six years remote-first building web, mobile and AI systems in TypeScript, for Tomorrowland, Kaedim and Flanders.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sennebels.com"),
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: "/assets/screenshot.png",
+        url: "/assets/og.png",
         width: 1200,
         height: 630,
         alt: `${PERSON.name}, ${PERSON.jobTitle}`,
@@ -78,7 +79,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     creator: "@snenenenene",
-    images: ["/assets/screenshot.png"],
+    images: ["/assets/og.png"],
   },
   robots: {
     index: true,

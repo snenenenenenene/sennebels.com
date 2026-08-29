@@ -19,7 +19,10 @@ import { PageTitle } from "../components/section-header";
 
 export const metadata: Metadata = {
   title: "About",
-  description: PERSON.answerBlock,
+  // answerBlock runs to 279 characters, which a result truncates. This is
+  // the same claim inside the ~155 that actually renders.
+  description:
+    "Senne Bels, software engineer in Antwerp. Frontend lead on a platform used by 140,000 people, and six years of web, mobile and AI work behind that.",
   alternates: { canonical: "https://sennebels.com/about" },
 };
 

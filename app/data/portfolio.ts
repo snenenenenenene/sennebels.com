@@ -54,6 +54,8 @@ export type Featured = {
   phonesHaveIsland?: boolean;
   cta: string;
   /** Everything below powers /work/[slug] only. */
+  /** Short title for search, when name + headline overruns ~60 characters. */
+  seoTitle?: string;
   /** Countries the work actually spanned: teams, markets or editions. */
   regions?: { codes: string[]; label: string };
   /** What the project taught, in one paragraph. Grounded in its own story. */
@@ -100,6 +102,7 @@ export const FEATURED: Featured[] = [
       { src: "/images/work/tomorrowland-explore.webp", caption: "Every edition in one place, plus the eleven months you are not at one" },
       { src: "/images/work/tomorrowland-search.webp", caption: "Search across DJ sets and One World Radio shows" },
     ],
+    seoTitle: "Tomorrowland: one app, every edition",
     regions: { codes: ["be", "br"], label: "Editions worldwide, Belgium and Brazil among them" },
     lesson:
       "Write down how a thing fails before you try to fix it. The radio only got better once the failure modes were on paper, because a stream that stalls, a network that dropped and a person who pressed pause look identical from the player and need three different answers. Guessing at that in code just moves the bug.",
@@ -142,6 +145,7 @@ export const FEATURED: Featured[] = [
       ],
       credit: "Delivered through Nimble, in a team of eight",
     },
+    seoTitle: "Euroconsumers: Vera, a legal assistant",
     regions: { codes: ["pt", "fr", "it"], label: "Teams in Portugal, France and Italy" },
     lesson:
       "Knowing when to say nothing is a feature. Vera is more useful for refusing a question her sources cannot support than she would be for answering everything fluently. An answer you can check beats one you have to take on faith, and most of that trust was won in the dull places: dated sources, prices that parse, a person on anything risky.",
@@ -192,6 +196,7 @@ export const FEATURED: Featured[] = [
       // The asset grid is already the hero image above, so it is not repeated here.
       { src: "/images/work/kaedim-viewer.webp", caption: "UV and texture views, and the stage-by-stage history beside them" },
     ],
+    seoTitle: "Kaedim: a human-in-the-loop 3D pipeline",
     regions: { codes: ["us", "gb", "sg"], label: "Team across San Francisco, London and Singapore" },
     lesson:
       "Waiting is a design problem, not a backend one. Nothing about the generation got faster, but a skeleton loader turns a frozen screen into visible progress, and one bad item no longer takes a whole batch down with it. The same idea runs the other way too: failing bad assets automatically means a designer only spends attention on work worth looking at.",
@@ -298,6 +303,7 @@ export const FEATURED: Featured[] = [
       "Every Belgian municipality publishes its decisions. Almost none of it was searchable. I made the first commit on the citizen-facing database and then built the validation toolchain that tells a municipality whether what it published actually meets the standard.",
     tech: ["Leaflet", "D3.js", "Semantic web"],
     image: "/images/work/lokaalbeslist.webp",
+    seoTitle: "Lokaal Beslist: public decisions, searchable",
     regions: { codes: ["be"], label: "300+ Belgian municipalities" },
     lesson:
       "Publishing something is not the same as publishing it correctly. Scoring correct and complete separately sounds pedantic until you notice a municipality can be one without being the other, and that the fix differs for each. Fixing the data upstream is what makes the citizen-facing half worth searching at all.",
