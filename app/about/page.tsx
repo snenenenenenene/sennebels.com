@@ -3,6 +3,7 @@ import {
   Briefcase,
   Clock,
   GitCommit,
+  ArrowRight,
   ArrowUpRight,
   GraduationCap,
   Lightning,
@@ -104,6 +105,7 @@ export default function About() {
                 Experience
               </Heading>
             </div>
+            <ul className="flex flex-col">
             {EXPERIENCE.map((e, rowIndex) => {
               const rowTint = TRIO[rowIndex % TRIO.length];
               const mark = e.logo ? (
@@ -115,7 +117,7 @@ export default function About() {
                   <BrandMark slug={e.slug} size={24} />
                 </span>
               ) : (
-                <Monogram name={e.org} tint={e.tint} size={29} />
+                <Monogram name={e.org} size={29} />
               );
   
               const body = (
@@ -154,34 +156,45 @@ export default function About() {
   
               // The whole row is the target, which is both the iOS list pattern
               // and the only way a 29pt mark and one line of copy clear 44pt.
-              const cls =
-                "flex min-h-tap items-center gap-3 rounded-tile px-4 py-[11px] transition-colors duration-200 odd:bg-raised hover:bg-raised";
-  
+              // The card is the container. The row anchor sits inside it and is
+              // transparent, so the case study link can be a sibling of the
+              // anchor (never nested inside it) while still reading as part of
+              // the same card. Putting the surface on the anchor is what left
+              // those links floating in the gap between cards.
+              const card =
+                "squircle flex flex-col rounded-tile transition-colors duration-200 odd:bg-raised hover:bg-raised";
+              const rowCls = "flex min-h-tap items-center gap-3 px-4 py-[11px]";
+
               const row = e.href ? (
-                <a href={e.href} target="_blank" rel="noreferrer" className={`${cls} group/row`}>
+                <a href={e.href} target="_blank" rel="noreferrer" className={`${rowCls} group/row`}>
                   {body}
                 </a>
               ) : (
-                <div className={cls}>{body}</div>
+                <div className={rowCls}>{body}</div>
               );
-  
-              // The case study link is a sibling of the row, never inside it:
-              // the row is already an anchor, and an anchor within an anchor is
-              // invalid HTML that React 19 refuses to hydrate.
+
               return (
-                <div key={e.role + e.org} className="flex flex-col">
+                <li key={e.role + e.org} className={card}>
                   {row}
                   {e.caseStudy && (
-                    <Link
+                    <DirectionalLink
                       href={`/work/${e.caseStudy}`}
-                      className="ml-[60px] w-fit pb-1 text-caption text-ink-3 underline decoration-ink-3/30 underline-offset-[3px] transition-colors duration-200 hover:text-ink hover:decoration-ink"
+                      direction="nav-forward"
+                      className="group/cs -mt-3 mb-0.5 ml-[48px] inline-flex min-h-tap w-fit items-center gap-1 px-3 py-3 text-caption font-medium text-ink-3 transition-colors duration-200 hover:text-tone-blue"
                     >
                       Read the case study
-                    </Link>
+                      <ArrowRight
+                        size={11}
+                        weight="bold"
+                        aria-hidden
+                        className="transition-transform duration-300 ease-out group-hover/cs:translate-x-0.5"
+                      />
+                    </DirectionalLink>
                   )}
-                </div>
+                </li>
               );
             })}
+            </ul>
           </section>
   
           <div className="flex flex-col gap-10">
