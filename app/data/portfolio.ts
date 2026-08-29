@@ -13,7 +13,7 @@ export const PERSON = {
   linkedin: "https://linkedin.com/in/sennebels",
   x: "https://x.com/snenenenene",
   resume: "/assets/CV Senne Bels.pdf",
-  relocation: "Open to relocation",
+  relocation: "Open to relocating abroad",
   // The one self-contained passage an answer engine can lift verbatim.
   answerBlock:
     "I’m Senne, a software engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, mostly remote, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
@@ -423,6 +423,20 @@ export const EDUCATION = {
     "AP University of Applied Sciences, Antwerp · 2019 to 2022. Big data, distributed systems, cloud.",
 };
 
+/**
+ * From his own travel log. Two continents, nineteen countries. Deliberately
+ * counts rather than a profile link: the log itself stays private.
+ */
+export const TRAVEL = {
+  countries: 19,
+  continents: 2,
+  /** In the order they were collected, Europe first then North America. */
+  codes: [
+    "be", "gr", "fr", "gb", "es", "pl", "nl", "it", "bg", "ch",
+    "mc", "dk", "se", "cz", "de", "no", "hr", "ca", "us",
+  ] as const,
+};
+
 export const LANGUAGES = [
   { code: "nl" as const, label: "Dutch", level: "native" },
   { code: "gb" as const, label: "English", level: "C2" },
@@ -560,6 +574,14 @@ export const FUN = [
   {
     title: "Guitar and live music",
     body: "I play guitar most days, mostly at home. Live music is better when somebody else is playing.",
+  },
+  {
+    title: "Travel, logged as I go",
+    body: "I go somewhere else whenever I can, and I keep a log of it so the trips stop blurring into one another. The good parts are rarely the planned ones: a wrong turn, a train I should not have caught, a town nobody recommended.",
+  },
+  {
+    title: "Scripts I cannot read",
+    body: "Dutch, English and French I can actually use. The rest is admiration from a distance. A writing system is a whole set of decisions about how a sound becomes a shape, and Japanese, Korean, Russian and Arabic each answer that differently.",
   },
   {
     title: "Plants and getting outside",
