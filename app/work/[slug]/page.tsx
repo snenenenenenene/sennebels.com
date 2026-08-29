@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, Lightbulb, MagnifyingGlass, TrendUp } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, PERSON } from "../../data/portfolio";
 import { Tilt } from "../../components/tilt";
+import { Phone } from "../../components/phone";
 import { RebusText } from "../../components/rebus-text";
 import { BrandMark, Flags, type FlagCode } from "../../components/marks";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../components/ui";
@@ -234,6 +235,16 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </section>
       )}
 
+      {project.phones && (
+        <Reveal className="pt-16">
+          <figure className="flex flex-wrap items-start justify-center gap-6">
+            {project.phones.map((src, i) => (
+              <Phone key={src} src={src} width={236} island={project.phonesHaveIsland} className={i % 2 ? "" : "sm:mt-10"} />
+            ))}
+          </figure>
+        </Reveal>
+      )}
+
       {project.image && (
         <Reveal className="pt-16"><figure><Tilt>
           <Image
@@ -261,9 +272,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           <ul className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 md:-mx-12 md:px-12">
             {project.gallery.map((shot) => (
               <li key={shot.src} className="flex w-[210px] shrink-0 snap-start flex-col gap-3 sm:w-[240px]">
-                <div>
-                  <Image src={shot.src} alt={shot.caption} width={620} height={1275} className="w-full rounded-[20px]" />
-                </div>
+                <Phone src={shot.src} alt={shot.caption} width={228} island={project.phonesHaveIsland} className="w-full" />
                 <p className="text-callout leading-[1.5] text-ink-2">{shot.caption}</p>
               </li>
             ))}
@@ -326,8 +335,10 @@ function PeekCard({
       href={`/work/${project.slug}`}
       className={`squircle group/peek flex flex-col gap-4 rounded-card p-5 shadow-none transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover ${CARD_TINT[project.accent]} ${isPrev ? "" : "sm:items-end sm:text-right"}`}
     >
-      <div className="overflow-hidden">
-        {project.image ? (
+      <div className="flex h-[150px] items-start justify-center overflow-hidden">
+        {project.phones ? (
+          <Phone src={project.phones[0]} width={96} island={project.phonesHaveIsland} />
+        ) : project.image ? (
           <Image
             src={project.image}
             alt=""

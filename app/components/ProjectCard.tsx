@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Featured } from "../data/portfolio";
 import { Tilt } from "./tilt";
+import { Phone } from "./phone";
 import { ACCENT_TEXT, CARD_TINT, type Tint } from "./ui";
 import { RebusText } from "./rebus-text";
 import { CaseStudyButton } from "./cta";
@@ -59,7 +60,19 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
           </Link>
         </div>
 
-        {project.image ? (
+        {project.phones ? (
+          <div className="flex items-start justify-center gap-4 lg:min-w-0 lg:flex-1">
+            {project.phones.map((src, i) => (
+              <Phone
+                key={src}
+                src={src}
+                width={168}
+                island={project.phonesHaveIsland}
+                className={i === 1 ? "" : "mt-7"}
+              />
+            ))}
+          </div>
+        ) : project.image ? (
           <Tilt className="lg:min-w-0 lg:flex-1">
             <div className="overflow-hidden">
               <Image

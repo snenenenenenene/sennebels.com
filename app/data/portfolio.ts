@@ -47,6 +47,10 @@ export type Featured = {
   spec?: { points: string[]; credit: string };
   /** Real screens from the shipped app, shown as a row on the case study. */
   gallery?: { src: string; caption: string }[];
+  /** Phone screens for the card, rendered in device frames rather than baked into one image. */
+  phones?: string[];
+  /** True when the captures already have the Dynamic Island painted in. */
+  phonesHaveIsland?: boolean;
   cta: string;
   /** Everything below powers /work/[slug] only. */
   /** Countries the work actually spanned: teams, markets or editions. */
@@ -86,7 +90,11 @@ export const FEATURED: Featured[] = [
     description:
       "Three or four apps became one, covering every Tomorrowland edition worldwide and carrying the old radio app's features into CarPlay and Android Auto. My work is the live radio surviving a bad network on both platforms, and the CMS-driven content system the festival screens are built from.",
     tech: ["React Native", "Expo", "Server-driven UI"],
-    image: "/images/work/tomorrowland.webp",
+    phones: [
+      "/images/work/tomorrowland-explore.webp",
+      "/images/work/tomorrowland-search.webp",
+    ],
+    phonesHaveIsland: true,
     gallery: [
       { src: "/images/work/tomorrowland-explore.webp", caption: "Every edition in one place, plus the eleven months you are not at one" },
       { src: "/images/work/tomorrowland-search.webp", caption: "Search across DJ sets and One World Radio shows" },
@@ -241,7 +249,11 @@ export const FEATURED: Featured[] = [
       { src: "/images/work/beedee-travel.webp", caption: "Travel mode, with the places you keep going back to" },
       { src: "/images/work/beedee-likes.webp", caption: "Who liked you, kept separate from who you liked" },
     ],
-    image: "/images/work/beedee.webp",
+    phones: [
+      "/images/work/beedee-discover.webp",
+      "/images/work/beedee-match.webp",
+      "/images/work/beedee-conversation.webp",
+    ],
     regions: { codes: ["be", "in"], label: "Belgium, with the engineering team in India" },
     lesson:
       "The unglamorous flow is where the users actually are. More work went into signup than into any feature, and none of it is something a person would ever ask for. Keeping your answers when you go back to change your phone number does not demo well. It just means people finish.",

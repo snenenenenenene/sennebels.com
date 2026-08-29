@@ -30,7 +30,7 @@ import { IconLink } from "./components/icon-link";
 import { SOCIALS } from "./components/footer";
 import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
-import Image from "next/image";
+import { Phone } from "./components/phone";
 
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -110,9 +110,9 @@ function Hero() {
  * only thing on show.
  */
 const HERO_SHOTS = [
-  { src: "/images/work/beedee-profile.webp", rotate: "-7deg", z: "z-10", pos: "left-0 top-8" },
-  { src: "/images/work/tomorrowland-explore.webp", rotate: "2deg", z: "z-20", pos: "left-[104px] top-0" },
-  { src: "/images/work/beedee-travel.webp", rotate: "10deg", z: "z-10", pos: "left-[208px] top-10" },
+  { src: "/images/work/beedee-profile.webp", rotate: "-7deg", z: "z-10", pos: "left-0 top-8", island: true },
+  { src: "/images/work/tomorrowland-explore.webp", rotate: "2deg", z: "z-20", pos: "left-[104px] top-0", island: false },
+  { src: "/images/work/beedee-travel.webp", rotate: "10deg", z: "z-10", pos: "left-[208px] top-10", island: true },
 ];
 
 function HeroScreens() {
@@ -123,13 +123,11 @@ function HeroScreens() {
     >
       {HERO_SHOTS.map((shot, i) => (
         <Reveal key={shot.src} delay={0.15 + i * 0.1} y={26} className={`absolute ${shot.pos} ${shot.z}`}>
-          <Image
+          <Phone
             src={shot.src}
-            alt=""
-            width={430}
-            height={880}
+            width={150}
+            island={shot.island}
             priority
-            className="w-[150px] rounded-[18px]"
             style={{ transform: `rotate(${shot.rotate})` }}
           />
         </Reveal>
