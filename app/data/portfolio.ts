@@ -15,7 +15,7 @@ export const PERSON = {
   relocation: "Open to relocation",
   // The one self-contained passage an answer engine can lift verbatim.
   answerBlock:
-    "I’m Senne, a software engineer from Antwerp. For the past six years I’ve built web, mobile and AI products for startups, agencies and the Flemish government. I currently lead frontend for a platform used by 140,000 people, work on the Tomorrowland app, and build my own products on the side.",
+    "I’m Senne, a software engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, mostly remote, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
 } as const;
 
 
@@ -143,7 +143,7 @@ export const FEATURED: Featured[] = [
     },
     regions: { codes: ["pt", "fr", "it"], label: "Teams in Portugal, France and Italy" },
     lesson:
-      "Knowing when to say nothing is a feature. Vera is more useful for refusing a question her sources cannot support than she would be for answering everything fluently, and an answer you can check beats one you have to take on faith. Most of the trust came from the unglamorous half: dated sources, prices that parse, a person on anything risky.",
+      "Knowing when to say nothing is a feature. Vera is more useful for refusing a question her sources cannot support than she would be for answering everything fluently. An answer you can check beats one you have to take on faith, and most of that trust was won in the dull places: dated sources, prices that parse, a person on anything risky.",
     cta: "read the write-up",
     facts: [
       { label: "Role", value: "AI Engineer" },
@@ -152,9 +152,9 @@ export const FEATURED: Featured[] = [
       { label: "Team", value: "Eight engineers, two organisations" },
     ],
     story: [
-      "A wrong answer about your consumer rights is worse than no answer, so the whole build is arranged around not being confidently wrong.",
+      "Everything here is arranged around not being confidently wrong.",
       "Vera looks things up before she answers rather than reciting from memory, and every answer carries the article it came from, so a member can check her. Sources show their publication date, because a consumer-rights article that was right two years ago may not be now. Ingestion had to be rebuilt around how long real legal documents actually take to process, rather than how long we had assumed.",
-      "The rest was the unglamorous half that decides whether people trust it: prices that parse correctly in every market, translations for every surface, a refusal to answer questions the sources cannot support, and a human in the loop on anything carrying real risk. I also built and ran the environments it lives on, working with teams in Portugal, France and Italy.",
+      "Then the unglamorous half, which is what actually decides whether people trust it. Prices that parse correctly in every market. Translations for every surface. A refusal to answer what the sources cannot support, and a human in the loop on anything carrying real risk.",
     ],
     outcomes: [
       { value: "100% cited", label: "answers traceable to their source articles" },
