@@ -16,6 +16,7 @@ import { Reveal } from "../components/motion";
 import { RebusText } from "../components/rebus-text";
 import { BrandMark, CompanyLogo, Flag, Mark, Monogram } from "../components/marks";
 import { PageTitle } from "../components/section-header";
+import { Greeting } from "../components/greeting";
 
 export const metadata: Metadata = {
   title: "About",
@@ -172,9 +173,25 @@ export default function About() {
                 </li>
               ))}
             </ul>
+            {/* Three I can use, the rest admired from a distance. */}
+            <p className="mt-1 max-w-[34ch] text-callout text-ink-3">
+              Plus a standing interest in the ones I cannot read.
+            </p>
           </section>
         </div>
       </div>
+
+      <section className="flex flex-col gap-6 pt-20">
+        <Heading icon={Translate} tint="yellow">
+          Hello, in whichever alphabet
+        </Heading>
+        <Greeting />
+        <p className="max-w-[54ch] text-body leading-[1.9] text-ink-2">
+          I would like to be working somewhere other than Belgium. Which country matters less
+          to me than the move itself, so I am open to relocating for the right role, wherever
+          that turns out to be.
+        </p>
+      </section>
 
       {/* Grouped, not thirty loose chips. Same keywords, a fifth of the space. */}
       <section className="flex flex-col gap-5 pt-20">

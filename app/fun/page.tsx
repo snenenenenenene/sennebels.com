@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import * as Ph from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import { Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor-icons/react/dist/ssr";
-import { ASIDE, FUN, FUN_BRANDS, FUN_REBUS, TRAITS } from "../data/portfolio";
+import { ASIDE, FUN, FUN_BRANDS, FUN_REBUS, TRAVEL, TRAITS } from "../data/portfolio";
 import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { Reveal } from "../components/motion";
 // Imported directly: Maria is already a client component, and ssr:false is
 // not allowed from a server component. three itself is still kept out of the
 // bundle by the dynamic import inside her effect.
 import { Maria } from "../components/maria";
+import { Flag, type FlagCode } from "../components/marks";
 import { PageTitle } from "../components/section-header";
 import { RebusText } from "../components/rebus-text";
 import { BrandMark } from "../components/marks";
@@ -71,6 +72,27 @@ export default function Fun() {
           );
         })}
       </ul>
+
+      <section className="mt-14 flex flex-col gap-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+          <h2 className="text-title3 font-medium text-ink">Where I have been so far</h2>
+          <p className="text-caption text-ink-3">
+            {TRAVEL.countries} countries, {TRAVEL.continents} continents
+          </p>
+        </div>
+        {/* Flags rather than a map: nineteen pins on a world map is mostly
+            empty ocean, and the flags carry the same fact in a tenth of the space. */}
+        <ul className="flex flex-wrap gap-2.5">
+          {TRAVEL.codes.map((code) => (
+            <li
+              key={code}
+              className="squircle flex size-11 items-center justify-center rounded-[13px] bg-raised shadow-card transition-transform duration-200 ease-out hover:-translate-y-0.5"
+            >
+              <Flag code={code as FlagCode} size={26} />
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* Mixed spans, so no two rows are the same shape. */}
       <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-6">

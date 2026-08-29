@@ -34,8 +34,8 @@ export function Footer() {
             Come say hi
           </h2>
           <p className="max-w-[52ch] text-body text-ink-2">
-            Open to contract work, and to full-time roles in Canada or the United States that
-            sponsor. The plan points at Vancouver.
+            Open to contract work, and to full-time roles abroad. I would move for the right
+            one, and I am not precious about which country it is in.
           </p>
           <a
             href={`mailto:${PERSON.email}`}

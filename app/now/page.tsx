@@ -30,7 +30,7 @@ const NOW = [
     title: "Where next",
     icon: MapPin,
     tint: "yellow" as Tint,
-    body: "I’m still in Antwerp. The longer-term plan points at Vancouver, and I’m open to roles in Canada or the United States that sponsor.",
+    body: "Still in Antwerp, though not permanently. I would like the next stretch to be somewhere else entirely, and I am open to roles abroad and to relocating for one.",
   },
   {
     title: "Away from the laptop",

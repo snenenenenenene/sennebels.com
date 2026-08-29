@@ -1,9 +1,21 @@
+import ES from "country-flag-icons/react/3x2/ES";
+import PL from "country-flag-icons/react/3x2/PL";
+import IT from "country-flag-icons/react/3x2/IT";
+import BG from "country-flag-icons/react/3x2/BG";
+import CH from "country-flag-icons/react/3x2/CH";
+import MC from "country-flag-icons/react/3x2/MC";
+import DK from "country-flag-icons/react/3x2/DK";
+import SE from "country-flag-icons/react/3x2/SE";
+import CZ from "country-flag-icons/react/3x2/CZ";
+import DE from "country-flag-icons/react/3x2/DE";
+import NO from "country-flag-icons/react/3x2/NO";
+import HR from "country-flag-icons/react/3x2/HR";
+import GR from "country-flag-icons/react/3x2/GR";
 import NL from "country-flag-icons/react/3x2/NL";
 import GB from "country-flag-icons/react/3x2/GB";
 import FR from "country-flag-icons/react/3x2/FR";
 import BE from "country-flag-icons/react/3x2/BE";
 import PT from "country-flag-icons/react/3x2/PT";
-import IT from "country-flag-icons/react/3x2/IT";
 import IN from "country-flag-icons/react/3x2/IN";
 import SG from "country-flag-icons/react/3x2/SG";
 import US from "country-flag-icons/react/3x2/US";
@@ -102,6 +114,18 @@ const FLAGS: Record<string, { Icon: (p: { title?: string }) => JSX.Element; labe
   us: { Icon: US, label: "United States" },
   ca: { Icon: CA, label: "Canada" },
   br: { Icon: BR, label: "Brazil" },
+  es: { Icon: ES, label: "Spain" },
+  pl: { Icon: PL, label: "Poland" },
+  bg: { Icon: BG, label: "Bulgaria" },
+  ch: { Icon: CH, label: "Switzerland" },
+  mc: { Icon: MC, label: "Monaco" },
+  dk: { Icon: DK, label: "Denmark" },
+  se: { Icon: SE, label: "Sweden" },
+  cz: { Icon: CZ, label: "Czechia" },
+  de: { Icon: DE, label: "Germany" },
+  no: { Icon: NO, label: "Norway" },
+  hr: { Icon: HR, label: "Croatia" },
+  gr: { Icon: GR, label: "Greece" },
 };
 
 export type FlagCode = keyof typeof FLAGS;
