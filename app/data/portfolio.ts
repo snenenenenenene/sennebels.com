@@ -421,8 +421,8 @@ export const ALSO = [
  */
 export const NUMBERS = [
   {
-    value: "140,000",
-    label: "people on the consumer app I lead frontend for",
+    value: "600,000+",
+    label: "installs of the apps I work on, on Android alone",
   },
   {
     value: "2.9M",
