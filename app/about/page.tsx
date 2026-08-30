@@ -4,6 +4,7 @@ import {
   Clock,
   GitCommit,
   ArrowRight,
+  DownloadSimple,
   ArrowUpRight,
   GraduationCap,
   Lightning,
@@ -38,7 +39,7 @@ const TRIO: Tint[] = ["red", "blue", "yellow"];
 // Paired to the figure they sit behind, not to their position in the list:
 // a clock behind "300+ municipalities" is just decoration that lies.
 const STATS: { icon: typeof UsersThree; tint: Tint }[] = [
-  { icon: UsersThree, tint: "red" },
+  { icon: DownloadSimple, tint: "red" },
   { icon: MagnifyingGlass, tint: "blue" },
   { icon: Clock, tint: "yellow" },
 ];
