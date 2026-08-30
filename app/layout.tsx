@@ -10,6 +10,7 @@ import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
 import { Navbar } from "./components/navbar";
 import { Footer } from "./components/footer";
 import { Konami } from "./components/konami";
+import { PostHogAnalytics } from "./components/analytics";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -183,6 +184,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(workSchema) }}
         />
         <Analytics />
+        <PostHogAnalytics />
         {children}
         <Footer />
         <Konami />
