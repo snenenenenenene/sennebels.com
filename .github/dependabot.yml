@@ -1,0 +1,21 @@
+version: 2
+updates:
+  # One PR a week for routine updates, instead of one per advisory.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      routine:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+      # A burst of advisories arrives as one PR, not fifteen.
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
+    # Majors stay ungrouped on purpose: they need reading, not merging.
