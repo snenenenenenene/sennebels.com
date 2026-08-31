@@ -9,6 +9,19 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "chore(deps)"
+    ignore:
+      # ESLint 10 has no compatible plugin set: eslint-plugin-react (7.37.5)
+      # and eslint-plugin-import (2.32.0) both cap their peer range at eslint
+      # ^9, and eslint-config-next depends on both. Merging it is what broke
+      # linting on every file in transita. Revisit when eslint-plugin-react
+      # ships ESLint 10 support.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      # Tailwind 4 is a config-format migration (@tailwindcss/postcss + the
+      # CSS-first @theme block), not a version bump. The bump alone fails the
+      # build. Do it deliberately, with a visual diff.
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
     groups:
       routine:
         applies-to: version-updates
