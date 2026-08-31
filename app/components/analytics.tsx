@@ -55,6 +55,13 @@ export function PostHogAnalytics() {
         // ingested), so it stays off. Unique-visitor counts come from Vercel
         // Web Analytics, which does its own cookieless de-duplication.
         persistence: "memory",
+        // Never record sessions. There is no consent banner on this site, and
+        // replay is the one thing here that genuinely would need one — it
+        // records what a visitor did, not just that they came. The PostHog
+        // project is shared with other products, one of which does want replay
+        // for its consented users, so a project-level toggle flipped there
+        // would otherwise silently start recording portfolio visitors.
+        disable_session_recording: true,
         capture_pageview: false,
         capture_pageleave: true,
         // An error a visitor hits is worth knowing about even though nobody
