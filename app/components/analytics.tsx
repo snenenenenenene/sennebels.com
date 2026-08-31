@@ -42,7 +42,10 @@ export function PostHogAnalytics() {
     if (!KEY) return;
     if (!posthog.__loaded) {
       posthog.init(KEY, {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
+        // EU, because that is where this site reports. The fallback used to
+        // name the US host, so an unset env var would have sent events to the
+        // wrong region rather than failing visibly.
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com",
         // Nothing is written to the visitor's device: no cookie, no
         // localStorage, no sessionStorage. So there is no consent gate and
         // every visitor is counted, not just the ones who would accept one.
