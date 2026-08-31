@@ -63,6 +63,16 @@ export function PostHogAnalytics() {
         // would otherwise silently start recording portfolio visitors.
         disable_session_recording: true,
         capture_pageview: false,
+        // Every island in the shared PostHog project stamps `product` on its
+        // events, so one query can span them or single one out. Set through
+        // before_send rather than register(): on posthog-js 1.422 register()
+        // writes super-properties through to persisted storage even under
+        // persistence "memory", which would put a cookie on a site that has
+        // no consent banner precisely because it stores nothing.
+        before_send: (event) => {
+          if (event) event.properties = { ...event.properties, product: "portfolio" };
+          return event;
+        },
         capture_pageleave: true,
         // An error a visitor hits is worth knowing about even though nobody
         // will ever report it.
