@@ -12,7 +12,7 @@
     "@gsap/react": "^2.1.2",
     "@next/third-parties": "^15.5.24",
     "@phosphor-icons/react": "^2.1.10",
-    "@vercel/analytics": "^1.6.1",
+    "@vercel/analytics": "^2.0.1",
     "country-flag-icons": "^1.6.20",
     "dotenv": "^16.6.1",
     "framer-motion": "^11.18.2",
