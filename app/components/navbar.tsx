@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { Cat } from "@phosphor-icons/react";
+import { Cat, EnvelopeSimple } from "@phosphor-icons/react";
 import { GLASS, TAP } from "./ui";
 import { DirectionalLink } from "./transition";
 
@@ -87,7 +87,7 @@ export function Navbar({ email }: { email: string }) {
   return (
     <div
       style={{ viewTransitionName: "persistent-nav" }}
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-3.5"
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3.5 sm:px-4"
     >
       <nav
         aria-label="Primary"
@@ -129,7 +129,7 @@ export function Navbar({ email }: { email: string }) {
               aria-current={active ? "page" : undefined}
               onMouseEnter={() => warm(l.warm)}
               onFocus={() => warm(l.warm)}
-              className={`relative z-10 flex min-h-tap w-[74px] items-center justify-center text-callout font-medium transition-colors duration-200 ${
+              className={`relative z-10 flex min-h-tap w-[62px] items-center justify-center sm:w-[74px] text-callout font-medium transition-colors duration-200 ${
                 active ? PILL[l.tint].text : "text-ink-2 hover:text-ink"
               }`}
             >
@@ -138,11 +138,15 @@ export function Navbar({ email }: { email: string }) {
           );
         })}
 
+        {/* The label does not fit next to three tabs at 375px, so below sm the
+            button keeps its tap target and drops to the envelope alone. */}
         <a
           href={`mailto:${email}`}
-          className={`relative z-10 ml-1 flex min-h-tap items-center rounded-full bg-mark-yellow px-4 text-callout font-semibold text-[#1E1515] ${TAP}`}
+          aria-label="Get in touch"
+          className={`relative z-10 ml-1 grid size-tap shrink-0 place-items-center rounded-full bg-mark-yellow text-callout font-semibold text-[#1E1515] sm:flex sm:min-h-tap sm:w-auto sm:px-4 ${TAP}`}
         >
-          Get in touch
+          <EnvelopeSimple size={18} weight="fill" aria-hidden className="sm:hidden" />
+          <span className="hidden sm:inline">Get in touch</span>
         </a>
       </nav>
     </div>
