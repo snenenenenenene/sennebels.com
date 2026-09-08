@@ -66,19 +66,6 @@ export default function Now() {
             </Reveal>
           ))}
         </div>
-  
-        <p className="mt-12 max-w-[62ch] text-callout text-ink-3">
-          This is a{" "}
-          <a
-            href="https://nownownow.com/about"
-            target="_blank"
-            rel="noreferrer"
-            className="underline decoration-ink-3/40 underline-offset-4 transition-colors hover:text-tone-blue"
-          >
-            /now page
-          </a>
-          . The idea is Derek Sivers’s: say what has your attention now, then keep it honest.
-        </p>
       </main>
     </PageTransition>
   );
