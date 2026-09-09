@@ -63,7 +63,7 @@ export function SectionHeader({
       // opacity-100 class, which GSAP overrides on mount.
       className="flex flex-wrap items-baseline gap-x-3 gap-y-1 opacity-100"
     >
-      <Tag className="flex flex-wrap gap-x-[0.3em] text-callout font-semibold uppercase tracking-[0.22em] text-ink-3">
+      <Tag className="flex flex-wrap gap-x-[0.3em] font-mono text-callout uppercase tracking-[0.16em] text-ink-3">
         {words(label, "")}
       </Tag>
       {aside && (

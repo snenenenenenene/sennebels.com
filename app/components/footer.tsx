@@ -1,4 +1,4 @@
-import { ArrowUpRight, Clock, EnvelopeSimple, FileText, GithubLogo, LinkedinLogo, XLogo } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Clock, EnvelopeSimple, FileText, GithubLogo, LinkedinLogo, NotePencil, XLogo } from "@phosphor-icons/react/dist/ssr";
 import { PERSON } from "../data/portfolio";
 import { TAP, type Tint } from "./ui";
 import { IconLink } from "./icon-link";
@@ -20,6 +20,7 @@ export const SOCIALS = [
 
 const MORE = [
   { label: "Now", href: "/now", icon: Clock, external: false },
+  { label: "Guestbook", href: "/guestbook", icon: NotePencil, external: false },
   { label: "Transita", href: "https://transita.app", icon: ArrowUpRight },
   { label: "Korf", href: "https://korf.app", icon: ArrowUpRight },
 ];
