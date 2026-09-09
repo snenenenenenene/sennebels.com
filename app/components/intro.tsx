@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Cat } from "@phosphor-icons/react";
 import { PERSON } from "../data/portfolio";
 import { MICRO, TAP } from "./ui";
+import { DirectionalLink } from "./transition";
 
 /**
  * First-visit intro.
@@ -93,28 +94,66 @@ export function Intro() {
             </p>
           </motion.div>
 
-          <motion.button
-            type="button"
-            onClick={dismiss}
-            autoFocus
-            className={`rounded-full bg-mark-yellow px-8 py-3.5 text-body font-semibold text-[#1E1515] shadow-card-hover ${TAP}`}
+          <motion.div
+            className="flex flex-col items-center gap-4"
             initial={{ y: 14, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            Come in
-          </motion.button>
+            <DirectionalLink
+              href="/welcome"
+              direction="nav-forward"
+              onClick={dismiss}
+              className={`rounded-full bg-mark-yellow px-8 py-3.5 text-body font-semibold text-[#1E1515] shadow-card-hover ${TAP}`}
+            >
+              Get a visitor card
+            </DirectionalLink>
+
+            <button
+              type="button"
+              onClick={dismiss}
+              autoFocus
+              className={`min-h-tap text-ink-3 underline decoration-hairline decoration-2 underline-offset-4 transition-colors duration-200 hover:text-ink ${MICRO}`}
+            >
+              Just look around
+            </button>
+          </motion.div>
 
           <motion.p
-            className="text-caption text-ink-3"
+            className={`text-ink-3 ${MICRO}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
           >
-            Or press Escape. It only ever asks once.
+            Escape does the same. It only ever asks once.
           </motion.p>
+
+          {/* A running clock, because a door wants something alive behind it. */}
+          <Clock />
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+/**
+ * Local time, ticking. The one thing on the intro that proves the page is
+ * running rather than a picture of a page.
+ *
+ * Null until mounted: a clock rendered on the server is a hydration mismatch
+ * with a one-second fuse.
+ */
+function Clock() {
+  const [now, setNow] = useState<string | null>(null);
+  useEffect(() => {
+    const tick = () => setNow(new Date().toLocaleTimeString());
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <p className={`fixed bottom-6 left-6 text-ink-3 ${MICRO}`} suppressHydrationWarning>
+      {now ?? ""}
+    </p>
   );
 }

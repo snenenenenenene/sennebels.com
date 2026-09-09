@@ -20,7 +20,7 @@ export const SOCIALS = [
 
 const MORE = [
   { label: "Now", href: "/now", icon: Clock, external: false },
-  { label: "Guestbook", href: "/guestbook", icon: NotePencil, external: false },
+  { label: "Visitor gallery", href: "/guestbook", icon: NotePencil, external: false },
   { label: "Transita", href: "https://transita.app", icon: ArrowUpRight },
   { label: "Korf", href: "https://korf.app", icon: ArrowUpRight },
 ];

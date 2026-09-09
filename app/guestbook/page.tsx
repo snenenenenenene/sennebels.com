@@ -1,33 +1,43 @@
 import type { Metadata } from "next";
-import { countEntries, listEntries } from "../lib/guestbook";
-import { CARD_TINT, MICRO, PINNED, type Tint } from "../components/ui";
+import { listEntries, stats as loadStats, type Stats } from "../lib/guestbook";
+import { traffic as loadTraffic, type Traffic } from "../lib/traffic";
+import { parseSignature, isCardColor, isHat, type CardColor } from "../data/visitor";
+import { VisitorCard } from "../components/visitor-card";
+import { StatsForNerds } from "../components/stats";
+import { MICRO, PINNED, TAP } from "../components/ui";
 import { PageTitle } from "../components/section-header";
 import { PageTransition } from "../components/transition";
+import { DirectionalLink } from "../components/transition";
 import { Reveal } from "../components/motion";
-import { SignForm } from "./sign-form";
 
 export const metadata: Metadata = {
-  title: "Guestbook",
+  title: "Visitor gallery",
   description:
-    "Sign Senne Bels's guestbook. A page of people who passed through, in their own words.",
+    "Everyone who has passed through sennebels.com, as the cards they were issued. Plus what the site's own numbers actually say.",
   alternates: { canonical: "https://sennebels.com/guestbook" },
 };
 
-// Entries are written by visitors, so this cannot be baked at build time.
 export const dynamic = "force-dynamic";
 
-const TRIO: Tint[] = ["red", "blue", "yellow"];
+const FALLBACK: CardColor[] = ["red", "blue", "yellow", "green"];
 
-export default async function Guestbook() {
-  // A guestbook whose database is down should still render its page and say
-  // so, rather than 500 on a route that is not load-bearing.
+export default async function Gallery() {
   let entries: Awaited<ReturnType<typeof listEntries>> = [];
-  let total = 0;
+  let stats: Stats | null = null;
   let broken = false;
   try {
-    [entries, total] = await Promise.all([listEntries(), countEntries()]);
+    [entries, stats] = await Promise.all([listEntries(), loadStats()]);
   } catch {
     broken = true;
+  }
+
+  // Traffic is decoration on someone else's API. It must never take the page
+  // down with it.
+  let traffic: Traffic | null = null;
+  try {
+    traffic = await loadTraffic();
+  } catch {
+    traffic = null;
   }
 
   return (
@@ -37,51 +47,53 @@ export default async function Guestbook() {
         className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-28 md:px-12 lg:px-16"
       >
         <PageTitle
-          title="Guestbook"
+          title="Visitor gallery"
           lede="Most of the web is people passing through without leaving a mark. This is the other thing."
         />
 
         <p className={`mt-5 text-ink-3 ${MICRO}`}>
-          {total} {total === 1 ? "signature" : "signatures"}
+          {stats?.total ?? 0} {stats?.total === 1 ? "card issued" : "cards issued"}
         </p>
 
-        <div className="mt-12 max-w-[46rem]">
-          {broken ? (
-            <p className="text-body text-ink-2">
-              The guestbook is having a moment. Try again shortly.
-            </p>
-          ) : (
-            <SignForm />
+        <div className="mt-10 flex flex-wrap items-center gap-5">
+          <DirectionalLink
+            href="/welcome"
+            direction="nav-forward"
+            className={`inline-flex items-center rounded-full bg-mark-yellow px-6 py-3 text-body font-semibold text-[#1E1515] shadow-card-hover ${TAP}`}
+          >
+            Get your card
+          </DirectionalLink>
+          {broken && (
+            <p className="text-body text-ink-2">The gallery is having a moment. Try again shortly.</p>
           )}
         </div>
 
-        <ul className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {stats && (
+          <div className="mt-12">
+            <StatsForNerds stats={stats} traffic={traffic} />
+          </div>
+        )}
+
+        <ul className="mt-14 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {entries.map((e, i) => (
             <Reveal key={e.id} delay={Math.min(i, 6) * 0.04} className="flex">
-              <li
-                className={`squircle flex h-full w-full flex-col gap-3 rounded-panel p-6 ${PINNED} ${
-                  CARD_TINT[TRIO[i % TRIO.length]]
-                }`}
-              >
-                <p className="font-display text-title3 font-medium text-ink">{e.name}</p>
-                {e.note && <p className="text-callout leading-[1.7] text-ink-2">{e.note}</p>}
-                <time
-                  dateTime={new Date(e.created_at).toISOString()}
-                  className={`mt-auto pt-2 text-ink-3 ${MICRO} tracking-[0.1em]`}
-                >
-                  {new Date(e.created_at).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </time>
+              <li className={`flex w-full flex-col gap-3 ${PINNED}`}>
+                <VisitorCard
+                  name={e.name}
+                  color={isCardColor(e.color ?? "") ? (e.color as CardColor) : FALLBACK[i % FALLBACK.length]}
+                  hat={isHat(e.hat ?? "") ? (e.hat as never) : "none"}
+                  signature={parseSignature(e.signature)}
+                  issued={new Date(e.created_at)}
+                  serial={e.id}
+                />
+                {e.note && <p className="px-1 text-callout leading-[1.7] text-ink-2">{e.note}</p>}
               </li>
             </Reveal>
           ))}
         </ul>
 
         {!broken && entries.length === 0 && (
-          <p className="mt-16 text-body text-ink-2">Nobody yet. Be the first.</p>
+          <p className="mt-14 text-body text-ink-2">Nobody yet. Be the first.</p>
         )}
       </main>
     </PageTransition>

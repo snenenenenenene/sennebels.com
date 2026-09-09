@@ -25,7 +25,7 @@ const LINKS = [
   { href: "/about", label: "About" },
   { href: "/fun", label: "Fun" },
   { href: "/now", label: "Now" },
-  { href: "/guestbook", label: "Guestbook" },
+  { href: "/guestbook", label: "Gallery" },
 ];
 
 export function Rail() {

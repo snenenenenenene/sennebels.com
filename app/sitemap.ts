@@ -14,6 +14,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/now", priority: 0.7, changeFrequency: "weekly" },
   { path: "/fun", priority: 0.5, changeFrequency: "yearly" },
   { path: "/guestbook", priority: 0.4, changeFrequency: "daily" },
+  // /welcome is a sign-in flow, deliberately not in the sitemap.
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
