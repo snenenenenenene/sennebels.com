@@ -33,6 +33,7 @@ const config: Config = {
       },
       spacing: {
         tap: "44px", // HIG minimum interactive target
+        rail: "310px", // identity rail; content is inset by the same token
         stack: "28px", // the one vertical rhythm step between grouped cards
       },
       fontSize: {
@@ -50,6 +51,7 @@ const config: Config = {
         satoshi: ["Satoshi", "sans-serif"],
         sans: ["var(--font-hanken)", "sans-serif"],
         display: ["var(--font-fraunces)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
         // Wabi-sabi tokens. Every value swaps under prefers-color-scheme: dark

@@ -1,6 +1,6 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import { Fraunces, Hanken_Grotesk } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
@@ -8,6 +8,8 @@ import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
 // import { Dock } from "./components/dock";
 // import { TopBar } from "./components/topbar";
 import { Navbar } from "./components/navbar";
+import { Rail } from "./components/rail";
+import { Intro } from "./components/intro";
 import { Footer } from "./components/footer";
 import { Konami } from "./components/konami";
 import { PostHogAnalytics } from "./components/analytics";
@@ -16,6 +18,18 @@ const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-hanken",
+  display: "swap",
+});
+
+/**
+ * The label face. Every small uppercase label on the site is a caption for
+ * something else, and a mono at that size reads as machine-set annotation
+ * rather than as more of the same voice the body copy is written in.
+ */
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -158,7 +172,7 @@ const workSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`h-full ${hanken.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`h-full ${hanken.variable} ${fraunces.variable} ${plexMono.variable}`}>
       <head>
         <meta name="theme-color" content="#F9F8F5" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
@@ -175,6 +189,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Navbar email={PERSON.email} />
+        <Rail />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
@@ -185,9 +200,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         <PostHogAnalytics />
-        {children}
-        <Footer />
+        {/* One inset, in the layout, rather than a left padding remembered on
+            every page's <main>. The rail is fixed, so nothing reserves space
+            for it otherwise. */}
+        <div className="lg:pl-rail">
+          {children}
+          <Footer />
+        </div>
         <Konami />
+        <Intro />
       </body>
     </html>
   );

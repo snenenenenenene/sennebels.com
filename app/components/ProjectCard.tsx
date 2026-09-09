@@ -6,7 +6,7 @@ import { Tilt } from "./tilt";
 import { Phone } from "./phone";
 import { Browser } from "./browser";
 import { DirectionalLink, SharedMedia, SharedTitle } from "./transition";
-import { ACCENT_TEXT, CARD_TINT, type Tint } from "./ui";
+import { ACCENT_TEXT, CARD_TINT, MetaRow, OutcomeRow, PINNED, PINNED_MEDIA, TypeLine, type Tint } from "./ui";
 import { RebusText } from "./rebus-text";
 import { CaseStudyButton } from "./cta";
 
@@ -51,6 +51,11 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             </SharedTitle>
           </div>
 
+          {/* What kind of work this was, before what it was called. */}
+          <div className="mb-4">
+            <TypeLine {...project.typeLine} />
+          </div>
+
           <h3 className="max-w-[16ch] text-title1 font-medium text-ink">{project.title}</h3>
 
           <RebusText
@@ -59,7 +64,18 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             className="mt-6 max-w-[52ch] text-body leading-[2.1] text-ink-2"
           />
 
-          <DirectionalLink href={`/work/${project.slug}`} direction="nav-forward" className="mt-9 w-fit">
+          {/* Evidence before invitation: the numbers answer "was it any good"
+              and the credit line answers "what was your part", which are the
+              two questions a card that only carries a description leaves open. */}
+          <div className="mt-8">
+            <OutcomeRow outcomes={project.outcomes} tint={project.accent} />
+          </div>
+
+          <div className="mt-7 border-t border-hairline pt-6">
+            <MetaRow facts={project.facts} />
+          </div>
+
+          <DirectionalLink href={`/work/${project.slug}`} direction="nav-forward" className="mt-8 w-fit">
             <CaseStudyButton label={project.cta} />
           </DirectionalLink>
         </div>
@@ -143,7 +159,7 @@ export function SmallCard({
               width={1200}
               height={760}
               loading="eager"
-              className={`w-full object-cover object-top ${wide ? "h-[300px]" : "h-[210px]"}`}
+              className={`w-full object-cover object-top ${PINNED_MEDIA} ${wide ? "h-[300px]" : "h-[210px]"}`}
             />
           </div>
         </Tilt>
@@ -157,7 +173,7 @@ export function SmallCard({
   );
 
   const cls =
-    "squircle group/small flex h-full w-full min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card transition-shadow duration-300 hover:shadow-card-hover";
+    `squircle group/small flex h-full w-full min-h-tap flex-col gap-1.5 rounded-panel bg-raised p-5 shadow-card ${PINNED}`;
 
   return href ? (
     <Link href={href} className={cls}>

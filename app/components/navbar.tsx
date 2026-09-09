@@ -45,6 +45,10 @@ const LINKS = [
   { href: "/fun", label: "Fun", tint: "yellow" as const, warm: ["/models/maria.glb", "/draco/draco_decoder.wasm"] },
 ];
 
+// Now and Guestbook live in the rail at desktop widths and in the footer
+// everywhere. The pill bar is 375px wide before it is anything else, so it
+// carries the three that earn the space.
+
 /** Pill ground and the type colour that sits on it, per destination. */
 const PILL: Record<string, { bg: string; text: string }> = {
   red: {
@@ -87,7 +91,9 @@ export function Navbar({ email }: { email: string }) {
   return (
     <div
       style={{ viewTransitionName: "persistent-nav" }}
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3.5 sm:px-4"
+      // Hidden from lg up, where the identity rail is the navigation. Two
+      // navigations on one screen is one too many.
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3.5 sm:px-4 lg:hidden"
     >
       <nav
         aria-label="Primary"

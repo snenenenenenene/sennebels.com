@@ -32,6 +32,7 @@ import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 import { Phone } from "./components/phone";
 import { PageTransition } from "./components/transition";
+import { LatestLog } from "./components/log";
 
 
 // Server component on purpose: every claim below ships in the HTML, so search
@@ -42,6 +43,10 @@ export default function Home() {
       <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
         <Hero />
   
+        <Reveal>
+          <LatestLog />
+        </Reveal>
+
         {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
         <section id="work" className="flex flex-col gap-stack pt-24">
           <h2 className="text-title1 font-medium text-ink">Selected work</h2>

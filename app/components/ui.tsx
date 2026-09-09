@@ -9,7 +9,45 @@ import type { Icon } from "@phosphor-icons/react";
 
 /** Pressable affordance. iOS scales a control down on touch rather than dimming it. */
 export const TAP =
-  "min-h-tap transition-transform duration-200 ease-out active:scale-[0.98]";
+  "min-h-tap transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-[2px] active:translate-y-0 active:scale-[0.98] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+
+/**
+ * Micro-label. Every small uppercase caption on the site — section labels,
+ * metric labels, dates, credit rows — resolves here.
+ *
+ * There were ten of these written by hand across the site with five different
+ * tracking values, which is what drift looks like before anyone calls it that.
+ * One face (mono), one size, one tracking.
+ */
+export const MICRO = "font-mono text-caption uppercase tracking-[0.16em]";
+
+/**
+ * The one easing the site moves on. Slow out, no overshoot: things settle
+ * rather than bounce, which is the difference between a page that feels
+ * built and one that feels animated.
+ */
+export const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
+
+/**
+ * A card that is pinned rather than placed.
+ *
+ * At rest it sits a fraction of a degree off square, the way something put
+ * down by hand does. On hover it straightens and lifts. That is the whole
+ * trick: the movement is toward order, so hovering reads as picking a thing
+ * up and squaring it rather than as the card flinching away from the cursor.
+ *
+ * Rotation is sub-degree on purpose. At one degree it looks broken; at a
+ * third of one it only registers once the card straightens.
+ *
+ * Under reduced motion the rest angle goes too, not just the transition —
+ * a permanently crooked card is the part that bothers people.
+ */
+export const PINNED =
+  "-rotate-[0.4deg] transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0 hover:-translate-y-[3px] hover:shadow-card-hover motion-reduce:rotate-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+
+/** Media inside a PINNED card, which leans in slightly as the card is picked up. */
+export const PINNED_MEDIA =
+  "transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/small:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/small:scale-100";
 
 /**
  * Liquid Glass, Regular variant.
@@ -271,7 +309,7 @@ export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?:
  */
 export function TypeLine({ kind, sub }: { kind: string; sub: string }) {
   return (
-    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-caption font-medium uppercase tracking-[0.18em] text-ink-3">
+    <p className={`flex flex-wrap items-center gap-x-2.5 gap-y-1 text-ink-3 ${MICRO}`}>
       <span>{kind}</span>
       <span aria-hidden className="h-px w-4 bg-ink-3/50" />
       <span>{sub}</span>
@@ -290,5 +328,58 @@ export function Flavour({ children }: { children: ReactNode }) {
     <p className="border-l-2 border-moss/30 pl-4 font-display text-callout italic leading-[1.6] text-ink-3">
       {children}
     </p>
+  );
+}
+
+/**
+ * The evidence row on a project card: three results, stated as a number and
+ * what it counts. A card that says "AI-powered pipeline" and a card that says
+ * "89% faster page loads" cost the same amount of space and are not worth the
+ * same amount to a reader, so the numbers get to lead.
+ *
+ * Values are the project's own `outcomes`, not a second set written for the
+ * card, and not every one of them is a figure: "Flutter to RN" is a result the
+ * same way "+27%" is. So the value is sized as a heading rather than a display
+ * number, which is a size a short phrase survives.
+ */
+export function OutcomeRow({
+  outcomes,
+  tint = "blue",
+}: {
+  outcomes: { value: string; label: string }[];
+  tint?: Tint;
+}) {
+  return (
+    <dl className="flex flex-wrap gap-x-9 gap-y-5">
+      {outcomes.slice(0, 3).map((o) => (
+        <div key={o.label} className="flex max-w-[19ch] flex-col gap-1">
+          <dt className="sr-only">{o.label}</dt>
+          <dd className={`font-display text-title3 font-medium leading-[1.15] ${ACCENT_TEXT[tint]}`}>
+            {o.value}
+          </dd>
+          <p aria-hidden className={`text-ink-3 ${MICRO}`}>
+            {o.label}
+          </p>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/**
+ * Role, engagement and dates, as a credit line rather than prose. Reads off
+ * the same `facts` the case study uses; the card takes the first three, which
+ * is where the answers to "what did you actually do, and when" live.
+ */
+export function MetaRow({ facts }: { facts: { label: string; value: string }[] }) {
+  return (
+    <dl className="flex flex-wrap gap-x-8 gap-y-4">
+      {facts.slice(0, 3).map((f) => (
+        <div key={f.label} className="flex max-w-[24ch] flex-col gap-1">
+          <dt className={`text-ink-3 ${MICRO}`}>{f.label}</dt>
+          <dd className="text-callout text-ink-2">{f.value}</dd>
+        </div>
+      ))}
+    </dl>
   );
 }

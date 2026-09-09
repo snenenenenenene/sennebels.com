@@ -3,8 +3,10 @@ import { Briefcase, Cat, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";
 import { LinkedText } from "../components/linked-text";
 import { PageTitle } from "../components/section-header";
-import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
+import { CARD_TINT, GlyphTile, MICRO, type Tint } from "../components/ui";
 import { PageTransition } from "../components/transition";
+import { LOGS } from "../data/logs";
+import { LogBody, logDate } from "../components/log";
 
 export const metadata: Metadata = {
   title: "Now",
@@ -66,6 +68,28 @@ export default function Now() {
             </Reveal>
           ))}
         </div>
+
+        {/* The dated half. The cards above say what is true in general; this
+            says what was in front of me on a particular Tuesday, and it is the
+            half that shows whether the page is being kept. */}
+        <section className="flex flex-col gap-8 pt-24">
+          <h2 className="text-title2 font-medium text-ink">Log</h2>
+          <ol className="flex flex-col">
+            {LOGS.map((entry, i) => (
+              <Reveal key={entry.date} delay={Math.min(i, 4) * 0.05}>
+                <li className="flex flex-col gap-2 border-t border-hairline py-7 md:flex-row md:gap-10">
+                  <time
+                    dateTime={entry.date}
+                    className={`shrink-0 pt-0.5 text-ink-3 md:w-[15ch] ${MICRO}`}
+                  >
+                    {logDate(entry.date)}
+                  </time>
+                  <LogBody body={entry.body} className="max-w-[64ch] text-body leading-[1.85] text-ink-2" />
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </section>
       </main>
     </PageTransition>
   );
