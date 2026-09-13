@@ -13,6 +13,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/about", priority: 0.9, changeFrequency: "monthly" },
   { path: "/now", priority: 0.7, changeFrequency: "monthly" },
   { path: "/fun", priority: 0.5, changeFrequency: "yearly" },
+  { path: "/buurtsit", priority: 0.6, changeFrequency: "weekly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
