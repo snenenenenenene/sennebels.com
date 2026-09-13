@@ -4,12 +4,7 @@ import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
-// Dock and TopBar are kept for reference; the Navbar replaces both for now.
-// import { Dock } from "./components/dock";
-// import { TopBar } from "./components/topbar";
-import { Navbar } from "./components/navbar";
-import { Footer } from "./components/footer";
-import { Konami } from "./components/konami";
+import { SiteChrome } from "./components/site-chrome";
 import { PostHogAnalytics } from "./components/analytics";
 
 const hanken = Hanken_Grotesk({
@@ -164,17 +159,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="min-h-full bg-paper font-sans">
-        {/*
-          WCAG 2.4.1: a keyboard user should be able to get past the navigation
-          without tabbing through it on every page. Off-screen until focused.
-        */}
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-body focus:font-medium focus:text-paper"
-        >
-          Skip to content
-        </a>
-        <Navbar email={PERSON.email} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
@@ -185,9 +169,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         <PostHogAnalytics />
-        {children}
-        <Footer />
-        <Konami />
+        <SiteChrome email={PERSON.email}>{children}</SiteChrome>
       </body>
     </html>
   );
