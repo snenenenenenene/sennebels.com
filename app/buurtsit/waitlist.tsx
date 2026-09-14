@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import posthog from "posthog-js";
 import { FORM_URL, MAILTO_FALLBACK } from "./form";
 
 type Lang = "nl" | "en";
@@ -60,6 +61,15 @@ export function Waitlist() {
     }
 
     setOk(true);
+
+    const normalizedEmail = data.email.toLowerCase().trim();
+    posthog.identify(normalizedEmail);
+    posthog.capture("waitlist_submit", {
+      product: "buurtsit",
+      role: data.role,
+      district: data.district,
+      car: data.car,
+    });
 
     if (FORM_URL) {
       window.setTimeout(() => {

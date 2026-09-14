@@ -42,10 +42,10 @@ export function PostHogAnalytics() {
     if (!KEY) return;
     if (!posthog.__loaded) {
       posthog.init(KEY, {
-        // EU, because that is where this site reports. The fallback used to
-        // name the US host, so an unset env var would have sent events to the
-        // wrong region rather than failing visibly.
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com",
+        // US project 356563. The fallback used to name the EU host; an unset
+        // env var now reports to US rather than failing visibly. Production
+        // may still override via NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com.
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
         // Nothing is written to the visitor's device: no cookie, no
         // localStorage, no sessionStorage. So there is no consent gate and
         // every visitor is counted, not just the ones who would accept one.
@@ -73,7 +73,13 @@ export function PostHogAnalytics() {
         // persistence "memory", which would put a cookie on a site that has
         // no consent banner precisely because it stores nothing.
         before_send: (event) => {
-          if (event) event.properties = { ...event.properties, product: "portfolio" };
+          if (event) {
+            const path = event.properties?.$current_url
+              ? new URL(event.properties.$current_url).pathname
+              : "";
+            const product = path.startsWith("/buurtsit") ? "buurtsit" : "portfolio";
+            event.properties = { ...event.properties, product };
+          }
           return event;
         },
         capture_pageleave: true,
