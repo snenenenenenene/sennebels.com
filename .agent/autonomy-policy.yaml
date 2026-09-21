@@ -1,0 +1,29 @@
+# Autonomy policy for sennebels.com (doc §14). Read by Hermes bots before yellow actions. Senne edits this; bots do not.
+project: sennebels.com
+green:   # automatic
+  - research, local code, tests, docs, branches, draft PRs
+  - read-only analytics (PostHog), safe browser QA
+yellow:  # automatic only with clear rollback; otherwise ask
+  production_deploy: auto         # the gate is ~/.hermes/scripts/ship.py (outside this repo): it re-reads the diff,
+                                  # refuses unless this line says auto, needs a QA verdict bound to the head SHA, and
+                                  # runs `vercel rollback` itself if the production smoke below fails.
+  feature_flags: ask
+  dependency_bumps: auto_minor    # patch/minor auto via PR; major asks
+  content_publish: ask
+  migrations: ask
+red:     # always Senne
+  - destructive production data changes, billing, legal, sending in Senne's name, credential rotation, deleting repos
+
+# Read by ~/.hermes/scripts/ship.py (there is no scripts/ship.py in this repo): the URL it checks after a merge
+# and the paths that must answer. A path string must answer <400; a mapping with an `expect` list names the
+# statuses that count as healthy. A merge also needs a QA verdict bound to the head SHA, in
+# ~/Developer/hq/data/ops/qa-verdicts/<repo>-pr<N>.json, and that SHA must still be the head at merge time.
+# Added 2026-09-21 with the production-build fix, because the file was missing and the gate refuses without it.
+# Probed against the live site 2026-09-21 (curl -s -o /dev/null -A hermes-ship/1.0): / 200, /fun 200,
+# /now 200, /about 200, /buurtsit 200, /sitemap.xml 200. /work answers 404 on its own (the route is
+# app/work/[slug] with no index), so it is not a smoke path.
+production_url: https://sennebels.com
+smoke:
+  - /
+  - /fun
+  - /sitemap.xml
