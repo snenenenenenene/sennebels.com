@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Wraps every <Link> navigation in document.startViewTransition.
-  experimental: { viewTransition: true },
+  // <ViewTransition> needs no flag on Next 16: the App Router's React canary
+  // ships it, and `experimental.viewTransition` is no longer a recognised key.
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

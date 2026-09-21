@@ -1,10 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  unstable_ViewTransition as ViewTransition,
-  unstable_addTransitionType as addTransitionType,
-} from "react";
+import { ViewTransition, addTransitionType } from "react";
 import type React from "react";
 import type { ReactNode } from "react";
 
