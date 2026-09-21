@@ -1,0 +1,40 @@
+# Pull-request CI. The repo had none, and that is exactly why production could
+# fail to build for two days without anyone noticing: main was serving an older
+# READY deployment, so the apex looked healthy while every new build died.
+#
+# It runs the same two things Vercel runs on a production deploy, in the same
+# order, with the same installer:
+#
+#   install  `npm install --legacy-peer-deps` (what the Vercel build log shows;
+#            the repo also carries a stale bun.lock that nothing reads)
+#   build    `npm run build`, which is `__NEXT_TEST_MODE=1 next build` and so
+#            covers the TypeScript check, the static prerender of every page and
+#            the config-schema warnings in one step
+#
+# A separate typecheck job would be redundant: next build already fails on a
+# TypeScript error, which is how the TS7 `baseUrl` break reached production.
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: npm install --legacy-peer-deps --no-audit --no-fund
+      - name: Build
+        run: npm run build
