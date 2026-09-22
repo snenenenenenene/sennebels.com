@@ -6,7 +6,7 @@
 # order, with the same installer:
 #
 #   install  `npm install --legacy-peer-deps` (what the Vercel build log shows;
-#            the repo also carries a stale bun.lock that nothing reads)
+#            package-lock.json is the tracked npm lockfile, bun.lock is gone)
 #   build    `npm run build`, which is `__NEXT_TEST_MODE=1 next build` and so
 #            covers the TypeScript check, the static prerender of every page and
 #            the config-schema warnings in one step
