@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "__NEXT_TEST_MODE=1 next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx app"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -28,12 +28,12 @@
     "three": "^0.186.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "16.3.4",
     "@types/node": "^26.4.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
     "@types/three": "^0.185.4",
-    "eslint": "^9.0.0",
-    "eslint-config-next": "16.3.4",
+    "eslint": "^8.57.1",
     "postcss": "8.5.28",
     "tailwindcss": "^3.4.19",
     "typescript": "^7.0.2"

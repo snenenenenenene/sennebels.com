@@ -1,3 +1,12 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "next/dist/compiled/babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "babelOptions": {
+      "presets": ["next/babel"]
+    }
+  },
+  "extends": "plugin:@next/next/core-web-vitals-legacy"
 }
