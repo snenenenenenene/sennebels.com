@@ -50,7 +50,7 @@ export function Greeting() {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={reduce ? undefined : { opacity: 0, y: -14, filter: "blur(4px)" }}
             transition={{ type: "spring", bounce: 0, duration: 0.45 }}
-            className="absolute inset-0 flex items-center font-display text-[2.4rem] font-medium leading-none text-ink sm:text-[2.9rem]"
+            className="absolute inset-0 flex items-center font-vividly text-[2.4rem] font-normal leading-none text-ink sm:text-[2.9rem]"
           >
             {g.text}
           </motion.p>
