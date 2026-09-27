@@ -1,0 +1,20 @@
+Vividly
+=======
+
+Designer : Tata
+Source page  : https://www.dafont.com/vividly.font
+Download     : https://dl.dafont.com/dl/?f=vividly (the download link on the page above)
+Retrieved    : 2026-09-24
+File         : Vividly-Regular.ttf (13672 bytes) sha256 bd88e406fb4b49166e029a559f32deca8296750a84f4ac587ac7ccba6b11b144
+Shipped as   : Vividly-Regular.woff2 (converted from the ttf above, glyphs unchanged)
+
+Licence
+-------
+The source page lists this font as "100% Free". The author's own note on that page, verbatim:
+
+  "hello! this is my first attempt to create a font and i hope you enjoy this one. the font is
+   made by a bold stroke hence that's exactly the reason why i named it vividly.
+   feel free to use this font, whether for personal use or any commercial project!"
+
+That note grants commercial use, so this copy is hosted on this site under the author's own
+terms. The font file has OS/2 fsType 0 (installable embedding).

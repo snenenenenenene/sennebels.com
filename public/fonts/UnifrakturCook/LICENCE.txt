@@ -1,0 +1,19 @@
+UnifrakturCook Bold
+====================
+
+Designer : j. 'mach' wust, with Peter Wiegel
+Source   : https://github.com/google/fonts/tree/main/ofl/unifrakturcook
+Retrieved: 2026-09-24
+File     : UnifrakturCook-Bold.ttf (42688 bytes) sha256 ea002fa9c65f1a612af100e00d87ab65f16381f450020ec3d021f3dbf79a6dcd
+Shipped as: UnifrakturCook-Bold.woff2 (converted from the ttf above, glyphs unchanged)
+
+Licence
+-------
+SIL Open Font License, Version 1.1. The full text ships next to this file as OFL.txt, and it is
+also embedded in the font's own name table:
+
+  "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is
+   available with a FAQ at: http://scripts.sil.org/OFL"
+
+The OFL permits use, study, modification and redistribution, including in commercial products
+and on a commercial website. The font is shipped unmodified and is not sold on its own.

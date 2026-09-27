@@ -1,4 +1,28 @@
 
+@font-face {
+  font-family: "HelvetiHand";
+  src: url("/fonts/HelvetiHand/HelvetiHand.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Vividly";
+  src: url("/fonts/Vividly/Vividly-Regular.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "UnifrakturCook";
+  src: url("/fonts/UnifrakturCook/UnifrakturCook-Bold.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -92,14 +116,20 @@
   body {
     color: var(--ink);
     background-color: var(--paper);
-    font-family: var(--font-hanken), sans-serif;
     text-size-adjust: 100%;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 500;
+    font-synthesis: none;
     line-height: 155%;
   }
 }
 @layer components {
+  /* HelvetiHand stays at readable body/UI sizes; compact labels keep Hanken. */
+  .text-callout,
+  .text-caption {
+    @apply font-sans;
+  }
+
   .container {
     @apply max-w-7xl mx-auto px-6 z-[1] flex flex-col justify-center;
   }

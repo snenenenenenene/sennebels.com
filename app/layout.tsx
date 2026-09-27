@@ -158,7 +158,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#F9F8F5" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#141110" media="(prefers-color-scheme: dark)" />
       </head>
-      <body className="min-h-full bg-paper font-sans">
+      <body className="min-h-full bg-paper font-helvetihand">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}

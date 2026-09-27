@@ -50,6 +50,9 @@ const config: Config = {
         satoshi: ["Satoshi", "sans-serif"],
         sans: ["var(--font-hanken)", "sans-serif"],
         display: ["var(--font-fraunces)", "Georgia", "serif"],
+        helvetihand: ["HelvetiHand", "var(--font-hanken)", "sans-serif"],
+        vividly: ["Vividly", "var(--font-fraunces)", "Georgia", "serif"],
+        unifraktur: ["UnifrakturCook", "var(--font-fraunces)", "Georgia", "serif"],
       },
       colors: {
         // Wabi-sabi tokens. Every value swaps under prefers-color-scheme: dark

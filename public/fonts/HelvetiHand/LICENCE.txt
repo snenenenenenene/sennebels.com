@@ -1,0 +1,24 @@
+HelvetiHand
+===========
+
+Designer : Billy Snyder
+Source page  : https://www.dafont.com/helvetihand.font
+Download     : https://dl.dafont.com/dl/?f=helvetihand (the download link on the page above)
+Retrieved    : 2026-09-24
+File         : HelvetiHand.ttf (88472 bytes) sha256 472addf7e8ace43c97d72c347b23975147e0d347c908e18dfd0ea68f7c488bb2
+Shipped as   : HelvetiHand.woff2 (converted from the ttf above, glyphs unchanged)
+
+Licence
+-------
+The source page lists this font as "100% Free". The author's own note on that page, verbatim:
+
+  "HelvetiHand is a handwritten font that follows the basic shape structure of Helvetica.
+   Great for cartoons or comics.
+   Feel free to use this font for anything you want. Crediting me would be awesome, but I
+   can't expect everyone to do it, so it is not required.
+   If anything, at least send me a copy of the work when you use it. I love seeing my fonts
+   in action. :)"
+
+"Free for anything you want" includes commercial use and web embedding, so this copy is hosted
+on this site under the author's own terms. The font file has OS/2 fsType 0 (installable
+embedding). Credit is offered in the site footer as a courtesy, not as a licence condition.
