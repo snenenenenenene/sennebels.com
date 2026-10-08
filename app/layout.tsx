@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
 import { SiteChrome } from "./components/site-chrome";
 import { PostHogAnalytics } from "./components/analytics";
-import { pageOpenGraph } from "./data/seo";
+import { pageOpenGraph, SITE_URL } from "./data/seo";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -91,49 +91,68 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
+const PERSON_ID = `${SITE_URL}/#person`;
+const OKAPI_ID = `${SITE_URL}/#okapi`;
+
 // ProfilePage wrapping a Person is the snippet that does the most work on a portfolio:
 // it is what lets a knowledge graph resolve "Senne Bels" to one entity.
-const profileSchema = {
+// One @graph so the Person, Okapi Works and the work list reference each other by @id.
+const schema = {
   "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  mainEntity: {
-    "@type": "Person",
-    name: PERSON.name,
-    jobTitle: PERSON.jobTitle,
-    description: PERSON.answerBlock,
-    url: "https://sennebels.com",
-    email: `mailto:${PERSON.email}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: PERSON.locality,
-      addressCountry: PERSON.country,
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE_URL}/#profile`,
+      url: SITE_URL,
+      mainEntity: { "@id": PERSON_ID },
     },
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "AP University of Applied Sciences",
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: PERSON.name,
+      jobTitle: PERSON.jobTitle,
+      description: PERSON.answerBlock,
+      url: SITE_URL,
+      image: `${SITE_URL}/assets/og.png`,
+      email: `mailto:${PERSON.email}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: PERSON.locality,
+        addressCountry: PERSON.country,
+      },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "AP University of Applied Sciences",
+      },
+      worksFor: { "@id": OKAPI_ID },
+      knowsAbout: SKILL_GROUPS.flatMap((g) => g.items.map((i) => i.name)),
+      knowsLanguage: ["nl", "en", "fr"],
+      sameAs: [PERSON.github, PERSON.linkedin, PERSON.x],
     },
-    worksFor: { "@type": "Organization", name: "Okapi Works" },
-    knowsAbout: SKILL_GROUPS.flatMap((g) => g.items.map((i) => i.name)),
-    knowsLanguage: ["nl", "en", "fr"],
-    sameAs: [PERSON.github, PERSON.linkedin, PERSON.x],
-  },
-};
-
-const workSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Selected work",
-  itemListElement: FEATURED.map((project, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    item: {
-      "@type": "CreativeWork",
-      name: project.name,
-      headline: project.title,
-      description: project.description,
-      author: { "@type": "Person", name: PERSON.name },
+    {
+      "@type": "ProfessionalService",
+      "@id": OKAPI_ID,
+      name: "Okapi Works",
+      url: SITE_URL,
+      areaServed: PERSON.country,
+      founder: { "@id": PERSON_ID },
     },
-  })),
+    {
+      "@type": "ItemList",
+      name: "Selected work",
+      itemListElement: FEATURED.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "CreativeWork",
+          name: project.name,
+          headline: project.title,
+          description: project.description,
+          author: { "@id": PERSON_ID },
+        },
+      })),
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -146,11 +165,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full bg-paper font-helvetihand">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(workSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
         <Analytics />
         <PostHogAnalytics />
