@@ -48,7 +48,6 @@ export const metadata: Metadata = {
     "Senne Bels",
     "Antwerp Developer",
     "Belgium Developer",
-    "Visa Sponsorship",
   ],
   authors: [{ name: PERSON.name, url: "https://sennebels.com" }],
   creator: PERSON.name,
