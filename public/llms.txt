@@ -1,0 +1,30 @@
+# Senne Bels
+
+> Senior software engineer in Antwerp, Belgium. Six years building web, mobile and AI systems in TypeScript, for startups, agencies and once for the Flemish government. The rest of his time goes to products of his own.
+
+- Works through Okapi Works, based in Antwerp.
+- BSc Computer Science, Cum Laude, AP University of Applied Sciences, Antwerp (2019 to 2022).
+- Speaks Dutch (native), English (C2) and French (professional).
+- Contact: sennebels@gmail.com
+
+## Pages
+
+- [Home](https://sennebels.com): selected work and side projects
+- [About](https://sennebels.com/about): experience, skills, education
+- [Now](https://sennebels.com/now): what he is working on this month
+- [Fun](https://sennebels.com/fun): life away from the keyboard
+- [CV](https://sennebels.com/assets/CV%20Senne%20Bels.pdf)
+
+## Products
+
+- [Transita](https://transita.app): answer nine questions and Claude ranks the immigration routes open to you. Live, with paying customers.
+- [Keepr](https://joinkeepr.com): writes a Belgian rental inspection report (plaatsbeschrijving) from photos and runs the rest of the lease from one place.
+- [Korf](https://korf.app): scan a receipt and find where the same basket costs less. On the App Store and Play Store.
+- [Stadiq](https://stadiq.app): reads Antwerp's open data and tells an operator what is about to disrupt their street. In private beta.
+- [Scritch](https://scritch.xyz): an AI recovery agent for B2B support teams.
+
+## Elsewhere
+
+- GitHub: https://github.com/snenenenenenene
+- LinkedIn: https://linkedin.com/in/sennebels
+- X: https://x.com/snenenenene
