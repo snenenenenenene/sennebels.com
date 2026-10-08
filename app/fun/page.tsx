@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageOpenGraph, SITE_URL } from "../data/seo";
+import { PERSON } from "../data/portfolio";
 import * as Ph from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import { Cat, Coffee, FilmSlate, GameController, Guitar, Plant } from "@phosphor-icons/react/dist/ssr";
@@ -15,11 +17,15 @@ import { RebusText } from "../components/rebus-text";
 import { BrandMark } from "../components/marks";
 import { PageTransition } from "../components/transition";
 
+const TITLE = "Fun";
+const DESCRIPTION =
+  "Four cats, a dog, guitar, horror films, Magic, and strategy-game achievement runs. What Senne Bels does away from the keyboard, plus Maria in 3D.";
+
 export const metadata: Metadata = {
-  title: "Fun",
-  description:
-    "Four cats, a dog, guitar, horror films, Magic, and strategy-game achievement runs. What Senne Bels does away from the keyboard, plus Maria in 3D.",
-  alternates: { canonical: "https://sennebels.com/fun" },
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}/fun` },
+  openGraph: pageOpenGraph("/fun", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
 const TRIO: Tint[] = ["red", "blue", "yellow"];

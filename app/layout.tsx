@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
 import { SiteChrome } from "./components/site-chrome";
 import { PostHogAnalytics } from "./components/analytics";
+import { pageOpenGraph } from "./data/seo";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -53,22 +54,7 @@ export const metadata: Metadata = {
   creator: PERSON.name,
   publisher: PERSON.name,
   formatDetection: { email: false, telephone: false, address: false },
-  openGraph: {
-    type: "profile",
-    locale: "en_GB",
-    url: "https://sennebels.com",
-    siteName: PERSON.name,
-    title: TITLE,
-    description: DESCRIPTION,
-    images: [
-      {
-        url: "/assets/og.png",
-        width: 1200,
-        height: 630,
-        alt: `${PERSON.name}, ${PERSON.jobTitle}`,
-      },
-    ],
-  },
+  openGraph: pageOpenGraph("", TITLE, DESCRIPTION),
   twitter: {
     card: "summary_large_image",
     title: TITLE,

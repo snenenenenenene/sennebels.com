@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageOpenGraph, SITE_URL } from "../data/seo";
+import { PERSON } from "../data/portfolio";
 import { Briefcase, Cat, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";
 import { LinkedText } from "../components/linked-text";
@@ -6,11 +8,15 @@ import { PageTitle } from "../components/section-header";
 import { CARD_TINT, GlyphTile, type Tint } from "../components/ui";
 import { PageTransition } from "../components/transition";
 
+const TITLE = "Now";
+const DESCRIPTION =
+  "What Senne Bels is working on in August 2026: the Tomorrowland app, frontend lead at BeeDee, Outpost, and his own products. Updated monthly.";
+
 export const metadata: Metadata = {
-  title: "Now",
-  description:
-    "What Senne Bels is working on in August 2026: the Tomorrowland app, frontend lead at BeeDee, Outpost, and his own products. Updated monthly.",
-  alternates: { canonical: "https://sennebels.com/now" },
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}/now` },
+  openGraph: pageOpenGraph("/now", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
 const UPDATED = "29 August 2026";

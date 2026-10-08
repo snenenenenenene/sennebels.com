@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageOpenGraph, SITE_URL } from "../data/seo";
 import {
   Briefcase,
   Clock,
@@ -25,13 +26,17 @@ import Link from "next/link";
 import { Greeting } from "../components/greeting";
 import { DirectionalLink, PageTransition } from "../components/transition";
 
+const TITLE = "About";
+// answerBlock runs to 279 characters, which a result truncates. This is
+// the same claim inside the ~155 that actually renders.
+const DESCRIPTION =
+  "Senne Bels, software engineer in Antwerp. Frontend lead on a platform used by 140,000 people, and six years of web, mobile and AI work behind that.";
+
 export const metadata: Metadata = {
-  title: "About",
-  // answerBlock runs to 279 characters, which a result truncates. This is
-  // the same claim inside the ~155 that actually renders.
-  description:
-    "Senne Bels, software engineer in Antwerp. Frontend lead on a platform used by 140,000 people, and six years of web, mobile and AI work behind that.",
-  alternates: { canonical: "https://sennebels.com/about" },
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}/about` },
+  openGraph: pageOpenGraph("/about", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
 const TRIO: Tint[] = ["red", "blue", "yellow"];
