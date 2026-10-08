@@ -365,6 +365,15 @@ export const ALSO = [
     wide: true,
     description:
       "A roadworks permit, a bridge closure and a festival all land in the same street in the same week, and nobody tells the businesses on it. Stadiq reads Antwerp's open data and tells an operator what is about to disrupt them, in plain language, with the estimate stated as an estimate.",
+    href: "https://stadiq.app",
+  },
+  {
+    name: "Scritch",
+    tint: "green" as const,
+    kind: "Live",
+    description:
+      "An AI recovery agent for B2B support teams. When a user is blocked, it investigates, explains the real cause in their language, and proves the problem is gone before saying so.",
+    href: "https://scritch.xyz",
   },
   {
     name: "Transita",
