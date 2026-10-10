@@ -403,6 +403,14 @@ export const ALSO = [
     href: "https://korf.app",
   },
   {
+    name: "BuurtSit",
+    tint: "green" as const,
+    kind: "Waitlist open",
+    description:
+      "District babysit matching for Ekeren and Merksem. Parents in the same neighbourhood swap trusted sitters, with a car filter and Gezinsbond rules built in.",
+    href: "/buurtsit",
+  },
+  {
     name: "Faultline",
     tint: "red" as const,
     image: "/images/work/faultline.webp",
