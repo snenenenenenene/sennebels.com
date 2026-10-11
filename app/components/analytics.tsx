@@ -28,9 +28,9 @@ import posthog from "posthog-js";
  * majority missing from the numbers. See below for what that costs and
  * who counts unique people instead.
  *
- * Discord pings are not fired from here: PostHog forwards the events it
+ * Push notifications are not fired from here: PostHog forwards the events it
  * is told to, to /api/discord/posthog. Doing it client-side would mean
- * shipping a webhook URL to the browser.
+ * shipping the ntfy topic to the browser.
  */
 
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;

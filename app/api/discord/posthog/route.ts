@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 
 /**
- * PostHog → Discord.
+ * PostHog → ntfy.
  *
- * PostHog's webhook destination POSTs here, this formats one embed and
- * forwards it to DISCORD_WEBHOOK_URL. Which events arrive is decided in
+ * PostHog's webhook destination POSTs here, this formats one short
+ * message and sends it to ntfy (NTFY_TOPIC). Which events arrive is decided in
  * the PostHog UI, not in this file — filtering there means no deploy is
- * needed to stop the channel being noisy.
+ * needed to stop the phone being noisy.
  *
  * Setup, once:
  *   PostHog → Data pipelines → Destinations → HTTP Webhook
@@ -16,8 +16,9 @@ import { NextResponse } from "next/server";
  *           $pageview is deliberately left out — it fires for every bot
  *           and every reload and would drown the rest.
  *
- * No-ops silently when DISCORD_WEBHOOK_URL is unset, so previews and
- * local runs never ping the channel.
+ * The route path and DISCORD_POSTHOG_WEBHOOK_SECRET keep their names so the
+ * PostHog destination config does not change. No-ops silently when
+ * NTFY_TOPIC is unset, so previews and local runs never ping the phone.
  */
 
 export const runtime = "edge";
@@ -30,15 +31,6 @@ interface PostHogEvent {
 
 /** PostHog sends the event flat on some pipelines and wrapped on others. */
 type Body = PostHogEvent | { event?: PostHogEvent };
-
-const COLOURS: Record<string, number> = {
-  $pageview: 0x6b7280,
-  $pageleave: 0x6b7280,
-  $autocapture: 0x3b82f6,
-  $rageclick: 0xdc5252,
-  $dead_click: 0xdc5252,
-  $exception: 0xdc5252,
-};
 
 function str(v: unknown): string | undefined {
   if (typeof v !== "string" || v === "") return undefined;
@@ -53,8 +45,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "unauthorised" }, { status: 401 });
   }
 
-  const webhook = process.env.DISCORD_WEBHOOK_URL;
-  if (!webhook) return NextResponse.json({ ok: true, skipped: "no webhook" });
+  const topic = process.env.NTFY_TOPIC;
+  if (!topic) return NextResponse.json({ ok: true, skipped: "no topic" });
 
   let body: Body;
   try {
@@ -94,7 +86,7 @@ export async function POST(req: Request) {
 
   // What a click actually hit. PostHog puts the text of the clicked
   // element in $el_text and the href in the elements chain; the text is
-  // the readable half and the only one worth a line in Discord.
+  // the readable half and the only one worth a line in the push.
   const fields = [
     { name: "Page", value: str(p.$current_url) ?? str(p.$pathname) ?? "—", inline: false },
     { name: "Clicked", value: str(p.$el_text), inline: true },
@@ -106,20 +98,19 @@ export async function POST(req: Request) {
   ].filter((f) => f.value);
 
   // Every ping links to the visitor's full session in PostHog, so one
-  // interesting embed is one click away from everything else they did.
+  // interesting push is one tap away from everything else they did.
   const sessionId = str(p.$session_id);
-  const url = sessionId
+  const click = sessionId
     ? `https://us.posthog.com/project/356563/replay/${encodeURIComponent(sessionId)}`
     : undefined;
 
-  await fetch(webhook, {
+  const headers: Record<string, string> = { Title: `sennebels.com - ${name}` };
+  if (click) headers.Click = click;
+  await fetch(`${process.env.NTFY_SERVER || "https://ntfy.sh"}/${topic}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: "sennebels.com",
-      embeds: [{ title: name, url, color: COLOURS[name] ?? 0x1e1515, fields }],
-    }),
-  });
+    headers,
+    body: fields.map((f) => `${f.name}: ${f.value}`).join("\n") || name,
+  }).catch(() => {});
 
   return NextResponse.json({ ok: true });
 }
