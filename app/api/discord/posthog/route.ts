@@ -104,7 +104,10 @@ export async function POST(req: Request) {
     ? `https://us.posthog.com/project/356563/replay/${encodeURIComponent(sessionId)}`
     : undefined;
 
-  const headers: Record<string, string> = { Title: `sennebels.com - ${name}` };
+  const headers: Record<string, string> = {
+    // Header values must be Latin-1 or fetch() throws.
+    Title: `sennebels.com - ${name}`.replace(/[^\x20-\xff]/g, "-"),
+  };
   if (click) headers.Click = click;
   await fetch(`${process.env.NTFY_SERVER || "https://ntfy.sh"}/${topic}`, {
     method: "POST",
