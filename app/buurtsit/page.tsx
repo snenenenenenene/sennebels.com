@@ -14,6 +14,24 @@ export const metadata: Metadata = {
   ),
 };
 
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "BuurtSit",
+  description: metadata.description,
+  url: "https://sennebels.com/buurtsit",
+  image: "https://sennebels.com/assets/og.png",
+  brand: { "@type": "Brand", name: "BuurtSit" },
+};
+
 export default function BuurtSitWaitlistPage() {
-  return <Waitlist />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <Waitlist />
+    </>
+  );
 }
