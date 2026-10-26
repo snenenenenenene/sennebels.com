@@ -11,7 +11,7 @@
 
 - [Home](https://sennebels.com): selected work and side projects
 - [About](https://sennebels.com/about): experience, skills, education
-- [Freelance React Native developer](https://sennebels.com/react-native-developer): the React Native apps he has shipped, how a quote works, and answers on what hiring a mobile developer costs. No rates are published.
+- [Freelance React Native developer](https://sennebels.com/react-native-developer): the React Native apps he has shipped, what drives a quote for a React Native app, and whether React Native suits a new app. No rates are published.
 - [Now](https://sennebels.com/now): what he is working on this month
 - [Fun](https://sennebels.com/fun): life away from the keyboard
 - [CV](https://sennebels.com/assets/CV%20Senne%20Bels.pdf)

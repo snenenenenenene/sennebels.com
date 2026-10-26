@@ -476,8 +476,8 @@ export const EXPERIENCE: {
 
 /**
  * /react-native-developer. No rates or prices anywhere: none are published, so
- * the page says how a quote works instead. Every outside figure in the FAQ is
- * one of HIRE_SOURCES, and the page lists them under the answers.
+ * the page says how a quote works instead. Every outside claim in the FAQ is
+ * one of HIRE_SOURCES, listed under its answer.
  */
 export const HIRE = {
   path: "/react-native-developer",
@@ -491,10 +491,6 @@ export const HIRE = {
 } as const;
 
 export const HIRE_SOURCES = {
-  bls: {
-    label: "US Bureau of Labor Statistics, Software Developers, Occupational Outlook Handbook",
-    href: "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm",
-  },
   rn: { label: "reactnative.dev", href: "https://reactnative.dev/" },
   rn076: {
     label: "React Native 0.76 release notes",
@@ -506,25 +502,16 @@ export const HIRE_SOURCES = {
   },
 } as const;
 
+/** One array feeds both the visible FAQ and its FAQPage JSON-LD. */
 export const HIRE_FAQ: { q: string; a: string; sources: (keyof typeof HIRE_SOURCES)[] }[] = [
   {
-    q: "How much does it cost to hire a mobile developer?",
-    a: "It depends on the scope and on where the developer is based, so there is no single price. For a public benchmark, the US Bureau of Labor Statistics puts the median annual wage for software developers at $135,980 (May 2025). That is a salary, not a freelance rate. I quote per project, once I know what the app needs to do.",
-    sources: ["bls"],
-  },
-  {
-    q: "How much do freelance app developers charge?",
-    a: "Rates vary by country, seniority and scope. I don’t publish one. Send me the scope and you get a quote for that work.",
+    q: "How much does a React Native app cost?",
+    a: "It depends on what the app has to do, so a quote is built from a few inputs: the features in scope, whether it ships on iOS, Android or both, whether it needs a backend or connects to one you already run, whether the design is finished or still to be made, and the date it has to launch. Send me those and the quote comes back for that scope.",
     sources: [],
   },
   {
-    q: "How much does cross-platform app development cost?",
-    a: "React Native builds iOS and Android from one codebase, so the app is written once rather than once per platform. Tomorrowland went from three or four Flutter apps to one React Native app on Expo. The total still depends on the features, so it is quoted per project.",
-    sources: ["rn"],
-  },
-  {
-    q: "Is React Native still good?",
-    a: "Yes. Meta released it in 2015 and still maintains it, the New Architecture has been on by default since version 0.76 in October 2024, and the official docs recommend starting a new app on a framework such as Expo. I ship it in production on the Tomorrowland app and at BeeDee.",
+    q: "Is React Native a good choice for a new app in 2026?",
+    a: "Meta released React Native in 2015 and still maintains it. Since version 0.76, out in October 2024, the New Architecture is on by default. The official docs recommend starting a new app on a framework such as Expo.",
     sources: ["rn", "rn076", "rnFramework"],
   },
 ];

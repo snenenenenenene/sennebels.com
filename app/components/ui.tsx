@@ -248,7 +248,9 @@ export function Heading({
   children: ReactNode;
 }) {
   return (
-    <Tag className="flex items-center gap-2.5 text-title3 font-medium">
+    // A grid rather than flex, so a title that wraps stays in its own column
+    // beside the tile instead of running back under it.
+    <Tag className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-2.5 text-title3 font-medium">
       <GlyphTile icon={I} tint={tint} />
       {children}
     </Tag>

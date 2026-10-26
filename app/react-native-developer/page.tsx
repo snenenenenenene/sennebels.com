@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, ChatCircleText, DeviceMobile, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, ChatCircleText, DeviceMobile, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, HIRE, HIRE_FAQ, HIRE_SOURCES, PERSON } from "../data/portfolio";
 import { pageOpenGraph, PERSON_ID, SITE_URL } from "../data/seo";
-import { ACCENT_TEXT, CARD_TINT, Heading } from "../components/ui";
+import { ACCENT_TEXT, CARD_TINT, Heading, Surface } from "../components/ui";
 import { INLINE_LINK } from "../components/linked-text";
 import { PageTitle } from "../components/section-header";
 import { Reveal } from "../components/motion";
 import { DirectionalLink, PageTransition } from "../components/transition";
 
 const PAGE_URL = `${SITE_URL}${HIRE.path}`;
+
+/** The nav is fixed, so a jump to a section anchor has to land below it. */
+const ANCHOR = "scroll-mt-24";
 
 export const metadata: Metadata = {
   title: HIRE.title,
@@ -54,7 +57,7 @@ export default function ReactNativeDeveloper() {
 
         <PageTitle title={HIRE.heading} lede={HIRE.lede} />
 
-        <section className="flex flex-col gap-6 pt-20">
+        <section id="work" className={`flex flex-col gap-6 pt-20 ${ANCHOR}`}>
           <Heading as="h2" icon={DeviceMobile} tint="red">
             React Native apps I have shipped
           </Heading>
@@ -84,7 +87,7 @@ export default function ReactNativeDeveloper() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-4 pt-20">
+        <section id="quote" className={`flex flex-col gap-4 pt-20 ${ANCHOR}`}>
           <Heading as="h2" icon={EnvelopeSimple} tint="yellow">
             Hire a React Native developer: how a quote works
           </Heading>
@@ -96,35 +99,34 @@ export default function ReactNativeDeveloper() {
           </p>
         </section>
 
-        <section className="flex flex-col gap-6 pt-20">
+        <section id="faq" className={`flex max-w-[70ch] flex-col gap-6 pt-20 ${ANCHOR}`}>
           <Heading as="h2" icon={ChatCircleText} tint="blue">
             Questions people ask before hiring
           </Heading>
-          <dl className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
             {HIRE_FAQ.map((f) => (
-              <div key={f.q} className="flex flex-col gap-2 rounded-panel px-4 py-4 odd:bg-raised">
-                <dt className="text-body font-semibold text-ink">{f.q}</dt>
-                <dd className="max-w-[68ch] text-body leading-[1.8] text-ink-2">{f.a}</dd>
+              <Surface key={f.q} as="article" className="flex flex-col gap-3 p-5 sm:p-6">
+                <h3 className="text-body font-semibold text-ink">{f.q}</h3>
+                <p className="text-body leading-[1.8] text-ink-2">{f.a}</p>
                 {f.sources.length > 0 && (
-                  <dd className="flex flex-wrap gap-x-4 gap-y-1 text-callout text-ink-3">
-                    {f.sources.length > 1 ? "Sources:" : "Source:"}
-                    {f.sources.map((key) => (
-                      <a
-                        key={key}
-                        href={HIRE_SOURCES[key].href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 break-words transition-colors duration-200 hover:text-ink"
-                      >
-                        {HIRE_SOURCES[key].label}
-                        <ArrowUpRight size={12} weight="bold" aria-hidden />
-                      </a>
-                    ))}
-                  </dd>
+                  <div className="flex flex-col gap-1.5 text-callout">
+                    <p className="text-caption font-medium text-ink-3">
+                      {f.sources.length > 1 ? "Sources" : "Source"}
+                    </p>
+                    <ul className="flex flex-col gap-1.5">
+                      {f.sources.map((key) => (
+                        <li key={key}>
+                          <a href={HIRE_SOURCES[key].href} target="_blank" rel="noreferrer" className={INLINE_LINK}>
+                            {HIRE_SOURCES[key].label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
-              </div>
+              </Surface>
             ))}
-          </dl>
+          </div>
         </section>
       </main>
     </PageTransition>
