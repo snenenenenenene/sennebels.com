@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { FEATURED } from "./data/portfolio";
+import { FEATURED, HIRE } from "./data/portfolio";
 
 const SITE = "https://sennebels.com";
 
@@ -11,6 +11,7 @@ const SITE = "https://sennebels.com";
 const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "", priority: 1, changeFrequency: "monthly" },
   { path: "/about", priority: 0.9, changeFrequency: "monthly" },
+  { path: HIRE.path, priority: 0.9, changeFrequency: "monthly" },
   { path: "/now", priority: 0.7, changeFrequency: "monthly" },
   { path: "/fun", priority: 0.5, changeFrequency: "yearly" },
   { path: "/buurtsit", priority: 0.6, changeFrequency: "weekly" },
