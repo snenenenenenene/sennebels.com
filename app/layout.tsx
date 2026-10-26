@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { FEATURED, PERSON, SKILL_GROUPS } from "./data/portfolio";
+import { FEATURED, HIRE, PERSON, SKILL_GROUPS } from "./data/portfolio";
 import { SiteChrome } from "./components/site-chrome";
 import { PostHogAnalytics } from "./components/analytics";
-import { pageOpenGraph, SITE_URL } from "./data/seo";
+import { OKAPI_ID, PERSON_ID, pageOpenGraph, SITE_URL } from "./data/seo";
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     "React",
     "Next.js",
     "React Native",
+    "Freelance React Native Developer",
     "TypeScript",
     "Three.js",
     "Senne Bels",
@@ -82,9 +83,6 @@ export const metadata: Metadata = {
   },
   category: "technology",
 };
-
-const PERSON_ID = `${SITE_URL}/#person`;
-const OKAPI_ID = `${SITE_URL}/#okapi`;
 
 // ProfilePage wrapping a Person is the snippet that does the most work on a portfolio:
 // it is what lets a knowledge graph resolve "Senne Bels" to one entity.
@@ -128,6 +126,9 @@ const schema = {
       url: SITE_URL,
       areaServed: PERSON.country,
       founder: { "@id": PERSON_ID },
+      // The one service with its own page; the rest is the web and AI work above.
+      serviceType: "React Native app development",
+      description: HIRE.description,
     },
     {
       "@type": "ItemList",
