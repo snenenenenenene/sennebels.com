@@ -474,6 +474,61 @@ export const EXPERIENCE: {
   { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logoMono: true, href: "https://cronos-groep.be", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
 ];
 
+/**
+ * /react-native-developer. No rates or prices anywhere: none are published, so
+ * the page says how a quote works instead. Every outside figure in the FAQ is
+ * one of HIRE_SOURCES, and the page lists them under the answers.
+ */
+export const HIRE = {
+  path: "/react-native-developer",
+  title: "Freelance React Native developer in Belgium",
+  description:
+    "Senne Bels is a freelance React Native developer in Antwerp. He builds iOS and Android apps with Expo and TypeScript, the Tomorrowland app among them.",
+  heading: "Freelance React Native developer",
+  lede: "I’m Senne, a freelance React Native developer in Antwerp, Belgium. I build iOS and Android apps from one TypeScript codebase on Expo. Right now that means the Tomorrowland app, and leading frontend at BeeDee.",
+  quote:
+    "There are no rates on this site, because the price depends on the app. Email me what it needs to do, who it is for and when it has to ship, and the quote comes back for that scope.",
+} as const;
+
+export const HIRE_SOURCES = {
+  bls: {
+    label: "US Bureau of Labor Statistics, Software Developers, Occupational Outlook Handbook",
+    href: "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm",
+  },
+  rn: { label: "reactnative.dev", href: "https://reactnative.dev/" },
+  rn076: {
+    label: "React Native 0.76 release notes",
+    href: "https://reactnative.dev/blog/2024/10/23/release-0.76-new-architecture",
+  },
+  rnFramework: {
+    label: "React Native docs, Get Started",
+    href: "https://reactnative.dev/docs/environment-setup",
+  },
+} as const;
+
+export const HIRE_FAQ: { q: string; a: string; sources: (keyof typeof HIRE_SOURCES)[] }[] = [
+  {
+    q: "How much does it cost to hire a mobile developer?",
+    a: "It depends on the scope and on where the developer is based, so there is no single price. For a public benchmark, the US Bureau of Labor Statistics puts the median annual wage for software developers at $135,980 (May 2025). That is a salary, not a freelance rate. I quote per project, once I know what the app needs to do.",
+    sources: ["bls"],
+  },
+  {
+    q: "How much do freelance app developers charge?",
+    a: "Rates vary by country, seniority and scope. I don’t publish one. Send me the scope and you get a quote for that work.",
+    sources: [],
+  },
+  {
+    q: "How much does cross-platform app development cost?",
+    a: "React Native builds iOS and Android from one codebase, so the app is written once rather than once per platform. Tomorrowland went from three or four Flutter apps to one React Native app on Expo. The total still depends on the features, so it is quoted per project.",
+    sources: ["rn"],
+  },
+  {
+    q: "Is React Native still good?",
+    a: "Yes. Meta released it in 2015 and still maintains it, the New Architecture has been on by default since version 0.76 in October 2024, and the official docs recommend starting a new app on a framework such as Expo. I ship it in production on the Tomorrowland app and at BeeDee.",
+    sources: ["rn", "rn076", "rnFramework"],
+  },
+];
+
 export const EDUCATION = {
   degree: "BSc Computer Science, Cum Laude",
   detail:

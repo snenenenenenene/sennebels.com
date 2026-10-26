@@ -238,17 +238,20 @@ export function GlyphTile({ icon: I, tint }: { icon: Icon; tint: Tint }) {
 export function Heading({
   icon: I,
   tint = "green",
+  as: Tag = "h3",
   children,
 }: {
   icon: Icon;
   tint?: Tint;
+  /** h2 where the section sits straight under the page's h1. */
+  as?: "h2" | "h3";
   children: ReactNode;
 }) {
   return (
-    <h3 className="flex items-center gap-2.5 text-title3 font-medium">
+    <Tag className="flex items-center gap-2.5 text-title3 font-medium">
       <GlyphTile icon={I} tint={tint} />
       {children}
-    </h3>
+    </Tag>
   );
 }
 

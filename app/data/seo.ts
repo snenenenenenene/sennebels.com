@@ -3,6 +3,10 @@ import { PERSON } from "./portfolio";
 
 export const SITE_URL = "https://sennebels.com";
 
+/** JSON-LD node ids, defined once so a page can point at the layout's Person. */
+export const PERSON_ID = `${SITE_URL}/#person`;
+export const OKAPI_ID = `${SITE_URL}/#okapi`;
+
 /**
  * A page-level openGraph replaces the layout's whole object rather than
  * merging into it, so a subpage that only set `url` would lose the image,

@@ -12,6 +12,10 @@ import { FEATURED } from "../data/portfolio";
  *
  * `skip` exists because a case study naming itself should not link to itself.
  */
+/** Inline prose link. Shared so a link inside a paragraph looks the same everywhere. */
+export const INLINE_LINK =
+  "font-medium text-ink underline decoration-tone-red/35 decoration-2 underline-offset-[3px] transition-colors duration-200 hover:decoration-tone-red";
+
 const TARGETS = FEATURED.map((p) => ({ name: p.name, slug: p.slug }));
 
 export function LinkedText({
@@ -41,7 +45,7 @@ export function LinkedText({
             key={`${hit.slug}-${i}`}
             href={`/work/${hit.slug}`}
             direction="nav-forward"
-            className="font-medium text-ink underline decoration-tone-red/35 decoration-2 underline-offset-[3px] transition-colors duration-200 hover:decoration-tone-red"
+            className={INLINE_LINK}
           >
             {part}
           </DirectionalLink>
