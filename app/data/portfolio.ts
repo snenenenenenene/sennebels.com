@@ -511,7 +511,7 @@ export const HIRE_FAQ: { q: string; a: string; sources: (keyof typeof HIRE_SOURC
   },
   {
     q: "Is React Native a good choice for a new app in 2026?",
-    a: "Meta released React Native in 2015 and still maintains it. Since version 0.76, out in October 2024, the New Architecture is on by default. The official docs recommend starting a new app on a framework such as Expo.",
+    a: "Yes, for most apps that share their screens across iOS and Android. It is the wrong pick for heavy 3D or games, and for an app built mostly on one platform's newest native APIs. Meta released React Native in 2015 and still maintains it. Since version 0.76, out in October 2024, the New Architecture is on by default. The official docs recommend starting a new app on a framework such as Expo.",
     sources: ["rn", "rn076", "rnFramework"],
   },
 ];
