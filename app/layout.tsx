@@ -126,8 +126,13 @@ const schema = {
       url: SITE_URL,
       areaServed: PERSON.country,
       founder: { "@id": PERSON_ID },
-      // The one service with its own page; the rest is the web and AI work above.
-      serviceType: "React Native app development",
+      // The one service with its own page (its Service node lives there); the
+      // rest is the web and AI work above. serviceType is not a property of
+      // ProfessionalService, so the offer points at that Service instead.
+      makesOffer: {
+        "@type": "Offer",
+        itemOffered: { "@id": `${SITE_URL}${HIRE.path}#service` },
+      },
       description: HIRE.description,
     },
     {
@@ -138,6 +143,7 @@ const schema = {
         position: index + 1,
         item: {
           "@type": "CreativeWork",
+          url: `${SITE_URL}/work/${project.slug}`,
           name: project.name,
           headline: project.title,
           description: project.description,
