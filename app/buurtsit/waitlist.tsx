@@ -25,6 +25,78 @@ const I18N = {
   },
 } as const;
 
+type Qa = { q: string; a: string };
+
+/** Pilot facts, each one stated elsewhere on this page or in the signup form. */
+const PILOT: Record<Lang, { title: string; qa: Qa[] }> = {
+  nl: {
+    title: "Hoe de pilot werkt",
+    qa: [
+      {
+        q: "Voor wie is BuurtSit?",
+        a: "Voor ouders die een babysit zoeken in hun eigen buurt, en voor babysitters die dichtbij willen werken. Bij het aanmelden kies je of je ouder, babysit of allebei bent.",
+      },
+      {
+        q: "Welke districten doen mee?",
+        a: "De pilot start in Ekeren en Merksem. In het formulier kun je ook Deurne, Schoten of Kapellen en Hoevenen kiezen. Woon je ergens anders, kies dan Andere.",
+      },
+      {
+        q: "Wat doet het auto-filter?",
+        a: "Je geeft aan of je zelf een auto hebt, of dat je een babysit met auto nodig hebt. Zo houdt een match rekening met vervoer.",
+      },
+      {
+        q: "Ik ben lid van de Gezinsbond. Wat nu?",
+        a: "Gebruik eerst de officiële kinderoppasdienst van de Gezinsbond: die is verzekerd en heeft een vast tarief. BuurtSit is voor de rest: vaste betaalde sits, sits met de auto, of als de lijst vol zit.",
+      },
+      {
+        q: "Is dit een stadwijde marktplaats?",
+        a: "Nee. BuurtSit werkt per district en bevat een menselijke check, in plaats van een open lijst voor heel Antwerpen.",
+      },
+      {
+        q: "Wat gebeurt er met mijn gegevens?",
+        a: "Ze worden alleen voor deze pilot gebruikt. Geen spam en geen doorverkoop.",
+      },
+      {
+        q: "Wie zit erachter?",
+        a: "BuurtSit is een project van Okapi Works in Antwerpen (Ekeren), gebouwd door Senne Bels.",
+      },
+    ],
+  },
+  en: {
+    title: "How the pilot works",
+    qa: [
+      {
+        q: "Who is BuurtSit for?",
+        a: "Parents looking for a sitter in their own neighbourhood, and sitters who want to work close to home. When you sign up you choose whether you are a parent, a sitter or both.",
+      },
+      {
+        q: "Which districts are in?",
+        a: "The pilot starts in Ekeren and Merksem. The form also lists Deurne, Schoten and Kapellen / Hoevenen. Live elsewhere? Pick Other.",
+      },
+      {
+        q: "What does the car filter do?",
+        a: "You say whether you have a car, or whether you need a sitter who has one. That way a match takes transport into account.",
+      },
+      {
+        q: "I am a Gezinsbond member. Now what?",
+        a: "Use the Gezinsbond's official kinderoppasdienst first: it is insured and has a fixed rate. BuurtSit covers the rest: regular paid sits, sits that need a car, or when the usual list is full.",
+      },
+      {
+        q: "Is this a citywide marketplace?",
+        a: "No. BuurtSit works per district and includes a human check, instead of an open list for all of Antwerp.",
+      },
+      {
+        q: "What happens to my details?",
+        a: "They are used for this pilot only. No spam, no resale.",
+      },
+      {
+        q: "Who is behind it?",
+        a: "BuurtSit is a project of Okapi Works in Antwerp (Ekeren), built by Senne Bels.",
+      },
+    ],
+  },
+};
+
 export function Waitlist() {
   const [lang, setLang] = useState<Lang>("nl");
   const [ok, setOk] = useState(false);
@@ -175,6 +247,9 @@ export function Waitlist() {
         }
         .bs-ok.show { display: block; }
         .bs-root ul.compact { margin: 0.5rem 0 0; padding-left: 1.1rem; color: var(--muted); }
+        .bs-faq h2 { font-size: 1.15rem; margin: 2rem 0 0.5rem; }
+        .bs-faq dt { font-weight: 600; margin-top: 1rem; }
+        .bs-faq dd { margin: 0.25rem 0 0; color: var(--muted); }
         .bs-footer { margin-top: 2rem; font-size: 0.8rem; color: var(--muted); }
       `}</style>
 
@@ -334,6 +409,18 @@ export function Waitlist() {
               </div>
             </form>
           </div>
+
+          <section className="bs-faq" aria-labelledby="bs-faq-title">
+            <h2 id="bs-faq-title">{PILOT[lang].title}</h2>
+            <dl>
+              {PILOT[lang].qa.map(({ q, a }) => (
+                <div key={q}>
+                  <dt>{q}</dt>
+                  <dd>{a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
 
           <footer className="bs-footer">
             BuurtSit · Okapi Works (Antwerp / Ekeren) ·{" "}
