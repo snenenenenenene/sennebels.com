@@ -177,15 +177,6 @@ export function Waitlist() {
         }
         .bs-root * { box-sizing: border-box; }
         .bs-wrap { max-width: 640px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
-        .bs-badge {
-          display: inline-block;
-          font-size: 0.75rem;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          color: var(--accent);
-          font-weight: 600;
-          margin-bottom: 0.75rem;
-        }
         .bs-root h1 { font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0 0 0.75rem; line-height: 1.2; }
         .bs-lead { color: var(--muted); font-size: 1.05rem; margin: 0 0 1.5rem; }
         .bs-card {
@@ -276,7 +267,6 @@ export function Waitlist() {
 
           {lang === "nl" ? (
             <div>
-              <div className="bs-badge">Pilot · Ekeren–Merksem</div>
               <h1>Babysit in je district. Dichtbij. Met auto-filter.</h1>
               <p className="bs-lead">
                 BuurtSit matcht ouders en babysitters in het noorden van Antwerpen.
@@ -299,7 +289,6 @@ export function Waitlist() {
             </div>
           ) : (
             <div>
-              <div className="bs-badge">Pilot · Ekeren–Merksem</div>
               <h1>Babysitter in your district. Nearby. Car filter included.</h1>
               <p className="bs-lead">
                 BuurtSit matches parents and sitters in north Antwerp. Not another

@@ -20,16 +20,12 @@ export const PERSON = {
 } as const;
 
 
-/** Type line, in the Magic sense: what a thing is, then what kind. */
-export type TypeLine = { kind: string; sub: string };
-
 /** iOS system accent carried by a project. Faded at rest, full on hover. */
 export type Accent = "red" | "blue" | "yellow" | "green";
 
 export type Featured = {
   slug: string;
   name: string;
-  typeLine: TypeLine;
   accent: Accent;
   /** Rebus glyphs woven into the card copy. */
   /** Phrases in the story that carry a rebus mark. */
@@ -85,7 +81,6 @@ export const FEATURED: Featured[] = [
     name: "Tomorrowland",
   brand: "/images/logos/tomorrowland.svg",
   brandDark: "invert",
-    typeLine: { kind: "Client work", sub: "Mobile" },
   accent: "red",
     title: "One app for every edition, all year round",
     description:
@@ -134,7 +129,6 @@ export const FEATURED: Featured[] = [
   rebus: [{ phrase: "looks things up rather than guessing", icon: "MagnifyingGlass", tint: "red" }, { phrase: "cites the article", icon: "Quotes", tint: "blue" }, { phrase: "hands anything risky to a person", icon: "HandHeart", tint: "yellow" }],
     name: "Euroconsumers",
   brand: "/images/logos/euroconsumers.svg",
-    typeLine: { kind: "Client work", sub: "AI systems" },
   accent: "blue",
     title: "Vera, a legal assistant that has to be right",
     description:
@@ -194,7 +188,6 @@ export const FEATURED: Featured[] = [
     name: "Kaedim",
   brand: "/images/logos/kaedim.png",
   brandDark: "lift",
-    typeLine: { kind: "Startup", sub: "3D and AI" },
   accent: "yellow",
     title: "Both sides of a human-in-the-loop pipeline",
     description:
@@ -254,7 +247,6 @@ export const FEATURED: Featured[] = [
   rebus: [{ phrase: "made it native", icon: "DeviceMobile", tint: "red" }, { phrase: "signup flow", icon: "SignIn", tint: "blue" }, { phrase: "GitHub Actions", icon: "GitBranch", tint: "yellow" }],
     name: "BeeDee",
   brand: "/images/logos/beedee.png",
-    typeLine: { kind: "Client work", sub: "Frontend lead" },
   accent: "red",
     title: "A consumer app, owned end to end",
     description:
@@ -317,7 +309,6 @@ export const FEATURED: Featured[] = [
   rebus: [{ phrase: "first commit", icon: "GitCommit", tint: "red" }, { phrase: "citizen-facing database", icon: "Buildings", tint: "blue" }, { phrase: "validation toolchain", icon: "ShieldCheck", tint: "yellow" }],
     name: "Lokaal Beslist",
   brand: "/images/logos/vlaanderen.png",
-    typeLine: { kind: "Government", sub: "Civic platform" },
   accent: "blue",
     title: "Public by law, readable by nobody",
     description:

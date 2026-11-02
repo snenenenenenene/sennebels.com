@@ -28,7 +28,6 @@ import { ProjectCard, SmallCard } from "./components/ProjectCard";
 import { Chip, GlyphTile, Heading, Rebus, Surface, TAP, type Tint } from "./components/ui";
 import { IconLink } from "./components/icon-link";
 import { SOCIALS } from "./components/footer";
-import { SectionHeader } from "./components/section-header";
 import { LiftOnHover, Reveal, Rise, Stagger } from "./components/motion";
 import { Phone } from "./components/phone";
 import { PageTransition } from "./components/transition";
@@ -42,7 +41,6 @@ export default function Home() {
       <main id="main" className="mx-auto flex w-full max-w-[1280px] flex-col px-6 pb-24 pt-24 md:px-12 lg:px-16">
         <Hero />
   
-        {/* Eyebrow budget: 8 sections allows 3. Used here, on About, and nowhere else. */}
         <section id="work" className="flex flex-col gap-stack pt-24">
           <h2 className="text-title1 font-medium text-ink">Selected work</h2>
           {FEATURED.map((project, i) => (

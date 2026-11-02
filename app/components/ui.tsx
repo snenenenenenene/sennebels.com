@@ -270,21 +270,6 @@ export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?:
 }
 
 /**
- * Type line, borrowed from a Magic card: what the thing is, then what kind.
- * The separator is an element, not a dash character, so no em-dash sneaks in
- * and the two halves stay legible when the line wraps.
- */
-export function TypeLine({ kind, sub }: { kind: string; sub: string }) {
-  return (
-    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-caption font-medium uppercase tracking-[0.18em] text-ink-3">
-      <span>{kind}</span>
-      <span aria-hidden className="h-px w-4 bg-ink-3/50" />
-      <span>{sub}</span>
-    </p>
-  );
-}
-
-/**
  * Flavour text. On a Magic card this is the italic line at the bottom that
  * tells you what the thing feels like rather than what it does. Here it is
  * where the personality lives, attached to the work instead of quarantined
