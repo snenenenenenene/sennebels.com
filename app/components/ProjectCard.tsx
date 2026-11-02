@@ -40,7 +40,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
             {project.brand && (
               <Image
                 src={project.brand}
-                alt=""
+                alt={`${project.name} logo`}
                 width={140}
                 height={56}
                 className={`h-8 w-auto object-contain object-left ${BRAND_DARK[project.brandDark ?? "none"]}`}

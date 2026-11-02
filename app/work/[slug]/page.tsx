@@ -170,7 +170,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                 {project.brand && (
                   <Image
                     src={project.brand}
-                    alt=""
+                    alt={`${project.name} logo`}
                     width={200}
                     height={80}
                     priority
@@ -392,7 +392,7 @@ function PeekCard({
             {project.brand && (
               <Image
                 src={project.brand}
-                alt=""
+                alt={`${project.name} logo`}
                 width={200}
                 height={80}
                 className={`h-9 w-auto object-contain ${BRAND_DARK[project.brandDark ?? "none"]}`}
