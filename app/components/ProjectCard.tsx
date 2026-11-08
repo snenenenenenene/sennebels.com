@@ -74,6 +74,7 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
               <Phone
                 key={src}
                 src={src}
+                alt={`${project.name} app screen on iPhone`}
                 width={168}
                 island={project.phonesHaveIsland}
                 className={i === 1 ? "" : "mt-7"}
@@ -121,6 +122,7 @@ export function SmallCard({
   description,
   href,
   image,
+  alt,
   tint = "blue",
   wide = false,
 }: {
@@ -129,6 +131,8 @@ export function SmallCard({
   description: string;
   href?: string;
   image?: string;
+  /** What the screenshot shows, written for search and screen readers. */
+  alt?: string;
   tint?: Tint;
   wide?: boolean;
 }) {
@@ -139,9 +143,10 @@ export function SmallCard({
           <div className="overflow-hidden">
             <Image
               src={image}
-              alt={`${name}: ${description.slice(0, 60)}`}
+              alt={alt ?? `${name}: ${description.slice(0, 60)}`}
               width={1200}
               height={760}
+              sizes={wide ? "(min-width: 1280px) 1150px, 90vw" : "(min-width: 1280px) 570px, (min-width: 768px) 45vw, 90vw"}
               loading="eager"
               className={`w-full object-cover object-top ${wide ? "h-[300px]" : "h-[210px]"}`}
             />

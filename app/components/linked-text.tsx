@@ -1,5 +1,5 @@
 import { DirectionalLink } from "./transition";
-import { FEATURED } from "../data/portfolio";
+import { FEATURED, PRODUCT_LINKS } from "../data/portfolio";
 
 /**
  * Turns a project's name into a link to its case study, wherever it is
@@ -16,7 +16,11 @@ import { FEATURED } from "../data/portfolio";
 export const INLINE_LINK =
   "font-medium text-ink underline decoration-tone-red/35 decoration-2 underline-offset-[3px] transition-colors duration-200 hover:decoration-tone-red";
 
-const TARGETS = FEATURED.map((p) => ({ name: p.name, slug: p.slug }));
+/** Case studies link inward; products of his own link out to their live site. */
+const TARGETS: { name: string; slug?: string; href: string }[] = [
+  ...FEATURED.map((p) => ({ name: p.name, slug: p.slug, href: `/work/${p.slug}` })),
+  ...PRODUCT_LINKS,
+];
 
 export function LinkedText({
   text,
@@ -27,7 +31,7 @@ export function LinkedText({
   skip?: string;
   className?: string;
 }) {
-  const targets = TARGETS.filter((t) => t.slug !== skip);
+  const targets = TARGETS.filter((t) => !skip || t.slug !== skip);
   // Longest first, so "Lokaal Beslist" is matched before any shorter name that
   // happens to sit inside it.
   const names = targets.map((t) => t.name).sort((a, b) => b.length - a.length);
@@ -40,10 +44,17 @@ export function LinkedText({
       {parts.map((part, i) => {
         const hit = targets.find((t) => t.name === part);
         if (!hit) return part;
+        if (!hit.slug) {
+          return (
+            <a key={`${hit.name}-${i}`} href={hit.href} className={INLINE_LINK}>
+              {part}
+            </a>
+          );
+        }
         return (
           <DirectionalLink
             key={`${hit.slug}-${i}`}
-            href={`/work/${hit.slug}`}
+            href={hit.href}
             direction="nav-forward"
             className={INLINE_LINK}
           >

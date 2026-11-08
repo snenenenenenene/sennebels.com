@@ -15,12 +15,15 @@ export function Browser({
   url,
   className = "",
   priority = false,
+  sizes = "(min-width: 1280px) 720px, (min-width: 1024px) 55vw, 90vw",
 }: {
   src: string;
   alt?: string;
   url?: string;
   className?: string;
   priority?: boolean;
+  /** Rendered width hint for next/image, so it does not ship the 1600px file to a small slot. */
+  sizes?: string;
 }) {
   return (
     <div className={`overflow-hidden rounded-[14px] bg-[#e6e2dc] dark:bg-[#2b2b30] ${className}`}>
@@ -39,6 +42,7 @@ export function Browser({
         alt={alt}
         width={1600}
         height={1000}
+        sizes={sizes}
         priority={priority}
         className="block w-full"
       />

@@ -32,7 +32,7 @@ const NOW = [
     title: "My own things",
     icon: Cube,
     tint: "blue" as Tint,
-    body: "Transita has paying customers. Korf is on both app stores. Keepr is live, Stadiq is in private beta, and Faultline is the game I’m still building: twelve players, one disaster, and a map that decides who gets out.",
+    body: "Transita has paying customers. Korf is on both app stores. Keepr and Penfolk are live, Stadiq is in private beta, and Faultline is the game I’m still building: twelve players, one disaster, and a map that decides who gets out.",
   },
   {
     title: "Where next",

@@ -186,7 +186,7 @@ export const FEATURED: Featured[] = [
   ],
   rebus: [{ phrase: "onboarding and progress", icon: "SignIn", tint: "red" }, { phrase: "review queue", icon: "ListChecks", tint: "blue" }, { phrase: "automated testing", icon: "Robot", tint: "yellow" }],
     name: "Kaedim",
-  brand: "/images/logos/kaedim.png",
+  brand: "/images/logos/kaedim.webp",
   brandDark: "lift",
   accent: "yellow",
     title: "Both sides of a human-in-the-loop pipeline",
@@ -246,7 +246,7 @@ export const FEATURED: Featured[] = [
   ],
   rebus: [{ phrase: "made it native", icon: "DeviceMobile", tint: "red" }, { phrase: "signup flow", icon: "SignIn", tint: "blue" }, { phrase: "GitHub Actions", icon: "GitBranch", tint: "yellow" }],
     name: "BeeDee",
-  brand: "/images/logos/beedee.png",
+  brand: "/images/logos/beedee.webp",
   accent: "red",
     title: "A consumer app, owned end to end",
     description:
@@ -308,7 +308,7 @@ export const FEATURED: Featured[] = [
   ],
   rebus: [{ phrase: "first commit", icon: "GitCommit", tint: "red" }, { phrase: "citizen-facing database", icon: "Buildings", tint: "blue" }, { phrase: "validation toolchain", icon: "ShieldCheck", tint: "yellow" }],
     name: "Lokaal Beslist",
-  brand: "/images/logos/vlaanderen.png",
+  brand: "/images/logos/vlaanderen.webp",
   accent: "blue",
     title: "Public by law, readable by nobody",
     description:
@@ -351,7 +351,8 @@ export const ALSO = [
   {
     name: "Stadiq",
     tint: "blue" as const,
-    image: "/images/work/stadiq.webp",
+    image: "/images/work/stadiq-antwerp-street-disruption.webp",
+    alt: "Stadiq briefing for an Antwerp brewery, with planned roadworks, public transport diversions and expected foot traffic on its street",
     kind: "In private beta",
     wide: true,
     description:
@@ -369,7 +370,8 @@ export const ALSO = [
   {
     name: "Transita",
     tint: "red" as const,
-    image: "/images/work/transita.webp",
+    image: "/images/work/transita-immigration-routes.webp",
+    alt: "Transita homepage, an immigration and relocation planner that ranks the visa routes open to you",
     kind: "Live, paying customers",
     description:
       "Answer nine questions and Claude ranks the immigration routes actually open to you. I built it, I run it, and people pay for it.",
@@ -378,16 +380,28 @@ export const ALSO = [
   {
     name: "Keepr",
     tint: "blue" as const,
-    image: "/images/work/keepr.webp",
+    image: "/images/work/keepr-belgian-rental-inspection.webp",
+    alt: "Keepr homepage, rental inspection reports (plaatsbeschrijving) and lease management for Belgian landlords",
     kind: "Live",
     description:
       "A Belgian landlord signs a new tenant and the paperwork eats the week. Keepr writes the plaatsbeschrijving from photos and runs the rest of the lease from one place.",
     href: "https://joinkeepr.com",
   },
   {
+    name: "Penfolk",
+    tint: "green" as const,
+    image: "/images/work/penfolk-pen-pal-letters.webp",
+    alt: "Penfolk, a pen-pal and language-exchange app: handwritten letters with stamps from other countries, a fountain pen and a globe",
+    kind: "Live",
+    description:
+      "A pen-pal app for making friends in other countries. You write slow letters instead of chatting, and you can look for someone to swap languages with.",
+    href: "https://penfolk.app",
+  },
+  {
     name: "Korf",
     tint: "yellow" as const,
-    image: "/images/work/korf-live.webp",
+    image: "/images/work/korf-grocery-price-comparison.webp",
+    alt: "Korf grocery price comparison app, a shopping list priced across Colruyt, Delhaize, Albert Heijn and Lidl",
     kind: "App Store and Play Store",
     description:
       "Scan a receipt, find out where the same basket costs less. Live on both stores, and every push to main goes out to TestFlight and the Play Store.",
@@ -404,12 +418,19 @@ export const ALSO = [
   {
     name: "Faultline",
     tint: "red" as const,
-    image: "/images/work/faultline.webp",
+    image: "/images/work/faultline-multiplayer-disaster-game.webp",
+    alt: "Faultline, a multiplayer disaster game: players run as a tower collapses on a flooding island",
     kind: "In progress",
     description:
       "An earthquake cracks the dam, the dam breaks, the island floods. Twelve players, one seed disaster, and the cascade decides who survives. Dead players still get a vote.",
   },
 ];
+
+
+/** Products with a live site of their own, so a mention anywhere can link out to it. */
+export const PRODUCT_LINKS = ALSO.flatMap((p) =>
+  "href" in p && p.href?.startsWith("http") ? [{ name: p.name, href: p.href }] : [],
+);
 
 
 
@@ -458,11 +479,11 @@ export const EXPERIENCE: {
   
   { role: "Senior Mobile Engineer", org: "Tomorrowland", caseStudy: "tomorrowland", logoMono: true, href: "https://www.tomorrowland.com", logo: "/images/logos/tomorrowland.svg", tint: "red", dates: "Jul 2026 to now" },
   { role: "Full-Stack Engineer", org: "Outpost", href: "https://outpostplayers.com", logo: "/images/logos/outpost.webp", tint: "blue", dates: "Jan 2026 to now" },
-  { role: "Frontend Lead", org: "BeeDee", caseStudy: "beedee", href: "https://www.beedee.com", logo: "/images/logos/beedee.png", tint: "red", dates: "Jan 2025 to now" },
+  { role: "Frontend Lead", org: "BeeDee", caseStudy: "beedee", href: "https://www.beedee.com", logo: "/images/logos/beedee.webp", tint: "red", dates: "Jan 2025 to now" },
   { role: "AI Engineer", org: "Euroconsumers, via Nimble", caseStudy: "euroconsumers", href: "https://www.euroconsumers.org", logo: "/images/logos/euroconsumers.svg", tint: "blue", dates: "Aug 2025 to Apr 2026" },
-  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", caseStudy: "kaedim", href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.png", tint: "yellow", dates: "2025" },
-  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", caseStudy: "lokaal-beslist", href: "https://www.vlaanderen.be", logo: "/images/logos/vlaanderen.png", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
-  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logoMono: true, href: "https://cronos-groep.be", logo: "/images/logos/cronos.png", tint: "green", dates: "2021 to 2026" },
+  { role: "Creative Engineer", org: "Kaedim, Y Combinator-backed", caseStudy: "kaedim", href: "https://www.kaedim3d.com", logo: "/images/logos/kaedim.webp", tint: "yellow", dates: "2025" },
+  { role: "Full-Stack Developer", org: "Flanders Agency of Home Affairs", caseStudy: "lokaal-beslist", href: "https://www.vlaanderen.be", logo: "/images/logos/vlaanderen.webp", tint: "yellow", dates: "Jul 2022 to Jul 2024" },
+  { role: "Earlier engagements", org: "WeHave, BubblyDoo, JStack (Cronos), Inuits", logoMono: true, href: "https://cronos-groep.be", logo: "/images/logos/cronos.webp", tint: "green", dates: "2021 to 2026" },
 ];
 
 /**

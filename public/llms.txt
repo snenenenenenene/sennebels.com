@@ -21,6 +21,7 @@
 - [Transita](https://transita.app): answer nine questions and Claude ranks the immigration routes open to you. Live, with paying customers.
 - [Keepr](https://joinkeepr.com): writes a Belgian rental inspection report (plaatsbeschrijving) from photos and runs the rest of the lease from one place.
 - [Korf](https://korf.app): scan a receipt and find where the same basket costs less. On the App Store and Play Store.
+- [Penfolk](https://penfolk.app): a pen-pal app for making friends in other countries, with slow letters and language exchange.
 - [Stadiq](https://stadiq.app): reads Antwerp's open data and tells an operator what is about to disrupt their street. In private beta.
 - [Scritch](https://scritch.xyz): an AI recovery agent for B2B support teams.
 

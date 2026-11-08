@@ -271,7 +271,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             <SharedMedia slug={project.slug}>
           <figure className="-mx-6 flex items-start gap-6 overflow-x-auto px-6 md:-mx-12 md:px-12 lg:mx-0 lg:justify-center lg:overflow-visible lg:px-0">
               {project.phones.map((src, i) => (
-                <Phone key={src} src={src} alt={`${project.name} on iPhone`} width={236} island={project.phonesHaveIsland} className={i % 2 ? "" : "sm:mt-10"} />
+                <Phone key={src} src={src} alt={`${project.name} app screen on iPhone`} width={236} island={project.phonesHaveIsland} className={i % 2 ? "" : "sm:mt-10"} />
               ))}
             </figure>
             </SharedMedia>
@@ -283,7 +283,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             <figure>
               <Tilt>
                 <SharedMedia slug={project.slug}>
-                  <Browser src={project.image} alt={`${project.name}: ${project.title}`} url={project.live?.label} />
+                  <Browser src={project.image} alt={`${project.name}: ${project.title}`} url={project.live?.label} sizes="(min-width: 1280px) 1150px, 90vw" />
                 </SharedMedia>
               </Tilt>
             </figure>
@@ -310,7 +310,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                   {project.phones ? (
                     <Phone src={shot.src} alt={shot.caption} width={228} island={project.phonesHaveIsland} className="w-full" />
                   ) : (
-                    <Browser src={shot.src} alt={shot.caption} />
+                    <Browser src={shot.src} alt={shot.caption} sizes="(min-width: 640px) 440px, 320px" />
                   )}
                   <p className="text-callout leading-[1.5] text-ink-2">{shot.caption}</p>
                 </li>
@@ -378,13 +378,14 @@ function PeekCard({
     >
       <div className="flex h-[150px] items-start justify-center overflow-hidden">
         {project.phones ? (
-          <Phone src={project.phones[0]} width={96} island={project.phonesHaveIsland} />
+          <Phone src={project.phones[0]} alt={`${project.name} app screen on iPhone`} width={96} island={project.phonesHaveIsland} />
         ) : project.image ? (
           <Image
             src={project.image}
             alt={`${project.name}: ${project.title}`}
             width={800}
             height={500}
+            sizes="(min-width: 1280px) 560px, (min-width: 640px) 45vw, 90vw"
             className="h-[150px] w-full object-cover object-top transition-transform duration-500 ease-out group-hover/peek:scale-[1.03]"
           />
         ) : (

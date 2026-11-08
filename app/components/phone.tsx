@@ -50,6 +50,7 @@ export function Phone({
           alt={alt}
           width={620}
           height={1300}
+          sizes={`${width}px`}
           priority={priority}
           className="block w-full"
         />
