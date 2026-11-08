@@ -21,8 +21,9 @@ export const SOCIALS = [
 const MORE = [
   { label: "Now", href: "/now", icon: Clock, external: false },
   { label: "Hire me", href: HIRE.path, icon: DeviceMobile, external: false },
-  ...PRODUCT_LINKS.map((p) => ({ label: p.name, href: p.href, icon: ArrowUpRight })),
 ];
+
+const PRODUCTS = PRODUCT_LINKS.map((p) => ({ label: p.name, href: p.href, icon: ArrowUpRight, tint: "blue" as Tint }));
 
 export function Footer() {
   return (
@@ -51,11 +52,15 @@ export function Footer() {
             {SOCIALS.map((l) => (
               <IconLink key={l.label} {...l} />
             ))}
-          </div>
-          <div className="flex flex-col gap-3">
-            <p className="text-caption font-medium text-ink-3">More</p>
+            <p className="mt-5 text-caption font-medium text-ink-3">More</p>
             {MORE.map((m, i) => (
               <IconLink key={m.label} {...m} tint={TRIO[i % TRIO.length]} />
+            ))}
+          </div>
+          <div className="flex flex-col gap-3">
+            <p className="text-caption font-medium text-ink-3">Products</p>
+            {PRODUCTS.map((p) => (
+              <IconLink key={p.label} {...p} />
             ))}
           </div>
         </div>
