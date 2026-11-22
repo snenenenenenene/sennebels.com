@@ -1,6 +1,6 @@
 # Senne Bels
 
-> Senior software engineer in Antwerp, Belgium. Six years building web, mobile and AI systems in TypeScript, for startups, agencies and once for the Flemish government. The rest of his time goes to products of his own: Transita, Keepr, Penfolk, Stadiq and Korf.
+> Senior product engineer in Antwerp, Belgium. Six years building web, mobile and AI products in TypeScript, for startups, agencies and once for the Flemish government. The rest of his time goes to products of his own: Transita, Keepr, Penfolk, Stadiq and Korf.
 
 - Works through Okapi Works, based in Antwerp.
 - BSc Computer Science, Cum Laude, AP University of Applied Sciences, Antwerp (2019 to 2022).

@@ -64,9 +64,8 @@ function Hero() {
       <Stagger className="flex flex-col gap-9 lg:flex-1">
         <Rise>
           <h1 className="max-w-[17ch] font-unifraktur text-display font-bold">
-            {PERSON.name}, a{" "}
-            <span className="text-tone-red">creative</span> software
-            engineer.
+            {PERSON.name}, a senior{" "}
+            <span className="text-tone-red">product</span> engineer.
           </h1>
         </Rise>
 

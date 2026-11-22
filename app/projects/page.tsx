@@ -52,7 +52,7 @@ export default function ProjectsPage() {
             </Rise>
             <Rise>
               <p className="max-w-[60ch] text-lede leading-[1.7] text-ink-2">
-                I’m Senne Bels, a software engineer in Antwerp. Alongside client work, I build and run my own products, from the
+                I’m Senne Bels, a senior product engineer in Antwerp. Alongside client work, I build and run my own products, from the
                 first commit to the support inbox. Each page below covers the problem, what I built and where the product stands
                 today.
               </p>

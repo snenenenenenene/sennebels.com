@@ -42,10 +42,11 @@ export function PostHogAnalytics() {
     if (!KEY) return;
     if (!posthog.__loaded) {
       posthog.init(KEY, {
-        // US project 356563. The fallback used to name the EU host; an unset
-        // env var now reports to US rather than failing visibly. Production
-        // may still override via NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com.
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
+        // First-party proxy (see next.config.mjs), so ad blockers that
+        // drop *.posthog.com still let the pageview through. ui_host keeps
+        // toolbar links pointing at the real PostHog app.
+        api_host: "/ingest",
+        ui_host: "https://eu.posthog.com",
         // Nothing is written to the visitor's device: no cookie, no
         // localStorage, no sessionStorage. So there is no consent gate and
         // every visitor is counted, not just the ones who would accept one.

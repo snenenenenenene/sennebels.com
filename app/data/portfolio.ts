@@ -5,9 +5,9 @@ import { PROJECTS, projectPath } from "./projects";
 
 export const PERSON = {
   name: "Senne Bels",
-  jobTitle: "Senior Software Engineer",
+  jobTitle: "Senior Product Engineer",
   tagline:
-    "Senior software engineer. I build things people poke at instead of scroll past, and I have been doing it for six years.",
+    "Senior product engineer. I build things people poke at instead of scroll past, and I have been doing it for six years.",
   email: "sennebels@gmail.com",
   locality: "Antwerp",
   country: "BE",
@@ -18,10 +18,10 @@ export const PERSON = {
   relocation: "Open to relocating abroad",
   // Third person, for schema and llms.txt: the sentence an answer engine quotes about him.
   summary:
-    "Senne Bels is a senior software engineer in Antwerp, Belgium. He builds web, mobile and AI products in TypeScript for clients, and builds and runs products of his own: Transita, Keepr, Penfolk, Stadiq and Korf.",
+    "Senne Bels is a senior product engineer in Antwerp, Belgium. He builds web, mobile and AI products in TypeScript for clients, and builds and runs products of his own: Transita, Keepr, Penfolk, Stadiq and Korf.",
   // The one self-contained passage an answer engine can lift verbatim.
   answerBlock:
-    "I’m Senne, a software engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
+    "I’m Senne, a senior product engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
 } as const;
 
 

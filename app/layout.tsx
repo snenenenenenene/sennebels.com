@@ -26,7 +26,7 @@ const fraunces = Fraunces({
 const TITLE = `${PERSON.name}, ${PERSON.jobTitle}`;
 /** Kept under 160 characters: past that, Google truncates it in the result. */
 const DESCRIPTION =
-  "Senior software engineer in Antwerp. Six years remote-first building web, mobile and AI systems in TypeScript, for Tomorrowland, Kaedim and Flanders.";
+  "Senior product engineer in Antwerp. Six years remote-first building web, mobile and AI products in TypeScript, for Tomorrowland, Kaedim and Flanders.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sennebels.com"),
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
+    "Senior Product Engineer",
     "Senior Software Engineer",
     "Full-Stack Engineer",
     "AI Engineer",

@@ -31,7 +31,7 @@ const TITLE = "About";
 // answerBlock runs to 279 characters, which a result truncates. This is
 // the same claim inside the ~155 that actually renders.
 const DESCRIPTION =
-  "Senne Bels, software engineer in Antwerp. Frontend lead on a platform used by 140,000 people, and six years of web, mobile and AI work behind that.";
+  "Senne Bels, senior product engineer in Antwerp. Frontend lead on a platform used by 140,000 people, and six years of web, mobile and AI work behind that.";
 
 export const metadata: Metadata = {
   title: TITLE,
