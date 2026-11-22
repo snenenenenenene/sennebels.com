@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { pageOpenGraph } from "../data/seo";
+import { pageOpenGraph, pageTwitter } from "../data/seo";
 import { Waitlist } from "./waitlist";
+
+const DESCRIPTION = "District babysit matching for Ekeren and Merksem. Car filter. Gezinsbond-aware.";
+const SHARE_TITLE = "BuurtSit wachtlijst, Ekeren en Merksem";
 
 export const metadata: Metadata = {
   title: "BuurtSit waitlist",
-  description:
-    "District babysit matching for Ekeren and Merksem. Car filter. Gezinsbond-aware.",
+  description: DESCRIPTION,
   alternates: { canonical: "https://sennebels.com/buurtsit" },
-  openGraph: pageOpenGraph(
-    "/buurtsit",
-    "BuurtSit — waitlist · Ekeren–Merksem",
-    "District babysit matching for Ekeren and Merksem. Car filter. Gezinsbond-aware.",
-  ),
+  openGraph: pageOpenGraph("/buurtsit", SHARE_TITLE, DESCRIPTION),
+  twitter: pageTwitter(SHARE_TITLE, DESCRIPTION),
 };
 
 const productJsonLd = {

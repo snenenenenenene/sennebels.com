@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageOpenGraph, SITE_URL } from "../data/seo";
+import { pageOpenGraph, pageTwitter, SITE_URL } from "../data/seo";
 import { PERSON } from "../data/portfolio";
 import * as Ph from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/fun` },
   openGraph: pageOpenGraph("/fun", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
+  twitter: pageTwitter(`${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
 const TRIO: Tint[] = ["red", "blue", "yellow"];

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageOpenGraph, SITE_URL } from "../data/seo";
+import { pageOpenGraph, pageTwitter, SITE_URL } from "../data/seo";
 import { PERSON } from "../data/portfolio";
 import { Briefcase, Cat, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "../components/motion";
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/now` },
   openGraph: pageOpenGraph("/now", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
+  twitter: pageTwitter(`${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
 const UPDATED = "22 November 2026";

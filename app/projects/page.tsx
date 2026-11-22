@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { PROJECTS, PROJECTS_PATH, projectPath } from "../data/projects";
-import { PERSON_ID, SITE_URL, pageOpenGraph } from "../data/seo";
+import { PERSON_ID, SITE_URL, pageOpenGraph, pageTwitter } from "../data/seo";
 import { StatusPill } from "../components/status-pill";
 import { Reveal, Rise, Stagger } from "../components/motion";
 import { DirectionalLink, PageTransition } from "../components/transition";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}${PROJECTS_PATH}` },
   openGraph: pageOpenGraph(PROJECTS_PATH, TITLE, DESCRIPTION),
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: ["/assets/og.png"] },
+  twitter: pageTwitter(TITLE, DESCRIPTION),
 };
 
 const schema = {

@@ -30,3 +30,12 @@ export function pageOpenGraph(path: string, title: string, description: string):
     ],
   };
 }
+
+/**
+ * The twitter card, for the same reason as pageOpenGraph: a page without its
+ * own `twitter` inherits the layout's, so it would share the home page's
+ * title and description.
+ */
+export function pageTwitter(title: string, description: string, image = "/assets/og.png"): Metadata["twitter"] {
+  return { card: "summary_large_image", creator: "@snenenenene", title, description, images: [image] };
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, ChatCircleText, DeviceMobile, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, HIRE, HIRE_FAQ, HIRE_SOURCES, PERSON } from "../data/portfolio";
-import { pageOpenGraph, PERSON_ID, SITE_URL } from "../data/seo";
+import { pageOpenGraph, pageTwitter, PERSON_ID, SITE_URL } from "../data/seo";
 import { ACCENT_TEXT, CARD_TINT, Heading, Surface } from "../components/ui";
 import { INLINE_LINK } from "../components/linked-text";
 import { PageTitle } from "../components/section-header";
@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description: HIRE.description,
   alternates: { canonical: PAGE_URL },
   openGraph: pageOpenGraph(HIRE.path, `${HIRE.title} | ${PERSON.name}`, HIRE.description),
+  twitter: pageTwitter(`${HIRE.title} | ${PERSON.name}`, HIRE.description),
 };
 
 /** The shipped React Native work, read off the case studies rather than retyped. */

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageOpenGraph, SITE_URL } from "../data/seo";
+import { pageOpenGraph, pageTwitter, SITE_URL } from "../data/seo";
 import {
   Briefcase,
   Clock,
@@ -38,6 +38,7 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: pageOpenGraph("/about", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
+  twitter: pageTwitter(`${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
 const TRIO: Tint[] = ["red", "blue", "yellow"];
