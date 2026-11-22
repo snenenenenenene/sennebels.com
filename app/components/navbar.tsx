@@ -41,6 +41,7 @@ function warm(urls?: string[]) {
 
 const LINKS = [
   { href: "/", label: "Work", tint: "red" as const },
+  { href: "/projects", label: "Projects", tint: "green" as const },
   { href: "/about", label: "About", tint: "blue" as const },
   { href: "/fun", label: "Fun", tint: "yellow" as const, warm: ["/models/maria.glb", "/draco/draco_decoder.wasm"] },
 ];
@@ -54,6 +55,10 @@ const PILL: Record<string, { bg: string; text: string }> = {
   blue: {
     bg: "bg-[color-mix(in_srgb,var(--sys-blue)_15%,var(--raised))]",
     text: "text-tone-blue",
+  },
+  green: {
+    bg: "bg-[color-mix(in_srgb,var(--sys-green)_15%,var(--raised))]",
+    text: "text-tone-green",
   },
   yellow: {
     bg: "bg-[color-mix(in_srgb,var(--sys-yellow)_28%,var(--raised))]",

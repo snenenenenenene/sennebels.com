@@ -90,7 +90,6 @@ export function ProjectCard({ project, flipped }: { project: Featured; flipped: 
               src={project.image}
               alt={`${project.name}: ${project.title}`}
               url={project.live?.label}
-              priority
             /></SharedMedia>
           </Tilt>
         ) : (
@@ -147,7 +146,6 @@ export function SmallCard({
               width={1200}
               height={760}
               sizes={wide ? "(min-width: 1280px) 1150px, 90vw" : "(min-width: 1280px) 570px, (min-width: 768px) 45vw, 90vw"}
-              loading="eager"
               className={`w-full object-cover object-top ${wide ? "h-[300px]" : "h-[210px]"}`}
             />
           </div>

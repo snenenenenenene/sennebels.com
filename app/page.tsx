@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { PROJECTS_PATH } from "./data/projects";
 import {
+  ArrowRight,
   ArrowUpRight,
   Cat,
   Coffee,
@@ -138,9 +140,18 @@ function HeroScreens() {
 function Also() {
   return (
     <section className="flex flex-col gap-12 pt-24">
-      <h2 className="max-w-[24ch] text-title1 font-medium">
-        Things I build on my own time.
-      </h2>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <h2 className="max-w-[24ch] text-title1 font-medium">
+          Things I build on my own time.
+        </h2>
+        <Link
+          href={PROJECTS_PATH}
+          className="inline-flex min-h-tap items-center gap-2 text-body font-medium text-tone-blue underline-offset-4 hover:underline"
+        >
+          All projects
+          <ArrowRight size={16} weight="bold" aria-hidden />
+        </Link>
+      </div>
       <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-2">
         {ALSO.map((item, i) => (
           <Reveal

@@ -1,6 +1,6 @@
 # Senne Bels
 
-> Senior software engineer in Antwerp, Belgium. Six years building web, mobile and AI systems in TypeScript, for startups, agencies and once for the Flemish government. The rest of his time goes to products of his own.
+> Senior software engineer in Antwerp, Belgium. Six years building web, mobile and AI systems in TypeScript, for startups, agencies and once for the Flemish government. The rest of his time goes to products of his own: Transita, Keepr, Penfolk, Stadiq and Korf.
 
 - Works through Okapi Works, based in Antwerp.
 - BSc Computer Science, Cum Laude, AP University of Applied Sciences, Antwerp (2019 to 2022).
@@ -11,6 +11,7 @@
 
 - [Home](https://sennebels.com): selected work and side projects
 - [About](https://sennebels.com/about): experience, skills, education
+- [Projects](https://sennebels.com/projects): case studies of the products he builds and runs
 - [Freelance React Native developer](https://sennebels.com/react-native-developer): the React Native apps he has shipped, what drives a quote for a React Native app, and whether React Native suits a new app. No rates are published.
 - [Now](https://sennebels.com/now): what he is working on this month
 - [Fun](https://sennebels.com/fun): life away from the keyboard
@@ -18,15 +19,18 @@
 
 ## Products
 
-- [Transita](https://transita.app): answer nine questions and Claude ranks the immigration routes open to you. Live, with paying customers.
-- [Keepr](https://joinkeepr.com): writes a Belgian rental inspection report (plaatsbeschrijving) from photos and runs the rest of the lease from one place.
-- [Korf](https://korf.app): scan a receipt and find where the same basket costs less. On the App Store and Play Store.
-- [Penfolk](https://penfolk.app): a pen-pal app for making friends in other countries, with slow letters and language exchange.
-- [Stadiq](https://stadiq.app): reads Antwerp's open data and tells an operator what is about to disrupt their street. In private beta.
+Senne builds and runs these himself. Each has a case study on this site and a live site of its own.
+
+- [Transita](https://sennebels.com/projects/transita) ([transita.app](https://transita.app)): a short quiz ranks the work and skilled-migration visa routes you appear to qualify for, then a workspace tracks the route you pick. Live, with its first paying customers.
+- [Keepr](https://sennebels.com/projects/keepr) ([joinkeepr.com](https://joinkeepr.com)): writes the Belgian move-in inspection report (plaatsbeschrijving) from phone photos, gets the tenant to sign online and runs the rest of the lease admin. Live, early.
+- [Penfolk](https://sennebels.com/projects/penfolk) ([penfolk.app](https://penfolk.app)): pen pals for language learners. Letters take time to arrive, based on the real distance between the writers. Public beta.
+- [Stadiq](https://sennebels.com/projects/stadiq) ([stadiq.app](https://stadiq.app)): road works, closures and transit diversions around any Antwerp address, from GIPOD and De Lijn, with a paid data API. Live.
+- [Korf](https://sennebels.com/projects/korf) ([korf.app](https://korf.app)): reads grocery receipts and finds where the same products cost less at Colruyt, Delhaize, Albert Heijn and Lidl. On the App Store; Android is on its way.
+- [Payout Rescue](https://sennebels.com/projects/payout-rescue) ([payout-rescue.vercel.app](https://payout-rescue.vercel.app)): an experiment. Plain guides for merchants whose Stripe, PayPal, Square or Mollie payouts were frozen.
 - [Scritch](https://scritch.xyz): an AI recovery agent for B2B support teams.
 
 ## Elsewhere
 
 - GitHub: https://github.com/snenenenenenene
-- LinkedIn: https://linkedin.com/in/sennebels
+- LinkedIn: https://www.linkedin.com/in/sennebels/
 - X: https://x.com/snenenenene

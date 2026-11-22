@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { FEATURED, HIRE } from "./data/portfolio";
+import { PROJECTS, PROJECTS_PATH, projectPath } from "./data/projects";
 
 const SITE = "https://sennebels.com";
 
@@ -11,6 +12,7 @@ const SITE = "https://sennebels.com";
 const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "", priority: 1, changeFrequency: "monthly" },
   { path: "/about", priority: 0.9, changeFrequency: "monthly" },
+  { path: PROJECTS_PATH, priority: 0.9, changeFrequency: "monthly" },
   { path: HIRE.path, priority: 0.9, changeFrequency: "monthly" },
   { path: "/now", priority: 0.7, changeFrequency: "monthly" },
   { path: "/fun", priority: 0.5, changeFrequency: "yearly" },
@@ -30,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE}/work/${project.slug}`,
       lastModified,
       changeFrequency: "yearly" as const,
+      priority: 0.8,
+    })),
+    ...PROJECTS.map((project) => ({
+      url: `${SITE}${projectPath(project.slug)}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
   ];

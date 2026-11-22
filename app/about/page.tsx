@@ -25,6 +25,7 @@ import { PageTitle } from "../components/section-header";
 import Link from "next/link";
 import { Greeting } from "../components/greeting";
 import { DirectionalLink, PageTransition } from "../components/transition";
+import { PROJECTS_PATH } from "../data/projects";
 
 const TITLE = "About";
 // answerBlock runs to 279 characters, which a result truncates. This is
@@ -63,6 +64,13 @@ export default function About() {
           marks={ABOUT_REBUS}
           className="mt-8 max-w-[62ch] text-lede leading-[2.2] text-ink-2"
         />
+        <Link
+          href={PROJECTS_PATH}
+          className="mt-4 inline-flex w-fit min-h-tap items-center gap-2 text-body font-medium text-tone-blue underline-offset-4 hover:underline"
+        >
+          The products I build, with case studies
+          <ArrowRight size={16} weight="bold" aria-hidden />
+        </Link>
   
         <section className="pt-16">
           {/*
@@ -107,7 +115,7 @@ export default function About() {
         <div className="grid grid-cols-1 gap-12 pt-20 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <section className="flex flex-col">
             <div className="pb-4">
-              <Heading icon={Briefcase} tint="blue">
+              <Heading as="h2" icon={Briefcase} tint="blue">
                 Experience
               </Heading>
             </div>
@@ -205,14 +213,14 @@ export default function About() {
   
           <div className="flex flex-col gap-10">
             <section className="flex flex-col gap-3">
-              <Heading icon={GraduationCap} tint="yellow">
+              <Heading as="h2" icon={GraduationCap} tint="yellow">
                 Education
               </Heading>
               <p className="text-body">{EDUCATION.degree}</p>
               <p className="text-callout text-ink-3">{EDUCATION.detail}</p>
             </section>
             <section className="flex flex-col gap-3">
-              <Heading icon={Translate} tint="green">
+              <Heading as="h2" icon={Translate} tint="green">
                 Languages
               </Heading>
               <ul className="flex flex-col gap-2.5">
@@ -233,7 +241,7 @@ export default function About() {
         </div>
   
         <section className="flex flex-col gap-6 pt-20">
-          <Heading icon={Translate} tint="yellow">
+          <Heading as="h2" icon={Translate} tint="yellow">
             Hello, in whichever alphabet
           </Heading>
           <Greeting />
@@ -246,7 +254,7 @@ export default function About() {
   
         {/* Grouped, not thirty loose chips. Same keywords, a fifth of the space. */}
         <section className="flex flex-col gap-5 pt-20">
-          <Heading icon={Wrench} tint="blue">
+          <Heading as="h2" icon={Wrench} tint="blue">
             Skills
           </Heading>
           <dl className="flex flex-col gap-2">

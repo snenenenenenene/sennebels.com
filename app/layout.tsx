@@ -101,7 +101,7 @@ const schema = {
       "@id": PERSON_ID,
       name: PERSON.name,
       jobTitle: PERSON.jobTitle,
-      description: PERSON.answerBlock,
+      description: PERSON.summary,
       url: SITE_URL,
       image: `${SITE_URL}/assets/og.png`,
       email: `mailto:${PERSON.email}`,

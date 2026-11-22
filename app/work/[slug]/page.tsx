@@ -4,11 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle, Crown, Lightbulb, MagnifyingGlass, TrendUp } from "@phosphor-icons/react/dist/ssr";
 import { FEATURED, PERSON } from "../../data/portfolio";
+import { PERSON_ID } from "../../data/seo";
 import { Tilt } from "../../components/tilt";
 import { Phone } from "../../components/phone";
 import { Browser } from "../../components/browser";
 import { RebusText } from "../../components/rebus-text";
-import { BrandMark, Flags, type FlagCode } from "../../components/marks";
+import { Flags, type FlagCode } from "../../components/marks";
+import { BuiltWith } from "../../components/built-with";
 import { ACCENT_TEXT, CARD_TINT, GlyphTile, TAP, type Tint } from "../../components/ui";
 import { Reveal, Rise, Stagger } from "../../components/motion";
 import { DirectionalLink, PageTransition, SharedMedia, SharedTitle } from "../../components/transition";
@@ -117,7 +119,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
     description: project.description,
     url: `https://sennebels.com/work/${project.slug}`,
     keywords: project.builtWith.map((t) => t.name).join(", "),
-    author: { "@type": "Person", name: PERSON.name, url: "https://sennebels.com" },
+    author: { "@id": PERSON_ID },
   };
 
   return (
@@ -233,21 +235,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
   
         {/* Built with, once. The marks row and the side panel's text pills were
             two lists of the same thing that did not even agree with each other. */}
-        <ul className="flex flex-wrap items-center gap-2.5 pt-2">
-          {project.builtWith.map((t) => (
-            <li
-              key={t.name}
-              className="squircle flex items-center gap-2 rounded-full bg-raised py-1.5 pl-2.5 pr-4 text-callout text-ink-2 shadow-card"
-            >
-              {t.slug ? (
-                <BrandMark slug={t.slug} size={17} />
-              ) : (
-                <span aria-hidden className="size-[7px] rounded-full bg-ink-3/40" />
-              )}
-              {t.name}
-            </li>
-          ))}
-        </ul>
+        <BuiltWith items={project.builtWith} className="pt-2" />
   
         {project.features && (
           <section className="flex flex-col gap-5 pt-16">

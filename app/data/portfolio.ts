@@ -1,3 +1,5 @@
+import { PROJECTS, projectPath } from "./projects";
+
 // Single source of truth for everything the page renders.
 // Every number here is taken from the 2026 resume. Do not invent figures.
 
@@ -10,10 +12,13 @@ export const PERSON = {
   locality: "Antwerp",
   country: "BE",
   github: "https://github.com/snenenenenenene",
-  linkedin: "https://linkedin.com/in/sennebels",
+  linkedin: "https://www.linkedin.com/in/sennebels/",
   x: "https://x.com/snenenenene",
   resume: "/assets/CV Senne Bels.pdf",
   relocation: "Open to relocating abroad",
+  // Third person, for schema and llms.txt: the sentence an answer engine quotes about him.
+  summary:
+    "Senne Bels is a senior software engineer in Antwerp, Belgium. He builds web, mobile and AI products in TypeScript for clients, and builds and runs products of his own: Transita, Keepr, Penfolk, Stadiq and Korf.",
   // The one self-contained passage an answer engine can lift verbatim.
   answerBlock:
     "I’m Senne, a software engineer from Antwerp. I lead frontend on a platform 140,000 people use, and I work on the Tomorrowland app. Six years of this now, for startups and agencies and once for the Flemish government. The rest of my time goes to products of my own.",
@@ -347,18 +352,14 @@ export const FEATURED: Featured[] = [
   },
 ];
 
+/** A product card on the home grid. Case-study products come from PROJECTS. */
+const projectCard = (slug: string, extra: { wide?: boolean } = {}) => {
+  const p = PROJECTS.find((x) => x.slug === slug)!;
+  return { name: p.name, tint: p.tint, image: p.image, alt: p.alt, kind: p.status, description: p.card, href: projectPath(p.slug), ...extra };
+};
+
 export const ALSO = [
-  {
-    name: "Stadiq",
-    tint: "blue" as const,
-    image: "/images/work/stadiq-antwerp-street-disruption.webp",
-    alt: "Stadiq briefing for an Antwerp brewery, with planned roadworks, public transport diversions and expected foot traffic on its street",
-    kind: "In private beta",
-    wide: true,
-    description:
-      "A roadworks permit, a bridge closure and a festival all land in the same street in the same week, and nobody tells the businesses on it. Stadiq reads Antwerp's open data and tells an operator what is about to disrupt them, in plain language, with the estimate stated as an estimate.",
-    href: "https://stadiq.app",
-  },
+  projectCard("stadiq", { wide: true }),
   {
     name: "Scritch",
     tint: "green" as const,
@@ -367,46 +368,10 @@ export const ALSO = [
       "An AI recovery agent for B2B support teams. When a user is blocked, it investigates, explains the real cause in their language, and proves the problem is gone before saying so.",
     href: "https://scritch.xyz",
   },
-  {
-    name: "Transita",
-    tint: "red" as const,
-    image: "/images/work/transita-immigration-routes.webp",
-    alt: "Transita homepage, an immigration and relocation planner that ranks the visa routes open to you",
-    kind: "Live, paying customers",
-    description:
-      "Answer nine questions and Claude ranks the immigration routes actually open to you. I built it, I run it, and people pay for it.",
-    href: "https://transita.app",
-  },
-  {
-    name: "Keepr",
-    tint: "blue" as const,
-    image: "/images/work/keepr-belgian-rental-inspection.webp",
-    alt: "Keepr homepage, rental inspection reports (plaatsbeschrijving) and lease management for Belgian landlords",
-    kind: "Live",
-    description:
-      "A Belgian landlord signs a new tenant and the paperwork eats the week. Keepr writes the plaatsbeschrijving from photos and runs the rest of the lease from one place.",
-    href: "https://joinkeepr.com",
-  },
-  {
-    name: "Penfolk",
-    tint: "green" as const,
-    image: "/images/work/penfolk-pen-pal-letters.webp",
-    alt: "Penfolk, a pen-pal and language-exchange app: handwritten letters with stamps from other countries, a fountain pen and a globe",
-    kind: "Live",
-    description:
-      "A pen-pal app for making friends in other countries. You write slow letters instead of chatting, and you can look for someone to swap languages with.",
-    href: "https://penfolk.app",
-  },
-  {
-    name: "Korf",
-    tint: "yellow" as const,
-    image: "/images/work/korf-grocery-price-comparison.webp",
-    alt: "Korf grocery price comparison app, a shopping list priced across Colruyt, Delhaize, Albert Heijn and Lidl",
-    kind: "App Store and Play Store",
-    description:
-      "Scan a receipt, find out where the same basket costs less. Live on both stores, and every push to main goes out to TestFlight and the Play Store.",
-    href: "https://korf.app",
-  },
+  projectCard("transita"),
+  projectCard("keepr"),
+  projectCard("penfolk"),
+  projectCard("korf"),
   {
     name: "BuurtSit",
     tint: "green" as const,
@@ -415,6 +380,7 @@ export const ALSO = [
       "District babysit matching for Ekeren and Merksem. Parents in the same neighbourhood swap trusted sitters, with a car filter and Gezinsbond rules built in.",
     href: "/buurtsit",
   },
+  projectCard("payout-rescue"),
   {
     name: "Faultline",
     tint: "red" as const,
@@ -428,9 +394,10 @@ export const ALSO = [
 
 
 /** Products with a live site of their own, so a mention anywhere can link out to it. */
-export const PRODUCT_LINKS = ALSO.flatMap((p) =>
-  "href" in p && p.href?.startsWith("http") ? [{ name: p.name, href: p.href }] : [],
-);
+export const PRODUCT_LINKS = [
+  ...PROJECTS.map((p) => ({ name: p.name, href: p.live.href })),
+  { name: "Scritch", href: "https://scritch.xyz" },
+];
 
 
 

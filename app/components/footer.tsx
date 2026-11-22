@@ -1,6 +1,7 @@
-import { ArrowUpRight, Clock, DeviceMobile, EnvelopeSimple, FileText, GithubLogo, LinkedinLogo, XLogo } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Clock, FolderSimple, DeviceMobile, EnvelopeSimple, FileText, GithubLogo, LinkedinLogo, XLogo } from "@phosphor-icons/react/dist/ssr";
 import { HIRE, PERSON, PRODUCT_LINKS } from "../data/portfolio";
 import { TAP, type Tint } from "./ui";
+import { PROJECTS_PATH } from "../data/projects";
 import { IconLink } from "./icon-link";
 
 /**
@@ -19,6 +20,7 @@ export const SOCIALS = [
 ];
 
 const MORE = [
+  { label: "Projects", href: PROJECTS_PATH, icon: FolderSimple, external: false },
   { label: "Now", href: "/now", icon: Clock, external: false },
   { label: "Hire me", href: HIRE.path, icon: DeviceMobile, external: false },
 ];
