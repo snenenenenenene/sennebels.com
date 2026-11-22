@@ -10,7 +10,7 @@ import { PageTransition } from "../components/transition";
 
 const TITLE = "Now";
 const DESCRIPTION =
-  "What Senne Bels is working on in August 2026: the Tomorrowland app, frontend lead at BeeDee, Outpost, and his own products. Updated monthly.";
+  "What Senne Bels is working on in November 2026: the Tomorrowland app, frontend lead at BeeDee, Outpost, and his own products. Updated monthly.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: pageOpenGraph("/now", `${TITLE} | ${PERSON.name}`, DESCRIPTION),
 };
 
-const UPDATED = "29 August 2026";
+const UPDATED = "22 November 2026";
 
 const NOW = [
   {
@@ -32,7 +32,7 @@ const NOW = [
     title: "My own things",
     icon: Cube,
     tint: "blue" as Tint,
-    body: "Transita has paying customers. Korf is on both app stores. Keepr and Penfolk are live, Stadiq is in private beta, and Faultline is the game I’m still building: twelve players, one disaster, and a map that decides who gets out.",
+    body: "Transita has its first paying customers. Korf is on the App Store, with Android on the way. Keepr and Stadiq are live, Penfolk is in public beta, and Payout Rescue is a new experiment. Faultline is the game I’m still building: twelve players, one disaster, and a map that decides who gets out.",
   },
   {
     title: "Where next",

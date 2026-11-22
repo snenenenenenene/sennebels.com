@@ -244,7 +244,8 @@ export function Waitlist() {
         .bs-footer { margin-top: 2rem; font-size: 0.8rem; color: var(--muted); }
       `}</style>
 
-      <div className="bs-root">
+      {/* lang on the root, so the server HTML already says Dutch before the effect below runs. */}
+      <div className="bs-root" lang={lang}>
         <div className="bs-wrap">
           <div className="bs-lang" role="tablist" aria-label="Language">
             <button
