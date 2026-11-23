@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import posthog from "posthog-js";
+import { isLegalDistinctId } from "../components/distinct-id";
 import { FORM_URL, MAILTO_FALLBACK } from "./form";
 
 type Lang = "nl" | "en";
@@ -135,7 +136,7 @@ export function Waitlist() {
     setOk(true);
 
     const normalizedEmail = data.email.toLowerCase().trim();
-    posthog.identify(normalizedEmail);
+    if (isLegalDistinctId(normalizedEmail)) posthog.identify(normalizedEmail);
     posthog.capture("waitlist_submit", {
       product: "buurtsit",
       role: data.role,
