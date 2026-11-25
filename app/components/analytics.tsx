@@ -25,8 +25,7 @@ import posthog from "posthog-js";
  * It runs fully cookieless, which is why there is no consent banner and
  * why the traffic count is the real one: nothing is stored on the
  * visitor's device, so there is no opt-in to decline and no silent
- * majority missing from the numbers. See below for what that costs and
- * who counts unique people instead.
+ * majority missing from the numbers.
  *
  * Push notifications are not fired from here: PostHog forwards the events it
  * is told to, to /api/discord/posthog. Doing it client-side would mean
@@ -51,14 +50,14 @@ export function PostHogAnalytics() {
         // localStorage, no sessionStorage. So there is no consent gate and
         // every visitor is counted, not just the ones who would accept one.
         //
-        // The cost is that PostHog cannot tell two visits apart from two
-        // visitors — each page load is a fresh anonymous id. PostHog's
-        // cookieless_mode: "always" is meant to fix exactly that, and it
-        // silently drops every event on project 356563 (probed directly
-        // against /e/ in both server-hash modes: "Ok" on the wire, nothing
-        // ingested), so it stays off. Unique-visitor counts come from Vercel
-        // Web Analytics, which does its own cookieless de-duplication.
-        persistence: "memory",
+        // cookieless_mode "on_reject" plus opt_out_capturing_by_default puts
+        // every visitor on PostHog's cookieless rail: events go out with a
+        // sentinel id and PostHog derives a daily visitor hash server-side
+        // (server hash mode is on for project 92696), so unique visitors
+        // count without storing anything here. There is no consent banner,
+        // so nobody ever leaves that rail.
+        cookieless_mode: "on_reject",
+        opt_out_capturing_by_default: true,
         // Never record sessions. There is no consent banner on this site, and
         // replay is the one thing here that genuinely would need one — it
         // records what a visitor did, not just that they came. The PostHog
