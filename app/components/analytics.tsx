@@ -66,6 +66,8 @@ export function PostHogAnalytics() {
         // would otherwise silently start recording portfolio visitors.
         disable_session_recording: true,
         capture_pageview: false,
+        // No feature flags here, and /flags answers 400 for cookieless visitors.
+        advanced_disable_flags: true,
         // Every island in the shared PostHog project stamps `product` on its
         // events, so one query can span them or single one out. Set through
         // before_send rather than register(): on posthog-js 1.422 register()
